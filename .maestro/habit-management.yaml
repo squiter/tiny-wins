@@ -1,0 +1,59 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: add-habit
+- tapOn:
+    id: habit-name
+- inputText: Read one page
+- hideKeyboard
+- tapOn: Book icon
+- tapOn: coral color
+- tapOn:
+    id: save-habit
+- tapOn: Complete Read one page today
+- assertVisible: 1 day in a row
+- tapOn: Edit Read one page
+- tapOn:
+    id: habit-name
+- eraseText
+- inputText: Read a chapter
+- hideKeyboard
+- tapOn:
+    id: save-habit
+- assertVisible: Read a chapter
+- assertVisible: 1 day in a row
+- tapOn:
+    id: add-habit
+- tapOn:
+    id: habit-name
+- inputText: Walk
+- hideKeyboard
+- tapOn: Walk icon
+- tapOn:
+    id: save-habit
+- tapOn: Reorder habits
+- tapOn: Move Walk up
+- tapOn: Done reordering
+- stopApp
+- launchApp
+- assertVisible: Read a chapter
+- assertVisible: 1 day in a row
+- tapOn: Edit Read a chapter
+- scrollUntilVisible:
+    element: Archive habit
+    direction: DOWN
+- tapOn: Archive habit
+- scrollUntilVisible:
+    element: 'Archived habits \(1\)'
+    direction: DOWN
+- tapOn: 'Archived habits \(1\)'
+- tapOn: Restore Read a chapter
+- tapOn: '← Back to Today'
+- assertVisible: Read a chapter
+- assertVisible: 1 day in a row
+- stopApp
+- launchApp
+- assertVisible: Read a chapter
+- assertVisible: 1 day in a row

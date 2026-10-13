@@ -1,0 +1,24 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: add-habit
+- tapOn:
+    id: habit-name
+- inputText: Read one page
+- hideKeyboard
+- tapOn:
+    id: save-habit
+- assertVisible: Read one page
+- tapOn: Complete Read one page today
+- assertVisible: 1 day in a row
+- stopApp
+- launchApp
+- assertVisible: Read one page
+- assertVisible: 1 day in a row
+- tapOn: Undo Read one page today
+- assertVisible: 0 days in a row
+- stopApp
+- launchApp
+- assertVisible: 0 days in a row

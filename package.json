@@ -1,0 +1,63 @@
+{
+  "name": "tiny-wins",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "expo start",
+    "ios": "expo start --ios",
+    "android": "expo start --android",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "build": "expo export --platform all",
+    "verify": "npm run typecheck && npm run lint && npm run format:check && npm run test:unit && npm run test:integration && npm run build",
+    "test:e2e": "maestro test .maestro/first-win.yaml",
+    "security": "npm audit --audit-level=high",
+    "web": "npm run preview",
+    "build:web": "expo export --platform web",
+    "preview": "npm run build:web && node scripts/preview.mjs",
+    "postinstall": "node scripts/patch-expo-sqlite.mjs"
+  },
+  "dependencies": {
+    "@expo-google-fonts/fraunces": "0.4.1",
+    "@expo-google-fonts/inter": "0.4.2",
+    "drizzle-orm": "0.45.4",
+    "expo": "57.0.28",
+    "expo-constants": "~57.0.21",
+    "expo-crypto": "~57.0.4",
+    "expo-font": "~57.0.4",
+    "expo-linking": "~57.0.12",
+    "expo-router": "~57.0.26",
+    "expo-sqlite": "57.0.4",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-reanimated": "4.5.1",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-native-web": "^0.21.2",
+    "react-native-worklets": "0.10.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "9.6.0",
+    "@types/node": "26.6.5",
+    "@types/react": "19.2.4",
+    "better-sqlite3": "13.0.3",
+    "drizzle-kit": "0.31.11",
+    "eslint": "9.39.5",
+    "eslint-config-expo": "57.0.2",
+    "eslint-import-resolver-typescript": "4.4.5",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "vitest": "5.0.4"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Tiny Wins",
+    "slug": "tiny-wins",
+    "scheme": "tinywins",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "headers": {
+            "Cross-Origin-Opener-Policy": "same-origin",
+            "Cross-Origin-Embedder-Policy": "require-corp"
+          }
+        }
+      ],
+      "expo-sqlite",
+      "expo-font",
+      "expo-status-bar"
+    ],
+    "ios": {
+      "bundleIdentifier": "app.tinywins.mobile",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "app.tinywins.mobile"
+    },
+    "experiments": {
+      "typedRoutes": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    }
+  }
+}

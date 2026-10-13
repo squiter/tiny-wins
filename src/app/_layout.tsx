@@ -1,0 +1,68 @@
+import { Stack, type ErrorBoundaryProps } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { useFonts } from 'expo-font';
+import { Fraunces_600SemiBold } from '@expo-google-fonts/fraunces/600SemiBold';
+import { Inter_400Regular } from '@expo-google-fonts/inter/400Regular';
+import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
+import { Platform, Pressable, Text, View } from 'react-native';
+import { DatabaseProvider } from '../database/provider';
+import { theme } from '../theme/tokens';
+import { recoverApp } from '../lib/recover';
+export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: theme.ivory,
+        padding: 24,
+        justifyContent: 'center',
+        gap: 20,
+      }}
+    >
+      <Text accessibilityRole="header" style={{ fontSize: 26, color: theme.forest }}>
+        Could not open your habits
+      </Text>
+      <Text style={{ color: theme.charcoal, fontSize: 16, lineHeight: 24 }}>
+        {Platform.OS === 'web'
+          ? 'Close any other Tiny Wins tabs and try again.'
+          : 'Please try again. If this continues, close and reopen Tiny Wins.'}
+      </Text>
+      <Pressable
+        accessibilityRole="button"
+        onPress={() => recoverApp(retry)}
+        style={{
+          backgroundColor: theme.forest,
+          borderRadius: 16,
+          padding: 18,
+          alignItems: 'center',
+        }}
+      >
+        <Text style={{ color: '#FFFFFF', fontSize: 16 }}>Try again</Text>
+      </Pressable>
+    </View>
+  );
+}
+export default function Layout() {
+  const [loaded, error] = useFonts({ Fraunces_600SemiBold, Inter_400Regular, Inter_600SemiBold });
+  if (!loaded && !error)
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: theme.ivory,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Text>Getting your tiny wins ready…</Text>
+      </View>
+    );
+  return (
+    <DatabaseProvider>
+      <StatusBar style="dark" />
+      <Stack
+        screenOptions={{ headerShown: false, contentStyle: { backgroundColor: theme.ivory } }}
+      />
+    </DatabaseProvider>
+  );
+}

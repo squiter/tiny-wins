@@ -1,0 +1,7 @@
+node_modules
+.expo
+dist
+coverage
+package-lock.json
+docs/TINY_WINS_IMPLEMENTATION_PLAN.md
+docs/IMPLEMENTATION_PLAN.md
