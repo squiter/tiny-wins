@@ -1,6 +1,6 @@
 # Architecture
 
-Source of truth: IMPLEMENTATION_PLAN.md. The bootstrap delivered daily creation/check/undo. The owner subsequently authorized a compact UI and habit management slice guided by docs/inspirations; later schedules/detail/insights remain deferred.
+Source of truth: IMPLEMENTATION_PLAN.md. The bootstrap delivered daily creation/check/undo. The owner subsequently authorized a compact UI and habit management slice guided by docs/inspirations; continued work includes effective weekday schedules, detail calendars and aggregate insights.
 
 ## Boundaries
 
@@ -39,3 +39,9 @@ React Native Web renders the same screens for local review. The existing Expo SQ
 Schema v2 adds icons, archival timestamps and ordering. UI filters active/archived records; use cases validate edits and exclude archived habits from check-ins. Reorders are transactional and cover all active IDs. Restoration appends without changing start dates or completions. See ADR-007 and DESIGN_SYSTEM.md.
 
 The browser worker's response-length defect is repaired by a version/source-checked postinstall script and an integration regression test. See ADR-008 before upgrading expo-sqlite.
+
+## Schedules and progress
+
+Schema v3 stores effective local schedule versions (ADR-009). Domain calculations remain pure; monthly/yearly calendars and insights consume the same records. Today opens detail from a name, and the historical grid opens explicit date inspection. Today, Insights and Settings are working Router tabs. The reusable focus/foreground refresh hook prevents stale views after navigation.
+
+Type checking first regenerates route declarations through Expo's own generator, matching its CLI. This prevents an old local .expo cache from hiding/misreporting route changes; generated declarations remain untracked.

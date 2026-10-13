@@ -20,12 +20,14 @@ import {
   type Habit,
   type IconKey,
 } from '../domain/habit';
+import { allWeekdays, plannedDays, validateWeekdays, type Weekday } from '../domain/schedule';
 import { habitColors, habitSurfaces, theme } from '../theme/tokens';
 import { habitIcons, HabitIcon } from './HabitIcon';
 export interface HabitDraft {
   title: string;
   color: ColorKey;
   icon: IconKey;
+  days: Weekday[];
 }
 interface Props {
   habit: Habit | null;
@@ -38,17 +40,23 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
   const [title, setTitle] = useState(habit?.title ?? '');
   const [color, setColor] = useState<ColorKey>(habit?.color ?? 'forest');
   const [icon, setIcon] = useState<IconKey>(habit?.icon ?? 'plant');
+  const [days, setDays] = useState<Weekday[]>(
+    habit ? plannedDays(habit.schedule) : [...allWeekdays],
+  );
   const [error, setError] = useState('');
   function save() {
     let validated: string;
     try {
       validated = habitTitle(title);
+      validateWeekdays(days);
     } catch {
-      setError('Use a habit name of 1–80 characters.');
+      setError(
+        !title.trim() ? 'Use a habit name of 1–80 characters.' : 'Choose at least one weekday.',
+      );
       return;
     }
     try {
-      onSave({ title: validated, color, icon });
+      onSave({ title: validated, color, icon, days });
     } catch {
       setError('We couldn’t save your habit. Please try again.');
     }
@@ -145,10 +153,68 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 </Pressable>
               ))}
             </View>
-            <View style={styles.frequency}>
-              <Text style={styles.label}>Every day</Text>
-              <Text style={styles.support}>Make a little room for your daily win.</Text>
+            <Text style={styles.label}>Frequency</Text>
+            <View style={styles.options}>
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel="Every day"
+                onPress={() => setDays([...allWeekdays])}
+                style={[
+                  styles.frequency,
+                  { backgroundColor: days.length === 7 ? theme.mint : '#FFFFFF' },
+                ]}
+              >
+                <Text style={styles.label}>Every day</Text>
+              </Pressable>
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel="Weekdays"
+                onPress={() => setDays([1, 2, 3, 4, 5])}
+                style={styles.frequency}
+              >
+                <Text style={styles.label}>Weekdays</Text>
+              </Pressable>
             </View>
+            <View style={styles.options} role="group" accessibilityLabel="Scheduled weekdays">
+              {([1, 2, 3, 4, 5, 6, 0] as Weekday[]).map((day) => (
+                <Pressable
+                  key={day}
+                  accessibilityRole="checkbox"
+                  aria-checked={days.includes(day)}
+                  accessibilityState={{ checked: days.includes(day) }}
+                  hitSlop={4}
+                  accessibilityLabel={
+                    ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
+                      day
+                    ]
+                  }
+                  onPress={() =>
+                    setDays(
+                      days.includes(day) ? days.filter((value) => value !== day) : [...days, day],
+                    )
+                  }
+                  style={[
+                    styles.day,
+                    { backgroundColor: days.includes(day) ? theme.forest : '#FFFFFF' },
+                  ]}
+                >
+                  <Text
+                    style={{
+                      fontFamily: 'Inter_600SemiBold',
+                      color: days.includes(day) ? '#FFFFFF' : theme.forest,
+                      fontSize: 13,
+                    }}
+                  >
+                    {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'][day]}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+            <Text style={styles.support}>
+              {habit
+                ? 'Frequency changes start tomorrow. Past wins stay on their original dates.'
+                : 'Choose the days that work for you.'}
+            </Text>
             {!!error && (
               <Text accessibilityRole="alert" style={styles.error}>
                 {error}
@@ -226,6 +292,13 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  day: {
+    minWidth: 40,
+    minHeight: 48,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
   },

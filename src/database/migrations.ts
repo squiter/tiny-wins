@@ -28,6 +28,8 @@ UPDATE habits SET sort_order = (
  SELECT count(*) FROM habits AS earlier
  WHERE earlier.created_at < habits.created_at OR (earlier.created_at = habits.created_at AND earlier.id < habits.id)
 );`,
+  `ALTER TABLE habits ADD COLUMN schedule TEXT NOT NULL DEFAULT '[]';
+   UPDATE habits SET schedule = json_array(json_object('from', starts_on, 'days', json_array(0,1,2,3,4,5,6)));`,
 ];
 export function migrate(database: MigrationDatabase) {
   database.execSync('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;');

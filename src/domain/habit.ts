@@ -1,4 +1,5 @@
 import { shiftDay, type LocalDate } from './calendar';
+import { scheduledOn, type ScheduleVersion } from './schedule';
 
 export const colorKeys = ['forest', 'blue', 'coral', 'violet', 'teal', 'amber'] as const;
 export type ColorKey = (typeof colorKeys)[number];
@@ -26,6 +27,7 @@ export interface Habit {
   sortOrder: number;
   startsOn: LocalDate;
   createdAt: string;
+  schedule: ScheduleVersion[];
 }
 export interface Completion {
   habitId: string;
@@ -36,35 +38,55 @@ export interface Completion {
 export interface HistoryCell {
   day: LocalDate;
   today: boolean;
-  state: 'complete' | 'missed' | 'before-start';
+  state: 'complete' | 'missed' | 'before-start' | 'not-scheduled' | 'future';
 }
 export function habitTitle(value: string): string {
   const title = value.trim();
   if (!title || title.length > 80) throw new Error('Use a habit name of 1–80 characters.');
   return title;
 }
-export function history(habit: Habit, completions: Completion[], today: LocalDate): HistoryCell[] {
+export function calendarCells(
+  habit: Habit,
+  completions: Completion[],
+  start: LocalDate,
+  end: LocalDate,
+  today: LocalDate,
+): HistoryCell[] {
   const completed = new Set(
     completions.filter((c) => c.habitId === habit.id).map((c) => c.localDate),
   );
-  return Array.from({ length: 14 }, (_, index) => {
-    const day = shiftDay(today, index - 13);
-    return {
+  const cells: HistoryCell[] = [];
+  for (let day = start; day <= end; day = shiftDay(day, 1)) {
+    cells.push({
       day,
       today: day === today,
-      state: completed.has(day) ? 'complete' : day < habit.startsOn ? 'before-start' : 'missed',
-    };
-  });
+      state:
+        day > today
+          ? 'future'
+          : completed.has(day)
+            ? 'complete'
+            : day < habit.startsOn
+              ? 'before-start'
+              : !scheduledOn(habit.schedule, day)
+                ? 'not-scheduled'
+                : 'missed',
+    });
+  }
+  return cells;
+}
+export function history(habit: Habit, completions: Completion[], today: LocalDate): HistoryCell[] {
+  return calendarCells(habit, completions, shiftDay(today, -13), today, today);
 }
 export function currentStreak(habit: Habit, completions: Completion[], today: LocalDate): number {
   const completed = new Set(
     completions.filter((c) => c.habitId === habit.id).map((c) => c.localDate),
   );
-  let day = completed.has(today) ? today : shiftDay(today, -1);
   let streak = 0;
-  while (day >= habit.startsOn && completed.has(day)) {
+  for (let day = today; day >= habit.startsOn; day = shiftDay(day, -1)) {
+    if (!scheduledOn(habit.schedule, day)) continue;
+    if (day === today && !completed.has(day)) continue;
+    if (!completed.has(day)) break;
     streak += 1;
-    day = shiftDay(day, -1);
   }
   return streak;
 }

@@ -1,26 +1,35 @@
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { AppState, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { randomUUID } from 'expo-crypto';
-import { useRepository } from '../database/provider';
-import { localDay } from '../domain/calendar';
-import type { Habit } from '../domain/habit';
-import { createHabit, toggleToday } from '../features/check-ins/service';
-import { archiveHabit, editHabit, moveHabit, restoreHabit } from '../features/habits/service';
-import { deviceClock } from '../lib/clock';
-import { HabitCard } from '../components/HabitCard';
-import { HabitEditor, type HabitDraft } from '../components/HabitEditor';
-import { HabitIcon } from '../components/HabitIcon';
-import { theme } from '../theme/tokens';
+import { useRepository } from '../../database/provider';
+import { localDay } from '../../domain/calendar';
+import { scheduledOn } from '../../domain/schedule';
+import type { Habit } from '../../domain/habit';
+import { createHabit, toggleToday } from '../../features/check-ins/service';
+import { archiveHabit, editHabit, moveHabit, restoreHabit } from '../../features/habits/service';
+import { deviceClock } from '../../lib/clock';
+import { HabitCard } from '../../components/HabitCard';
+import { HabitEditor, type HabitDraft } from '../../components/HabitEditor';
+import { HabitIcon } from '../../components/HabitIcon';
+import { theme } from '../../theme/tokens';
 
 export default function Today() {
   const repository = useRepository();
+  const params = useLocalSearchParams<{ archived?: string }>();
   const [, refresh] = useState(0);
   const [editor, setEditor] = useState<{ habit: Habit | null } | null>(null);
   const [ordering, setOrdering] = useState(false);
   const [archived, setArchived] = useState(false);
   const [notice, setNotice] = useState('');
   const update = useCallback(() => refresh((value) => value + 1), []);
+  useFocusEffect(
+    useCallback(() => {
+      update();
+      setArchived(params.archived === '1');
+    }, [update, params.archived]),
+  );
   useEffect(() => {
     const listener = AppState.addEventListener('change', (state) => {
       if (state === 'active') update();
@@ -36,7 +45,8 @@ export default function Today() {
   const activeHabits = allHabits.filter((habit) => !habit.archivedAt);
   const archivedHabits = allHabits.filter((habit) => !!habit.archivedAt);
   const completions = repository.listCompletions();
-  const wins = activeHabits.filter((habit) =>
+  const dueHabits = activeHabits.filter((habit) => scheduledOn(habit.schedule, today));
+  const wins = dueHabits.filter((habit) =>
     completions.some((record) => record.habitId === habit.id && record.localDate === today),
   ).length;
   const dateLabel = new Intl.DateTimeFormat('en-US', {
@@ -47,8 +57,26 @@ export default function Today() {
     timeZone: 'UTC',
   }).format(new Date(`${today}T12:00:00Z`));
   function save(draft: HabitDraft) {
-    if (editor?.habit) editHabit(repository, editor.habit.id, draft.title, draft.color, draft.icon);
-    else createHabit(repository, deviceClock, randomUUID(), draft.title, draft.color, draft.icon);
+    if (editor?.habit)
+      editHabit(
+        repository,
+        editor.habit.id,
+        draft.title,
+        draft.color,
+        draft.icon,
+        deviceClock,
+        draft.days,
+      );
+    else
+      createHabit(
+        repository,
+        deviceClock,
+        randomUUID(),
+        draft.title,
+        draft.color,
+        draft.icon,
+        draft.days,
+      );
     update();
     setEditor(null);
     setArchived(false);
@@ -117,7 +145,9 @@ export default function Today() {
               <Text style={styles.bannerText}>Small wins today,{'\n'}brighter tomorrows.</Text>
               <Text style={styles.support}>
                 {activeHabits.length
-                  ? `${wins} of ${activeHabits.length} daily wins`
+                  ? dueHabits.length
+                    ? `${wins} of ${dueHabits.length} planned wins`
+                    : 'Nothing planned today. Enjoy a little breathing room.'
                   : 'One small step is a lovely start.'}
               </Text>
             </View>
@@ -175,7 +205,10 @@ export default function Today() {
               habit={habit}
               completions={completions}
               today={today}
-              onEdit={() => setEditor({ habit })}
+              onView={() => router.push({ pathname: '/habit/[id]', params: { id: habit.id } })}
+              onInspect={(day) =>
+                router.push({ pathname: '/habit/[id]', params: { id: habit.id, day } })
+              }
               onToggle={() => mutate(() => toggleToday(repository, deviceClock, habit.id))}
               ordering={
                 ordering
@@ -209,7 +242,7 @@ export default function Today() {
                 accessibilityLabel={`Restore ${habit.title}`}
                 onPress={() =>
                   mutate(
-                    () => restoreHabit(repository, habit.id),
+                    () => restoreHabit(repository, habit.id, deviceClock),
                     `${habit.title} restored. Find it in Today.`,
                   )
                 }

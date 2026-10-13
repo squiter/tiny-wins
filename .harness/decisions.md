@@ -8,3 +8,7 @@
 
 - Archive retains history; restoration appends to the active list. Schema v2 is additive (ADR-007).
 - The browser SQLite worker length bug requires a guarded postinstall repair until an upstream fix is verified (ADR-008).
+
+- Owner authorized GitHub publication/commits and continued MVP implementation. Repository: https://github.com/squiter/tiny-wins; later changes use a reviewable branch.
+- Frequency edits take effect tomorrow; new archive/restore records eligibility pauses. Legacy pause intervals are not fabricated (ADR-009).
+- Consistency includes today's pending opportunity; insights weight active-habit opportunities over 30 days and retain archived all-time wins.

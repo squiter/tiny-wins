@@ -19,12 +19,13 @@ export function sqliteRepository(
     update: (id, changes) => {
       db.update(schema.habits).set(changes).where(eq(schema.habits.id, id)).run();
     },
-    setArchived: (id, archivedAt) => {
+    setArchived: (id, archivedAt, schedule) => {
       db.transaction(() => {
         const changes =
           archivedAt === null
             ? {
                 archivedAt,
+                schedule,
                 sortOrder:
                   Math.max(
                     -1,
@@ -34,7 +35,7 @@ export function sqliteRepository(
                       .map((habit) => habit.sortOrder),
                   ) + 1,
               }
-            : { archivedAt };
+            : { archivedAt, schedule };
         db.update(schema.habits).set(changes).where(eq(schema.habits.id, id)).run();
       });
     },

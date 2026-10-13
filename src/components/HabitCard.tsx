@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn, LinearTransition, ReduceMotion } from 'react-native-reanimated';
 import { currentStreak, history, type Completion, type Habit } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
+import { scheduledOn } from '../domain/schedule';
 import { habitColors, habitSurfaces, theme } from '../theme/tokens';
 import { HabitIcon } from './HabitIcon';
 interface Props {
@@ -9,11 +10,21 @@ interface Props {
   completions: Completion[];
   today: LocalDate;
   onToggle(): void;
-  onEdit(): void;
+  onView(): void;
+  onInspect(day: LocalDate): void;
   ordering?: { first: boolean; last: boolean; move(direction: -1 | 1): void };
 }
-export function HabitCard({ habit, completions, today, onToggle, onEdit, ordering }: Props) {
+export function HabitCard({
+  habit,
+  completions,
+  today,
+  onToggle,
+  onView,
+  onInspect,
+  ordering,
+}: Props) {
   const cells = history(habit, completions, today);
+  const due = scheduledOn(habit.schedule, today);
   const done = cells[13]?.state === 'complete';
   const color = habitColors[habit.color];
   const streak = currentStreak(habit, completions, today);
@@ -26,8 +37,8 @@ export function HabitCard({ habit, completions, today, onToggle, onEdit, orderin
       <View style={styles.header}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`Edit ${habit.title}`}
-          onPress={onEdit}
+          accessibilityLabel={`View ${habit.title}`}
+          onPress={onView}
           style={styles.edit}
         >
           <HabitIcon icon={habit.icon} color={habit.color} />
@@ -36,16 +47,17 @@ export function HabitCard({ habit, completions, today, onToggle, onEdit, orderin
               {habit.title}
             </Text>
             <Text style={styles.support}>
-              {streak} day{streak === 1 ? '' : 's'} in a row
+              {due ? `${streak} day${streak === 1 ? '' : 's'} in a row` : 'Not scheduled today'}
             </Text>
           </View>
         </Pressable>
         <Pressable
           testID={`complete-${habit.id}`}
           accessibilityRole="checkbox"
-          accessibilityState={{ checked: done }}
+          accessibilityState={{ checked: done, disabled: !due && !done }}
           aria-checked={done}
           accessibilityLabel={`${done ? 'Undo' : 'Complete'} ${habit.title} today`}
+          disabled={!due && !done}
           onPress={onToggle}
           style={[
             styles.check,
@@ -63,21 +75,21 @@ export function HabitCard({ habit, completions, today, onToggle, onEdit, orderin
               maxFontSizeMultiplier={1}
               style={{ color: done ? '#FFFFFF' : color, fontSize: 23 }}
             >
-              {done ? '✓' : '+'}
+              {done ? '✓' : due ? '+' : '–'}
             </Text>
           </Animated.View>
         </Pressable>
       </View>
       <View style={styles.grid}>
         {cells.map((cell) => {
-          const label = `${cell.day}: ${cell.state === 'complete' ? 'completed' : cell.state === 'before-start' ? 'before habit started' : cell.today ? 'pending' : 'not completed'}${cell.today ? ', today' : ''}`;
+          const label = `${cell.day}: ${cell.state === 'complete' ? 'completed' : cell.state === 'before-start' || cell.state === 'not-scheduled' ? (cell.state === 'not-scheduled' ? 'not scheduled' : 'before habit started') : cell.today ? 'pending' : 'not completed'}${cell.today ? ', today' : ''}`;
           const style = [
             styles.cell,
             {
               backgroundColor:
                 cell.state === 'complete'
                   ? color
-                  : cell.state === 'before-start'
+                  : cell.state === 'before-start' || cell.state === 'not-scheduled'
                     ? '#F0EEEA'
                     : habitSurfaces[habit.color],
               borderColor: cell.today ? color : 'transparent',
@@ -87,9 +99,10 @@ export function HabitCard({ habit, completions, today, onToggle, onEdit, orderin
           return cell.today ? (
             <Pressable
               key={cell.day}
+              disabled={!due && !done}
               onPress={onToggle}
               accessibilityRole="checkbox"
-              accessibilityState={{ checked: done }}
+              accessibilityState={{ checked: done, disabled: !due && !done }}
               aria-checked={done}
               accessibilityLabel={`${habit.title}, ${label}`}
               hitSlop={6}
@@ -99,15 +112,27 @@ export function HabitCard({ habit, completions, today, onToggle, onEdit, orderin
                 maxFontSizeMultiplier={1}
                 style={[styles.cellMark, { color: done ? '#FFFFFF' : color }]}
               >
-                {done ? '✓' : '•'}
+                {done ? '✓' : due ? '•' : '–'}
               </Text>
             </Pressable>
           ) : (
-            <View key={cell.day} accessible accessibilityLabel={label} style={style}>
-              <Text maxFontSizeMultiplier={1} style={[styles.cellMark, { color: '#FFFFFF' }]}>
-                {cell.state === 'complete' ? '✓' : ''}
+            <Pressable
+              key={cell.day}
+              onPress={() => onInspect(cell.day)}
+              accessibilityRole="button"
+              accessibilityLabel={`Inspect ${habit.title}, ${label}`}
+              style={style}
+            >
+              <Text
+                maxFontSizeMultiplier={1}
+                style={[
+                  styles.cellMark,
+                  { color: cell.state === 'complete' ? '#FFFFFF' : theme.muted },
+                ]}
+              >
+                {cell.state === 'complete' ? '✓' : cell.state === 'not-scheduled' ? '–' : ''}
               </Text>
-            </View>
+            </Pressable>
           );
         })}
       </View>
