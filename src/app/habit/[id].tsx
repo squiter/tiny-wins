@@ -18,7 +18,8 @@ import { StatsGrid } from '../../components/StatsGrid';
 import { MonthCalendar } from '../../components/MonthCalendar';
 import { YearGrid } from '../../components/YearGrid';
 import { DayInspector } from '../../components/DayInspector';
-import { theme } from '../../theme/tokens';
+import { useTheme, useThemeStyles } from '../../theme/useTheme';
+import type { ThemePalette } from '../../theme/tokens';
 function safeDay(value?: string): LocalDate | null {
   try {
     return value ? dateKey(value) : null;
@@ -27,6 +28,8 @@ function safeDay(value?: string): LocalDate | null {
   }
 }
 export default function HabitDetail() {
+  const { theme } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const { weekStartsOn } = usePreferences();
   const { id, day, periodStart } = useLocalSearchParams<{
     id: string;
@@ -294,36 +297,37 @@ export default function HabitDetail() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: theme.ivory },
-  page: {
-    padding: 16,
-    gap: 16,
-    width: '100%',
-    maxWidth: 600,
-    alignSelf: 'center',
-    paddingBottom: 32,
-  },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  action: { minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center' },
-  back: { fontSize: 30, color: theme.forest },
-  eyebrow: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 11,
-    letterSpacing: 1.3,
-    color: theme.muted,
-  },
-  link: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: theme.forest },
-  identity: { flexDirection: 'row', gap: 12, alignItems: 'center' },
-  heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 29, color: theme.forest },
-  support: { fontFamily: 'Inter_400Regular', fontSize: 13, lineHeight: 20, color: theme.muted },
-  yearHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  year: { fontFamily: 'Fraunces_600SemiBold', fontSize: 25, color: theme.forest },
-  footer: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 21,
-    color: theme.forest,
-    textAlign: 'center',
-    padding: 16,
-  },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    safe: { flex: 1, backgroundColor: theme.ivory },
+    page: {
+      padding: 16,
+      gap: 16,
+      width: '100%',
+      maxWidth: 600,
+      alignSelf: 'center',
+      paddingBottom: 32,
+    },
+    header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+    action: { minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center' },
+    back: { fontSize: 30, color: theme.forest },
+    eyebrow: {
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 11,
+      letterSpacing: 1.3,
+      color: theme.muted,
+    },
+    link: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: theme.forest },
+    identity: { flexDirection: 'row', gap: 12, alignItems: 'center' },
+    heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 29, color: theme.forest },
+    support: { fontFamily: 'Inter_400Regular', fontSize: 13, lineHeight: 20, color: theme.muted },
+    yearHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+    year: { fontFamily: 'Fraunces_600SemiBold', fontSize: 25, color: theme.forest },
+    footer: {
+      fontFamily: 'Fraunces_600SemiBold',
+      fontSize: 21,
+      color: theme.forest,
+      textAlign: 'center',
+      padding: 16,
+    },
+  });

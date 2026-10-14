@@ -54,6 +54,49 @@ const clock: Clock = {
   timezone: () => 'America/Sao_Paulo',
 };
 describe('real SQLite + shared Drizzle adapter', () => {
+  it('upgrades v5 appearance without changing calendar data and persists overrides across reopen', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-appearance-'));
+    directories.push(directory);
+    const path = join(directory, 'appearance.db');
+    let connection = open(path);
+    createHabit(connection.repository, clock, 'read', 'Read', 'coral', 'book');
+    toggleToday(connection.repository, clock, 'read');
+    saveDayNote(connection.repository, clock, 'read', dateKey('2024-02-29'), 'Keep this note');
+    connection.repository.setWeekStartsOn(0);
+    const habits = connection.repository.listHabits();
+    const wins = connection.repository.listCompletions();
+    const notes = connection.repository.listNotes();
+    connection.sqlite.exec(
+      'ALTER TABLE preferences DROP COLUMN appearance; PRAGMA user_version = 5',
+    );
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getAppearance()).toBe('system');
+    expect(connection.repository.getWeekStartsOn()).toBe(0);
+    expect(connection.repository.listHabits()).toEqual(habits);
+    expect(connection.repository.listCompletions()).toEqual(wins);
+    expect(connection.repository.listNotes()).toEqual(notes);
+    connection.repository.setAppearance('dark');
+    connection.repository.setWeekStartsOn(1);
+    expect(() => connection.repository.setAppearance('invalid' as 'dark')).toThrow();
+    expect(() => connection.sqlite.exec("UPDATE preferences SET appearance='invalid'")).toThrow();
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getAppearance()).toBe('dark');
+    expect(connection.repository.getWeekStartsOn()).toBe(1);
+    connection.repository.mergeBackup(
+      parseBackup(serializeBackup(habits, wins, clock.now(), notes)),
+    );
+    expect(connection.repository.getAppearance()).toBe('dark');
+    connection.repository.setAppearance('light');
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getAppearance()).toBe('light');
+    connection.repository.setAppearance('system');
+    migrate(connection.adapter);
+    expect(connection.repository.getAppearance()).toBe('system');
+    expect(connection.repository.listNotes()).toEqual(notes);
+  });
   it('migrates v4 without rewriting wins, saves independent notes and reopens/merges atomically', () => {
     const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-notes-'));
     directories.push(directory);
@@ -62,7 +105,9 @@ describe('real SQLite + shared Drizzle adapter', () => {
     createHabit(connection.repository, clock, 'read', 'Read', 'coral', 'book');
     toggleToday(connection.repository, clock, 'read');
     const wins = connection.repository.listCompletions();
-    connection.sqlite.exec('DROP TABLE notes; PRAGMA user_version = 4');
+    connection.sqlite.exec(
+      'ALTER TABLE preferences DROP COLUMN appearance; DROP TABLE notes; PRAGMA user_version = 4',
+    );
     connection.sqlite.close();
     connection = open(path);
     expect(connection.repository.listCompletions()).toEqual(wins);
@@ -190,7 +235,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(
       connection.sqlite.prepare('SELECT schedule FROM habits WHERE id=?').get('strict'),
     ).toEqual(legacyJson);
-    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 5 });
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 6 });
     const backup = parseBackup(
       serializeBackup(connection.repository.listHabits(), completions, later.now()),
     );
@@ -260,7 +305,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(repository.getHabit('b')?.startsOn).toBe('2024-02-29');
     expect(repository.listCompletions()[0]?.localDate).toBe('2024-02-29');
     migrate(adapter);
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 5 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 6 });
     sqlite.close();
     expect(open(path).repository.listCompletions()).toHaveLength(1);
   });
@@ -489,8 +534,8 @@ describe('real SQLite + shared Drizzle adapter', () => {
   });
   it('rejects unknown future schema without modifying user data', () => {
     const { sqlite, adapter } = open(':memory:');
-    sqlite.exec('PRAGMA user_version = 6');
+    sqlite.exec('PRAGMA user_version = 7');
     expect(() => migrate(adapter)).toThrow('newer Tiny Wins');
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 6 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 7 });
   });
 });

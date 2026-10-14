@@ -28,7 +28,8 @@ import {
   validateWeekdays,
   type Weekday,
 } from '../domain/schedule';
-import { habitColors, habitSurfaces, theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 import { habitIcons, HabitIcon } from './HabitIcon';
 export interface HabitDraft {
   title: string;
@@ -44,6 +45,8 @@ interface Props {
   onArchive(): void;
 }
 export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
+  const { theme, habitColors, habitSurfaces } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const reducedMotion = useReducedMotion();
   const [title, setTitle] = useState(habit?.title ?? '');
   const [color, setColor] = useState<ColorKey>(habit?.color ?? 'forest');
@@ -175,7 +178,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                     accessibilityLabel={`${key} color`}
                     style={[styles.swatch, { backgroundColor: habitColors[key] }]}
                   >
-                    <Text style={{ color: '#FFFFFF', fontSize: 22 }}>
+                    <Text style={{ color: theme.onHabit, fontSize: 22 }}>
                       {color === key ? '✓' : ''}
                     </Text>
                   </Pressable>
@@ -189,7 +192,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                   onPress={() => setDays([...allWeekdays])}
                   style={[
                     styles.frequency,
-                    { backgroundColor: days.length === 7 ? theme.mint : '#FFFFFF' },
+                    { backgroundColor: days.length === 7 ? theme.mint : theme.surface },
                   ]}
                 >
                   <Text style={styles.label}>Every day</Text>
@@ -229,13 +232,13 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                     }
                     style={[
                       styles.day,
-                      { backgroundColor: days.includes(day) ? theme.forest : '#FFFFFF' },
+                      { backgroundColor: days.includes(day) ? theme.forest : theme.surface },
                     ]}
                   >
                     <Text
                       style={{
                         fontFamily: 'Inter_600SemiBold',
-                        color: days.includes(day) ? '#FFFFFF' : theme.forest,
+                        color: days.includes(day) ? theme.onPrimary : theme.forest,
                         fontSize: 13,
                       }}
                     >
@@ -347,76 +350,83 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
     </Modal>
   );
 }
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: theme.ivory },
-  page: {
-    padding: 16,
-    gap: 16,
-    width: '100%',
-    maxWidth: 560,
-    alignSelf: 'center',
-    paddingBottom: 32,
-  },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 24, color: theme.forest },
-  back: { minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center' },
-  backText: { fontSize: 32, color: theme.forest },
-  preview: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    padding: 16,
-    borderRadius: 18,
-    backgroundColor: '#FFFFFF',
-  },
-  previewTitle: { flex: 1, fontFamily: 'Fraunces_600SemiBold', fontSize: 23, color: theme.forest },
-  label: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.charcoal },
-  input: {
-    padding: 16,
-    minHeight: 54,
-    fontFamily: 'Inter_400Regular',
-    fontSize: 17,
-    borderRadius: 13,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: theme.stone,
-  },
-  options: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  iconOption: {
-    width: 48,
-    height: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 13,
-    borderWidth: 2,
-  },
-  swatch: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  day: {
-    minWidth: 40,
-    minHeight: 48,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  frequency: { borderRadius: 13, backgroundColor: '#ECEFE8', padding: 14, gap: 5 },
-  support: { fontFamily: 'Inter_400Regular', fontSize: 13, color: theme.muted, lineHeight: 20 },
-  error: { color: habitColors.coral, fontFamily: 'Inter_400Regular' },
-  button: {
-    minHeight: 52,
-    padding: 16,
-    borderRadius: 13,
-    backgroundColor: theme.forest,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: { color: '#FFFFFF', fontFamily: 'Inter_600SemiBold', fontSize: 16 },
-  secondary: { minHeight: 48, alignItems: 'center', justifyContent: 'center' },
-  secondaryText: { color: theme.forest, fontFamily: 'Inter_600SemiBold', fontSize: 15 },
-  archive: { alignItems: 'center', gap: 5 },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    safe: { flex: 1, backgroundColor: theme.ivory },
+    page: {
+      padding: 16,
+      gap: 16,
+      width: '100%',
+      maxWidth: 560,
+      alignSelf: 'center',
+      paddingBottom: 32,
+    },
+    header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+    heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 24, color: theme.forest },
+    back: { minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center' },
+    backText: { fontSize: 32, color: theme.forest },
+    preview: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 12,
+      padding: 16,
+      borderRadius: 18,
+      backgroundColor: theme.surface,
+    },
+    previewTitle: {
+      flex: 1,
+      fontFamily: 'Fraunces_600SemiBold',
+      fontSize: 23,
+      color: theme.forest,
+    },
+    label: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.charcoal },
+    input: {
+      padding: 16,
+      minHeight: 54,
+      fontFamily: 'Inter_400Regular',
+      fontSize: 17,
+      borderRadius: 13,
+      backgroundColor: theme.surface,
+      color: theme.charcoal,
+      borderWidth: 1,
+      borderColor: theme.stone,
+    },
+    options: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+    iconOption: {
+      width: 48,
+      height: 48,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 13,
+      borderWidth: 2,
+    },
+    swatch: {
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    day: {
+      minWidth: 40,
+      minHeight: 48,
+      borderRadius: 12,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    frequency: { borderRadius: 13, backgroundColor: theme.frequency, padding: 14, gap: 5 },
+    support: { fontFamily: 'Inter_400Regular', fontSize: 13, color: theme.muted, lineHeight: 20 },
+    error: { color: theme.charcoal, fontFamily: 'Inter_400Regular' },
+    button: {
+      minHeight: 52,
+      padding: 16,
+      borderRadius: 13,
+      backgroundColor: theme.forest,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    buttonText: { color: theme.onPrimary, fontFamily: 'Inter_600SemiBold', fontSize: 16 },
+    secondary: { minHeight: 48, alignItems: 'center', justifyContent: 'center' },
+    secondaryText: { color: theme.forest, fontFamily: 'Inter_600SemiBold', fontSize: 15 },
+    archive: { alignItems: 'center', gap: 5 },
+  });

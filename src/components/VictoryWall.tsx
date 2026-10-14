@@ -12,7 +12,8 @@ import type { HistoryCell, Habit } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
 import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
 import type { ReportPeriod } from '../domain/report';
-import { habitColors, habitSurfaces, theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 import { HabitIcon } from './HabitIcon';
 export function VictoryWall({
   habit,
@@ -35,6 +36,8 @@ export function VictoryWall({
   onInspect(day: LocalDate): void;
   onView(): void;
 }) {
+  const { theme, habitColors, habitSurfaces } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const columns = period === 'year' ? 35 : 7;
   const offset = cells[0] ? calendarOffset(cells[0].day, weekStartsOn) : 0;
   const color = habitColors[habit.color];
@@ -112,7 +115,7 @@ export function VictoryWall({
                           ? color
                           : cell.state === 'grace'
                             ? habitSurfaces[habit.color]
-                            : '#FFFFFF',
+                            : theme.surface,
                       borderColor: cell.today || cell.state === 'missed' ? color : theme.stone,
                       borderStyle:
                         cell.state === 'future' || cell.state === 'not-scheduled'
@@ -128,7 +131,7 @@ export function VictoryWall({
                       maxFontSizeMultiplier={1}
                       style={[
                         styles.number,
-                        { color: cell.state === 'complete' ? '#FFFFFF' : theme.muted },
+                        { color: cell.state === 'complete' ? theme.onHabit : theme.muted },
                       ]}
                     >
                       {Number(cell.day.slice(8))}
@@ -140,7 +143,7 @@ export function VictoryWall({
                     style={{
                       fontSize: period === 'year' ? 5 : 11,
                       lineHeight: period === 'year' ? 7 : 14,
-                      color: cell.state === 'complete' ? '#FFFFFF' : color,
+                      color: cell.state === 'complete' ? theme.onHabit : color,
                     }}
                   >
                     {cell.state === 'complete'
@@ -179,40 +182,41 @@ export function VictoryWall({
     </Animated.View>
   );
 }
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: theme.stone,
-    borderRadius: 17,
-    padding: 12,
-    gap: 10,
-  },
-  header: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 48 },
-  identity: { flex: 1 },
-  name: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.charcoal },
-  copy: { fontFamily: 'Inter_400Regular', fontSize: 11, lineHeight: 17, color: theme.muted },
-  rate: { fontFamily: 'Inter_600SemiBold', fontSize: 14 },
-  wall: { gap: 2 },
-  row: { flexDirection: 'row', gap: 2 },
-  tile: {
-    flex: 1,
-    aspectRatio: 1,
-    borderRadius: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  blank: { flex: 1, aspectRatio: 1 },
-  largeTile: { minHeight: 48, aspectRatio: undefined, borderRadius: 6 },
-  number: { fontFamily: 'Inter_600SemiBold', fontSize: 12 },
-  weekday: {
-    flex: 1,
-    textAlign: 'center',
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
-    color: theme.muted,
-  },
-  axis: { flexDirection: 'row', justifyContent: 'space-between' },
-  explore: { minHeight: 48, justifyContent: 'center' },
-  link: { fontFamily: 'Inter_600SemiBold', fontSize: 12, color: theme.forest },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    card: {
+      backgroundColor: theme.surface,
+      borderWidth: 1,
+      borderColor: theme.stone,
+      borderRadius: 17,
+      padding: 12,
+      gap: 10,
+    },
+    header: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 48 },
+    identity: { flex: 1 },
+    name: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.charcoal },
+    copy: { fontFamily: 'Inter_400Regular', fontSize: 11, lineHeight: 17, color: theme.muted },
+    rate: { fontFamily: 'Inter_600SemiBold', fontSize: 14 },
+    wall: { gap: 2 },
+    row: { flexDirection: 'row', gap: 2 },
+    tile: {
+      flex: 1,
+      aspectRatio: 1,
+      borderRadius: 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    blank: { flex: 1, aspectRatio: 1 },
+    largeTile: { minHeight: 48, aspectRatio: undefined, borderRadius: 6 },
+    number: { fontFamily: 'Inter_600SemiBold', fontSize: 12 },
+    weekday: {
+      flex: 1,
+      textAlign: 'center',
+      fontFamily: 'Inter_400Regular',
+      fontSize: 11,
+      color: theme.muted,
+    },
+    axis: { flexDirection: 'row', justifyContent: 'space-between' },
+    explore: { minHeight: 48, justifyContent: 'center' },
+    link: { fontFamily: 'Inter_600SemiBold', fontSize: 12, color: theme.forest },
+  });

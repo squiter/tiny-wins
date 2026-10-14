@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 import type { ColorKey, IconKey } from '../domain/habit';
-import { habitSurfaces } from '../theme/tokens';
+import { useTheme } from '../theme/useTheme';
 export const habitIcons: Record<IconKey, { glyph: string; label: string }> = {
   plant: { glyph: '🌱', label: 'Plant' },
   water: { glyph: '💧', label: 'Water' },
@@ -16,6 +16,7 @@ export const habitIcons: Record<IconKey, { glyph: string; label: string }> = {
   smile: { glyph: '🙂', label: 'Smile' },
 };
 export function HabitIcon({ icon, color }: { icon: IconKey; color: ColorKey }) {
+  const { habitSurfaces } = useTheme();
   return (
     <View
       accessible={false}

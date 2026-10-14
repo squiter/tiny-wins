@@ -14,7 +14,8 @@ import {
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import type { HistoryCell } from '../domain/habit';
-import { theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 export function DayInspector({
   cell,
   habitTitle,
@@ -34,6 +35,8 @@ export function DayInspector({
   onChange(completed: boolean): void;
   onClose(): void;
 }) {
+  const { theme } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const [draft, setDraft] = useState(note);
   const [typing, setTyping] = useState(false);
   const [savedNote, setSavedNote] = useState(note);
@@ -109,6 +112,7 @@ export function DayInspector({
                         multiline
                         maxLength={noteLimit}
                         placeholder="What would you like to remember?"
+                        placeholderTextColor={theme.muted}
                         onFocus={() => setTyping(true)}
                         onBlur={() => setTyping(false)}
                         style={styles.noteInput}
@@ -189,39 +193,40 @@ export function DayInspector({
     </Modal>
   );
 }
-const styles = StyleSheet.create({
-  overlay: { flex: 1, backgroundColor: '#00000044', justifyContent: 'flex-end' },
-  sheet: {
-    backgroundColor: theme.ivory,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    maxHeight: '90%',
-  },
-  content: { padding: 24, gap: 16 },
-  noteSection: { gap: 12, paddingTop: 16, borderTopWidth: 1, borderColor: theme.stone },
-  noteTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
-  noteInput: {
-    minHeight: 100,
-    padding: 14,
-    textAlignVertical: 'top',
-    borderWidth: 1,
-    borderColor: theme.stone,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    fontFamily: 'Inter_400Regular',
-    fontSize: 16,
-    color: theme.charcoal,
-  },
-  title: { fontFamily: 'Fraunces_600SemiBold', fontSize: 25, color: theme.forest },
-  text: { fontFamily: 'Inter_400Regular', fontSize: 15, lineHeight: 23, color: theme.muted },
-  button: {
-    minHeight: 52,
-    borderRadius: 13,
-    backgroundColor: theme.forest,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 16,
-  },
-  buttonText: { color: '#FFFFFF', fontFamily: 'Inter_600SemiBold', fontSize: 15 },
-  close: { minHeight: 48, alignItems: 'center', justifyContent: 'center' },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    overlay: { flex: 1, backgroundColor: theme.overlay, justifyContent: 'flex-end' },
+    sheet: {
+      backgroundColor: theme.ivory,
+      borderTopLeftRadius: 24,
+      borderTopRightRadius: 24,
+      maxHeight: '90%',
+    },
+    content: { padding: 24, gap: 16 },
+    noteSection: { gap: 12, paddingTop: 16, borderTopWidth: 1, borderColor: theme.stone },
+    noteTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
+    noteInput: {
+      minHeight: 100,
+      padding: 14,
+      textAlignVertical: 'top',
+      borderWidth: 1,
+      borderColor: theme.stone,
+      borderRadius: 12,
+      backgroundColor: theme.surface,
+      fontFamily: 'Inter_400Regular',
+      fontSize: 16,
+      color: theme.charcoal,
+    },
+    title: { fontFamily: 'Fraunces_600SemiBold', fontSize: 25, color: theme.forest },
+    text: { fontFamily: 'Inter_400Regular', fontSize: 15, lineHeight: 23, color: theme.muted },
+    button: {
+      minHeight: 52,
+      borderRadius: 13,
+      backgroundColor: theme.forest,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 16,
+    },
+    buttonText: { color: theme.onPrimary, fontFamily: 'Inter_600SemiBold', fontSize: 15 },
+    close: { minHeight: 48, alignItems: 'center', justifyContent: 'center' },
+  });

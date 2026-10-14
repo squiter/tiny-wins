@@ -12,4 +12,4 @@ Calendar week-start preferences are implemented in task 007.
 
 Renewable per-habit streak flexibility and softly colored grace tiles are delivered in task 011, with local/browser and hosted iPhone configuration/persistence acceptance. No new dependency or destructive schema migration.
 
-Day notes are implemented in task 012 with local/browser verification and backup v3 compatibility. Native note acceptance is pending. Next product slice: saved system/light/dark appearance, before native widgets.
+Day notes are implemented in task 012 with local/browser verification and backup v3 compatibility. Native note acceptance is pending. Saved system/light/dark appearance is implemented in task 013, with local/browser acceptance. Next: native runtime evidence for notes/appearance, then a dedicated widget feasibility/platform slice before implementation.

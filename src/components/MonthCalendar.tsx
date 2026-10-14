@@ -3,7 +3,8 @@ import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/p
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { HistoryCell, ColorKey } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
-import { habitColors, habitSurfaces, theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 export function MonthCalendar({
   cells,
   color,
@@ -15,6 +16,8 @@ export function MonthCalendar({
   weekStartsOn: WeekStartsOn;
   onInspect(day: LocalDate): void;
 }) {
+  const { theme, habitColors, habitSurfaces } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const offset = cells[0] ? calendarOffset(cells[0].day, weekStartsOn) : 0;
   return (
     <View style={styles.grid}>
@@ -56,14 +59,14 @@ export function MonthCalendar({
             style={{
               fontFamily: 'Inter_600SemiBold',
               fontSize: 12,
-              color: cell.state === 'complete' ? '#FFFFFF' : theme.muted,
+              color: cell.state === 'complete' ? theme.onHabit : theme.muted,
             }}
           >
             {Number(cell.day.slice(8))}
           </Text>
           <Text
             maxFontSizeMultiplier={1}
-            style={{ fontSize: 9, color: cell.state === 'complete' ? '#FFFFFF' : theme.muted }}
+            style={{ fontSize: 9, color: cell.state === 'complete' ? theme.onHabit : theme.muted }}
           >
             {cell.state === 'complete'
               ? '✓'
@@ -78,28 +81,29 @@ export function MonthCalendar({
     </View>
   );
 }
-const styles = StyleSheet.create({
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 4,
-    padding: 10,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-  },
-  label: {
-    width: '13.1%',
-    textAlign: 'center',
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
-    color: theme.muted,
-    marginVertical: 6,
-  },
-  day: {
-    width: '13.1%',
-    aspectRatio: 1,
-    borderRadius: 9,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    grid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 4,
+      padding: 10,
+      backgroundColor: theme.surface,
+      borderRadius: 16,
+    },
+    label: {
+      width: '13.1%',
+      textAlign: 'center',
+      fontFamily: 'Inter_400Regular',
+      fontSize: 11,
+      color: theme.muted,
+      marginVertical: 6,
+    },
+    day: {
+      width: '13.1%',
+      aspectRatio: 1,
+      borderRadius: 9,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });

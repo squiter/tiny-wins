@@ -6,9 +6,10 @@ import { Inter_400Regular } from '@expo-google-fonts/inter/400Regular';
 import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
 import { Platform, Pressable, Text, View } from 'react-native';
 import { DatabaseProvider } from '../database/provider';
-import { theme } from '../theme/tokens';
+import { useSystemTheme, useTheme } from '../theme/useTheme';
 import { recoverApp } from '../lib/recover';
 export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
+  const { theme } = useSystemTheme();
   return (
     <View
       style={{
@@ -37,12 +38,13 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
           alignItems: 'center',
         }}
       >
-        <Text style={{ color: '#FFFFFF', fontSize: 16 }}>Try again</Text>
+        <Text style={{ color: theme.onPrimary, fontSize: 16 }}>Try again</Text>
       </Pressable>
     </View>
   );
 }
 export default function Layout() {
+  const { theme } = useSystemTheme();
   const [loaded, error] = useFonts({ Fraunces_600SemiBold, Inter_400Regular, Inter_600SemiBold });
   if (!loaded && !error)
     return (
@@ -54,15 +56,24 @@ export default function Layout() {
           alignItems: 'center',
         }}
       >
-        <Text>Getting your tiny wins ready…</Text>
+        <Text style={{ color: theme.charcoal }}>Getting your tiny wins ready…</Text>
       </View>
     );
   return (
     <DatabaseProvider>
-      <StatusBar style="dark" />
+      <ThemedRoutes />
+    </DatabaseProvider>
+  );
+}
+
+function ThemedRoutes() {
+  const { theme, scheme } = useTheme();
+  return (
+    <>
+      <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Stack
         screenOptions={{ headerShown: false, contentStyle: { backgroundColor: theme.ivory } }}
       />
-    </DatabaseProvider>
+    </>
   );
 }

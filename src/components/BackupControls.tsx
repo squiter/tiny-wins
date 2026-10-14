@@ -4,8 +4,11 @@ import { useRepository } from '../database/provider';
 import { parseBackup, serializeBackup, type Backup } from '../domain/backup';
 import { chooseBackupFile, saveBackupFile } from '../features/backups/files';
 import { deviceClock } from '../lib/clock';
-import { theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 export function BackupControls() {
+  const { theme } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const repository = useRepository();
   const [pending, setPending] = useState<Backup | null>(null);
   const [busy, setBusy] = useState(false);
@@ -123,27 +126,28 @@ export function BackupControls() {
     </View>
   );
 }
-const styles = StyleSheet.create({
-  card: {
-    padding: 18,
-    gap: 12,
-    borderRadius: 16,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: theme.stone,
-  },
-  heading: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
-  copy: { fontFamily: 'Inter_400Regular', fontSize: 14, lineHeight: 22, color: theme.muted },
-  primary: {
-    minHeight: 52,
-    padding: 14,
-    borderRadius: 13,
-    backgroundColor: theme.forest,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  primaryText: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: '#FFFFFF' },
-  secondary: { minHeight: 48, alignItems: 'center', justifyContent: 'center', padding: 10 },
-  secondaryText: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: theme.forest },
-  review: { padding: 14, borderRadius: 13, backgroundColor: theme.mint, gap: 12 },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    card: {
+      padding: 18,
+      gap: 12,
+      borderRadius: 16,
+      backgroundColor: theme.surface,
+      borderWidth: 1,
+      borderColor: theme.stone,
+    },
+    heading: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
+    copy: { fontFamily: 'Inter_400Regular', fontSize: 14, lineHeight: 22, color: theme.muted },
+    primary: {
+      minHeight: 52,
+      padding: 14,
+      borderRadius: 13,
+      backgroundColor: theme.forest,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    primaryText: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.onPrimary },
+    secondary: { minHeight: 48, alignItems: 'center', justifyContent: 'center', padding: 10 },
+    secondaryText: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: theme.forest },
+    review: { padding: 14, borderRadius: 13, backgroundColor: theme.mint, gap: 12 },
+  });

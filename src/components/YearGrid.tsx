@@ -2,7 +2,8 @@ import { NoteMarker } from './NoteMarker';
 import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { HistoryCell, ColorKey } from '../domain/habit';
-import { habitColors, habitSurfaces, theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 import type { LocalDate } from '../domain/calendar';
 const months = [
   'January',
@@ -29,6 +30,8 @@ export function YearGrid({
   weekStartsOn: WeekStartsOn;
   onInspect(day: LocalDate): void;
 }) {
+  const { theme, habitColors, habitSurfaces } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   return (
     <View style={styles.year}>
       {months.map((month, index) => {
@@ -77,7 +80,7 @@ export function YearGrid({
                     maxFontSizeMultiplier={1}
                     style={{
                       fontSize: 7,
-                      color: cell.state === 'complete' ? '#FFFFFF' : theme.muted,
+                      color: cell.state === 'complete' ? theme.onHabit : theme.muted,
                     }}
                   >
                     {cell.state === 'complete'
@@ -99,33 +102,34 @@ export function YearGrid({
     </View>
   );
 }
-const styles = StyleSheet.create({
-  year: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  month: {
-    width: '48%',
-    flexGrow: 1,
-    padding: 12,
-    borderRadius: 16,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: theme.stone,
-    gap: 10,
-  },
-  title: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: theme.forest },
-  days: { flexDirection: 'row', flexWrap: 'wrap', gap: 2 },
-  weekday: {
-    width: '12.8%',
-    textAlign: 'center',
-    fontFamily: 'Inter_400Regular',
-    fontSize: 8,
-    color: theme.muted,
-    marginBottom: 2,
-  },
-  cell: {
-    width: '12.8%',
-    aspectRatio: 1,
-    borderRadius: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    year: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
+    month: {
+      width: '48%',
+      flexGrow: 1,
+      padding: 12,
+      borderRadius: 16,
+      backgroundColor: theme.surface,
+      borderWidth: 1,
+      borderColor: theme.stone,
+      gap: 10,
+    },
+    title: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: theme.forest },
+    days: { flexDirection: 'row', flexWrap: 'wrap', gap: 2 },
+    weekday: {
+      width: '12.8%',
+      textAlign: 'center',
+      fontFamily: 'Inter_400Regular',
+      fontSize: 8,
+      color: theme.muted,
+      marginBottom: 2,
+    },
+    cell: {
+      width: '12.8%',
+      aspectRatio: 1,
+      borderRadius: 3,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });

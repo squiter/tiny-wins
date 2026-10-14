@@ -19,8 +19,11 @@ import { deviceClock } from '../../lib/clock';
 import { VictoryWall } from '../../components/VictoryWall';
 import { DayInspector } from '../../components/DayInspector';
 import { StatsGrid } from '../../components/StatsGrid';
-import { theme } from '../../theme/tokens';
+import { useTheme, useThemeStyles } from '../../theme/useTheme';
+import type { ThemePalette } from '../../theme/tokens';
 export default function Insights() {
+  const { theme } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const { repository, refresh, habits, completions, notes, today } = useHabitData();
   const { weekStartsOn } = usePreferences();
   const [period, setPeriod] = useState<ReportPeriod>('year');
@@ -92,7 +95,7 @@ export default function Insights() {
                   onPress={() => changePeriod(value)}
                   style={[styles.period, period === value && styles.chosen]}
                 >
-                  <Text style={[styles.link, period === value && { color: '#FFFFFF' }]}>
+                  <Text style={[styles.link, period === value && { color: theme.onPrimary }]}>
                     {value[0]!.toUpperCase() + value.slice(1)}
                   </Text>
                 </Pressable>
@@ -247,58 +250,64 @@ export default function Insights() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: theme.ivory },
-  page: { padding: 16, paddingBottom: 32, width: '100%', maxWidth: 600, alignSelf: 'center' },
-  intro: { gap: 14, marginBottom: 16 },
-  heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 34, color: theme.forest, marginTop: 16 },
-  support: { fontFamily: 'Inter_400Regular', fontSize: 13, lineHeight: 20, color: theme.muted },
-  periods: { flexDirection: 'row', gap: 8 },
-  period: {
-    flex: 1,
-    minHeight: 48,
-    borderRadius: 12,
-    backgroundColor: theme.stone,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  chosen: { backgroundColor: theme.forest },
-  navigation: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  arrow: {
-    width: 48,
-    minHeight: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-  },
-  chevron: { fontSize: 28, color: theme.forest },
-  range: {
-    flex: 1,
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 14,
-    color: theme.forest,
-    textAlign: 'center',
-  },
-  today: {
-    minHeight: 48,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-  },
-  link: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: theme.forest },
-  disabled: { opacity: 0.35 },
-  legend: { fontFamily: 'Inter_400Regular', fontSize: 11, lineHeight: 18, color: theme.muted },
-  summary: { gap: 14, marginTop: 20 },
-  section: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
-  empty: { gap: 12, padding: 16 },
-  footer: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 20,
-    color: theme.muted,
-    textAlign: 'center',
-    marginTop: 12,
-  },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    safe: { flex: 1, backgroundColor: theme.ivory },
+    page: { padding: 16, paddingBottom: 32, width: '100%', maxWidth: 600, alignSelf: 'center' },
+    intro: { gap: 14, marginBottom: 16 },
+    heading: {
+      fontFamily: 'Fraunces_600SemiBold',
+      fontSize: 34,
+      color: theme.forest,
+      marginTop: 16,
+    },
+    support: { fontFamily: 'Inter_400Regular', fontSize: 13, lineHeight: 20, color: theme.muted },
+    periods: { flexDirection: 'row', gap: 8 },
+    period: {
+      flex: 1,
+      minHeight: 48,
+      borderRadius: 12,
+      backgroundColor: theme.stone,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    chosen: { backgroundColor: theme.forest },
+    navigation: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+    arrow: {
+      width: 48,
+      minHeight: 48,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 12,
+      backgroundColor: theme.surface,
+    },
+    chevron: { fontSize: 28, color: theme.forest },
+    range: {
+      flex: 1,
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 14,
+      color: theme.forest,
+      textAlign: 'center',
+    },
+    today: {
+      minHeight: 48,
+      paddingHorizontal: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 12,
+      backgroundColor: theme.surface,
+    },
+    link: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: theme.forest },
+    disabled: { opacity: 0.35 },
+    legend: { fontFamily: 'Inter_400Regular', fontSize: 11, lineHeight: 18, color: theme.muted },
+    summary: { gap: 14, marginTop: 20 },
+    section: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
+    empty: { gap: 12, padding: 16 },
+    footer: {
+      fontFamily: 'Fraunces_600SemiBold',
+      fontSize: 20,
+      color: theme.muted,
+      textAlign: 'center',
+      marginTop: 12,
+    },
+  });

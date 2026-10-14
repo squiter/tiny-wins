@@ -7,9 +7,12 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 
 export function DailyProgress({ wins, planned }: { wins: number; planned: number }) {
+  const { theme } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const complete = planned > 0 && wins === planned;
   const previous = useRef(complete);
   const reducedMotion = useReducedMotion();
@@ -60,34 +63,35 @@ export function DailyProgress({ wins, planned }: { wins: number; planned: number
     </View>
   );
 }
-const styles = StyleSheet.create({
-  banner: {
-    padding: 14,
-    borderRadius: 17,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-    backgroundColor: '#E7EDE4',
-    marginBottom: 4,
-    minHeight: 106,
-  },
-  complete: { backgroundColor: '#F8EBCF' },
-  icon: { fontSize: 35 },
-  body: { flex: 1 },
-  heading: {
-    fontFamily: 'Fraunces_600SemiBold',
-    color: theme.forest,
-    fontSize: 19,
-    lineHeight: 25,
-    minHeight: 50,
-  },
-  copy: { fontFamily: 'Inter_400Regular', fontSize: 12, color: theme.muted, lineHeight: 19 },
-  track: {
-    height: 4,
-    marginTop: 8,
-    borderRadius: 2,
-    backgroundColor: '#CEDACB',
-    overflow: 'hidden',
-  },
-  fill: { height: '100%', backgroundColor: theme.forest, borderRadius: 2 },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    banner: {
+      padding: 14,
+      borderRadius: 17,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 16,
+      backgroundColor: theme.progress,
+      marginBottom: 4,
+      minHeight: 106,
+    },
+    complete: { backgroundColor: theme.celebration },
+    icon: { fontSize: 35 },
+    body: { flex: 1 },
+    heading: {
+      fontFamily: 'Fraunces_600SemiBold',
+      color: theme.forest,
+      fontSize: 19,
+      lineHeight: 25,
+      minHeight: 50,
+    },
+    copy: { fontFamily: 'Inter_400Regular', fontSize: 12, color: theme.muted, lineHeight: 19 },
+    track: {
+      height: 4,
+      marginTop: 8,
+      borderRadius: 2,
+      backgroundColor: theme.track,
+      overflow: 'hidden',
+    },
+    fill: { height: '100%', backgroundColor: theme.forest, borderRadius: 2 },
+  });

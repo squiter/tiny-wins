@@ -6,9 +6,12 @@ import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { deviceClock } from '../../lib/clock';
 import { BackupControls } from '../../components/BackupControls';
-import { theme } from '../../theme/tokens';
+import { useTheme, useThemeStyles } from '../../theme/useTheme';
+import type { ThemePalette } from '../../theme/tokens';
 export default function Settings() {
-  const { weekStartsOn, setWeekStartsOn } = usePreferences();
+  const { theme } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
+  const { weekStartsOn, setWeekStartsOn, appearance, setAppearance } = usePreferences();
   const [error, setError] = useState('');
   function changeWeek(value: WeekStartsOn) {
     try {
@@ -56,7 +59,9 @@ export default function Settings() {
                 onPress={() => changeWeek(value)}
                 style={[styles.choice, weekStartsOn === value && styles.chosen]}
               >
-                <Text style={[styles.choiceText, weekStartsOn === value && { color: '#FFFFFF' }]}>
+                <Text
+                  style={[styles.choiceText, weekStartsOn === value && { color: theme.onPrimary }]}
+                >
                   {weekStartsOn === value ? '✓ ' : ''}
                   {value === 1 ? 'Monday' : 'Sunday'}
                 </Text>
@@ -66,6 +71,54 @@ export default function Settings() {
           <Text style={styles.copy}>
             Saved on this device. Changes the monthly and yearly calendar layout. Your schedules and
             past wins stay the same.
+          </Text>
+          {!!error && (
+            <Text accessibilityRole="alert" style={styles.copy}>
+              {error}
+            </Text>
+          )}
+        </View>
+        <View style={styles.card}>
+          <Text accessibilityRole="header" style={styles.title}>
+            Make yourself comfortable
+          </Text>
+          <Text style={styles.copy}>Appearance</Text>
+          <View
+            accessibilityRole="radiogroup"
+            accessibilityLabel="Appearance"
+            style={styles.appearanceChoices}
+          >
+            {(['system', 'light', 'dark'] as const).map((value) => (
+              <Pressable
+                key={value}
+                testID={`appearance-${value}`}
+                accessibilityRole="radio"
+                accessibilityLabel={`${value[0]!.toUpperCase()}${value.slice(1)} appearance${appearance === value ? ', selected' : ''}`}
+                accessibilityState={{ checked: appearance === value }}
+                aria-checked={appearance === value}
+                onPress={() => {
+                  try {
+                    setAppearance(value);
+                    setError('');
+                  } catch {
+                    setError('We couldn’t save your preference. Please try again.');
+                  }
+                }}
+                style={[styles.choice, appearance === value && styles.chosen]}
+              >
+                <Text
+                  style={[styles.choiceText, appearance === value && { color: theme.onPrimary }]}
+                >
+                  {appearance === value ? '✓ ' : ''}
+                  {value[0]!.toUpperCase()}
+                  {value.slice(1)}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+          <Text style={styles.copy}>
+            System follows your device. Your choice is saved here; your wins and notes stay the
+            same.
           </Text>
           {!!error && (
             <Text accessibilityRole="alert" style={styles.copy}>
@@ -103,40 +156,47 @@ export default function Settings() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: theme.ivory },
-  page: { padding: 16, gap: 16, width: '100%', maxWidth: 600, alignSelf: 'center' },
-  heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 34, color: theme.forest, marginTop: 16 },
-  card: {
-    padding: 18,
-    gap: 10,
-    borderRadius: 16,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: theme.stone,
-    minHeight: 48,
-  },
-  choices: { flexDirection: 'row', gap: 10 },
-  choice: {
-    flex: 1,
-    minHeight: 48,
-    padding: 12,
-    borderRadius: 12,
-    backgroundColor: theme.ivory,
-    borderWidth: 1,
-    borderColor: theme.stone,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  chosen: { backgroundColor: theme.forest, borderColor: theme.forest },
-  choiceText: { fontFamily: 'Inter_600SemiBold', color: theme.forest, fontSize: 14 },
-  title: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
-  copy: { fontFamily: 'Inter_400Regular', fontSize: 14, lineHeight: 22, color: theme.muted },
-  footer: {
-    fontFamily: 'Fraunces_600SemiBold',
-    fontSize: 21,
-    color: theme.forest,
-    textAlign: 'center',
-    marginVertical: 20,
-  },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    safe: { flex: 1, backgroundColor: theme.ivory },
+    page: { padding: 16, gap: 16, width: '100%', maxWidth: 600, alignSelf: 'center' },
+    heading: {
+      fontFamily: 'Fraunces_600SemiBold',
+      fontSize: 34,
+      color: theme.forest,
+      marginTop: 16,
+    },
+    card: {
+      padding: 18,
+      gap: 10,
+      borderRadius: 16,
+      backgroundColor: theme.surface,
+      borderWidth: 1,
+      borderColor: theme.stone,
+      minHeight: 48,
+    },
+    choices: { flexDirection: 'row', gap: 10 },
+    appearanceChoices: { gap: 8 },
+    choice: {
+      flex: 1,
+      minHeight: 48,
+      padding: 12,
+      borderRadius: 12,
+      backgroundColor: theme.ivory,
+      borderWidth: 1,
+      borderColor: theme.stone,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    chosen: { backgroundColor: theme.forest, borderColor: theme.forest },
+    choiceText: { fontFamily: 'Inter_600SemiBold', color: theme.forest, fontSize: 14 },
+    title: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
+    copy: { fontFamily: 'Inter_400Regular', fontSize: 14, lineHeight: 22, color: theme.muted },
+    footer: {
+      fontFamily: 'Fraunces_600SemiBold',
+      fontSize: 21,
+      color: theme.forest,
+      textAlign: 'center',
+      marginVertical: 20,
+    },
+  });

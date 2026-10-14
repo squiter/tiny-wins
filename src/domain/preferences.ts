@@ -12,3 +12,21 @@ export function calendarWeekdays(startsOn: WeekStartsOn): string[] {
   const start = validateWeekStart(startsOn);
   return [...labels.slice(start), ...labels.slice(0, start)];
 }
+
+export const appearanceOptions = ['system', 'light', 'dark'] as const;
+export type Appearance = (typeof appearanceOptions)[number];
+export function validateAppearance(value: unknown): Appearance {
+  if (value !== 'system' && value !== 'light' && value !== 'dark')
+    throw new Error('Choose System, Light or Dark appearance.');
+  return value;
+}
+export function resolveAppearance(
+  value: Appearance,
+  systemScheme: 'light' | 'dark' | 'unspecified' | null | undefined,
+): 'light' | 'dark' {
+  return value === 'system'
+    ? systemScheme === 'dark'
+      ? 'dark'
+      : 'light'
+    : (validateAppearance(value) as 'light' | 'dark');
+}

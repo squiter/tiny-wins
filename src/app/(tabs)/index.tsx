@@ -14,9 +14,12 @@ import { DailyProgress } from '../../components/DailyProgress';
 import { HabitCard } from '../../components/HabitCard';
 import { HabitEditor, type HabitDraft } from '../../components/HabitEditor';
 import { HabitIcon } from '../../components/HabitIcon';
-import { theme } from '../../theme/tokens';
+import { useTheme, useThemeStyles } from '../../theme/useTheme';
+import type { ThemePalette } from '../../theme/tokens';
 
 export default function Today() {
+  const { theme } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const repository = useRepository();
   const params = useLocalSearchParams<{ archived?: string }>();
   const [, refresh] = useState(0);
@@ -271,105 +274,106 @@ export default function Today() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: theme.ivory },
-  page: {
-    padding: 16,
-    paddingBottom: 32,
-    gap: 10,
-    width: '100%',
-    maxWidth: 540,
-    alignSelf: 'center',
-  },
-  brand: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 8 },
-  brandMark: { width: 19, flexDirection: 'row', gap: 3, flexWrap: 'wrap' },
-  brandText: {
-    fontFamily: 'Inter_600SemiBold',
-    fontSize: 12,
-    letterSpacing: 0.4,
-    color: theme.muted,
-  },
-  header: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 8, marginTop: 6 },
-  heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 34, color: theme.forest },
-  date: { fontFamily: 'Inter_400Regular', fontSize: 13, color: theme.muted, marginTop: 5 },
-  add: {
-    width: 48,
-    minHeight: 48,
-    borderRadius: 24,
-    backgroundColor: theme.forest,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addText: { color: '#FFFFFF', fontSize: 30 },
-  support: { fontFamily: 'Inter_400Regular', fontSize: 12, color: theme.muted, lineHeight: 19 },
-  section: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    minHeight: 48,
-  },
-  sectionTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: theme.charcoal },
-  textButton: { minHeight: 48, minWidth: 64, justifyContent: 'center', alignItems: 'flex-end' },
-  link: { fontFamily: 'Inter_600SemiBold', color: theme.forest, fontSize: 13 },
-  notice: {
-    backgroundColor: theme.mint,
-    borderRadius: 12,
-    paddingLeft: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  dismiss: {
-    minWidth: 48,
-    minHeight: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 'auto',
-  },
-  empty: {
-    gap: 14,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: theme.stone,
-    borderRadius: 18,
-    padding: 20,
-  },
-  emptyTitle: { fontFamily: 'Fraunces_600SemiBold', color: theme.forest, fontSize: 24 },
-  emptyCopy: { fontFamily: 'Inter_400Regular', color: theme.muted, fontSize: 15, lineHeight: 23 },
-  primary: {
-    minHeight: 52,
-    backgroundColor: theme.forest,
-    borderRadius: 13,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 14,
-  },
-  primaryText: { fontFamily: 'Inter_600SemiBold', color: '#FFFFFF', fontSize: 15 },
-  legend: {
-    color: theme.muted,
-    fontFamily: 'Inter_400Regular',
-    fontSize: 11,
-    textAlign: 'center',
-    marginTop: 4,
-  },
-  archiveLink: { minHeight: 48, alignItems: 'center', justifyContent: 'center' },
-  footer: {
-    fontFamily: 'Fraunces_600SemiBold',
-    color: theme.muted,
-    fontSize: 17,
-    textAlign: 'center',
-    marginTop: 8,
-  },
-  archivedRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 17,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: theme.stone,
-  },
-  habitTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.charcoal },
-  restore: { minHeight: 48, paddingHorizontal: 10, justifyContent: 'center' },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    safe: { flex: 1, backgroundColor: theme.ivory },
+    page: {
+      padding: 16,
+      paddingBottom: 32,
+      gap: 10,
+      width: '100%',
+      maxWidth: 540,
+      alignSelf: 'center',
+    },
+    brand: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 8 },
+    brandMark: { width: 19, flexDirection: 'row', gap: 3, flexWrap: 'wrap' },
+    brandText: {
+      fontFamily: 'Inter_600SemiBold',
+      fontSize: 12,
+      letterSpacing: 0.4,
+      color: theme.muted,
+    },
+    header: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 8, marginTop: 6 },
+    heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 34, color: theme.forest },
+    date: { fontFamily: 'Inter_400Regular', fontSize: 13, color: theme.muted, marginTop: 5 },
+    add: {
+      width: 48,
+      minHeight: 48,
+      borderRadius: 24,
+      backgroundColor: theme.forest,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    addText: { color: theme.onPrimary, fontSize: 30 },
+    support: { fontFamily: 'Inter_400Regular', fontSize: 12, color: theme.muted, lineHeight: 19 },
+    section: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      minHeight: 48,
+    },
+    sectionTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 14, color: theme.charcoal },
+    textButton: { minHeight: 48, minWidth: 64, justifyContent: 'center', alignItems: 'flex-end' },
+    link: { fontFamily: 'Inter_600SemiBold', color: theme.forest, fontSize: 13 },
+    notice: {
+      backgroundColor: theme.mint,
+      borderRadius: 12,
+      paddingLeft: 14,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 8,
+    },
+    dismiss: {
+      minWidth: 48,
+      minHeight: 48,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginLeft: 'auto',
+    },
+    empty: {
+      gap: 14,
+      backgroundColor: theme.surface,
+      borderWidth: 1,
+      borderColor: theme.stone,
+      borderRadius: 18,
+      padding: 20,
+    },
+    emptyTitle: { fontFamily: 'Fraunces_600SemiBold', color: theme.forest, fontSize: 24 },
+    emptyCopy: { fontFamily: 'Inter_400Regular', color: theme.muted, fontSize: 15, lineHeight: 23 },
+    primary: {
+      minHeight: 52,
+      backgroundColor: theme.forest,
+      borderRadius: 13,
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 14,
+    },
+    primaryText: { fontFamily: 'Inter_600SemiBold', color: theme.onPrimary, fontSize: 15 },
+    legend: {
+      color: theme.muted,
+      fontFamily: 'Inter_400Regular',
+      fontSize: 11,
+      textAlign: 'center',
+      marginTop: 4,
+    },
+    archiveLink: { minHeight: 48, alignItems: 'center', justifyContent: 'center' },
+    footer: {
+      fontFamily: 'Fraunces_600SemiBold',
+      color: theme.muted,
+      fontSize: 17,
+      textAlign: 'center',
+      marginTop: 8,
+    },
+    archivedRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 10,
+      backgroundColor: theme.surface,
+      borderRadius: 17,
+      padding: 12,
+      borderWidth: 1,
+      borderColor: theme.stone,
+    },
+    habitTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.charcoal },
+    restore: { minHeight: 48, paddingHorizontal: 10, justifyContent: 'center' },
+  });

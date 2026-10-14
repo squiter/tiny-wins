@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 export function StatsGrid({
   items,
 }: {
   items: { label: string; value: string | number; icon: string }[];
 }) {
+  const { theme } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   return (
     <View style={styles.grid}>
       {items.map((item) => (
@@ -19,19 +22,20 @@ export function StatsGrid({
     </View>
   );
 }
-const styles = StyleSheet.create({
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  card: {
-    width: '48%',
-    flexGrow: 1,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 16,
-    gap: 6,
-    borderWidth: 1,
-    borderColor: theme.stone,
-  },
-  icon: { fontSize: 21 },
-  value: { fontFamily: 'Fraunces_600SemiBold', fontSize: 29, color: theme.forest },
-  label: { fontFamily: 'Inter_400Regular', fontSize: 13, color: theme.muted, lineHeight: 19 },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
+    card: {
+      width: '48%',
+      flexGrow: 1,
+      backgroundColor: theme.surface,
+      borderRadius: 16,
+      padding: 16,
+      gap: 6,
+      borderWidth: 1,
+      borderColor: theme.stone,
+    },
+    icon: { fontSize: 21 },
+    value: { fontFamily: 'Fraunces_600SemiBold', fontSize: 29, color: theme.forest },
+    label: { fontFamily: 'Inter_400Regular', fontSize: 13, color: theme.muted, lineHeight: 19 },
+  });

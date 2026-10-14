@@ -12,8 +12,10 @@ import type { HabitRepository } from '../features/habits/repository';
 import { sqliteRepository } from './repository';
 import { migrate, type MigrationDatabase } from './migrations';
 import * as schema from './schema';
-import type { WeekStartsOn } from '../domain/preferences';
+import type { Appearance, WeekStartsOn } from '../domain/preferences';
 const PreferencesContext = createContext<{
+  appearance: Appearance;
+  setAppearance(value: Appearance): void;
   weekStartsOn: WeekStartsOn;
   setWeekStartsOn(value: WeekStartsOn): void;
 } | null>(null);
@@ -22,6 +24,14 @@ const Context = createContext<HabitRepository | null>(null);
 function RepositoryProvider({ children }: PropsWithChildren) {
   const sqlite = useSQLiteContext();
   const repository = useMemo(() => sqliteRepository(drizzle(sqlite, { schema })), [sqlite]);
+  const [appearance, setAppearanceState] = useState(() => repository.getAppearance());
+  const setAppearance = useCallback(
+    (value: Appearance) => {
+      repository.setAppearance(value);
+      setAppearanceState(value);
+    },
+    [repository],
+  );
   const [weekStartsOn, setWeek] = useState(() => repository.getWeekStartsOn());
   const setWeekStartsOn = useCallback(
     (value: WeekStartsOn) => {
@@ -31,8 +41,8 @@ function RepositoryProvider({ children }: PropsWithChildren) {
     [repository],
   );
   const preferences = useMemo(
-    () => ({ weekStartsOn, setWeekStartsOn }),
-    [weekStartsOn, setWeekStartsOn],
+    () => ({ weekStartsOn, setWeekStartsOn, appearance, setAppearance }),
+    [weekStartsOn, setWeekStartsOn, appearance, setAppearance],
   );
   return (
     <Context.Provider value={repository}>

@@ -19,7 +19,7 @@ jobs:
       group: ios-smoke-main
       cancel-in-progress: false
     runs-on: macos-26
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -60,7 +60,7 @@ jobs:
           unzip -q "$RUNNER_TEMP/maestro.zip" -d "$RUNNER_TEMP/maestro-cli"
           echo "$RUNNER_TEMP/maestro-cli/maestro/bin" >> "$GITHUB_PATH"
       - name: Boot available iPhone simulator
-        timeout-minutes: 6
+        timeout-minutes: 8
         run: |
           set -euo pipefail
           xcrun simctl list devices available --json > "$RUNNER_TEMP/tiny-wins-devices.json"
@@ -89,14 +89,14 @@ jobs:
       - name: Prepare cold iOS development bundle
         timeout-minutes: 6
         run: curl --fail --silent --show-error --max-time 300 "http://localhost:8081/.expo/.virtual-metro-entry.bundle?platform=ios&dev=true&lazy=true&minify=false&inlineSourceMap=false&modulesOnly=false&runModule=true&excludeSource=true&sourcePaths=url-server&app=app.tinywins.mobile" -o "$RUNNER_TEMP/tiny-wins-ios.bundle"
-      - name: Run restart, management and day-note acceptance flows
+      - name: Run restart, management, notes and appearance acceptance flows
         env:
           MAESTRO_DRIVER_STARTUP_TIMEOUT: '240000'
           MAESTRO_CLI_NO_ANALYTICS: 'true'
           MAESTRO_DISABLE_UPDATE_CHECK: 'true'
           MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
           MAESTRO_API_URL: http://127.0.0.1:9
-        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/first-win.yaml .maestro/habit-management.yaml .maestro/day-notes.yaml
+        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/first-win.yaml .maestro/habit-management.yaml .maestro/day-notes.yaml .maestro/appearance.yaml
       - name: Capture simulator outcome
         if: always()
         run: |

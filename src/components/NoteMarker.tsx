@@ -1,11 +1,12 @@
 import { StyleSheet, View } from 'react-native';
-import { theme } from '../theme/tokens';
+import { useTheme } from '../theme/useTheme';
 export function NoteMarker({ completed }: { completed: boolean }) {
+  const { theme } = useTheme();
   return (
     <View
       accessible={false}
       pointerEvents="none"
-      style={[styles.marker, { borderColor: completed ? '#FFFFFF' : theme.forest }]}
+      style={[styles.marker, { borderColor: completed ? theme.onHabit : theme.forest }]}
     />
   );
 }

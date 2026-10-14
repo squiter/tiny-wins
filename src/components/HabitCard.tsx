@@ -15,7 +15,8 @@ import Animated, {
 import { currentStreak, history, type Completion, type Habit } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
 import { scheduledOn } from '../domain/schedule';
-import { habitColors, habitSurfaces, theme } from '../theme/tokens';
+import { useTheme, useThemeStyles } from '../theme/useTheme';
+import type { ThemePalette } from '../theme/tokens';
 import { HabitIcon } from './HabitIcon';
 interface Props {
   habit: Habit;
@@ -37,6 +38,8 @@ export function HabitCard({
   onInspect,
   ordering,
 }: Props) {
+  const { theme, habitColors, habitSurfaces } = useTheme();
+  const styles = useThemeStyles(createStyles, theme);
   const cells = history(habit, completions, today, notes);
   const due = scheduledOn(habit.schedule, today);
   const done = cells[13]?.state === 'complete';
@@ -117,7 +120,7 @@ export function HabitCard({
               >
                 <Text
                   maxFontSizeMultiplier={1}
-                  style={{ color: done ? '#FFFFFF' : color, fontSize: 23 }}
+                  style={{ color: done ? theme.onHabit : color, fontSize: 23 }}
                 >
                   {done ? '✓' : due ? '+' : '–'}
                 </Text>
@@ -148,7 +151,7 @@ export function HabitCard({
                 cell.state === 'complete'
                   ? color
                   : cell.state === 'before-start' || cell.state === 'not-scheduled'
-                    ? '#F0EEEA'
+                    ? theme.rest
                     : cell.state === 'grace'
                       ? habitSurfaces[habit.color]
                       : theme.ivory,
@@ -171,7 +174,7 @@ export function HabitCard({
               {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
               <Text
                 maxFontSizeMultiplier={1}
-                style={[styles.cellMark, { color: done ? '#FFFFFF' : color }]}
+                style={[styles.cellMark, { color: done ? theme.onHabit : color }]}
               >
                 {done ? '✓' : due ? '•' : '–'}
               </Text>
@@ -189,7 +192,7 @@ export function HabitCard({
                 maxFontSizeMultiplier={1}
                 style={[
                   styles.cellMark,
-                  { color: cell.state === 'complete' ? '#FFFFFF' : theme.muted },
+                  { color: cell.state === 'complete' ? theme.onHabit : theme.muted },
                 ]}
               >
                 {cell.state === 'complete'
@@ -207,38 +210,39 @@ export function HabitCard({
     </Animated.View>
   );
 }
-const styles = StyleSheet.create({
-  card: {
-    padding: 12,
-    borderRadius: 17,
-    gap: 8,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#EBE8E2',
-  },
-  header: { flexDirection: 'row', gap: 10, alignItems: 'center' },
-  edit: { flex: 1, flexDirection: 'row', gap: 10, alignItems: 'center', minHeight: 48 },
-  titleBlock: { flex: 1 },
-  title: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.charcoal },
-  support: { fontFamily: 'Inter_400Regular', fontSize: 12, color: theme.muted, marginTop: 3 },
-  check: {
-    width: 48,
-    minHeight: 48,
-    borderRadius: 13,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  grid: { flexDirection: 'row', gap: 2, marginLeft: 54, marginRight: 58, marginTop: -4 },
-  cell: {
-    flex: 1,
-    aspectRatio: 1,
-    borderRadius: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cellMark: { fontSize: 7 },
-  move: { backgroundColor: theme.ivory, borderColor: theme.stone },
-  up: { position: 'absolute', left: 0, top: 0 },
-  arrow: { color: theme.forest, fontSize: 23 },
-});
+const createStyles = (theme: ThemePalette) =>
+  StyleSheet.create({
+    card: {
+      padding: 12,
+      borderRadius: 17,
+      gap: 8,
+      backgroundColor: theme.surface,
+      borderWidth: 1,
+      borderColor: theme.cardBorder,
+    },
+    header: { flexDirection: 'row', gap: 10, alignItems: 'center' },
+    edit: { flex: 1, flexDirection: 'row', gap: 10, alignItems: 'center', minHeight: 48 },
+    titleBlock: { flex: 1 },
+    title: { fontFamily: 'Inter_600SemiBold', fontSize: 15, color: theme.charcoal },
+    support: { fontFamily: 'Inter_400Regular', fontSize: 12, color: theme.muted, marginTop: 3 },
+    check: {
+      width: 48,
+      minHeight: 48,
+      borderRadius: 13,
+      borderWidth: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    grid: { flexDirection: 'row', gap: 2, marginLeft: 54, marginRight: 58, marginTop: -4 },
+    cell: {
+      flex: 1,
+      aspectRatio: 1,
+      borderRadius: 3,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    cellMark: { fontSize: 7 },
+    move: { backgroundColor: theme.ivory, borderColor: theme.stone },
+    up: { position: 'absolute', left: 0, top: 0 },
+    arrow: { color: theme.forest, fontSize: 23 },
+  });
