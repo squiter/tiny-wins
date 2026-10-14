@@ -46,7 +46,7 @@ jobs:
           fi
           [[ "$run_id" =~ ^[0-9]+$ ]]
           gh api "repos/$GH_REPO/actions/runs/$run_id" > "$RUNNER_TEMP/tiny-wins-build.json"
-          build_sha=$(node -e 'const r=require(process.argv[1]); if(r.conclusion!=="success" || r.head_branch!=="main" || r.name!=="iOS simulator build") process.exit(1); console.log(r.head_sha)' "$RUNNER_TEMP/tiny-wins-build.json")
+          build_sha=$(node -e 'const r=require(process.argv[1]); if(r.conclusion!=="success" || r.head_branch!=="main" || r.name!=="iOS simulator build" || r.event!=="push") process.exit(1); console.log(r.head_sha)' "$RUNNER_TEMP/tiny-wins-build.json")
           git diff --exit-code "$build_sha" HEAD -- src assets app.json package.json package-lock.json metro.config.js babel.config.js scripts/patch-expo-sqlite.mjs scripts/patch-security-dependencies.mjs
           echo "Testing iOS artifact from $build_sha (run $run_id)"
           gh run download "$run_id" --name tiny-wins-ios-simulator --dir "$RUNNER_TEMP/tiny-wins-artifact"
@@ -60,21 +60,27 @@ jobs:
           unzip -q "$RUNNER_TEMP/maestro.zip" -d "$RUNNER_TEMP/maestro-cli"
           echo "$RUNNER_TEMP/maestro-cli/maestro/bin" >> "$GITHUB_PATH"
       - name: Boot available iPhone simulator
+        timeout-minutes: 6
         run: |
           set -euo pipefail
           xcrun simctl list devices available --json > "$RUNNER_TEMP/tiny-wins-devices.json"
           udid=$(node -e 'const d=require(process.argv[1]);const phone=Object.values(d.devices).flat().find(d=>d.isAvailable && d.name.startsWith("iPhone") && d.state==="Shutdown");if(!phone)throw new Error("No available iPhone simulator");console.log(phone.udid)' "$RUNNER_TEMP/tiny-wins-devices.json")
           echo "TINY_WINS_SIMULATOR=$udid" >> "$GITHUB_ENV"
+          echo "Booting iPhone simulator $udid"
+          open -a Simulator
           xcrun simctl boot "$udid"
           xcrun simctl bootstatus "$udid" -b
           xcrun simctl install "$udid" "$RUNNER_TEMP/tiny-wins-app/TinyWins.app"
       - name: Start local development bundle server
+        timeout-minutes: 4
+        env:
+          NODE_OPTIONS: --dns-result-order=ipv4first
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/tiny-wins-smoke"
           CI=1 npx expo start --localhost --port 8081 > "$RUNNER_TEMP/tiny-wins-smoke/metro.log" 2>&1 &
-          for attempt in $(seq 1 60); do
-            status=$(curl --fail --silent http://127.0.0.1:8081/status || true)
+          for attempt in $(seq 1 120); do
+            status=$(curl --fail --silent --max-time 1 http://localhost:8081/status || true)
             if [ "$status" = "packager-status:running" ]; then exit 0; fi
             sleep 1
           done
@@ -90,6 +96,7 @@ jobs:
       - name: Capture simulator outcome
         if: always()
         run: |
+          xcrun simctl list devices available
           if [ -n "${TINY_WINS_SIMULATOR:-}" ]; then
             mkdir -p "$RUNNER_TEMP/tiny-wins-smoke"
             xcrun simctl io "$TINY_WINS_SIMULATOR" screenshot "$RUNNER_TEMP/tiny-wins-smoke/simulator.png"
