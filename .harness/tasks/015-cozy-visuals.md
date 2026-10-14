@@ -8,6 +8,7 @@ Dependencies: None. Use existing React Native Image/View and bundled fonts.
 Acceptance criteria:
 
 - Add a restrained, warm botanical/rabbit illustration inspired by the saved board; decorative, non-interactive and hidden from accessibility.
+- Reserve the rabbit for the all-done daily banner. Shared page footers use quiet typography and generous spacing, without repeating the image or adding another colored card (owner refinement, 2026-10-14).
 - Apply shared card shapes, gentle depth and consistent navigation icons across Today/detail/Insights/Settings/editors.
 - Keep both palettes legible; preserve habit hue identity, binary/grace/note cues and exactly 14 Today dates.
 - Main controls remain 48 points; illustration never obscures copy/controls or expands compact rows.
@@ -29,3 +30,9 @@ Run 38622065385 again passes the five feature/core flows. Centering the reading 
 Manual enlarged screenshot review also finds an actual layout defect: the unbounded YOUR PROGRESS / Edit habit header and month label run past the right edge. Do not call the detail capture legible merely because Edit habit opens. Scope a responsive flex caption/edit action and flex calendar title, preserving font scaling and 48-point controls. Fixed-size decorative chevrons keep user text available. Add enlarged Insights/Settings captures to the same native review; new production source needs fresh verification and matching compilation.
 
 Responsive-header verification: `npm run verify` PASS again (70 unit + 22 real SQLite integration, types/lint/format and all platform exports). Native source revalidation is pending the fresh build. Enlarged review now asserts the month controls, Save/Archive/Cancel, captures the victory wall and the saved-animation row in Settings.
+
+Focused normal-font browser check after responsive fix (isolated 8091, 360 × 844): Edit habit stays 48 points high inside x270.22–329; October title spans x72–273 and both arrows remain visible. Screenshot: `docs/screenshots/cozy-detail-light-360.png`. Browser override/tab/server cleaned up. This normal-font check is separate from the pending native enlarged-text gate.
+
+Native run 38629308028 on a4c985c PASSED all six flows: features 3/0 failures, regressions 2/0, enlarged text 1/0; simulator readback accessibility-large. Reviewed detail, editor actions, day inspector, Insights/wall and Settings captures. The detail caption and October/2026 wrap inside the screen, both arrows remain visible, editor actions remain readable, and the animation switch stays separate from its wrapped label. This evidence precedes the footer refinement below.
+
+Owner footer refinement implemented in shared CozyNote: remove the duplicate rabbit and colored card; retain muted serif encouragement with breathable spacing across Today/detail/Insights/Settings. `npm run verify` PASS (70 unit + 22 SQLite tests, types/lint/format, web/iOS/Android exports). Browser captures reviewed at light 360/390 and dark 360: `cozy-typographic-footer-light-390.png`, `cozy-typographic-footer-light-360.png`, `cozy-typographic-footer-dark-360.png`. Six-of-six banner retains the sole rabbit illustration; all rows keep 14 dates. Synthetic preview only; owner data unchanged. New footer native runtime validation awaits a fresh matching build, so task remains in progress. Next product slice: task 017 interface languages, then task 018 starter ideas.
