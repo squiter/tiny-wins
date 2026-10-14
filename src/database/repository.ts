@@ -9,22 +9,42 @@ export function sqliteRepository(
 ): HabitRepository {
   const repository: HabitRepository = {
     listHabits: () =>
-      db
-        .select()
-        .from(schema.habits)
-        .orderBy(asc(schema.habits.sortOrder), asc(schema.habits.createdAt), asc(schema.habits.id))
-        .all(),
-    listCompletions: () => db.select().from(schema.completions).all(),
+      readPages(
+        (offset) =>
+          db
+            .select()
+            .from(schema.habits)
+            .orderBy(
+              asc(schema.habits.sortOrder),
+              asc(schema.habits.createdAt),
+              asc(schema.habits.id),
+            )
+            .limit(20)
+            .offset(offset)
+            .all(),
+        20,
+      ),
+    listCompletions: () =>
+      readPages((offset) =>
+        db
+          .select()
+          .from(schema.completions)
+          .orderBy(asc(schema.completions.habitId), asc(schema.completions.localDate))
+          .limit(100)
+          .offset(offset)
+          .all(),
+      ),
     getHabit: (id) => db.select().from(schema.habits).where(eq(schema.habits.id, id)).get(),
     update: (id, changes) => {
       db.update(schema.habits).set(changes).where(eq(schema.habits.id, id)).run();
     },
-    setArchived: (id, archivedAt) => {
+    setArchived: (id, archivedAt, schedule) => {
       db.transaction(() => {
         const changes =
           archivedAt === null
             ? {
                 archivedAt,
+                schedule,
                 sortOrder:
                   Math.max(
                     -1,
@@ -34,7 +54,7 @@ export function sqliteRepository(
                       .map((habit) => habit.sortOrder),
                   ) + 1,
               }
-            : { archivedAt };
+            : { archivedAt, schedule };
         db.update(schema.habits).set(changes).where(eq(schema.habits.id, id)).run();
       });
     },
@@ -49,6 +69,43 @@ export function sqliteRepository(
     create: (habit) => {
       db.insert(schema.habits).values(habit).run();
     },
+    mergeBackup: (backup) =>
+      db.transaction(() => {
+        const existing = new Map(repository.listHabits().map((habit) => [habit.id, habit]));
+        const wins = new Set(
+          repository.listCompletions().map((win) => `${win.habitId}:${win.localDate}`),
+        );
+        let habitsAdded = 0;
+        let winsAdded = 0;
+        let sortOrder =
+          Math.max(-1, ...Array.from(existing.values(), (habit) => habit.sortOrder)) + 1;
+        for (const habit of backup.habits) {
+          const current = existing.get(habit.id);
+          if (current && current.startsOn !== habit.startsOn)
+            throw new Error('This backup conflicts with existing habit history.');
+          if (!current) {
+            db.insert(schema.habits)
+              .values({ ...habit, sortOrder: sortOrder++ })
+              .run();
+            existing.set(habit.id, habit);
+            habitsAdded += 1;
+          }
+        }
+        for (const completion of backup.completions) {
+          if (
+            !existing.has(completion.habitId) ||
+            completion.localDate < existing.get(completion.habitId)!.startsOn
+          )
+            throw new Error('This backup contains an invalid win.');
+          const key = `${completion.habitId}:${completion.localDate}`;
+          if (!wins.has(key)) {
+            db.insert(schema.completions).values(completion).run();
+            wins.add(key);
+            winsAdded += 1;
+          }
+        }
+        return { habitsAdded, winsAdded };
+      }),
     isCompleted: (habitId, day) =>
       !!db
         .select()
@@ -69,4 +126,14 @@ export function sqliteRepository(
     },
   };
   return repository;
+}
+
+// Keep worker responses bounded on web; native storage uses the same query path.
+function readPages<T>(read: (offset: number) => T[], pageSize = 100): T[] {
+  const records: T[] = [];
+  for (let offset = 0; ; offset += pageSize) {
+    const page = read(offset);
+    records.push(...page);
+    if (page.length < pageSize) return records;
+  }
 }

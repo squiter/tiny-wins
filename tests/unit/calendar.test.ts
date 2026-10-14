@@ -14,6 +14,7 @@ const habit: Habit = {
   icon: 'plant',
   archivedAt: null,
   sortOrder: 0,
+  schedule: [{ from: dateKey('2024-02-01'), days: [0, 1, 2, 3, 4, 5, 6] }],
   startsOn: dateKey('2024-02-01'),
   createdAt: '2024-02-01T12:00:00Z',
 };

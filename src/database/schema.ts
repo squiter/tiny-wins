@@ -1,5 +1,6 @@
 import { sqliteTable, text, integer, primaryKey } from 'drizzle-orm/sqlite-core';
 import type { ColorKey, IconKey } from '../domain/habit';
+import type { ScheduleVersion } from '../domain/schedule';
 import type { LocalDate } from '../domain/calendar';
 export const habits = sqliteTable('habits', {
   id: text('id').primaryKey(),
@@ -10,6 +11,7 @@ export const habits = sqliteTable('habits', {
   sortOrder: integer('sort_order').notNull().default(0),
   startsOn: text('starts_on').$type<LocalDate>().notNull(),
   createdAt: text('created_at').notNull(),
+  schedule: text('schedule', { mode: 'json' }).$type<ScheduleVersion[]>().notNull(),
 });
 export const completions = sqliteTable(
   'completions',

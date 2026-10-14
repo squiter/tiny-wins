@@ -1,5 +1,7 @@
 import { localDay } from '../../domain/calendar';
 import { habitTitle, habitAppearance, type ColorKey, type IconKey } from '../../domain/habit';
+import { allWeekdays, scheduledOn, validateWeekdays, type Weekday } from '../../domain/schedule';
+import type { LocalDate } from '../../domain/calendar';
 import type { HabitRepository } from '../habits/repository';
 export interface Clock {
   now(): Date;
@@ -12,8 +14,10 @@ export function createHabit(
   title: string,
   color: ColorKey,
   icon: IconKey = 'plant',
+  days: Weekday[] = [...allWeekdays],
 ) {
   const now = clock.now();
+  const timezone = clock.timezone();
   habitAppearance(color, icon);
   const sortOrder = Math.max(-1, ...repository.listHabits().map((habit) => habit.sortOrder)) + 1;
   repository.create({
@@ -23,8 +27,9 @@ export function createHabit(
     icon,
     archivedAt: null,
     sortOrder,
-    startsOn: localDay(now, clock.timezone()),
+    startsOn: localDay(now, timezone),
     createdAt: now.toISOString(),
+    schedule: [{ from: localDay(now, timezone), days: validateWeekdays(days) }],
   });
 }
 export function toggleToday(repository: HabitRepository, clock: Clock, habitId: string) {
@@ -33,8 +38,37 @@ export function toggleToday(repository: HabitRepository, clock: Clock, habitId: 
   const now = clock.now();
   const timezone = clock.timezone();
   const day = localDay(now, timezone);
+  if (
+    day < habit.startsOn ||
+    (!scheduledOn(habit.schedule, day) && !repository.isCompleted(habitId, day))
+  )
+    throw new Error('This habit is not scheduled today.');
   repository.setCompleted(
     { habitId, localDate: day, timezone, completedAt: now.toISOString() },
     !repository.isCompleted(habitId, day),
+  );
+}
+
+export function setDayCompletion(
+  repository: HabitRepository,
+  clock: Clock,
+  habitId: string,
+  day: LocalDate,
+  completed: boolean,
+) {
+  const habit = repository.getHabit(habitId);
+  const now = clock.now();
+  const timezone = clock.timezone();
+  if (
+    !habit ||
+    habit.archivedAt ||
+    day < habit.startsOn ||
+    day > localDay(now, timezone) ||
+    (completed && !scheduledOn(habit.schedule, day))
+  )
+    throw new Error('This date cannot be edited.');
+  repository.setCompleted(
+    { habitId, localDate: day, timezone, completedAt: now.toISOString() },
+    completed,
   );
 }

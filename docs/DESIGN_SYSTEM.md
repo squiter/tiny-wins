@@ -10,9 +10,9 @@ Reference: [Habit App Design Board](inspirations/Tiny%20Wins%20Habit%20App%20Des
 - A soft encouragement banner and an honest count of today's completed active habits; no fabricated historic metrics.
 - Per-habit icon tile, name, streak, exactly 14 date cells and a separate 48-point completion control. Today's cell has an outline and state marker; historical cells do not toggle completion.
 - One shared history legend; less decoration and repetition in each row.
-- A live name/icon/color preview in the editor, twelve icon choices and six color choices. The current frequency is daily; there are no nonfunctional schedule selectors.
+- A live name/icon/color preview in the editor, twelve icon choices and six color choices. Daily and selected-weekday frequencies are functional; schedule changes start tomorrow.
 - Tap the name/icon to edit. Enter reorder mode for labeled move-up/down controls. Archive is reversible and does not delete history; archived habits have explicit restore controls.
-- No placeholder Insights/Settings navigation. These destinations will appear with working features in later slices.
+- Today, Insights and Settings are now working tabs. Habit names open monthly/yearly progress, with editing as an explicit action.
 
 ## Tokens and accessibility
 

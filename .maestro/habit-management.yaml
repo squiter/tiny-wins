@@ -14,7 +14,8 @@ appId: app.tinywins.mobile
     id: save-habit
 - tapOn: Complete Read one page today
 - assertVisible: 1 day in a row
-- tapOn: Edit Read one page
+- tapOn: View Read one page
+- tapOn: Edit habit
 - tapOn:
     id: habit-name
 - eraseText
@@ -23,7 +24,7 @@ appId: app.tinywins.mobile
 - tapOn:
     id: save-habit
 - assertVisible: Read a chapter
-- assertVisible: 1 day in a row
+- tapOn: Go back
 - tapOn:
     id: add-habit
 - tapOn:
@@ -40,11 +41,13 @@ appId: app.tinywins.mobile
 - launchApp
 - assertVisible: Read a chapter
 - assertVisible: 1 day in a row
-- tapOn: Edit Read a chapter
+- tapOn: View Read a chapter
+- tapOn: Edit habit
 - scrollUntilVisible:
     element: Archive habit
     direction: DOWN
 - tapOn: Archive habit
+- tapOn: Go back
 - scrollUntilVisible:
     element: 'Archived habits \(1\)'
     direction: DOWN

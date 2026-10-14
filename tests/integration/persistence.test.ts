@@ -7,13 +7,19 @@ import { join } from 'node:path';
 import { migrate, type MigrationDatabase } from '../../src/database/migrations';
 import { sqliteRepository } from '../../src/database/repository';
 import * as schema from '../../src/database/schema';
-import { createHabit, toggleToday, type Clock } from '../../src/features/check-ins/service';
+import {
+  createHabit,
+  toggleToday,
+  setDayCompletion,
+  type Clock,
+} from '../../src/features/check-ins/service';
 import {
   editHabit,
   archiveHabit,
   restoreHabit,
   moveHabit,
 } from '../../src/features/habits/service';
+import { parseBackup, serializeBackup } from '../../src/domain/backup';
 import { dateKey } from '../../src/domain/calendar';
 const directories: string[] = [];
 const databases: Database.Database[] = [];
@@ -69,7 +75,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(repository.getHabit('b')?.startsOn).toBe('2024-02-29');
     expect(repository.listCompletions()[0]?.localDate).toBe('2024-02-29');
     migrate(adapter);
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 2 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 3 });
     sqlite.close();
     expect(open(path).repository.listCompletions()).toHaveLength(1);
   });
@@ -102,8 +108,8 @@ describe('real SQLite + shared Drizzle adapter', () => {
         .filter((h) => !h.archivedAt)
         .map((h) => h.id),
     ).toEqual(['walk', 'water']);
-    restoreHabit(connection.repository, 'read');
-    restoreHabit(connection.repository, 'read');
+    restoreHabit(connection.repository, 'read', clock);
+    restoreHabit(connection.repository, 'read', clock);
     expect(connection.repository.listHabits().map((h) => h.id)).toEqual(['walk', 'water', 'read']);
     connection.sqlite.close();
     connection = open(path);
@@ -130,6 +136,98 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(() => repository.reorder(['a', 'b'])).toThrow();
     expect(() => moveHabit(repository, 'b', -1)).toThrow();
     repository.reorder(['a']);
+  });
+  it('persists effective schedules, protects today and rejects ineligible historical writes', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-schedule-'));
+    directories.push(directory);
+    const path = join(directory, 'habits.db');
+    let connection = open(path);
+    createHabit(connection.repository, clock, 'read', 'Read', 'blue', 'book');
+    toggleToday(connection.repository, clock, 'read');
+    editHabit(connection.repository, 'read', 'Read', 'blue', 'book', clock, [1, 3, 5]);
+    expect(connection.repository.getHabit('read')?.schedule).toEqual([
+      { from: '2024-02-29', days: [0, 1, 2, 3, 4, 5, 6] },
+      { from: '2024-03-01', days: [1, 3, 5] },
+    ]);
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.isCompleted('read', dateKey('2024-02-29'))).toBe(true);
+    const saturday: Clock = {
+      now: () => new Date('2024-03-02T15:00:00Z'),
+      timezone: clock.timezone,
+    };
+    expect(() => toggleToday(connection.repository, saturday, 'read')).toThrow('not scheduled');
+    expect(() =>
+      setDayCompletion(connection.repository, saturday, 'read', dateKey('2024-03-02'), true),
+    ).toThrow();
+    expect(() =>
+      setDayCompletion(connection.repository, saturday, 'read', dateKey('2024-03-03'), true),
+    ).toThrow();
+    expect(() =>
+      setDayCompletion(connection.repository, saturday, 'read', dateKey('2024-02-28'), true),
+    ).toThrow();
+    setDayCompletion(connection.repository, saturday, 'read', dateKey('2024-03-01'), true);
+    setDayCompletion(connection.repository, saturday, 'read', dateKey('2024-03-01'), false);
+    expect(connection.repository.listCompletions()).toHaveLength(1);
+    expect(() =>
+      editHabit(connection.repository, 'read', 'Read', 'blue', 'book', clock, []),
+    ).toThrow();
+  });
+  it('restores a file backup atomically, retains current edits and is idempotent after reopen', () => {
+    const original = open(':memory:');
+    createHabit(original.repository, clock, 'read', 'Read', 'coral', 'book');
+    toggleToday(original.repository, clock, 'read');
+    const backup = parseBackup(
+      serializeBackup(
+        original.repository.listHabits(),
+        original.repository.listCompletions(),
+        clock.now(),
+      ),
+    );
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-backup-'));
+    directories.push(directory);
+    const path = join(directory, 'restore.db');
+    let target = open(path);
+    expect(target.repository.mergeBackup(backup)).toEqual({ habitsAdded: 1, winsAdded: 1 });
+    editHabit(target.repository, 'read', 'A newer name', 'blue', 'water');
+    expect(target.repository.mergeBackup(backup)).toEqual({ habitsAdded: 0, winsAdded: 0 });
+    target.sqlite.close();
+    target = open(path);
+    expect(target.repository.getHabit('read')?.title).toBe('A newer name');
+    expect(target.repository.listCompletions()).toEqual(backup.completions);
+    const conflict = {
+      ...backup,
+      habits: [
+        { ...backup.habits[0]!, id: 'new' },
+        { ...backup.habits[0]!, startsOn: dateKey('2024-02-28') },
+      ],
+      completions: [],
+    };
+    expect(() => target.repository.mergeBackup(conflict)).toThrow('conflicts');
+    expect(target.repository.getHabit('new')).toBeUndefined();
+  });
+  it('reads multiple SQLite pages without missing or duplicating habits/wins', () => {
+    const { repository, sqlite } = open(':memory:');
+    const insert = sqlite.prepare(
+      'INSERT INTO habits (id,title,color,icon,starts_on,created_at,sort_order,schedule) VALUES (?,?,?,?,?,?,?,?)',
+    );
+    sqlite.transaction(() => {
+      for (let index = 0; index < 205; index++)
+        insert.run(
+          `habit-${index}`,
+          'Read',
+          'forest',
+          'book',
+          '2024-02-29',
+          '2024-02-29T12:00:00Z',
+          index,
+          JSON.stringify([{ from: '2024-02-29', days: [0, 1, 2, 3, 4, 5, 6] }]),
+        );
+    })();
+    for (const habit of repository.listHabits()) toggleToday(repository, clock, habit.id);
+    expect(repository.listHabits()).toHaveLength(205);
+    expect(new Set(repository.listHabits().map((habit) => habit.id)).size).toBe(205);
+    expect(repository.listCompletions()).toHaveLength(205);
   });
   it('keeps recorded dates immutable through midnight and timezone travel', () => {
     const { repository } = open(':memory:');
@@ -198,8 +296,8 @@ describe('real SQLite + shared Drizzle adapter', () => {
   });
   it('rejects unknown future schema without modifying user data', () => {
     const { sqlite, adapter } = open(':memory:');
-    sqlite.exec('PRAGMA user_version = 3');
+    sqlite.exec('PRAGMA user_version = 4');
     expect(() => migrate(adapter)).toThrow('newer Tiny Wins');
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 3 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 4 });
   });
 });

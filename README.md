@@ -17,9 +17,9 @@ npm ci
 npm start
 ```
 
-Scan the Expo development server QR code with a compatible Expo Go installation, or use `npm run ios` / `npm run android` with installed simulators. SQLite runs on the device. No server, account, or environment secrets are required. The bundle identifier is provisional until store registration.
+Scan the Expo development server QR code with a compatible Expo Go installation, or use `npm run ios` / `npm run android` with Xcode or the Android SDK and installed simulators; these commands compile and install the native app. SQLite runs on the device. No server, account, or environment secrets are required. The bundle identifier is provisional until store registration.
 
-Create daily habits with a name, icon and color; tap a habit name to edit it. Reorder with labeled up/down controls, or archive and restore without losing past wins. Today displays 14 calendar days and the current streak, with completion/undo in one tap. SQLite stores habits and completion timezone context. Fonts ship with the bundle and do not require a runtime download.
+Create daily or selected-weekday habits with a name, icon and color; tap a habit name to see its calendar and edit it. Schedule changes start tomorrow and preserve past history. Reorder with labeled up/down controls, or archive and restore without losing past wins. Today displays 14 calendar days and the current streak, with completion/undo in one tap. Insights summarizes eligible opportunities, streaks and wins. Settings exports versioned JSON backups and restores missing data after review, without overwriting existing habits. SQLite stores habits and completion timezone context. Fonts ship with the bundle and do not require a runtime download.
 
 ## Commands
 
@@ -45,8 +45,13 @@ Create daily habits with a name, icon and color; tap a habit name to edit it. Re
 - [Primary implementation plan](docs/IMPLEMENTATION_PLAN.md); the supplied original remains unchanged under its original filename.
 - [Architecture](docs/ARCHITECTURE.md), [design/UX guide](docs/DESIGN_SYSTEM.md) and [ADRs](docs/adr).
 - [Contributing](CONTRIBUTING.md), [agent contract](AGENTS.md), [.harness/checks.md](.harness/checks.md).
+- [Current delivery report](docs/DELIVERY_REPORT.md), including native build evidence and backup limits.
 - [Bootstrap evidence and limitations](docs/BOOTSTRAP_REPORT.md), [habit management validation](docs/HABIT_MANAGEMENT_REPORT.md).
 
 License, store price, final identifiers and trademark rights remain owner decisions. No license has been selected; public source availability alone does not grant an open-source license. Official distribution is planned as a paid App Store download with no in-app payments.
 
 The locked Expo SQLite web worker has a response-length bug repaired by the guarded postinstall script. npm ci applies the repair automatically and integration tests cover large/multibyte responses. Consult ADR-008 before changing expo-sqlite.
+
+## GitHub automation
+
+[Repository](https://github.com/squiter/tiny-wins) and [Actions](https://github.com/squiter/tiny-wins/actions). Every push and PR runs Node 24 verification and a separate dependency audit. Android builds an arm64 debug APK; iOS builds an unsigned simulator app on macOS 26. Artifacts expire after seven days. Debug artifacts require the Expo development server; neither workflow publishes to a store. The audit is currently failing and remains a release gate.
