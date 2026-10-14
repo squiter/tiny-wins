@@ -380,3 +380,7 @@ Consider Android store publication, widgets, notifications, dark mode, richer sc
 ---
 
 **Implementation kickoff:** complete Phase 0 first, then create one task file per vertical slice. Keep this plan updated through ADRs rather than silently changing scope.
+
+## Owner refinement: Insights victory tiles (2026-10-13)
+
+The owner identified the per-habit tile wall as central to the app's value. Plan a dedicated Insights overview showing each habit's sequence of binary wins together, guided by `docs/inspirations/Insights Victory Tiles Reference.png`. Filling a tile should feel rewarding; use one completion color per habit and explicit state cues, rather than heat intensity or partial/quantified goals. Keep cumulative history after streak breaks, effective-date eligibility, week/month/year navigation and accessible/reduced-motion feedback. Detailed acceptance criteria are in `.harness/tasks/008-insights-victory-tiles.md`. Implementation is intentionally deferred while CI and security are repaired.
