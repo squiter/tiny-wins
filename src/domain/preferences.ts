@@ -30,3 +30,9 @@ export function resolveAppearance(
       : 'light'
     : (validateAppearance(value) as 'light' | 'dark');
 }
+
+export function validateCelebrationAnimations(value: unknown): boolean {
+  if (typeof value !== 'boolean')
+    throw new Error('Choose whether celebration animations are enabled.');
+  return value;
+}

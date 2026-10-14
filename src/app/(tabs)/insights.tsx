@@ -1,3 +1,5 @@
+import { useCelebrations } from '../../features/feedback/provider';
+import { CozyNote } from '../../components/CozyNote';
 import { saveDayNote } from '../../features/habits/notes';
 import { router } from 'expo-router';
 import { useState } from 'react';
@@ -22,6 +24,7 @@ import { StatsGrid } from '../../components/StatsGrid';
 import { useTheme, useThemeStyles } from '../../theme/useTheme';
 import type { ThemePalette } from '../../theme/tokens';
 export default function Insights() {
+  const { announce } = useCelebrations();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const { repository, refresh, habits, completions, notes, today } = useHabitData();
@@ -210,7 +213,7 @@ export default function Insights() {
               Consistency counts scheduled dates through today. Future days, rest days and dates
               before creation don’t count. Archived histories stay visible.
             </Text>
-            <Text style={styles.footer}>A missed day never erases your wins.</Text>
+            <CozyNote message="A missed day never erases your wins." />
           </View>
         }
       />
@@ -218,6 +221,7 @@ export default function Insights() {
         <DayInspector
           key={`${selected.id}:${selected.day}`}
           habitTitle={selectedHabit.title}
+          habitId={selectedHabit.id}
           cell={cell}
           note={
             notes.find(
@@ -236,7 +240,9 @@ export default function Insights() {
           editable={editable}
           onClose={() => setSelected(null)}
           onChange={(completed) => {
-            setDayCompletion(repository, deviceClock, selectedHabit.id, selected.day, completed);
+            announce(
+              setDayCompletion(repository, deviceClock, selectedHabit.id, selected.day, completed),
+            );
             refresh();
             setNotice(
               completed

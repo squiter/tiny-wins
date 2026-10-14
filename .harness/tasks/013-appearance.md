@@ -1,6 +1,6 @@
 # Task: 013 — System and dark appearance
 
-Status: in progress
+Status: complete
 Goal: Deliver the high-priority dark mode slice with saved System/Light/Dark selection.
 Non-goals: Widgets, localization, custom themes or motion changes.
 Files/modules allowed: Theme tokens/hooks, preferences domain/repository/provider/migration, app layouts/screens/components, tests, Maestro and documentation.
@@ -21,3 +21,5 @@ Handoff summary: Local and browser acceptance passed. Native appearance/restart 
 Native diagnosis (run 38577008176): first-win and management passed. The note keyboard covered offscreen actions; taps produced extra letters instead of saving. The Settings tab's actual native label includes “tab, 3 of 3”, so the exact selector missed it. Inspector actions now live in a fixed footer above the keyboard, with bounded height/automatic keyboard insets. Note flow additionally asserts exact text before saving; appearance selects the observed tab label. Run new feature flows before regression flows, with separate JUnit reports; all four remain required. Second execution pending.
 
 Second diagnosis (38584048001): note flow PASSED. Appearance did not activate Dark because Maestro considered a partly clipped radio fully visible and tapped the tab-bar inset. Hierarchy retained System checked and Dark unchecked; no persistence failure occurred. Center the radio during scrolling before tapping, retaining exact selected-state/restart assertions. [Maestro scrolling reference](https://docs.maestro.dev/reference/commands-available/scrolluntilvisible). Reuse the matching 38dfc28 build for this flow-only repair.
+
+Final native acceptance: run 38606371018 PASSED all four flows on iPhone 17 Pro / iOS 26.5. Both JUnit suites report 2 tests / 0 failures. Appearance verifies Dark selection, restart persistence, Light and System; reviewed native captures are docs/screenshots/appearance-ios-dark.png and appearance-ios-light.png. The matching app artifact is 38dfc28 (build 38582089439), and the flow-only workflow commit is f52d657. Physical accessibility and Android runtime remain separate gates.

@@ -14,6 +14,8 @@ import { migrate, type MigrationDatabase } from './migrations';
 import * as schema from './schema';
 import type { Appearance, WeekStartsOn } from '../domain/preferences';
 const PreferencesContext = createContext<{
+  celebrationAnimations: boolean;
+  setCelebrationAnimations(value: boolean): void;
   appearance: Appearance;
   setAppearance(value: Appearance): void;
   weekStartsOn: WeekStartsOn;
@@ -24,6 +26,16 @@ const Context = createContext<HabitRepository | null>(null);
 function RepositoryProvider({ children }: PropsWithChildren) {
   const sqlite = useSQLiteContext();
   const repository = useMemo(() => sqliteRepository(drizzle(sqlite, { schema })), [sqlite]);
+  const [celebrationAnimations, setCelebrations] = useState(() =>
+    repository.getCelebrationAnimations(),
+  );
+  const setCelebrationAnimations = useCallback(
+    (value: boolean) => {
+      repository.setCelebrationAnimations(value);
+      setCelebrations(value);
+    },
+    [repository],
+  );
   const [appearance, setAppearanceState] = useState(() => repository.getAppearance());
   const setAppearance = useCallback(
     (value: Appearance) => {
@@ -41,8 +53,22 @@ function RepositoryProvider({ children }: PropsWithChildren) {
     [repository],
   );
   const preferences = useMemo(
-    () => ({ weekStartsOn, setWeekStartsOn, appearance, setAppearance }),
-    [weekStartsOn, setWeekStartsOn, appearance, setAppearance],
+    () => ({
+      weekStartsOn,
+      setWeekStartsOn,
+      appearance,
+      setAppearance,
+      celebrationAnimations,
+      setCelebrationAnimations,
+    }),
+    [
+      weekStartsOn,
+      setWeekStartsOn,
+      appearance,
+      setAppearance,
+      celebrationAnimations,
+      setCelebrationAnimations,
+    ],
   );
   return (
     <Context.Provider value={repository}>

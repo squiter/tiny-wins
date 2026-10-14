@@ -1,0 +1,57 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn:
+    id: add-habit
+    retryTapIfNoChange: true
+- tapOn:
+    id: habit-name
+- inputText: Little reading
+- tapOn: Done typing
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: save-habit
+- tapOn: Complete Little reading today
+- assertVisible: View Little reading, 1 win in a row
+- assertVisible: '(?s)All done for today!.*'
+- takeScreenshot: cozy-all-day
+- tapOn: Undo Little reading today
+- assertVisible: View Little reading, 0 wins in a row
+- tapOn: Settings, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: celebration-animations
+    direction: DOWN
+    centerElement: true
+- assertVisible: Celebration animations, on
+- tapOn:
+    id: celebration-animations
+- assertVisible: Celebration animations, off
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible: View Little reading, 0 wins in a row
+    timeout: 120000
+- tapOn: Complete Little reading today
+- assertVisible: View Little reading, 1 win in a row
+- assertVisible: '(?s)All done for today!.*'
+- tapOn: Settings, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: celebration-animations
+    direction: DOWN
+    centerElement: true
+- assertVisible: Celebration animations, off
+- takeScreenshot: cozy-animation-preference
+- tapOn:
+    id: celebration-animations
+- assertVisible: Celebration animations, on

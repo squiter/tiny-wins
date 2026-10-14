@@ -1,3 +1,4 @@
+import type { CheckInOutcome } from '../../domain/feedback';
 import { localDay } from '../../domain/calendar';
 import { habitTitle, habitAppearance, type ColorKey, type IconKey } from '../../domain/habit';
 import {
@@ -45,7 +46,11 @@ export function createHabit(
     ],
   });
 }
-export function toggleToday(repository: HabitRepository, clock: Clock, habitId: string) {
+export function toggleToday(
+  repository: HabitRepository,
+  clock: Clock,
+  habitId: string,
+): CheckInOutcome {
   const habit = repository.getHabit(habitId);
   if (!habit || habit.archivedAt) throw new Error('This habit is not active.');
   const now = clock.now();
@@ -56,10 +61,12 @@ export function toggleToday(repository: HabitRepository, clock: Clock, habitId: 
     (!scheduledOn(habit.schedule, day) && !repository.isCompleted(habitId, day))
   )
     throw new Error('This habit is not scheduled today.');
+  const completed = !repository.isCompleted(habitId, day);
   repository.setCompleted(
     { habitId, localDate: day, timezone, completedAt: now.toISOString() },
-    !repository.isCompleted(habitId, day),
+    completed,
   );
+  return { habitId, day, completed, changed: true };
 }
 
 export function setDayCompletion(
@@ -68,7 +75,7 @@ export function setDayCompletion(
   habitId: string,
   day: LocalDate,
   completed: boolean,
-) {
+): CheckInOutcome {
   const habit = repository.getHabit(habitId);
   const now = clock.now();
   const timezone = clock.timezone();
@@ -80,8 +87,10 @@ export function setDayCompletion(
     (completed && !scheduledOn(habit.schedule, day))
   )
     throw new Error('This date cannot be edited.');
+  const changed = repository.isCompleted(habitId, day) !== completed;
   repository.setCompleted(
     { habitId, localDate: day, timezone, completedAt: now.toISOString() },
     completed,
   );
+  return { habitId, day, completed, changed };
 }

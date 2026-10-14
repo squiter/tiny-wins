@@ -1,9 +1,9 @@
+import { useCelebrations } from '../features/feedback/provider';
 import { NoteMarker } from './NoteMarker';
 import { useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withSequence,
   withTiming,
@@ -41,22 +41,25 @@ export function VictoryWall({
   const columns = period === 'year' ? 35 : 7;
   const offset = cells[0] ? calendarOffset(cells[0].day, weekStartsOn) : 0;
   const color = habitColors[habit.color];
-  const previous = useRef({ wins, start: cells[0]?.day, end: cells.at(-1)?.day });
-  const reducedMotion = useReducedMotion();
+  const { event, animationsAllowed } = useCelebrations();
+  const lastEvent = useRef(event?.serial ?? 0);
   const scale = useSharedValue(1);
   useEffect(() => {
+    const fresh = !!event && event.serial !== lastEvent.current;
+    if (event) lastEvent.current = event.serial;
     if (
-      previous.current.start === cells[0]?.day &&
-      previous.current.end === cells.at(-1)?.day &&
-      wins > previous.current.wins &&
-      !reducedMotion
+      fresh &&
+      animationsAllowed &&
+      event.habitId === habit.id &&
+      event.day >= cells[0]!.day &&
+      event.day <= cells.at(-1)!.day
     )
       scale.value = withSequence(
         withTiming(1.015, { duration: 140 }),
         withTiming(1, { duration: 200 }),
       );
-    previous.current = { wins, start: cells[0]?.day, end: cells.at(-1)?.day };
-  }, [wins, cells, reducedMotion, scale]);
+    if (!animationsAllowed || !event) scale.value = 1;
+  }, [event, animationsAllowed, habit.id, cells, scale]);
   const feedback = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
   const rows = Array.from({ length: Math.ceil((cells.length + offset) / columns) }, (_, row) =>
     Array.from({ length: columns }, (_, column) => cells[row * columns + column - offset]),
@@ -186,9 +189,10 @@ const createStyles = (theme: ThemePalette) =>
   StyleSheet.create({
     card: {
       backgroundColor: theme.surface,
+      boxShadow: theme.cardShadow,
       borderWidth: 1,
       borderColor: theme.stone,
-      borderRadius: 17,
+      borderRadius: 20,
       padding: 12,
       gap: 10,
     },

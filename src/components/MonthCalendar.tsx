@@ -89,7 +89,7 @@ const createStyles = (theme: ThemePalette) =>
       gap: 4,
       padding: 10,
       backgroundColor: theme.surface,
-      borderRadius: 16,
+      borderRadius: 20,
     },
     label: {
       width: '13.1%',

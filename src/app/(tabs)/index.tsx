@@ -1,3 +1,5 @@
+import { useCelebrations } from '../../features/feedback/provider';
+import { CozyNote } from '../../components/CozyNote';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { AppState, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -18,6 +20,7 @@ import { useTheme, useThemeStyles } from '../../theme/useTheme';
 import type { ThemePalette } from '../../theme/tokens';
 
 export default function Today() {
+  const { announce } = useCelebrations();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const repository = useRepository();
@@ -201,7 +204,9 @@ export default function Today() {
               onInspect={(day) =>
                 router.push({ pathname: '/habit/[id]', params: { id: habit.id, day } })
               }
-              onToggle={() => mutate(() => toggleToday(repository, deviceClock, habit.id))}
+              onToggle={() =>
+                mutate(() => announce(toggleToday(repository, deviceClock, habit.id)))
+              }
               ordering={
                 ordering
                   ? {
@@ -260,7 +265,7 @@ export default function Today() {
             {archived ? '← Back to Today' : `Archived habits (${archivedHabits.length})`}
           </Text>
         </Pressable>
-        <Text style={styles.footer}>Consistency over perfection.</Text>
+        <CozyNote message="Consistency over perfection." />
       </ScrollView>
       {editor && (
         <HabitEditor
@@ -333,6 +338,7 @@ const createStyles = (theme: ThemePalette) =>
     empty: {
       gap: 14,
       backgroundColor: theme.surface,
+      boxShadow: theme.cardShadow,
       borderWidth: 1,
       borderColor: theme.stone,
       borderRadius: 18,
@@ -369,7 +375,7 @@ const createStyles = (theme: ThemePalette) =>
       alignItems: 'center',
       gap: 10,
       backgroundColor: theme.surface,
-      borderRadius: 17,
+      borderRadius: 20,
       padding: 12,
       borderWidth: 1,
       borderColor: theme.stone,

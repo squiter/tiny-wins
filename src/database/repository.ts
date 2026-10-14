@@ -2,7 +2,11 @@ import { and, asc, eq } from 'drizzle-orm';
 import type { BaseSQLiteDatabase } from 'drizzle-orm/sqlite-core';
 import type { HabitRepository } from '../features/habits/repository';
 import type { PreferencesRepository } from '../features/preferences/repository';
-import { validateAppearance, validateWeekStart } from '../domain/preferences';
+import {
+  validateAppearance,
+  validateCelebrationAnimations,
+  validateWeekStart,
+} from '../domain/preferences';
 import { noteText } from '../domain/notes';
 import * as schema from './schema';
 import { validateHabitOrder } from '../domain/habit';
@@ -11,6 +15,18 @@ export function sqliteRepository(
   db: BaseSQLiteDatabase<'sync', unknown, typeof schema>,
 ): HabitRepository & PreferencesRepository {
   const repository: HabitRepository & PreferencesRepository = {
+    getCelebrationAnimations: () =>
+      validateCelebrationAnimations(
+        db.select().from(schema.preferences).where(eq(schema.preferences.id, 1)).get()
+          ?.celebrationAnimations ?? true,
+      ),
+    setCelebrationAnimations: (value) => {
+      const celebrationAnimations = validateCelebrationAnimations(value);
+      db.insert(schema.preferences)
+        .values({ id: 1, celebrationAnimations })
+        .onConflictDoUpdate({ target: schema.preferences.id, set: { celebrationAnimations } })
+        .run();
+    },
     getAppearance: () =>
       validateAppearance(
         db.select().from(schema.preferences).where(eq(schema.preferences.id, 1)).get()

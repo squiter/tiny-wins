@@ -18,8 +18,12 @@ Reference: [Habit App Design Board](inspirations/Tiny%20Wins%20Habit%20App%20Des
 
 Tokens live in src/theme/tokens.ts. Each habit color has a strong foreground/completion token and a pale background token. White checkmarks and an explicit checked state avoid using color alone. Selection controls expose radio/checked semantics and labels. Main actions and ordering controls have a minimum 48-point target. Names can wrap to two lines; surrounding rows grow with text. Keep all 14 cells on narrow screens. Respect system reduced motion in editor and check-in feedback.
 
-Icons currently use system emoji on colored tiles, with accessible text labels. This avoids adding an icon dependency; glyph appearance can vary between iOS, Android and browser. Replace them with an approved shared vector set later if consistent artwork is needed. The bunny/illustration is optional and does not affect core navigation.
+Icons currently use system emoji on colored tiles, with accessible text labels. This avoids adding an icon dependency; glyph appearance can vary between iOS, Android and browser. Replace them with an approved shared vector set later if consistent artwork is needed. Navigation uses shared React Native shapes for home, progress bars and settings. A bundled transparent botanical rabbit illustration appears in encouragement surfaces, outside compact rows. It is decorative, hidden from accessibility and never carries state alone. Cards share rounded corners and gentle depth in both palettes; see ADR-018.
 
 ## Review gates
 
 Review Today with six habits at 390px and 360px, long names, the editor, ordering and archive/restore. Check that all 14 dates fit, today is identifiable, and check-in remains a single deliberate tap. Native VoiceOver/TalkBack and large system text checks remain required on actual devices; browser screenshots do not establish those results.
+
+## Deliberate celebrations
+
+A successful changed completion emits a transient event: a brief control/tile pulse for an individual win, and a botanical banner celebration when all positive scheduled opportunities today are complete. Reload, restored data, duplicates and failed writes never replay feedback. Undo restores static state. Settings saves the animation choice; system reduced motion overrides it. Disabling effects keeps completion symbols, counts and encouraging copy. No sound or haptic dependency is included; see ADR-019.

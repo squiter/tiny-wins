@@ -29,6 +29,9 @@ export const completions = sqliteTable(
 
 export const preferences = sqliteTable('preferences', {
   id: integer('id').primaryKey(),
+  celebrationAnimations: integer('celebration_animations', { mode: 'boolean' })
+    .notNull()
+    .default(true),
   appearance: text('appearance').$type<Appearance>().notNull().default('system'),
   weekStartsOn: integer('week_starts_on').$type<WeekStartsOn>().notNull().default(1),
 });

@@ -1,8 +1,10 @@
+import { BotanicalMark } from './BotanicalMark';
+import { useCelebrations } from '../features/feedback/provider';
+import { CozyIllustration } from './CozyIllustration';
 import { useEffect, useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withSequence,
   withTiming,
@@ -14,35 +16,57 @@ export function DailyProgress({ wins, planned }: { wins: number; planned: number
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const complete = planned > 0 && wins === planned;
-  const previous = useRef(complete);
-  const reducedMotion = useReducedMotion();
+  const { event, animationsAllowed } = useCelebrations();
+  const lastEvent = useRef(event?.serial ?? 0);
   const scale = useSharedValue(1);
+  const sparkle = useSharedValue(0);
   const progress = useSharedValue(planned ? wins / planned : 0);
   useEffect(() => {
+    const fresh = !!event && event.serial !== lastEvent.current;
+    if (event) lastEvent.current = event.serial;
     const target = planned ? wins / planned : 0;
-    progress.value = reducedMotion ? target : withTiming(target, { duration: 260 });
-    if (complete && !previous.current && !reducedMotion) {
+    progress.value = animationsAllowed && fresh ? withTiming(target, { duration: 300 }) : target;
+    if (complete && fresh && animationsAllowed && event.kind === 'all-day') {
+      sparkle.value = withSequence(
+        withTiming(1, { duration: 180 }),
+        withTiming(0, { duration: 1000 }),
+      );
       scale.value = withSequence(
-        withTiming(1.22, { duration: 180 }),
-        withTiming(0.96, { duration: 130 }),
-        withTiming(1, { duration: 170 }),
+        withTiming(1.1, { duration: 180 }),
+        withTiming(0.98, { duration: 140 }),
+        withTiming(1, { duration: 200 }),
       );
     }
-    previous.current = complete;
-  }, [wins, planned, complete, reducedMotion, progress, scale]);
+    if (!animationsAllowed || !event) {
+      scale.value = 1;
+      sparkle.value = 0;
+    }
+  }, [wins, planned, complete, event, animationsAllowed, progress, scale, sparkle]);
+  const sparkleStyle = useAnimatedStyle(() => ({
+    opacity: sparkle.value,
+    transform: [{ translateY: -8 * (1 - sparkle.value) }],
+  }));
   const iconStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
   const progressStyle = useAnimatedStyle(() => ({ width: `${progress.value * 100}%` }));
   return (
     <View testID="daily-progress" style={[styles.banner, complete && styles.complete]}>
+      <Animated.Text
+        testID="day-sparkles"
+        accessible={false}
+        aria-hidden={true}
+        pointerEvents="none"
+        maxFontSizeMultiplier={1}
+        style={[styles.sparkle, sparkleStyle]}
+      >
+        ✦ ✧
+      </Animated.Text>
       <Animated.View accessible={false} style={iconStyle}>
-        <Text accessible={false} maxFontSizeMultiplier={1} style={styles.icon}>
-          {complete ? '✨' : planned ? '🌱' : '🌿'}
-        </Text>
+        {complete ? <CozyIllustration width={76} /> : <BotanicalMark />}
       </Animated.View>
       <View style={styles.body} accessibilityLiveRegion="polite">
         <Text style={styles.heading}>
           {complete
-            ? 'All done for today!\nEnjoy your little win.'
+            ? 'All done for today!\nYou grew a little.'
             : planned
               ? 'Small wins today,\nbrighter tomorrows.'
               : 'A little room to breathe.'}
@@ -65,12 +89,13 @@ export function DailyProgress({ wins, planned }: { wins: number; planned: number
 }
 const createStyles = (theme: ThemePalette) =>
   StyleSheet.create({
+    sparkle: { position: 'absolute', left: 24, top: 6, fontSize: 16, color: theme.forest },
     banner: {
-      padding: 14,
-      borderRadius: 17,
+      padding: 16,
+      borderRadius: 24,
       flexDirection: 'row',
       alignItems: 'center',
-      gap: 16,
+      gap: 10,
       backgroundColor: theme.progress,
       marginBottom: 4,
       minHeight: 106,

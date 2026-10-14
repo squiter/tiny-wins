@@ -1,0 +1,25 @@
+appId: app.tinywins.mobile
+---
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible: View Read a chapter, 1 win in a row
+    timeout: 120000
+- takeScreenshot: cozy-large-text-today
+- tapOn: View Read a chapter, 1 win in a row
+- takeScreenshot: cozy-large-text-detail
+- tapOn: Edit habit
+- assertVisible: Close habit editor
+- takeScreenshot: cozy-large-text-editor
+- scrollUntilVisible:
+    element: Cancel
+    direction: DOWN
+    centerElement: true
+- tapOn: Cancel
+- tapOn:
+    id: inspect-today
+- assertVisible: Close day
+- takeScreenshot: cozy-large-text-day
+- tapOn: Close day
+- tapOn: Go back
+- assertVisible: View Read a chapter, 1 win in a row

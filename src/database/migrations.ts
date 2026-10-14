@@ -43,6 +43,7 @@ UPDATE habits SET sort_order = (
     PRIMARY KEY (habit_id, local_date)
   );`,
   `ALTER TABLE preferences ADD COLUMN appearance TEXT NOT NULL DEFAULT 'system' CHECK(appearance IN ('system', 'light', 'dark'));`,
+  `ALTER TABLE preferences ADD COLUMN celebration_animations INTEGER NOT NULL DEFAULT 1 CHECK(celebration_animations IN (0, 1));`,
 ];
 export function migrate(database: MigrationDatabase) {
   database.execSync('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;');

@@ -131,8 +131,9 @@ const createStyles = (theme: ThemePalette) =>
     card: {
       padding: 18,
       gap: 12,
-      borderRadius: 16,
+      borderRadius: 20,
       backgroundColor: theme.surface,
+      boxShadow: theme.cardShadow,
       borderWidth: 1,
       borderColor: theme.stone,
     },

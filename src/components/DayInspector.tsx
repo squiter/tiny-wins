@@ -1,5 +1,12 @@
 import { noteLimit } from '../domain/notes';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
+import { useCelebrations } from '../features/feedback/provider';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -19,6 +26,7 @@ import type { ThemePalette } from '../theme/tokens';
 export function DayInspector({
   cell,
   habitTitle,
+  habitId,
   editable,
   note,
   noteEditable,
@@ -28,6 +36,7 @@ export function DayInspector({
 }: {
   cell: HistoryCell;
   habitTitle?: string;
+  habitId: string;
   editable: boolean;
   note: string;
   noteEditable: boolean;
@@ -37,6 +46,20 @@ export function DayInspector({
 }) {
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
+  const { event, animationsAllowed } = useCelebrations();
+  const lastEvent = useRef(event?.serial ?? 0);
+  const scale = useSharedValue(1);
+  useEffect(() => {
+    const fresh = !!event && event.serial !== lastEvent.current;
+    if (event) lastEvent.current = event.serial;
+    if (fresh && animationsAllowed && event.habitId === habitId && event.day === cell.day)
+      scale.value = withSequence(
+        withTiming(1.03, { duration: 150 }),
+        withTiming(1, { duration: 220 }),
+      );
+    if (!animationsAllowed || !event) scale.value = 1;
+  }, [event, animationsAllowed, habitId, cell.day, scale]);
+  const feedbackStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
   const [draft, setDraft] = useState(note);
   const [typing, setTyping] = useState(false);
   const [savedNote, setSavedNote] = useState(note);
@@ -78,23 +101,25 @@ export function DayInspector({
               {editable && (
                 <>
                   <Text style={styles.text}>This changes only the completion on {cell.day}.</Text>
-                  <Pressable
-                    accessibilityRole="button"
-                    accessibilityLabel={`${cell.state === 'complete' ? 'Undo completion' : 'Mark completed'} for ${cell.day}`}
-                    onPress={() => {
-                      try {
-                        onChange(cell.state !== 'complete');
-                        setError('');
-                      } catch {
-                        setError('Could not save this day. Please try again.');
-                      }
-                    }}
-                    style={styles.button}
-                  >
-                    <Text style={styles.buttonText}>
-                      {cell.state === 'complete' ? 'Undo completion' : 'Mark completed'}
-                    </Text>
-                  </Pressable>
+                  <Animated.View style={feedbackStyle}>
+                    <Pressable
+                      accessibilityRole="button"
+                      accessibilityLabel={`${cell.state === 'complete' ? 'Undo completion' : 'Mark completed'} for ${cell.day}`}
+                      onPress={() => {
+                        try {
+                          onChange(cell.state !== 'complete');
+                          setError('');
+                        } catch {
+                          setError('Could not save this day. Please try again.');
+                        }
+                      }}
+                      style={styles.button}
+                    >
+                      <Text style={styles.buttonText}>
+                        {cell.state === 'complete' ? 'Undo completion' : 'Mark completed'}
+                      </Text>
+                    </Pressable>
+                  </Animated.View>
                 </>
               )}
               {(noteEditable || !!note) && (

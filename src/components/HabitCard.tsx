@@ -1,13 +1,12 @@
+import { useCelebrations } from '../features/feedback/provider';
 import type { DayNote } from '../domain/notes';
 import { NoteMarker } from './NoteMarker';
 import { useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
-  FadeIn,
   LinearTransition,
   ReduceMotion,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withSequence,
   withTiming,
@@ -44,19 +43,33 @@ export function HabitCard({
   const due = scheduledOn(habit.schedule, today);
   const done = cells[13]?.state === 'complete';
   const color = habitColors[habit.color];
-  const reducedMotion = useReducedMotion();
-  const previouslyDone = useRef(done);
+  const { event, animationsAllowed } = useCelebrations();
+  const lastEvent = useRef(event?.serial ?? 0);
+  const sparkle = useSharedValue(0);
   const scale = useSharedValue(1);
   useEffect(() => {
-    if (done && !previouslyDone.current && !reducedMotion) {
+    const fresh = !!event && event.serial !== lastEvent.current;
+    if (event) lastEvent.current = event.serial;
+    if (fresh && animationsAllowed && event.habitId === habit.id && event.day === today) {
       scale.value = withSequence(
-        withTiming(1.18, { duration: 110 }),
-        withTiming(0.94, { duration: 100 }),
+        withTiming(1.12, { duration: 120 }),
+        withTiming(1.02, { duration: 120 }),
         withTiming(1, { duration: 160 }),
       );
+      sparkle.value = withSequence(
+        withTiming(1, { duration: 140 }),
+        withTiming(0, { duration: 650 }),
+      );
     }
-    previouslyDone.current = done;
-  }, [done, reducedMotion, scale]);
+    if (!animationsAllowed || !event) {
+      scale.value = 1;
+      sparkle.value = 0;
+    }
+  }, [event, animationsAllowed, habit.id, today, scale, sparkle]);
+  const sparkleStyle = useAnimatedStyle(() => ({
+    opacity: sparkle.value,
+    transform: [{ translateY: -12 * (1 - sparkle.value) }, { scale: 0.8 + 0.2 * sparkle.value }],
+  }));
   const feedbackStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
   const streak = currentStreak(habit, completions, today);
   return (
@@ -114,10 +127,7 @@ export function HabitCard({
                 },
               ]}
             >
-              <Animated.View
-                key={done ? 'done' : 'pending'}
-                entering={FadeIn.duration(150).reduceMotion(ReduceMotion.System)}
-              >
+              <Animated.View key={done ? 'done' : 'pending'}>
                 <Text
                   maxFontSizeMultiplier={1}
                   style={{ color: done ? theme.onHabit : color, fontSize: 23 }}
@@ -141,6 +151,16 @@ export function HabitCard({
           </Pressable>
         )}
       </View>
+      <Animated.Text
+        testID={`win-sparkle-${habit.id}`}
+        accessible={false}
+        aria-hidden={true}
+        pointerEvents="none"
+        maxFontSizeMultiplier={1}
+        style={[styles.sparkle, { color }, sparkleStyle]}
+      >
+        ✧
+      </Animated.Text>
       <View style={styles.grid}>
         {cells.map((cell) => {
           const label = `${cell.day}: ${cell.state === 'complete' ? 'completed' : cell.state === 'before-start' || cell.state === 'not-scheduled' ? (cell.state === 'not-scheduled' ? 'not scheduled' : 'before habit started') : cell.state === 'grace' ? 'within streak tolerance' : cell.today ? 'pending' : 'not completed'}${cell.today ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`;
@@ -212,11 +232,13 @@ export function HabitCard({
 }
 const createStyles = (theme: ThemePalette) =>
   StyleSheet.create({
+    sparkle: { position: 'absolute', right: 66, top: 10, fontSize: 25 },
     card: {
       padding: 12,
-      borderRadius: 17,
+      borderRadius: 20,
       gap: 8,
       backgroundColor: theme.surface,
+      boxShadow: theme.cardShadow,
       borderWidth: 1,
       borderColor: theme.cardBorder,
     },

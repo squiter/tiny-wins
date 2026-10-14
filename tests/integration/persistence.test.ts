@@ -1,3 +1,4 @@
+import { checkInCelebration } from '../../src/features/feedback/service';
 import { saveDayNote } from '../../src/features/habits/notes';
 import { afterEach, describe, expect, it } from 'vitest';
 import Database from 'better-sqlite3';
@@ -54,6 +55,78 @@ const clock: Clock = {
   timezone: () => 'America/Sao_Paulo',
 };
 describe('real SQLite + shared Drizzle adapter', () => {
+  it('upgrades v6 animation preference, reopens and keeps history/backup restoration independent', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-effects-'));
+    directories.push(directory);
+    const path = join(directory, 'effects.db');
+    let connection = open(path);
+    createHabit(connection.repository, clock, 'read', 'Read', 'coral', 'book');
+    toggleToday(connection.repository, clock, 'read');
+    saveDayNote(connection.repository, clock, 'read', dateKey('2024-02-29'), 'Still here');
+    connection.repository.setAppearance('dark');
+    connection.repository.setWeekStartsOn(0);
+    const wins = connection.repository.listCompletions();
+    const notes = connection.repository.listNotes();
+    connection.sqlite.exec(
+      'ALTER TABLE preferences DROP COLUMN celebration_animations; PRAGMA user_version = 6',
+    );
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getCelebrationAnimations()).toBe(true);
+    connection.repository.setCelebrationAnimations(false);
+    expect(() => connection.repository.setCelebrationAnimations(1 as unknown as boolean)).toThrow();
+    expect(() =>
+      connection.sqlite.exec('UPDATE preferences SET celebration_animations = 2'),
+    ).toThrow();
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getCelebrationAnimations()).toBe(false);
+    expect(connection.repository.getAppearance()).toBe('dark');
+    expect(connection.repository.getWeekStartsOn()).toBe(0);
+    connection.repository.mergeBackup(
+      parseBackup(serializeBackup(connection.repository.listHabits(), wins, clock.now(), notes)),
+    );
+    expect(connection.repository.getCelebrationAnimations()).toBe(false);
+    expect(connection.repository.listCompletions()).toEqual(wins);
+    expect(connection.repository.listNotes()).toEqual(notes);
+    connection.repository.setCelebrationAnimations(true);
+    connection.sqlite.close();
+    expect(open(path).repository.getCelebrationAnimations()).toBe(true);
+  });
+  it('returns changed outcomes only after successful writes and counts active scheduled wins', () => {
+    const { repository, sqlite } = open(':memory:');
+    createHabit(repository, clock, 'read', 'Read', 'coral', 'book');
+    createHabit(repository, clock, 'water', 'Water', 'blue', 'water');
+    createHabit(repository, clock, 'rest', 'Rest', 'forest', 'plant', [1]);
+    const first = toggleToday(repository, clock, 'read');
+    expect(checkInCelebration(repository, clock, first)).toBe('win');
+    const unavailableFeedbackRead = {
+      ...repository,
+      listHabits: () => {
+        throw new Error('feedback snapshot unavailable');
+      },
+    };
+    expect(checkInCelebration(unavailableFeedbackRead, clock, first)).toBeNull();
+    expect(repository.listCompletions()).toHaveLength(1);
+    const last = toggleToday(repository, clock, 'water');
+    expect(checkInCelebration(repository, clock, last)).toBe('all-day');
+    const duplicate = setDayCompletion(repository, clock, 'water', dateKey('2024-02-29'), true);
+    expect(duplicate.changed).toBe(false);
+    expect(checkInCelebration(repository, clock, duplicate)).toBeNull();
+    const undo = toggleToday(repository, clock, 'water');
+    expect(checkInCelebration(repository, clock, undo)).toBeNull();
+    archiveHabit(repository, clock, 'water');
+    const remade = setDayCompletion(repository, clock, 'read', dateKey('2024-02-29'), false);
+    expect(checkInCelebration(repository, clock, remade)).toBeNull();
+    const onlyDue = toggleToday(repository, clock, 'read');
+    expect(checkInCelebration(repository, clock, onlyDue)).toBe('all-day');
+    toggleToday(repository, clock, 'read');
+    sqlite.exec(
+      "CREATE TRIGGER reject_test_win BEFORE INSERT ON completions BEGIN SELECT RAISE(ABORT, 'test write failure'); END;",
+    );
+    expect(() => toggleToday(repository, clock, 'read')).toThrow('test write failure');
+    expect(repository.listCompletions()).toEqual([]);
+  });
   it('upgrades v5 appearance without changing calendar data and persists overrides across reopen', () => {
     const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-appearance-'));
     directories.push(directory);
@@ -67,7 +140,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     const wins = connection.repository.listCompletions();
     const notes = connection.repository.listNotes();
     connection.sqlite.exec(
-      'ALTER TABLE preferences DROP COLUMN appearance; PRAGMA user_version = 5',
+      'ALTER TABLE preferences DROP COLUMN celebration_animations; ALTER TABLE preferences DROP COLUMN appearance; PRAGMA user_version = 5',
     );
     connection.sqlite.close();
     connection = open(path);
@@ -106,7 +179,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     toggleToday(connection.repository, clock, 'read');
     const wins = connection.repository.listCompletions();
     connection.sqlite.exec(
-      'ALTER TABLE preferences DROP COLUMN appearance; DROP TABLE notes; PRAGMA user_version = 4',
+      'ALTER TABLE preferences DROP COLUMN celebration_animations; ALTER TABLE preferences DROP COLUMN appearance; DROP TABLE notes; PRAGMA user_version = 4',
     );
     connection.sqlite.close();
     connection = open(path);
@@ -235,7 +308,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(
       connection.sqlite.prepare('SELECT schedule FROM habits WHERE id=?').get('strict'),
     ).toEqual(legacyJson);
-    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 6 });
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 7 });
     const backup = parseBackup(
       serializeBackup(connection.repository.listHabits(), completions, later.now()),
     );
@@ -305,7 +378,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(repository.getHabit('b')?.startsOn).toBe('2024-02-29');
     expect(repository.listCompletions()[0]?.localDate).toBe('2024-02-29');
     migrate(adapter);
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 6 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 7 });
     sqlite.close();
     expect(open(path).repository.listCompletions()).toHaveLength(1);
   });
@@ -534,8 +607,8 @@ describe('real SQLite + shared Drizzle adapter', () => {
   });
   it('rejects unknown future schema without modifying user data', () => {
     const { sqlite, adapter } = open(':memory:');
-    sqlite.exec('PRAGMA user_version = 7');
+    sqlite.exec('PRAGMA user_version = 8');
     expect(() => migrate(adapter)).toThrow('newer Tiny Wins');
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 7 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 8 });
   });
 });

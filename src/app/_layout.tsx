@@ -1,3 +1,4 @@
+import { FeedbackProvider } from '../features/feedback/provider';
 import { Stack, type ErrorBoundaryProps } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
@@ -33,7 +34,7 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
         onPress={() => recoverApp(retry)}
         style={{
           backgroundColor: theme.forest,
-          borderRadius: 16,
+          borderRadius: 20,
           padding: 18,
           alignItems: 'center',
         }}
@@ -61,7 +62,9 @@ export default function Layout() {
     );
   return (
     <DatabaseProvider>
-      <ThemedRoutes />
+      <FeedbackProvider>
+        <ThemedRoutes />
+      </FeedbackProvider>
     </DatabaseProvider>
   );
 }

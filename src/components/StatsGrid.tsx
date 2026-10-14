@@ -29,7 +29,7 @@ const createStyles = (theme: ThemePalette) =>
       width: '48%',
       flexGrow: 1,
       backgroundColor: theme.surface,
-      borderRadius: 16,
+      borderRadius: 20,
       padding: 16,
       gap: 6,
       borderWidth: 1,

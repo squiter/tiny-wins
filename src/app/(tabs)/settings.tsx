@@ -1,17 +1,30 @@
+import { useCelebrations } from '../../features/feedback/provider';
+import { CozyNote } from '../../components/CozyNote';
 import { useState } from 'react';
 import { usePreferences } from '../../database/provider';
 import type { WeekStartsOn } from '../../domain/preferences';
 import { router } from 'expo-router';
-import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Linking,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { deviceClock } from '../../lib/clock';
 import { BackupControls } from '../../components/BackupControls';
 import { useTheme, useThemeStyles } from '../../theme/useTheme';
 import type { ThemePalette } from '../../theme/tokens';
 export default function Settings() {
+  const { setAnimations, animationsAllowed } = useCelebrations();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
-  const { weekStartsOn, setWeekStartsOn, appearance, setAppearance } = usePreferences();
+  const { weekStartsOn, setWeekStartsOn, appearance, setAppearance, celebrationAnimations } =
+    usePreferences();
   const [error, setError] = useState('');
   function changeWeek(value: WeekStartsOn) {
     try {
@@ -126,6 +139,44 @@ export default function Settings() {
             </Text>
           )}
         </View>
+        <View style={styles.card}>
+          <Text accessibilityRole="header" style={styles.title}>
+            Celebrate your little wins
+          </Text>
+          <View style={styles.feedbackChoice}>
+            <Text style={[styles.copy, { flex: 1 }]}>Celebration animations</Text>
+            <Switch
+              testID="celebration-animations"
+              hitSlop={12}
+              accessibilityLabel={`Celebration animations, ${celebrationAnimations ? 'on' : 'off'}`}
+              value={celebrationAnimations}
+              onValueChange={(value) => {
+                try {
+                  setAnimations(value);
+                  setError('');
+                } catch {
+                  setError('We couldn’t save your preference. Please try again.');
+                }
+              }}
+              trackColor={{ false: theme.stone, true: theme.forest }}
+              thumbColor={theme.surface}
+            />
+          </View>
+          <Text style={styles.copy}>
+            Gentle feedback for a win, and a little extra warmth when your day is complete. System
+            reduced motion always takes priority.
+          </Text>
+          {celebrationAnimations && !animationsAllowed && (
+            <Text style={styles.copy}>
+              Your device requests reduced motion, so wins stay quietly celebrated.
+            </Text>
+          )}
+          {!!error && (
+            <Text accessibilityRole="alert" style={styles.copy}>
+              {error}
+            </Text>
+          )}
+        </View>
         <BackupControls />
         <View style={styles.card}>
           <Text style={styles.title}>Your local calendar</Text>
@@ -151,7 +202,7 @@ export default function Settings() {
           <Text style={styles.title}>View the project on GitHub ↗</Text>
           <Text style={styles.copy}>Tiny Wins · 0.1.0</Text>
         </Pressable>
-        <Text style={styles.footer}>Small steps. Big changes.</Text>
+        <CozyNote message="Small steps. Big changes." />
       </ScrollView>
     </SafeAreaView>
   );
@@ -169,14 +220,16 @@ const createStyles = (theme: ThemePalette) =>
     card: {
       padding: 18,
       gap: 10,
-      borderRadius: 16,
+      borderRadius: 20,
       backgroundColor: theme.surface,
+      boxShadow: theme.cardShadow,
       borderWidth: 1,
       borderColor: theme.stone,
       minHeight: 48,
     },
     choices: { flexDirection: 'row', gap: 10 },
     appearanceChoices: { gap: 8 },
+    feedbackChoice: { flexDirection: 'row', gap: 12, alignItems: 'center', minHeight: 48 },
     choice: {
       flex: 1,
       minHeight: 48,

@@ -1,3 +1,5 @@
+import { useCelebrations } from '../../features/feedback/provider';
+import { CozyNote } from '../../components/CozyNote';
 import { saveDayNote } from '../../features/habits/notes';
 import { usePreferences } from '../../database/provider';
 import { useState } from 'react';
@@ -28,6 +30,7 @@ function safeDay(value?: string): LocalDate | null {
   }
 }
 export default function HabitDetail() {
+  const { announce } = useCelebrations();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const { weekStartsOn } = usePreferences();
@@ -247,7 +250,7 @@ export default function HabitDetail() {
             {error}
           </Text>
         )}
-        <Text style={styles.footer}>Progress happens one small step at a time.</Text>
+        <CozyNote message="Progress happens one small step at a time." />
       </ScrollView>
       {editing && (
         <HabitEditor
@@ -270,6 +273,7 @@ export default function HabitDetail() {
           key={selectedCell.day}
           cell={selectedCell}
           habitTitle={habit.title}
+          habitId={id}
           note={
             notes.find((note) => note.habitId === id && note.localDate === selectedCell.day)
               ?.text ?? ''
@@ -288,7 +292,7 @@ export default function HabitDetail() {
             (scheduledOn(habit.schedule, selectedCell.day) || selectedCell.state === 'complete')
           }
           onChange={(completed) => {
-            setDayCompletion(repository, deviceClock, id, selectedCell.day, completed);
+            announce(setDayCompletion(repository, deviceClock, id, selectedCell.day, completed));
             refresh();
           }}
           onClose={() => setSelected(null)}
