@@ -20,7 +20,13 @@ import {
   type Habit,
   type IconKey,
 } from '../domain/habit';
-import { allWeekdays, plannedDays, validateWeekdays, type Weekday } from '../domain/schedule';
+import {
+  allWeekdays,
+  plannedDays,
+  plannedTolerance,
+  validateWeekdays,
+  type Weekday,
+} from '../domain/schedule';
 import { habitColors, habitSurfaces, theme } from '../theme/tokens';
 import { habitIcons, HabitIcon } from './HabitIcon';
 export interface HabitDraft {
@@ -28,6 +34,7 @@ export interface HabitDraft {
   color: ColorKey;
   icon: IconKey;
   days: Weekday[];
+  streakTolerance: number;
 }
 interface Props {
   habit: Habit | null;
@@ -43,6 +50,10 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
   const [days, setDays] = useState<Weekday[]>(
     habit ? plannedDays(habit.schedule) : [...allWeekdays],
   );
+  const [advanced, setAdvanced] = useState(false);
+  const [streakTolerance, setStreakTolerance] = useState(
+    habit ? plannedTolerance(habit.schedule) : 0,
+  );
   const [error, setError] = useState('');
   function save() {
     let validated: string;
@@ -56,7 +67,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
       return;
     }
     try {
-      onSave({ title: validated, color, icon, days });
+      onSave({ title: validated, color, icon, days, streakTolerance });
     } catch {
       setError('We couldn’t save your habit. Please try again.');
     }
@@ -215,6 +226,66 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 ? 'Frequency changes start tomorrow. Past wins stay on their original dates.'
                 : 'Choose the days that work for you.'}
             </Text>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityState={{ expanded: advanced }}
+              onPress={() => setAdvanced(!advanced)}
+              style={styles.secondary}
+            >
+              <Text style={styles.secondaryText}>
+                Advanced options
+                {streakTolerance > 0
+                  ? ` · ${streakTolerance} day${streakTolerance === 1 ? '' : 's'} tolerance`
+                  : ''}{' '}
+                {advanced ? '−' : '+'}
+              </Text>
+            </Pressable>
+            {advanced && (
+              <View style={styles.preview}>
+                <View style={{ flex: 1, gap: 8 }}>
+                  <Text style={styles.label}>Streak flexibility</Text>
+                  <Text style={styles.support}>
+                    Allow up to {streakTolerance} missed scheduled day
+                    {streakTolerance === 1 ? '' : 's'} between wins. Each win renews the allowance.
+                  </Text>
+                  <View style={styles.options}>
+                    <Pressable
+                      accessibilityRole="button"
+                      accessibilityLabel="Decrease streak tolerance"
+                      disabled={streakTolerance === 0}
+                      accessibilityState={{ disabled: streakTolerance === 0 }}
+                      onPress={() => setStreakTolerance(streakTolerance - 1)}
+                      style={styles.iconOption}
+                    >
+                      <Text style={styles.label}>−</Text>
+                    </Pressable>
+                    <Text
+                      accessibilityLabel={`${streakTolerance} scheduled day${streakTolerance === 1 ? '' : 's'} of tolerance`}
+                      style={[
+                        styles.label,
+                        { minWidth: 48, textAlign: 'center', alignSelf: 'center' },
+                      ]}
+                    >
+                      {streakTolerance}
+                    </Text>
+                    <Pressable
+                      accessibilityRole="button"
+                      accessibilityLabel="Increase streak tolerance"
+                      disabled={streakTolerance === 7}
+                      accessibilityState={{ disabled: streakTolerance === 7 }}
+                      onPress={() => setStreakTolerance(streakTolerance + 1)}
+                      style={styles.iconOption}
+                    >
+                      <Text style={styles.label}>+</Text>
+                    </Pressable>
+                  </View>
+                  <Text style={styles.support}>
+                    Soft ○ tiles keep your rhythm visible. Only completed days count as wins.
+                    {habit ? ' Changes start tomorrow.' : ''}
+                  </Text>
+                </View>
+              </View>
+            )}
             {!!error && (
               <Text accessibilityRole="alert" style={styles.error}>
                 {error}

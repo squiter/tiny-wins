@@ -43,7 +43,7 @@ export default function Insights() {
     !!selectedHabit &&
     !selectedHabit.archivedAt &&
     !!cell &&
-    (cell.state === 'complete' || cell.state === 'missed');
+    (cell.state === 'complete' || cell.state === 'missed' || cell.state === 'grace');
   const format = (day: LocalDate, options: Intl.DateTimeFormatOptions) =>
     new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'UTC' }).format(
       new Date(`${day}T12:00:00Z`),
@@ -144,8 +144,8 @@ export default function Insights() {
                 'Tap a tile to inspect its date. Marking or undoing a win needs a separate confirmation.'}
             </Text>
             <Text style={styles.legend}>
-              ✓ Win · • Pending / missed · – Rest{'\n'}Empty outline: before start · Dashed outline:
-              future
+              ✓ Win · soft ○ Within tolerance · • Pending / missed · – Rest{'\n'}Empty outline:
+              before start · Dashed outline: future
             </Text>
           </View>
         }

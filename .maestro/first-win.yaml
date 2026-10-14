@@ -13,15 +13,19 @@ appId: app.tinywins.mobile
     id: habit-name
 - inputText: Read one page
 - hideKeyboard
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
 - tapOn:
     id: save-habit
 - tapOn: Complete Read one page today
-- assertVisible: View Read one page, 1 day in a row
+- assertVisible: View Read one page, 1 win in a row
 - stopApp
 - launchApp
-- assertVisible: View Read one page, 1 day in a row
+- assertVisible: View Read one page, 1 win in a row
 - tapOn: Undo Read one page today
-- assertVisible: View Read one page, 0 days in a row
+- assertVisible: View Read one page, 0 wins in a row
 - stopApp
 - launchApp
-- assertVisible: View Read one page, 0 days in a row
+- assertVisible: View Read one page, 0 wins in a row

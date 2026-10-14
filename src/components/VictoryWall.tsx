@@ -11,7 +11,7 @@ import type { HistoryCell, Habit } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
 import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
 import type { ReportPeriod } from '../domain/report';
-import { habitColors, theme } from '../theme/tokens';
+import { habitColors, habitSurfaces, theme } from '../theme/tokens';
 import { HabitIcon } from './HabitIcon';
 export function VictoryWall({
   habit,
@@ -100,13 +100,18 @@ export function VictoryWall({
                   key={cell.day}
                   testID={`insights-day-${habit.id}-${cell.day}`}
                   accessibilityRole="button"
-                  accessibilityLabel={`${habit.title}, ${cell.day}: ${cell.today && cell.state === 'missed' ? 'pending, today' : cell.state.replaceAll('-', ' ')}${cell.today && cell.state !== 'missed' ? ', today' : ''}`}
+                  accessibilityLabel={`${habit.title}, ${cell.day}: ${cell.today && cell.state === 'missed' ? 'pending, today' : cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today && cell.state !== 'missed' ? ', today' : ''}`}
                   onPress={() => onInspect(cell.day)}
                   style={[
                     styles.tile,
                     period !== 'year' && styles.largeTile,
                     {
-                      backgroundColor: cell.state === 'complete' ? color : '#FFFFFF',
+                      backgroundColor:
+                        cell.state === 'complete'
+                          ? color
+                          : cell.state === 'grace'
+                            ? habitSurfaces[habit.color]
+                            : '#FFFFFF',
                       borderColor: cell.today || cell.state === 'missed' ? color : theme.stone,
                       borderStyle:
                         cell.state === 'future' || cell.state === 'not-scheduled'
@@ -138,11 +143,13 @@ export function VictoryWall({
                   >
                     {cell.state === 'complete'
                       ? '✓'
-                      : cell.state === 'not-scheduled'
-                        ? '–'
-                        : cell.state === 'missed'
-                          ? '•'
-                          : ''}
+                      : cell.state === 'grace'
+                        ? '○'
+                        : cell.state === 'not-scheduled'
+                          ? '–'
+                          : cell.state === 'missed'
+                            ? '•'
+                            : ''}
                   </Text>
                 </Pressable>
               ) : (

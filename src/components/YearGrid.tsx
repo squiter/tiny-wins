@@ -54,7 +54,7 @@ export function YearGrid({
                   accessibilityRole="button"
                   accessibilityState={{ disabled: cell.state === 'future' }}
                   disabled={cell.state === 'future'}
-                  accessibilityLabel={`${cell.day}: ${cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}`}
+                  accessibilityLabel={`${cell.day}: ${cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}`}
                   onPress={() => onInspect(cell.day)}
                   style={[
                     styles.cell,
@@ -62,7 +62,7 @@ export function YearGrid({
                       backgroundColor:
                         cell.state === 'complete'
                           ? habitColors[color]
-                          : cell.state === 'missed'
+                          : cell.state === 'grace'
                             ? habitSurfaces[color]
                             : theme.ivory,
                       borderWidth: cell.today ? 2 : cell.state === 'not-scheduled' ? 1 : 0,
@@ -80,11 +80,13 @@ export function YearGrid({
                   >
                     {cell.state === 'complete'
                       ? '✓'
-                      : cell.state === 'not-scheduled'
-                        ? '–'
-                        : cell.today
-                          ? '•'
-                          : ''}
+                      : cell.state === 'grace'
+                        ? '○'
+                        : cell.state === 'not-scheduled'
+                          ? '–'
+                          : cell.today
+                            ? '•'
+                            : ''}
                   </Text>
                 </Pressable>
               ))}

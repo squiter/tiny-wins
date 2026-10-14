@@ -6,7 +6,14 @@ import {
   type IconKey,
 } from '../../domain/habit';
 import { localDay, shiftDay } from '../../domain/calendar';
-import { changeSchedule, plannedDays, validateWeekdays, type Weekday } from '../../domain/schedule';
+import {
+  changeSchedule,
+  plannedDays,
+  plannedTolerance,
+  validateTolerance,
+  validateWeekdays,
+  type Weekday,
+} from '../../domain/schedule';
 import type { Clock } from '../check-ins/service';
 import type { HabitRepository } from './repository';
 
@@ -18,16 +25,21 @@ export function editHabit(
   icon: IconKey,
   clock?: Clock,
   days?: Weekday[],
+  streakTolerance?: number,
 ) {
   const habit = repository.getHabit(id);
   if (!habit || habit.archivedAt) throw new Error('This habit is not active.');
   habitAppearance(color, icon);
   const schedule =
-    clock && days
+    clock &&
+    days &&
+    (JSON.stringify(validateWeekdays(days)) !== JSON.stringify(plannedDays(habit.schedule)) ||
+      (streakTolerance ?? plannedTolerance(habit.schedule)) !== plannedTolerance(habit.schedule))
       ? changeSchedule(
           habit.schedule,
           shiftDay(localDay(clock.now(), clock.timezone()), 1),
           validateWeekdays(days),
+          validateTolerance(streakTolerance ?? plannedTolerance(habit.schedule)),
         )
       : habit.schedule;
   repository.update(id, { title: habitTitle(title), color, icon, schedule });

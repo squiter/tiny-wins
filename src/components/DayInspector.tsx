@@ -26,6 +26,7 @@ export function DayInspector({
   }).format(new Date(`${cell.day}T12:00:00Z`));
   const status = {
     complete: 'A win worth keeping.',
+    grace: 'A little breathing room. Your sequence stayed intact; this day is not a completed win.',
     missed: 'A new start is always possible.',
     'before-start': 'This date is before your habit started.',
     'not-scheduled': 'A day to rest. Nothing was planned.',

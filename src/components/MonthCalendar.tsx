@@ -30,7 +30,7 @@ export function MonthCalendar({
           key={cell.day}
           testID={`month-day-${cell.day}`}
           accessibilityRole="button"
-          accessibilityLabel={`${cell.day}: ${cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}`}
+          accessibilityLabel={`${cell.day}: ${cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}`}
           disabled={cell.state === 'future'}
           accessibilityState={{ disabled: cell.state === 'future' }}
           onPress={() => onInspect(cell.day)}
@@ -40,7 +40,7 @@ export function MonthCalendar({
               backgroundColor:
                 cell.state === 'complete'
                   ? habitColors[color]
-                  : cell.state === 'missed'
+                  : cell.state === 'grace'
                     ? habitSurfaces[color]
                     : theme.ivory,
               borderWidth: cell.today ? 2 : 1,
@@ -63,7 +63,13 @@ export function MonthCalendar({
             maxFontSizeMultiplier={1}
             style={{ fontSize: 9, color: cell.state === 'complete' ? '#FFFFFF' : theme.muted }}
           >
-            {cell.state === 'complete' ? '✓' : cell.state === 'not-scheduled' ? '–' : ''}
+            {cell.state === 'complete'
+              ? '✓'
+              : cell.state === 'grace'
+                ? '○'
+                : cell.state === 'not-scheduled'
+                  ? '–'
+                  : ''}
           </Text>
         </Pressable>
       ))}

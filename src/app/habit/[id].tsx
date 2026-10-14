@@ -83,7 +83,16 @@ export default function HabitDetail() {
     ? calendarCells(habit, completions, selected, selected, today)[0]
     : undefined;
   function save(draft: HabitDraft) {
-    editHabit(repository, id, draft.title, draft.color, draft.icon, deviceClock, draft.days);
+    editHabit(
+      repository,
+      id,
+      draft.title,
+      draft.color,
+      draft.icon,
+      deviceClock,
+      draft.days,
+      draft.streakTolerance,
+    );
     refresh();
     setEditing(false);
   }
@@ -212,8 +221,8 @@ export default function HabitDetail() {
           onInspect={setSelected}
         />
         <Text style={styles.support}>
-          Colored ✓ completed · pale missed · dashed – not scheduled · blank before start or future.
-          Today is outlined.
+          Colored ✓ completed · soft ○ within tolerance · pale missed · dashed – not scheduled ·
+          blank before start or future. Today is outlined.
         </Text>
         <Text style={styles.support}>
           Consistency includes scheduled dates through today. Days before creation, future days and

@@ -61,7 +61,7 @@ export function HabitCard({
       <View style={styles.header}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`View ${habit.title}, ${due ? `${streak} day${streak === 1 ? '' : 's'} in a row` : 'Not scheduled today'}`}
+          accessibilityLabel={`View ${habit.title}, ${due ? `${streak} win${streak === 1 ? '' : 's'} in a row` : 'Not scheduled today'}`}
           disabled={!!ordering}
           onPress={onView}
           style={styles.edit}
@@ -74,7 +74,7 @@ export function HabitCard({
               {habit.title}
             </Text>
             <Text style={styles.support}>
-              {due ? `${streak} day${streak === 1 ? '' : 's'} in a row` : 'Not scheduled today'}
+              {due ? `${streak} win${streak === 1 ? '' : 's'} in a row` : 'Not scheduled today'}
             </Text>
           </View>
         </Pressable>
@@ -136,7 +136,7 @@ export function HabitCard({
       </View>
       <View style={styles.grid}>
         {cells.map((cell) => {
-          const label = `${cell.day}: ${cell.state === 'complete' ? 'completed' : cell.state === 'before-start' || cell.state === 'not-scheduled' ? (cell.state === 'not-scheduled' ? 'not scheduled' : 'before habit started') : cell.today ? 'pending' : 'not completed'}${cell.today ? ', today' : ''}`;
+          const label = `${cell.day}: ${cell.state === 'complete' ? 'completed' : cell.state === 'before-start' || cell.state === 'not-scheduled' ? (cell.state === 'not-scheduled' ? 'not scheduled' : 'before habit started') : cell.state === 'grace' ? 'within streak tolerance' : cell.today ? 'pending' : 'not completed'}${cell.today ? ', today' : ''}`;
           const style = [
             styles.cell,
             {
@@ -145,7 +145,9 @@ export function HabitCard({
                   ? color
                   : cell.state === 'before-start' || cell.state === 'not-scheduled'
                     ? '#F0EEEA'
-                    : habitSurfaces[habit.color],
+                    : cell.state === 'grace'
+                      ? habitSurfaces[habit.color]
+                      : theme.ivory,
               borderColor: cell.today ? color : 'transparent',
               borderWidth: cell.today ? 2 : 0,
             },
@@ -184,7 +186,13 @@ export function HabitCard({
                   { color: cell.state === 'complete' ? '#FFFFFF' : theme.muted },
                 ]}
               >
-                {cell.state === 'complete' ? '✓' : cell.state === 'not-scheduled' ? '–' : ''}
+                {cell.state === 'complete'
+                  ? '✓'
+                  : cell.state === 'grace'
+                    ? '○'
+                    : cell.state === 'not-scheduled'
+                      ? '–'
+                      : ''}
               </Text>
             </Pressable>
           );

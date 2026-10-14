@@ -7,11 +7,11 @@ import {
   type Habit,
   type IconKey,
 } from './habit';
-import { validateWeekdays, type ScheduleVersion } from './schedule';
+import { validateTolerance, validateWeekdays, type ScheduleVersion } from './schedule';
 export const backupLimit = 5 * 1024 * 1024;
 export interface Backup {
   format: 'tiny-wins';
-  version: 1;
+  version: 1 | 2;
   exportedAt: string;
   habits: Habit[];
   completions: Completion[];
@@ -43,7 +43,7 @@ function timestamp(value: unknown): string {
   dateKey(result.slice(0, 10));
   return result;
 }
-function habit(value: unknown): Habit {
+function habit(value: unknown, backupVersion: number): Habit {
   const row = object(value);
   const startsOn = dateKey(text(row.startsOn, 10));
   if (Number(startsOn.slice(0, 4)) < 1900)
@@ -59,7 +59,13 @@ function habit(value: unknown): Habit {
     const version = object(value);
     if (!Array.isArray(version.days)) throw new Error('The backup contains an invalid schedule.');
     const days = version.days.length ? validateWeekdays(version.days) : [];
-    return { from: dateKey(text(version.from, 10)), days };
+    return {
+      from: dateKey(text(version.from, 10)),
+      days,
+      ...(backupVersion === 2 && version.streakTolerance !== undefined
+        ? { streakTolerance: validateTolerance(version.streakTolerance) }
+        : {}),
+    };
   });
   if (
     schedule[0]?.from !== startsOn ||
@@ -88,7 +94,7 @@ export function parseBackup(source: string): Backup {
     throw new Error('This file is not a valid Tiny Wins backup.');
   }
   const data = object(value);
-  if (data.format !== 'tiny-wins' || data.version !== 1)
+  if (data.format !== 'tiny-wins' || (data.version !== 1 && data.version !== 2))
     throw new Error('This backup format is not supported.');
   if (
     !Array.isArray(data.habits) ||
@@ -97,7 +103,7 @@ export function parseBackup(source: string): Backup {
     data.completions.length > 50000
   )
     throw new Error('This backup has too many records.');
-  const habits = data.habits.map(habit);
+  const habits = data.habits.map((value) => habit(value, data.version as number));
   const map = new Map(habits.map((value) => [value.id, value]));
   if (map.size !== habits.length) throw new Error('The backup contains duplicate habits.');
   const keys = new Set<string>();
@@ -120,7 +126,7 @@ export function parseBackup(source: string): Backup {
   });
   return {
     format: 'tiny-wins',
-    version: 1,
+    version: data.version as 1 | 2,
     exportedAt: timestamp(data.exportedAt),
     habits,
     completions,
@@ -128,7 +134,7 @@ export function parseBackup(source: string): Backup {
 }
 export function serializeBackup(habits: Habit[], completions: Completion[], now: Date): string {
   const source = JSON.stringify(
-    { format: 'tiny-wins', version: 1, exportedAt: now.toISOString(), habits, completions },
+    { format: 'tiny-wins', version: 2, exportedAt: now.toISOString(), habits, completions },
     null,
     2,
   );

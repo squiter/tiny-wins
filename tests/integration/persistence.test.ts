@@ -20,6 +20,8 @@ import {
   moveHabit,
 } from '../../src/features/habits/service';
 import { parseBackup, serializeBackup } from '../../src/domain/backup';
+import { currentStreak, calendarCells } from '../../src/domain/habit';
+import { allWeekdays, plannedTolerance } from '../../src/domain/schedule';
 import { dateKey } from '../../src/domain/calendar';
 const directories: string[] = [];
 const databases: Database.Database[] = [];
@@ -51,6 +53,74 @@ const clock: Clock = {
   timezone: () => 'America/Sao_Paulo',
 };
 describe('real SQLite + shared Drizzle adapter', () => {
+  it('reopens renewable tolerance, preserves legacy JSON, carries policy through pause and v2 restore', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-tolerance-'));
+    directories.push(directory);
+    const path = join(directory, 'habits.db');
+    let connection = open(path);
+    const first: Clock = { now: () => new Date('2024-02-29T12:00:00Z'), timezone: () => 'UTC' };
+    const later: Clock = { now: () => new Date('2024-03-02T12:00:00Z'), timezone: () => 'UTC' };
+    createHabit(connection.repository, first, 'read', 'Read', 'coral', 'book', [...allWeekdays], 1);
+    createHabit(connection.repository, first, 'strict', 'Strict', 'forest');
+    const legacyJson = connection.sqlite
+      .prepare('SELECT schedule FROM habits WHERE id=?')
+      .get('strict');
+    toggleToday(connection.repository, first, 'read');
+    toggleToday(connection.repository, later, 'read');
+    editHabit(
+      connection.repository,
+      'read',
+      'Read more',
+      'coral',
+      'book',
+      later,
+      [...allWeekdays],
+      2,
+    );
+    const schedule = connection.repository.getHabit('read')!.schedule;
+    editHabit(
+      connection.repository,
+      'read',
+      'Read more',
+      'coral',
+      'book',
+      later,
+      [...allWeekdays],
+      2,
+    );
+    expect(connection.repository.getHabit('read')!.schedule).toEqual(schedule);
+    archiveHabit(connection.repository, later, 'read');
+    restoreHabit(connection.repository, 'read', later);
+    connection.sqlite.close();
+    connection = open(path);
+    const habit = connection.repository.getHabit('read')!;
+    const completions = connection.repository.listCompletions();
+    expect(plannedTolerance(habit.schedule)).toBe(2);
+    expect(habit.schedule[0]?.streakTolerance).toBe(1);
+    expect(currentStreak(habit, completions, dateKey('2024-03-02'))).toBe(2);
+    expect(
+      calendarCells(
+        habit,
+        completions,
+        dateKey('2024-03-01'),
+        dateKey('2024-03-01'),
+        dateKey('2024-03-02'),
+      )[0]?.state,
+    ).toBe('grace');
+    expect(
+      connection.sqlite.prepare('SELECT schedule FROM habits WHERE id=?').get('strict'),
+    ).toEqual(legacyJson);
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 4 });
+    const backup = parseBackup(
+      serializeBackup(connection.repository.listHabits(), completions, later.now()),
+    );
+    const target = open(join(directory, 'restored.db'));
+    expect(target.repository.mergeBackup(backup)).toEqual({ habitsAdded: 2, winsAdded: 2 });
+    target.sqlite.close();
+    expect(open(join(directory, 'restored.db')).repository.getHabit('read')?.schedule).toEqual(
+      habit.schedule,
+    );
+  });
   it('adds preferences to a v3 database without moving scheduled wins', () => {
     const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-preferences-'));
     directories.push(directory);

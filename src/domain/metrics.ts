@@ -1,3 +1,4 @@
+import { streakProgress } from './streak';
 import { dateKey, shiftDay, type LocalDate } from './calendar';
 import { calendarCells, currentStreak, type Completion, type Habit } from './habit';
 import { scheduledOn } from './schedule';
@@ -13,8 +14,7 @@ export function habitMetrics(
   );
   let eligibleDays = 0;
   let eligibleWins = 0;
-  let bestStreak = 0;
-  let streak = 0;
+  const bestStreak = streakProgress(habit, completed, today, start, end).best;
   let totalWins = 0;
   for (let day = start; day <= end && day <= today; day = shiftDay(day, 1)) {
     if (day < habit.startsOn) continue;
@@ -23,9 +23,7 @@ export function habitMetrics(
     eligibleDays += 1;
     if (completed.has(day)) {
       eligibleWins += 1;
-      streak += 1;
-      bestStreak = Math.max(bestStreak, streak);
-    } else streak = 0;
+    }
   }
   return {
     currentStreak: currentStreak(habit, completions, today),

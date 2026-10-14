@@ -4,6 +4,7 @@ export type Weekday = (typeof allWeekdays)[number];
 export interface ScheduleVersion {
   from: LocalDate;
   days: Weekday[];
+  streakTolerance?: number;
 }
 export function validateWeekdays(days: readonly number[]): Weekday[] {
   if (
@@ -23,8 +24,16 @@ export function changeSchedule(
   schedule: ScheduleVersion[],
   from: LocalDate,
   days: Weekday[],
+  streakTolerance = plannedTolerance(schedule),
 ): ScheduleVersion[] {
-  return [...schedule.filter((version) => version.from < from), { from, days: [...days] }];
+  return [
+    ...schedule.filter((version) => version.from < from),
+    {
+      from,
+      days: [...days],
+      ...(validateTolerance(streakTolerance) > 0 ? { streakTolerance } : {}),
+    },
+  ];
 }
 export function plannedDays(schedule: ScheduleVersion[]): Weekday[] {
   return schedule.findLast((version) => version.days.length)?.days ?? [...allWeekdays];
@@ -32,4 +41,16 @@ export function plannedDays(schedule: ScheduleVersion[]): Weekday[] {
 export function scheduleLabel(days: Weekday[]): string {
   if (days.length === 7) return 'Every day';
   return days.map((day) => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day]).join(' · ');
+}
+
+export function validateTolerance(value: unknown): number {
+  if (typeof value !== 'number' || !Number.isInteger(value) || value < 0 || value > 7)
+    throw new Error('Choose a streak tolerance from 0 to 7 scheduled days.');
+  return value;
+}
+export function plannedTolerance(schedule: ScheduleVersion[]): number {
+  return schedule.at(-1)?.streakTolerance ?? 0;
+}
+export function toleranceOn(schedule: ScheduleVersion[], day: LocalDate): number {
+  return schedule.findLast((version) => version.from <= day)?.streakTolerance ?? 0;
 }

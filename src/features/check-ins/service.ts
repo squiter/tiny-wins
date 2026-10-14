@@ -1,6 +1,12 @@
 import { localDay } from '../../domain/calendar';
 import { habitTitle, habitAppearance, type ColorKey, type IconKey } from '../../domain/habit';
-import { allWeekdays, scheduledOn, validateWeekdays, type Weekday } from '../../domain/schedule';
+import {
+  allWeekdays,
+  scheduledOn,
+  validateTolerance,
+  validateWeekdays,
+  type Weekday,
+} from '../../domain/schedule';
 import type { LocalDate } from '../../domain/calendar';
 import type { HabitRepository } from '../habits/repository';
 export interface Clock {
@@ -15,6 +21,7 @@ export function createHabit(
   color: ColorKey,
   icon: IconKey = 'plant',
   days: Weekday[] = [...allWeekdays],
+  streakTolerance = 0,
 ) {
   const now = clock.now();
   const timezone = clock.timezone();
@@ -29,7 +36,13 @@ export function createHabit(
     sortOrder,
     startsOn: localDay(now, timezone),
     createdAt: now.toISOString(),
-    schedule: [{ from: localDay(now, timezone), days: validateWeekdays(days) }],
+    schedule: [
+      {
+        from: localDay(now, timezone),
+        days: validateWeekdays(days),
+        ...(validateTolerance(streakTolerance) > 0 ? { streakTolerance } : {}),
+      },
+    ],
   });
 }
 export function toggleToday(repository: HabitRepository, clock: Clock, habitId: string) {

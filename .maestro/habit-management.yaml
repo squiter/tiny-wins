@@ -15,17 +15,44 @@ appId: app.tinywins.mobile
 - hideKeyboard
 - tapOn: Book icon
 - tapOn: coral color
+- scrollUntilVisible:
+    element:
+      text: Advanced options.*
+    direction: DOWN
+- tapOn:
+    text: Advanced options.*
+- tapOn: Increase streak tolerance
+- assertVisible: 1 scheduled day of tolerance
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
 - tapOn:
     id: save-habit
 - tapOn: Complete Read one page today
-- assertVisible: View Read one page, 1 day in a row
-- tapOn: View Read one page, 1 day in a row
+- assertVisible: View Read one page, 1 win in a row
+- tapOn: View Read one page, 1 win in a row
 - tapOn: Edit habit
+- scrollUntilVisible:
+    element:
+      text: Advanced options.*
+    direction: DOWN
+- tapOn:
+    text: Advanced options.*
+- assertVisible: 1 scheduled day of tolerance
+- scrollUntilVisible:
+    element:
+      id: habit-name
+    direction: UP
 - tapOn:
     id: habit-name
 - eraseText
 - inputText: Read a chapter
 - hideKeyboard
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
 - tapOn:
     id: save-habit
 - assertVisible: Read a chapter
@@ -37,6 +64,10 @@ appId: app.tinywins.mobile
 - inputText: Walk
 - hideKeyboard
 - tapOn: Walk icon
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
 - tapOn:
     id: save-habit
 - tapOn: Reorder habits
@@ -44,8 +75,8 @@ appId: app.tinywins.mobile
 - tapOn: Done reordering
 - stopApp
 - launchApp
-- assertVisible: View Read a chapter, 1 day in a row
-- tapOn: View Read a chapter, 1 day in a row
+- assertVisible: View Read a chapter, 1 win in a row
+- tapOn: View Read a chapter, 1 win in a row
 - tapOn: Edit habit
 - scrollUntilVisible:
     element: Archive habit
@@ -58,7 +89,7 @@ appId: app.tinywins.mobile
 - tapOn: 'Archived habits \(1\)'
 - tapOn: Restore Read a chapter
 - tapOn: '← Back to Today'
-- assertVisible: View Read a chapter, 1 day in a row
+- assertVisible: View Read a chapter, 1 win in a row
 - stopApp
 - launchApp
-- assertVisible: View Read a chapter, 1 day in a row
+- assertVisible: View Read a chapter, 1 win in a row

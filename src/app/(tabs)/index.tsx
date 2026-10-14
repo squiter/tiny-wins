@@ -67,6 +67,7 @@ export default function Today() {
         draft.icon,
         deviceClock,
         draft.days,
+        draft.streakTolerance,
       );
     else
       createHabit(
@@ -77,6 +78,7 @@ export default function Today() {
         draft.color,
         draft.icon,
         draft.days,
+        draft.streakTolerance,
       );
     update();
     setEditor(null);
@@ -238,7 +240,7 @@ export default function Today() {
             </View>
           ))}
         {!archived && activeHabits.length > 0 && (
-          <Text style={styles.legend}>Past 14 days · today is outlined</Text>
+          <Text style={styles.legend}>Past 14 days · today outlined · soft ○ within tolerance</Text>
         )}
         <Pressable
           accessibilityRole="button"
