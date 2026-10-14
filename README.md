@@ -54,6 +54,8 @@ The core app works offline and stores data on your device, without an account or
 
 ## What's next
 
+First-release preparation is now the priority. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
+
 The [implementation plan](docs/IMPLEMENTATION_PLAN.md) guides these additions. They are planned work, with no promised release dates.
 
 | Direction                               | Planned additions                                                                                                           |

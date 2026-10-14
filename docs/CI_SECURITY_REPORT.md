@@ -31,4 +31,6 @@ Audit after changes: **18 high, 0 moderate, 0 critical**. All 15 moderate alerts
 
 ## Next steps
 
+Release-preparation refresh (2026-10-14): raw `npm audit --json` still reports **18 high, 0 moderate, 0 critical**, with the same braces 3.0.3 / node-forge 1.4.0 advisories. `npm ls` places both under Expo CLI/Metro tooling. Validate run 38636973295 on 6524866 passes its verify job and fails only the separate dependency audit. No corrected package update is inferred from this audit output. Its offered Expo 44.0.6 downgrade is incompatible with the approved baseline and was not applied. Tooling dependency placement informs a future reviewed risk assessment; it does not close the release gate or prove absence from every production artifact.
+
 Follow the new native jobs, review any actual compiler error, and replace temporary security patches when upstream corrected releases exist. Keep security alerts visible. The planned per-habit binary victory-tile Insights overview is task 008; it was intentionally not implemented in this security slice.
