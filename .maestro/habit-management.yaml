@@ -13,6 +13,7 @@ appId: app.tinywins.mobile
     id: habit-name
 - inputText: Read one page
 - hideKeyboard
+- takeScreenshot: habit-editor-safe-area
 - tapOn: Book icon
 - tapOn: coral color
 - scrollUntilVisible:
@@ -30,6 +31,7 @@ appId: app.tinywins.mobile
       id: streak-tolerance
     direction: DOWN
 - assertVisible: 1 scheduled day of tolerance
+- takeScreenshot: streak-flexibility-controls
 - scrollUntilVisible:
     element:
       id: save-habit
