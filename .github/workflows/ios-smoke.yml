@@ -88,7 +88,7 @@ jobs:
           exit 1
       - name: Prepare cold iOS development bundle
         timeout-minutes: 6
-        run: curl --fail --silent --show-error --max-time 300 "http://localhost:8081/node_modules/expo-router/entry.bundle?platform=ios&dev=true&minify=false" -o "$RUNNER_TEMP/tiny-wins-ios.bundle"
+        run: curl --fail --silent --show-error --max-time 300 "http://localhost:8081/.expo/.virtual-metro-entry.bundle?platform=ios&dev=true&lazy=true&minify=false&inlineSourceMap=false&modulesOnly=false&runModule=true&excludeSource=true&sourcePaths=url-server&app=app.tinywins.mobile" -o "$RUNNER_TEMP/tiny-wins-ios.bundle"
       - name: Run restart and management acceptance flows
         env:
           MAESTRO_CLI_NO_ANALYTICS: 'true'

@@ -8,6 +8,7 @@ appId: app.tinywins.mobile
     timeout: 120000
 - tapOn:
     id: add-habit
+    retryTapIfNoChange: true
 - tapOn:
     id: habit-name
 - inputText: Read one page

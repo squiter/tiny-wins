@@ -13,3 +13,5 @@ Save JUnit, debug output, simulator screenshot and Metro logs even when a flow f
 Sources: official Maestro CLI installation/commands docs and mobile-dev-inc/Maestro cli-2.11.0 release. Runtime acceptance status belongs in task 010; the version-based npm audit remains a separate open gate.
 
 Reference links: [CLI 2.11.0 release](https://github.com/mobile-dev-inc/Maestro/releases/tag/cli-2.11.0), [CLI commands](https://docs.maestro.dev/maestro-cli/maestro-cli-commands-and-options), [CLI environment variables](https://docs.maestro.dev/maestro-cli/environment-variables), [pinned error-report API setting](https://github.com/mobile-dev-inc/Maestro/blob/cli-2.11.0/maestro-cli/src/main/java/maestro/cli/util/EnvUtils.kt). The startup wait observes the New habit control instead of assuming a cold debug bundle is ready immediately.
+
+Cold-start diagnosis uses the actual bundle URL recorded by the native app. The initial New habit tap uses [Maestro’s early-tap handling](https://docs.maestro.dev/reference/commands-available/tapon) when the hierarchy has not changed; no whole-flow retries or assertion bypasses.
