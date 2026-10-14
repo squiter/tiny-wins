@@ -10,6 +10,7 @@ import type { Habit } from '../../domain/habit';
 import { createHabit, toggleToday } from '../../features/check-ins/service';
 import { archiveHabit, editHabit, moveHabit, restoreHabit } from '../../features/habits/service';
 import { deviceClock } from '../../lib/clock';
+import { DailyProgress } from '../../components/DailyProgress';
 import { HabitCard } from '../../components/HabitCard';
 import { HabitEditor, type HabitDraft } from '../../components/HabitEditor';
 import { HabitIcon } from '../../components/HabitIcon';
@@ -136,23 +137,7 @@ export default function Today() {
             </Text>
           </Pressable>
         </View>
-        {!archived && (
-          <View style={styles.banner}>
-            <Text accessible={false} maxFontSizeMultiplier={1} style={styles.leaf}>
-              🌱
-            </Text>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.bannerText}>Small wins today,{'\n'}brighter tomorrows.</Text>
-              <Text style={styles.support}>
-                {activeHabits.length
-                  ? dueHabits.length
-                    ? `${wins} of ${dueHabits.length} planned wins`
-                    : 'Nothing planned today. Enjoy a little breathing room.'
-                  : 'One small step is a lovely start.'}
-              </Text>
-            </View>
-          </View>
-        )}
+        {!archived && <DailyProgress wins={wins} planned={dueHabits.length} />}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
             {archived
@@ -312,22 +297,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addText: { color: '#FFFFFF', fontSize: 30 },
-  banner: {
-    padding: 14,
-    borderRadius: 17,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-    backgroundColor: '#E7EDE4',
-    marginBottom: 4,
-  },
-  leaf: { fontSize: 35 },
-  bannerText: {
-    fontFamily: 'Fraunces_600SemiBold',
-    color: theme.forest,
-    fontSize: 19,
-    lineHeight: 25,
-  },
   support: { fontFamily: 'Inter_400Regular', fontSize: 12, color: theme.muted, lineHeight: 19 },
   section: {
     flexDirection: 'row',

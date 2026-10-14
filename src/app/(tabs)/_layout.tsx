@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { theme } from '../../theme/tokens';
 export default function TabLayout() {
   return (
@@ -29,9 +29,31 @@ export default function TabLayout() {
         options={{
           title: 'Insights',
           tabBarIcon: ({ color }) => (
-            <Text accessible={false} aria-hidden={true} style={{ color, fontSize: 24 }}>
-              ▥
-            </Text>
+            <View
+              accessible={false}
+              aria-hidden={true}
+              style={{
+                width: 24,
+                height: 24,
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                gap: 3,
+                paddingBottom: 3,
+              }}
+            >
+              {[8, 14, 20].map((height) => (
+                <View
+                  key={height}
+                  style={{
+                    width: 5,
+                    height,
+                    borderRadius: 1,
+                    borderWidth: 1.5,
+                    borderColor: color,
+                  }}
+                />
+              ))}
+            </View>
           ),
         }}
       />

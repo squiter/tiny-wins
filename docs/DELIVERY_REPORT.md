@@ -30,3 +30,11 @@ This Mac lacks the full native toolchains. Maestro flows are prepared but unexec
 Backup limits: 5 MiB, 500 habits, 50,000 wins, 200 schedule versions per habit. Merge retains existing metadata and rejects conflicting creation dates atomically. See ADR-010.
 
 License, final bundle identifiers, trademark rights, paid store price and signing/store accounts remain owner decisions. No release or store publication was performed.
+
+## Completion feedback refinement
+
+Task 006 replaces the ambiguous Insights glyph with a drawn bar chart. Check-ins pulse the check control and animate the daily progress fill. The final scheduled win changes banner color/icon/copy, while undo immediately returns to pending progress. Reopening a completed day retains the completed message without replaying the transition pulse; a zero-opportunity day never counts as complete. New animations respect the system reduced-motion setting.
+
+Reorder arrows replace existing icon/check slots, avoiding the extra row that changed every card's height. Browser bounds are identical before/after entering the mode, and moving up/down remains functional. 360 px evidence: `screenshots/day-complete-360.png`, `screenshots/reorder-stable-360.png`. The original demo order and three wins were restored after QA. Native motion/accessibility acceptance remains pending.
+
+The Android build including backup modules passed on `01501e9`: [run 38491267666](https://github.com/squiter/tiny-wins/actions/runs/38491267666). This precedes the feedback refinement. iOS build was still running at this review.
