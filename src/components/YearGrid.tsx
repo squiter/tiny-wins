@@ -1,3 +1,4 @@
+import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { HistoryCell, ColorKey } from '../domain/habit';
 import { habitColors, habitSurfaces, theme } from '../theme/tokens';
@@ -20,23 +21,25 @@ export function YearGrid({
   cells,
   color,
   onInspect,
+  weekStartsOn,
 }: {
   cells: HistoryCell[];
   color: ColorKey;
+  weekStartsOn: WeekStartsOn;
   onInspect(day: LocalDate): void;
 }) {
   return (
     <View style={styles.year}>
       {months.map((month, index) => {
         const days = cells.filter((cell) => Number(cell.day.slice(5, 7)) === index + 1);
-        const offset = days[0] ? (new Date(`${days[0].day}T12:00:00Z`).getUTCDay() + 6) % 7 : 0;
+        const offset = days[0] ? calendarOffset(days[0].day, weekStartsOn) : 0;
         return (
           <View key={month} style={styles.month}>
             <Text accessibilityRole="header" style={styles.title}>
               {month}
             </Text>
             <View style={styles.days}>
-              {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((label, i) => (
+              {calendarWeekdays(weekStartsOn).map((label, i) => (
                 <Text accessible={false} key={`label-${i}`} style={styles.weekday}>
                   {label}
                 </Text>

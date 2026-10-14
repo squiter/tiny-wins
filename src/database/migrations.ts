@@ -30,6 +30,11 @@ UPDATE habits SET sort_order = (
 );`,
   `ALTER TABLE habits ADD COLUMN schedule TEXT NOT NULL DEFAULT '[]';
    UPDATE habits SET schedule = json_array(json_object('from', starts_on, 'days', json_array(0,1,2,3,4,5,6)));`,
+  `CREATE TABLE preferences (
+    id INTEGER PRIMARY KEY NOT NULL CHECK(id = 1),
+    week_starts_on INTEGER NOT NULL DEFAULT 1 CHECK(week_starts_on IN (0, 1))
+  );
+  INSERT INTO preferences (id, week_starts_on) VALUES (1, 1);`,
 ];
 export function migrate(database: MigrationDatabase) {
   database.execSync('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;');

@@ -38,3 +38,11 @@ Task 006 replaces the ambiguous Insights glyph with a drawn bar chart. Check-ins
 Reorder arrows replace existing icon/check slots, avoiding the extra row that changed every card's height. Browser bounds are identical before/after entering the mode, and moving up/down remains functional. 360 px evidence: `screenshots/day-complete-360.png`, `screenshots/reorder-stable-360.png`. The original demo order and three wins were restored after QA. Native motion/accessibility acceptance remains pending.
 
 The Android build including backup modules passed on `01501e9`: [run 38491267666](https://github.com/squiter/tiny-wins/actions/runs/38491267666). This precedes the feedback refinement. iOS build was still running at this review.
+
+## Direct main delivery and calendar preferences
+
+PR #1 was merged at the owner's request (merge commit `818295f`), and subsequent prototype work uses locally verified direct main commits. Contributing guidance records this preference; no new PR is required for owner work.
+
+Task 007 adds saved Sunday/Monday calendar layout preferences. Migration v4 adds a constrained singleton row without rewriting habit/completion data. Monthly and yearly grids share pure label/offset logic. Version 1 habit backups do not replace device presentation preferences.
+
+Validation: 61 tests (47 unit, 14 integration), strict types/lint/format and all-platform exports; browser Sunday selection survives reload and keeps six habits/three wins. No additional dependency. Native runtime, dependency audit, licensing and store gates remain as described above.

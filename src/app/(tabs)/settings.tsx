@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { usePreferences } from '../../database/provider';
+import type { WeekStartsOn } from '../../domain/preferences';
 import { router } from 'expo-router';
 import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -5,6 +8,16 @@ import { deviceClock } from '../../lib/clock';
 import { BackupControls } from '../../components/BackupControls';
 import { theme } from '../../theme/tokens';
 export default function Settings() {
+  const { weekStartsOn, setWeekStartsOn } = usePreferences();
+  const [error, setError] = useState('');
+  function changeWeek(value: WeekStartsOn) {
+    try {
+      setWeekStartsOn(value);
+      setError('');
+    } catch {
+      setError('We couldn’t save your preference. Please try again.');
+    }
+  }
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView contentContainerStyle={styles.page}>
@@ -22,6 +35,43 @@ export default function Settings() {
             Tiny Wins does not send your habit data to a server. Use a backup file when moving
             devices.
           </Text>
+        </View>
+        <View style={styles.card}>
+          <Text accessibilityRole="header" style={styles.title}>
+            Make the calendar yours
+          </Text>
+          <Text style={styles.copy}>Start your week on</Text>
+          <View
+            accessibilityRole="radiogroup"
+            accessibilityLabel="First day of the week"
+            style={styles.choices}
+          >
+            {([1, 0] as const).map((value) => (
+              <Pressable
+                key={value}
+                accessibilityRole="radio"
+                accessibilityLabel={value === 1 ? 'Monday' : 'Sunday'}
+                accessibilityState={{ checked: weekStartsOn === value }}
+                aria-checked={weekStartsOn === value}
+                onPress={() => changeWeek(value)}
+                style={[styles.choice, weekStartsOn === value && styles.chosen]}
+              >
+                <Text style={[styles.choiceText, weekStartsOn === value && { color: '#FFFFFF' }]}>
+                  {weekStartsOn === value ? '✓ ' : ''}
+                  {value === 1 ? 'Monday' : 'Sunday'}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+          <Text style={styles.copy}>
+            Saved on this device. Changes the monthly and yearly calendar layout. Your schedules and
+            past wins stay the same.
+          </Text>
+          {!!error && (
+            <Text accessibilityRole="alert" style={styles.copy}>
+              {error}
+            </Text>
+          )}
         </View>
         <BackupControls />
         <View style={styles.card}>
@@ -66,6 +116,20 @@ const styles = StyleSheet.create({
     borderColor: theme.stone,
     minHeight: 48,
   },
+  choices: { flexDirection: 'row', gap: 10 },
+  choice: {
+    flex: 1,
+    minHeight: 48,
+    padding: 12,
+    borderRadius: 12,
+    backgroundColor: theme.ivory,
+    borderWidth: 1,
+    borderColor: theme.stone,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chosen: { backgroundColor: theme.forest, borderColor: theme.forest },
+  choiceText: { fontFamily: 'Inter_600SemiBold', color: theme.forest, fontSize: 14 },
   title: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
   copy: { fontFamily: 'Inter_400Regular', fontSize: 14, lineHeight: 22, color: theme.muted },
   footer: {

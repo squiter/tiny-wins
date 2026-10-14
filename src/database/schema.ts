@@ -1,6 +1,7 @@
 import { sqliteTable, text, integer, primaryKey } from 'drizzle-orm/sqlite-core';
 import type { ColorKey, IconKey } from '../domain/habit';
 import type { ScheduleVersion } from '../domain/schedule';
+import type { WeekStartsOn } from '../domain/preferences';
 import type { LocalDate } from '../domain/calendar';
 export const habits = sqliteTable('habits', {
   id: text('id').primaryKey(),
@@ -25,3 +26,8 @@ export const completions = sqliteTable(
   },
   (table) => [primaryKey({ columns: [table.habitId, table.localDate] })],
 );
+
+export const preferences = sqliteTable('preferences', {
+  id: integer('id').primaryKey(),
+  weekStartsOn: integer('week_starts_on').$type<WeekStartsOn>().notNull().default(1),
+});

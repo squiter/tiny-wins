@@ -1,3 +1,4 @@
+import { usePreferences } from '../../database/provider';
 import { useState } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -25,6 +26,7 @@ function safeDay(value?: string): LocalDate | null {
   }
 }
 export default function HabitDetail() {
+  const { weekStartsOn } = usePreferences();
   const { id, day } = useLocalSearchParams<{ id: string; day?: string }>();
   const { repository, refresh, habits, completions, today } = useHabitData();
   const habit = habits.find((value) => value.id === id);
@@ -148,7 +150,12 @@ export default function HabitDetail() {
             <Text style={styles.back}>›</Text>
           </Pressable>
         </View>
-        <MonthCalendar cells={monthCells} color={habit.color} onInspect={setSelected} />
+        <MonthCalendar
+          weekStartsOn={weekStartsOn}
+          cells={monthCells}
+          color={habit.color}
+          onInspect={setSelected}
+        />
         <StatsGrid
           items={[
             { icon: '🌱', value: metrics.currentStreak, label: 'Current streak' },
@@ -188,7 +195,12 @@ export default function HabitDetail() {
           Each square is one day. Tap a past day to inspect it; changes require a separate
           confirmation below.
         </Text>
-        <YearGrid cells={cells} color={habit.color} onInspect={setSelected} />
+        <YearGrid
+          weekStartsOn={weekStartsOn}
+          cells={cells}
+          color={habit.color}
+          onInspect={setSelected}
+        />
         <Text style={styles.support}>
           Colored ✓ completed · pale missed · dashed – not scheduled · blank before start or future.
           Today is outlined.

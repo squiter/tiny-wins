@@ -1,3 +1,4 @@
+import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { HistoryCell, ColorKey } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
@@ -6,15 +7,17 @@ export function MonthCalendar({
   cells,
   color,
   onInspect,
+  weekStartsOn,
 }: {
   cells: HistoryCell[];
   color: ColorKey;
+  weekStartsOn: WeekStartsOn;
   onInspect(day: LocalDate): void;
 }) {
-  const offset = cells[0] ? (new Date(`${cells[0].day}T12:00:00Z`).getUTCDay() + 6) % 7 : 0;
+  const offset = cells[0] ? calendarOffset(cells[0].day, weekStartsOn) : 0;
   return (
     <View style={styles.grid}>
-      {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((label, index) => (
+      {calendarWeekdays(weekStartsOn).map((label, index) => (
         <Text accessible={false} key={`weekday-${index}`} style={styles.label}>
           {label}
         </Text>

@@ -51,6 +51,37 @@ const clock: Clock = {
   timezone: () => 'America/Sao_Paulo',
 };
 describe('real SQLite + shared Drizzle adapter', () => {
+  it('adds preferences to a v3 database without moving scheduled wins', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-preferences-'));
+    directories.push(directory);
+    const path = join(directory, 'preferences.db');
+    const first = open(path);
+    createHabit(first.repository, clock, 'water', 'Water', 'blue');
+    toggleToday(first.repository, clock, 'water');
+    const habits = first.repository.listHabits();
+    const wins = first.repository.listCompletions();
+    first.sqlite.exec('DROP TABLE preferences; PRAGMA user_version = 3');
+    first.sqlite.close();
+    const upgraded = open(path);
+    expect(upgraded.repository.getWeekStartsOn()).toBe(1);
+    upgraded.repository.setWeekStartsOn(0);
+    migrate(upgraded.adapter);
+    expect(upgraded.repository.listHabits()).toEqual(habits);
+    expect(upgraded.repository.listCompletions()).toEqual(wins);
+    upgraded.sqlite.close();
+    const reopened = open(path);
+    expect(reopened.repository.getWeekStartsOn()).toBe(0);
+    expect(reopened.repository.listCompletions()).toEqual(wins);
+  });
+  it('rejects unsupported preferences before writes and at the SQLite boundary', () => {
+    const { sqlite, repository } = open(':memory:');
+    expect(() => repository.setWeekStartsOn(2 as 0)).toThrow();
+    expect(() => sqlite.exec('UPDATE preferences SET week_starts_on = 2')).toThrow();
+    expect(() =>
+      sqlite.exec('INSERT INTO preferences (id, week_starts_on) VALUES (2, 0)'),
+    ).toThrow();
+    expect(repository.getWeekStartsOn()).toBe(1);
+  });
   it('upgrades a real v1 file without losing habits, dates or completions', () => {
     const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-v1-'));
     directories.push(directory);
@@ -75,7 +106,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(repository.getHabit('b')?.startsOn).toBe('2024-02-29');
     expect(repository.listCompletions()[0]?.localDate).toBe('2024-02-29');
     migrate(adapter);
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 3 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 4 });
     sqlite.close();
     expect(open(path).repository.listCompletions()).toHaveLength(1);
   });
@@ -296,8 +327,8 @@ describe('real SQLite + shared Drizzle adapter', () => {
   });
   it('rejects unknown future schema without modifying user data', () => {
     const { sqlite, adapter } = open(':memory:');
-    sqlite.exec('PRAGMA user_version = 4');
+    sqlite.exec('PRAGMA user_version = 5');
     expect(() => migrate(adapter)).toThrow('newer Tiny Wins');
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 4 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 5 });
   });
 });
