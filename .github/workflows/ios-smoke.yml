@@ -91,6 +91,7 @@ jobs:
         run: curl --fail --silent --show-error --max-time 300 "http://localhost:8081/.expo/.virtual-metro-entry.bundle?platform=ios&dev=true&lazy=true&minify=false&inlineSourceMap=false&modulesOnly=false&runModule=true&excludeSource=true&sourcePaths=url-server&app=app.tinywins.mobile" -o "$RUNNER_TEMP/tiny-wins-ios.bundle"
       - name: Run restart and management acceptance flows
         env:
+          MAESTRO_DRIVER_STARTUP_TIMEOUT: '240000'
           MAESTRO_CLI_NO_ANALYTICS: 'true'
           MAESTRO_DISABLE_UPDATE_CHECK: 'true'
           MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
