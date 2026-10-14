@@ -1,3 +1,4 @@
+import type { DayNote } from './notes';
 import { streakProgress } from './streak';
 import { shiftDay, type LocalDate } from './calendar';
 import { scheduledOn, type ScheduleVersion } from './schedule';
@@ -39,6 +40,7 @@ export interface Completion {
 export interface HistoryCell {
   day: LocalDate;
   today: boolean;
+  hasNote?: boolean;
   state: 'complete' | 'grace' | 'missed' | 'before-start' | 'not-scheduled' | 'future';
 }
 export function habitTitle(value: string): string {
@@ -52,9 +54,13 @@ export function calendarCells(
   start: LocalDate,
   end: LocalDate,
   today: LocalDate,
+  notes: DayNote[] = [],
 ): HistoryCell[] {
   const completed = new Set(
     completions.filter((c) => c.habitId === habit.id).map((c) => c.localDate),
+  );
+  const notedDates = new Set(
+    notes.filter((note) => note.habitId === habit.id).map((note) => note.localDate),
   );
   const { grace } = streakProgress(habit, completed, today, habit.startsOn, end);
   const cells: HistoryCell[] = [];
@@ -62,6 +68,7 @@ export function calendarCells(
     cells.push({
       day,
       today: day === today,
+      ...(notedDates.has(day) ? { hasNote: true } : {}),
       state:
         day > today
           ? 'future'
@@ -78,8 +85,13 @@ export function calendarCells(
   }
   return cells;
 }
-export function history(habit: Habit, completions: Completion[], today: LocalDate): HistoryCell[] {
-  return calendarCells(habit, completions, shiftDay(today, -13), today, today);
+export function history(
+  habit: Habit,
+  completions: Completion[],
+  today: LocalDate,
+  notes: DayNote[] = [],
+): HistoryCell[] {
+  return calendarCells(habit, completions, shiftDay(today, -13), today, today, notes);
 }
 export function currentStreak(habit: Habit, completions: Completion[], today: LocalDate): number {
   const completed = new Set(

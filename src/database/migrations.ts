@@ -35,6 +35,13 @@ UPDATE habits SET sort_order = (
     week_starts_on INTEGER NOT NULL DEFAULT 1 CHECK(week_starts_on IN (0, 1))
   );
   INSERT INTO preferences (id, week_starts_on) VALUES (1, 1);`,
+  `CREATE TABLE notes (
+    habit_id TEXT NOT NULL REFERENCES habits(id) ON DELETE CASCADE,
+    local_date TEXT NOT NULL,
+    text TEXT NOT NULL CHECK(length(trim(text)) BETWEEN 1 AND 280),
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (habit_id, local_date)
+  );`,
 ];
 export function migrate(database: MigrationDatabase) {
   database.execSync('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;');

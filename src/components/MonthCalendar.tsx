@@ -1,3 +1,4 @@
+import { NoteMarker } from './NoteMarker';
 import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { HistoryCell, ColorKey } from '../domain/habit';
@@ -30,7 +31,7 @@ export function MonthCalendar({
           key={cell.day}
           testID={`month-day-${cell.day}`}
           accessibilityRole="button"
-          accessibilityLabel={`${cell.day}: ${cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}`}
+          accessibilityLabel={`${cell.day}: ${cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`}
           disabled={cell.state === 'future'}
           accessibilityState={{ disabled: cell.state === 'future' }}
           onPress={() => onInspect(cell.day)}
@@ -49,6 +50,7 @@ export function MonthCalendar({
             },
           ]}
         >
+          {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
           <Text
             maxFontSizeMultiplier={1}
             style={{

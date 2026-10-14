@@ -1,3 +1,4 @@
+import type { DayNote } from './notes';
 import { dateKey, shiftDay, type LocalDate } from './calendar';
 import { calendarCells, type Completion, type Habit } from './habit';
 import { habitMetrics } from './metrics';
@@ -34,6 +35,7 @@ export function victoryReport(
   completions: Completion[],
   today: LocalDate,
   range: { start: LocalDate; end: LocalDate },
+  notes: DayNote[] = [],
 ) {
   const byHabit = new Map<string, Completion[]>();
   for (const win of completions) {
@@ -45,7 +47,7 @@ export function victoryReport(
     const wins = byHabit.get(habit.id) ?? [];
     return {
       habit,
-      cells: calendarCells(habit, wins, range.start, range.end, today),
+      cells: calendarCells(habit, wins, range.start, range.end, today, notes),
       metrics: habitMetrics(habit, wins, today, range.start, range.end),
     };
   });

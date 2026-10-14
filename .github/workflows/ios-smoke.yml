@@ -89,14 +89,14 @@ jobs:
       - name: Prepare cold iOS development bundle
         timeout-minutes: 6
         run: curl --fail --silent --show-error --max-time 300 "http://localhost:8081/.expo/.virtual-metro-entry.bundle?platform=ios&dev=true&lazy=true&minify=false&inlineSourceMap=false&modulesOnly=false&runModule=true&excludeSource=true&sourcePaths=url-server&app=app.tinywins.mobile" -o "$RUNNER_TEMP/tiny-wins-ios.bundle"
-      - name: Run restart and management acceptance flows
+      - name: Run restart, management and day-note acceptance flows
         env:
           MAESTRO_DRIVER_STARTUP_TIMEOUT: '240000'
           MAESTRO_CLI_NO_ANALYTICS: 'true'
           MAESTRO_DISABLE_UPDATE_CHECK: 'true'
           MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
           MAESTRO_API_URL: http://127.0.0.1:9
-        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/first-win.yaml .maestro/habit-management.yaml
+        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/first-win.yaml .maestro/habit-management.yaml .maestro/day-notes.yaml
       - name: Capture simulator outcome
         if: always()
         run: |

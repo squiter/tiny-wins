@@ -46,6 +46,7 @@ export default function Today() {
   const activeHabits = allHabits.filter((habit) => !habit.archivedAt);
   const archivedHabits = allHabits.filter((habit) => !!habit.archivedAt);
   const completions = repository.listCompletions();
+  const notes = repository.listNotes();
   const dueHabits = activeHabits.filter((habit) => scheduledOn(habit.schedule, today));
   const wins = dueHabits.filter((habit) =>
     completions.some((record) => record.habitId === habit.id && record.localDate === today),
@@ -191,6 +192,7 @@ export default function Today() {
               key={habit.id}
               habit={habit}
               completions={completions}
+              notes={notes}
               today={today}
               onView={() => router.push({ pathname: '/habit/[id]', params: { id: habit.id } })}
               onInspect={(day) =>

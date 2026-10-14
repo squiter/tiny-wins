@@ -1,3 +1,4 @@
+import { noteText, type DayNote } from './notes';
 import { dateKey } from './calendar';
 import {
   habitAppearance,
@@ -11,10 +12,11 @@ import { validateTolerance, validateWeekdays, type ScheduleVersion } from './sch
 export const backupLimit = 5 * 1024 * 1024;
 export interface Backup {
   format: 'tiny-wins';
-  version: 1 | 2;
+  version: 1 | 2 | 3;
   exportedAt: string;
   habits: Habit[];
   completions: Completion[];
+  notes: DayNote[];
 }
 function object(value: unknown): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value))
@@ -62,7 +64,7 @@ function habit(value: unknown, backupVersion: number): Habit {
     return {
       from: dateKey(text(version.from, 10)),
       days,
-      ...(backupVersion === 2 && version.streakTolerance !== undefined
+      ...(backupVersion >= 2 && version.streakTolerance !== undefined
         ? { streakTolerance: validateTolerance(version.streakTolerance) }
         : {}),
     };
@@ -94,7 +96,10 @@ export function parseBackup(source: string): Backup {
     throw new Error('This file is not a valid Tiny Wins backup.');
   }
   const data = object(value);
-  if (data.format !== 'tiny-wins' || (data.version !== 1 && data.version !== 2))
+  if (
+    data.format !== 'tiny-wins' ||
+    (data.version !== 1 && data.version !== 2 && data.version !== 3)
+  )
     throw new Error('This backup format is not supported.');
   if (
     !Array.isArray(data.habits) ||
@@ -124,17 +129,41 @@ export function parseBackup(source: string): Backup {
     keys.add(key);
     return { habitId, localDate, timezone, completedAt: timestamp(row.completedAt) };
   });
+  const notes: DayNote[] = [];
+  if (data.version === 3) {
+    if (!Array.isArray(data.notes) || data.notes.length > 50000)
+      throw new Error('The backup contains invalid notes.');
+    const noteKeys = new Set<string>();
+    for (const value of data.notes) {
+      const row = object(value);
+      const habitId = id(row.habitId);
+      const localDate = dateKey(text(row.localDate, 10));
+      const content = noteText(text(row.text, 280));
+      const owner = map.get(habitId);
+      const key = `${habitId}:${localDate}`;
+      if (!content || !owner || localDate < owner.startsOn || noteKeys.has(key))
+        throw new Error('The backup contains invalid or duplicate notes.');
+      noteKeys.add(key);
+      notes.push({ habitId, localDate, text: content, updatedAt: timestamp(row.updatedAt) });
+    }
+  }
   return {
     format: 'tiny-wins',
-    version: data.version as 1 | 2,
+    version: data.version as 1 | 2 | 3,
     exportedAt: timestamp(data.exportedAt),
     habits,
     completions,
+    notes,
   };
 }
-export function serializeBackup(habits: Habit[], completions: Completion[], now: Date): string {
+export function serializeBackup(
+  habits: Habit[],
+  completions: Completion[],
+  now: Date,
+  notes: DayNote[] = [],
+): string {
   const source = JSON.stringify(
-    { format: 'tiny-wins', version: 2, exportedAt: now.toISOString(), habits, completions },
+    { format: 'tiny-wins', version: 3, exportedAt: now.toISOString(), habits, completions, notes },
     null,
     2,
   );

@@ -1,3 +1,4 @@
+import { saveDayNote } from '../../features/habits/notes';
 import { usePreferences } from '../../database/provider';
 import { useState } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -33,7 +34,7 @@ export default function HabitDetail() {
     periodStart?: string;
   }>();
   const initialDay = safeDay(periodStart) ?? safeDay(day);
-  const { repository, refresh, habits, completions, today } = useHabitData();
+  const { repository, refresh, habits, completions, notes, today } = useHabitData();
   const habit = habits.find((value) => value.id === id);
   const [monthIndex, setMonthIndex] = useState(
     Number((initialDay ?? today).slice(0, 4)) * 12 + Number((initialDay ?? today).slice(5, 7)) - 1,
@@ -72,15 +73,15 @@ export default function HabitDetail() {
   const month = (monthIndex % 12) + 1;
   const monthStart = dateKey(`${monthYear}-${String(month).padStart(2, '0')}-01`);
   const monthEnd = dateKey(new Date(Date.UTC(monthYear, month, 0, 12)).toISOString().slice(0, 10));
-  const monthCells = calendarCells(habit, completions, monthStart, monthEnd, today);
+  const monthCells = calendarCells(habit, completions, monthStart, monthEnd, today, notes);
   const monthLabel = new Intl.DateTimeFormat('en-US', {
     month: 'long',
     year: 'numeric',
     timeZone: 'UTC',
   }).format(new Date(`${monthStart}T12:00:00Z`));
-  const cells = yearCells(habit, completions, year, today);
+  const cells = yearCells(habit, completions, year, today, notes);
   const selectedCell = selected
-    ? calendarCells(habit, completions, selected, selected, today)[0]
+    ? calendarCells(habit, completions, selected, selected, today, notes)[0]
     : undefined;
   function save(draft: HabitDraft) {
     editHabit(
@@ -169,6 +170,16 @@ export default function HabitDetail() {
             <Text style={styles.back}>›</Text>
           </Pressable>
         </View>
+        {!habit.archivedAt && (
+          <Pressable
+            testID="inspect-today"
+            accessibilityRole="button"
+            onPress={() => setSelected(today)}
+            style={styles.action}
+          >
+            <Text style={styles.link}>Add a note for today</Text>
+          </Pressable>
+        )}
         <MonthCalendar
           weekStartsOn={weekStartsOn}
           cells={monthCells}
@@ -222,7 +233,7 @@ export default function HabitDetail() {
         />
         <Text style={styles.support}>
           Colored ✓ completed · soft ○ within tolerance · pale missed · dashed – not scheduled ·
-          blank before start or future. Today is outlined.
+          blank before start or future. Corner mark: has note. Today is outlined.
         </Text>
         <Text style={styles.support}>
           Consistency includes scheduled dates through today. Days before creation, future days and
@@ -255,6 +266,18 @@ export default function HabitDetail() {
         <DayInspector
           key={selectedCell.day}
           cell={selectedCell}
+          habitTitle={habit.title}
+          note={
+            notes.find((note) => note.habitId === id && note.localDate === selectedCell.day)
+              ?.text ?? ''
+          }
+          noteEditable={
+            !habit.archivedAt && selectedCell.day >= habit.startsOn && selectedCell.day <= today
+          }
+          onSaveNote={(text) => {
+            saveDayNote(repository, deviceClock, id, selectedCell.day, text);
+            refresh();
+          }}
           editable={
             !habit.archivedAt &&
             selectedCell.day >= habit.startsOn &&

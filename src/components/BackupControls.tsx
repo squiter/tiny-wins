@@ -15,7 +15,12 @@ export function BackupControls() {
     setMessage('');
     try {
       const now = deviceClock.now();
-      const source = serializeBackup(repository.listHabits(), repository.listCompletions(), now);
+      const source = serializeBackup(
+        repository.listHabits(),
+        repository.listCompletions(),
+        now,
+        repository.listNotes(),
+      );
       await saveBackupFile(
         source,
         `tiny-wins-${now.toISOString().replaceAll(':', '-')}.tinywins.json`,
@@ -46,7 +51,7 @@ export function BackupControls() {
     try {
       const result = repository.mergeBackup(pending);
       setMessage(
-        `${result.habitsAdded} habits and ${result.winsAdded} wins added. Your existing habits were kept.`,
+        `${result.habitsAdded} habits and ${result.winsAdded} wins and ${result.notesAdded} notes added. Your existing habits were kept.`,
       );
       setPending(null);
     } catch (error) {
@@ -61,8 +66,8 @@ export function BackupControls() {
         Keep your tiny wins
       </Text>
       <Text style={styles.copy}>
-        Save a backup file to move or keep a copy of your habits, schedules and history. Your file
-        contains your habit data; choose where to save it.
+        Save a backup file to move or keep a copy of your habits, schedules, notes and history. Your
+        file contains your habit data; choose where to save it.
       </Text>
       <Pressable
         accessibilityRole="button"
@@ -86,11 +91,12 @@ export function BackupControls() {
         <View style={styles.review}>
           <Text style={styles.heading}>Ready to restore</Text>
           <Text style={styles.copy}>
-            {pending.habits.length} habits · {pending.completions.length} wins
+            {pending.habits.length} habits · {pending.completions.length} wins ·{' '}
+            {pending.notes.length} notes
           </Text>
           <Text style={styles.copy}>
-            Adds missing habits and wins. Existing names, colors, schedules and order stay as you
-            have them.
+            Adds missing habits, wins and notes. Existing note text is kept. Existing names, colors,
+            schedules and order stay as you have them.
           </Text>
           <Pressable accessibilityRole="button" onPress={restore} style={styles.primary}>
             <Text style={styles.primaryText}>Restore missing data</Text>

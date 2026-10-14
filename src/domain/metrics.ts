@@ -1,3 +1,4 @@
+import type { DayNote } from './notes';
 import { streakProgress } from './streak';
 import { dateKey, shiftDay, type LocalDate } from './calendar';
 import { calendarCells, currentStreak, type Completion, type Habit } from './habit';
@@ -34,7 +35,13 @@ export function habitMetrics(
     consistency: eligibleDays ? Math.round((100 * eligibleWins) / eligibleDays) : null,
   };
 }
-export function yearCells(habit: Habit, completions: Completion[], year: number, today: LocalDate) {
+export function yearCells(
+  habit: Habit,
+  completions: Completion[],
+  year: number,
+  today: LocalDate,
+  notes: DayNote[] = [],
+) {
   if (!Number.isInteger(year) || year < 1900 || year > 9999)
     throw new Error('Invalid calendar year.');
   return calendarCells(
@@ -43,6 +50,7 @@ export function yearCells(habit: Habit, completions: Completion[], year: number,
     dateKey(`${year}-01-01`),
     dateKey(`${year}-12-31`),
     today,
+    notes,
   );
 }
 export function insights(habits: Habit[], completions: Completion[], today: LocalDate) {

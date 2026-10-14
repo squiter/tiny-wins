@@ -32,7 +32,7 @@ describe('versioned local backup format', () => {
     expect(parsed.completions).toEqual([win]);
     expect(parsed.exportedAt).toBe(now.toISOString());
     expect(parseBackup('\uFEFF' + encoded)).toEqual(parsed);
-    expect(serializeBackup([], [], now)).toContain('"version": 2');
+    expect(serializeBackup([], [], now)).toContain('"version": 3');
   });
   it.each(['not json', '[]', '{}', '{"format":"tiny-wins","version":2}'])(
     'rejects incompatible source %s',

@@ -1,3 +1,4 @@
+import { NoteMarker } from './NoteMarker';
 import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { HistoryCell, ColorKey } from '../domain/habit';
@@ -54,7 +55,7 @@ export function YearGrid({
                   accessibilityRole="button"
                   accessibilityState={{ disabled: cell.state === 'future' }}
                   disabled={cell.state === 'future'}
-                  accessibilityLabel={`${cell.day}: ${cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}`}
+                  accessibilityLabel={`${cell.day}: ${cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`}
                   onPress={() => onInspect(cell.day)}
                   style={[
                     styles.cell,
@@ -71,6 +72,7 @@ export function YearGrid({
                     },
                   ]}
                 >
+                  {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
                   <Text
                     maxFontSizeMultiplier={1}
                     style={{

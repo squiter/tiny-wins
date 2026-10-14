@@ -1,3 +1,4 @@
+import { NoteMarker } from './NoteMarker';
 import { useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -100,7 +101,7 @@ export function VictoryWall({
                   key={cell.day}
                   testID={`insights-day-${habit.id}-${cell.day}`}
                   accessibilityRole="button"
-                  accessibilityLabel={`${habit.title}, ${cell.day}: ${cell.today && cell.state === 'missed' ? 'pending, today' : cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today && cell.state !== 'missed' ? ', today' : ''}`}
+                  accessibilityLabel={`${habit.title}, ${cell.day}: ${cell.today && cell.state === 'missed' ? 'pending, today' : cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today && cell.state !== 'missed' ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`}
                   onPress={() => onInspect(cell.day)}
                   style={[
                     styles.tile,
@@ -121,6 +122,7 @@ export function VictoryWall({
                     },
                   ]}
                 >
+                  {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
                   {period !== 'year' && (
                     <Text
                       maxFontSizeMultiplier={1}

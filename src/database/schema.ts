@@ -31,3 +31,16 @@ export const preferences = sqliteTable('preferences', {
   id: integer('id').primaryKey(),
   weekStartsOn: integer('week_starts_on').$type<WeekStartsOn>().notNull().default(1),
 });
+
+export const notes = sqliteTable(
+  'notes',
+  {
+    habitId: text('habit_id')
+      .notNull()
+      .references(() => habits.id, { onDelete: 'cascade' }),
+    localDate: text('local_date').$type<LocalDate>().notNull(),
+    text: text('text').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.habitId, table.localDate] })],
+);

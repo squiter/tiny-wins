@@ -1,3 +1,4 @@
+import { saveDayNote } from '../../src/features/habits/notes';
 import { afterEach, describe, expect, it } from 'vitest';
 import Database from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
@@ -53,6 +54,85 @@ const clock: Clock = {
   timezone: () => 'America/Sao_Paulo',
 };
 describe('real SQLite + shared Drizzle adapter', () => {
+  it('migrates v4 without rewriting wins, saves independent notes and reopens/merges atomically', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-notes-'));
+    directories.push(directory);
+    const path = join(directory, 'notes.db');
+    let connection = open(path);
+    createHabit(connection.repository, clock, 'read', 'Read', 'coral', 'book');
+    toggleToday(connection.repository, clock, 'read');
+    const wins = connection.repository.listCompletions();
+    connection.sqlite.exec('DROP TABLE notes; PRAGMA user_version = 4');
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.listCompletions()).toEqual(wins);
+    expect(connection.repository.listNotes()).toEqual([]);
+    const day = dateKey('2024-02-29');
+    saveDayNote(connection.repository, clock, 'read', day, '  First chapter 🌱  ');
+    saveDayNote(connection.repository, clock, 'read', day, 'A newer note');
+    expect(connection.repository.listNotes()).toHaveLength(1);
+    expect(connection.repository.listCompletions()).toEqual(wins);
+    toggleToday(connection.repository, clock, 'read');
+    expect(connection.repository.listNotes()[0]?.text).toBe('A newer note');
+    expect(connection.repository.listCompletions()).toEqual([]);
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.listNotes()[0]?.localDate).toBe(day);
+    expect(connection.repository.listNotes()[0]?.text).toBe('A newer note');
+    const backup = parseBackup(
+      serializeBackup(
+        connection.repository.listHabits(),
+        [],
+        clock.now(),
+        connection.repository.listNotes(),
+      ),
+    );
+    const target = open(join(directory, 'restore.db'));
+    expect(target.repository.mergeBackup(backup)).toEqual({
+      habitsAdded: 1,
+      winsAdded: 0,
+      notesAdded: 1,
+    });
+    saveDayNote(target.repository, clock, 'read', day, 'Keep my local edit');
+    expect(target.repository.mergeBackup(backup)).toEqual({
+      habitsAdded: 0,
+      winsAdded: 0,
+      notesAdded: 0,
+    });
+    expect(target.repository.listNotes()[0]?.text).toBe('Keep my local edit');
+    const invalid = {
+      ...backup,
+      habits: [{ ...backup.habits[0]!, id: 'new' }],
+      notes: [{ ...backup.notes[0]!, habitId: 'missing' }],
+    };
+    expect(() => target.repository.mergeBackup(invalid)).toThrow('invalid note');
+    expect(target.repository.getHabit('new')).toBeUndefined();
+    archiveHabit(connection.repository, clock, 'read');
+    expect(() => saveDayNote(connection.repository, clock, 'read', day, 'No')).toThrow();
+    expect(connection.repository.listNotes()).toHaveLength(1);
+    restoreHabit(connection.repository, 'read', clock);
+    saveDayNote(connection.repository, clock, 'read', day, '');
+    expect(connection.repository.listNotes()).toEqual([]);
+    expect(() =>
+      saveDayNote(connection.repository, clock, 'read', dateKey('2024-02-28'), 'No'),
+    ).toThrow();
+    expect(() =>
+      saveDayNote(connection.repository, clock, 'read', dateKey('2024-03-01'), 'No'),
+    ).toThrow();
+    createHabit(connection.repository, clock, 'rest', 'Rest', 'forest', 'plant', [1]);
+    saveDayNote(connection.repository, clock, 'rest', day, 'Rest day context');
+    expect(connection.repository.listCompletions()).toEqual([]);
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.listNotes()).toEqual([
+      {
+        habitId: 'rest',
+        localDate: day,
+        text: 'Rest day context',
+        updatedAt: clock.now().toISOString(),
+      },
+    ]);
+  });
   it('reopens renewable tolerance, preserves legacy JSON, carries policy through pause and v2 restore', () => {
     const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-tolerance-'));
     directories.push(directory);
@@ -110,12 +190,16 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(
       connection.sqlite.prepare('SELECT schedule FROM habits WHERE id=?').get('strict'),
     ).toEqual(legacyJson);
-    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 4 });
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 5 });
     const backup = parseBackup(
       serializeBackup(connection.repository.listHabits(), completions, later.now()),
     );
     const target = open(join(directory, 'restored.db'));
-    expect(target.repository.mergeBackup(backup)).toEqual({ habitsAdded: 2, winsAdded: 2 });
+    expect(target.repository.mergeBackup(backup)).toEqual({
+      habitsAdded: 2,
+      winsAdded: 2,
+      notesAdded: 0,
+    });
     target.sqlite.close();
     expect(open(join(directory, 'restored.db')).repository.getHabit('read')?.schedule).toEqual(
       habit.schedule,
@@ -130,7 +214,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     toggleToday(first.repository, clock, 'water');
     const habits = first.repository.listHabits();
     const wins = first.repository.listCompletions();
-    first.sqlite.exec('DROP TABLE preferences; PRAGMA user_version = 3');
+    first.sqlite.exec('DROP TABLE notes; DROP TABLE preferences; PRAGMA user_version = 3');
     first.sqlite.close();
     const upgraded = open(path);
     expect(upgraded.repository.getWeekStartsOn()).toBe(1);
@@ -176,7 +260,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(repository.getHabit('b')?.startsOn).toBe('2024-02-29');
     expect(repository.listCompletions()[0]?.localDate).toBe('2024-02-29');
     migrate(adapter);
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 4 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 5 });
     sqlite.close();
     expect(open(path).repository.listCompletions()).toHaveLength(1);
   });
@@ -289,9 +373,17 @@ describe('real SQLite + shared Drizzle adapter', () => {
     directories.push(directory);
     const path = join(directory, 'restore.db');
     let target = open(path);
-    expect(target.repository.mergeBackup(backup)).toEqual({ habitsAdded: 1, winsAdded: 1 });
+    expect(target.repository.mergeBackup(backup)).toEqual({
+      habitsAdded: 1,
+      winsAdded: 1,
+      notesAdded: 0,
+    });
     editHabit(target.repository, 'read', 'A newer name', 'blue', 'water');
-    expect(target.repository.mergeBackup(backup)).toEqual({ habitsAdded: 0, winsAdded: 0 });
+    expect(target.repository.mergeBackup(backup)).toEqual({
+      habitsAdded: 0,
+      winsAdded: 0,
+      notesAdded: 0,
+    });
     target.sqlite.close();
     target = open(path);
     expect(target.repository.getHabit('read')?.title).toBe('A newer name');
@@ -397,8 +489,8 @@ describe('real SQLite + shared Drizzle adapter', () => {
   });
   it('rejects unknown future schema without modifying user data', () => {
     const { sqlite, adapter } = open(':memory:');
-    sqlite.exec('PRAGMA user_version = 5');
+    sqlite.exec('PRAGMA user_version = 6');
     expect(() => migrate(adapter)).toThrow('newer Tiny Wins');
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 5 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 6 });
   });
 });

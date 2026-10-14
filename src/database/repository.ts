@@ -3,6 +3,7 @@ import type { BaseSQLiteDatabase } from 'drizzle-orm/sqlite-core';
 import type { HabitRepository } from '../features/habits/repository';
 import type { PreferencesRepository } from '../features/preferences/repository';
 import { validateWeekStart } from '../domain/preferences';
+import { noteText } from '../domain/notes';
 import * as schema from './schema';
 import { validateHabitOrder } from '../domain/habit';
 
@@ -48,6 +49,34 @@ export function sqliteRepository(
           .offset(offset)
           .all(),
       ),
+    listNotes: () =>
+      readPages(
+        (offset) =>
+          db
+            .select()
+            .from(schema.notes)
+            .orderBy(asc(schema.notes.habitId), asc(schema.notes.localDate))
+            .limit(20)
+            .offset(offset)
+            .all(),
+        20,
+      ),
+    setNote: (note) => {
+      const text = noteText(note.text);
+      const key = and(
+        eq(schema.notes.habitId, note.habitId),
+        eq(schema.notes.localDate, note.localDate),
+      );
+      if (!text) db.delete(schema.notes).where(key).run();
+      else
+        db.insert(schema.notes)
+          .values({ ...note, text })
+          .onConflictDoUpdate({
+            target: [schema.notes.habitId, schema.notes.localDate],
+            set: { text, updatedAt: note.updatedAt },
+          })
+          .run();
+    },
     getHabit: (id) => db.select().from(schema.habits).where(eq(schema.habits.id, id)).get(),
     update: (id, changes) => {
       db.update(schema.habits).set(changes).where(eq(schema.habits.id, id)).run();
@@ -89,6 +118,10 @@ export function sqliteRepository(
         const wins = new Set(
           repository.listCompletions().map((win) => `${win.habitId}:${win.localDate}`),
         );
+        const noteKeys = new Set(
+          repository.listNotes().map((note) => `${note.habitId}:${note.localDate}`),
+        );
+        let notesAdded = 0;
         let habitsAdded = 0;
         let winsAdded = 0;
         let sortOrder =
@@ -118,7 +151,21 @@ export function sqliteRepository(
             winsAdded += 1;
           }
         }
-        return { habitsAdded, winsAdded };
+        for (const note of backup.notes) {
+          if (
+            !existing.has(note.habitId) ||
+            note.localDate < existing.get(note.habitId)!.startsOn ||
+            !noteText(note.text)
+          )
+            throw new Error('This backup contains an invalid note.');
+          const key = `${note.habitId}:${note.localDate}`;
+          if (!noteKeys.has(key)) {
+            db.insert(schema.notes).values(note).run();
+            noteKeys.add(key);
+            notesAdded += 1;
+          }
+        }
+        return { habitsAdded, winsAdded, notesAdded };
       }),
     isCompleted: (habitId, day) =>
       !!db

@@ -1,3 +1,4 @@
+import { saveDayNote } from '../../features/habits/notes';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -20,7 +21,7 @@ import { DayInspector } from '../../components/DayInspector';
 import { StatsGrid } from '../../components/StatsGrid';
 import { theme } from '../../theme/tokens';
 export default function Insights() {
-  const { repository, refresh, habits, completions, today } = useHabitData();
+  const { repository, refresh, habits, completions, notes, today } = useHabitData();
   const { weekStartsOn } = usePreferences();
   const [period, setPeriod] = useState<ReportPeriod>('year');
   const [anchor, setAnchor] = useState(today);
@@ -28,7 +29,7 @@ export default function Insights() {
   const [notice, setNotice] = useState('');
   const range = reportRange(period, anchor, weekStartsOn);
   const current = reportRange(period, today, weekStartsOn);
-  const result = victoryReport(habits, completions, today, range);
+  const result = victoryReport(habits, completions, today, range, notes);
   const earliest = habits.reduce(
     (first, habit) => (habit.startsOn < first ? habit.startsOn : first),
     today,
@@ -37,7 +38,7 @@ export default function Insights() {
   const selectedHabit = habits.find((habit) => habit.id === selected?.id);
   const cell =
     selectedHabit && selected
-      ? calendarCells(selectedHabit, completions, selected.day, selected.day, today)[0]
+      ? calendarCells(selectedHabit, completions, selected.day, selected.day, today, notes)[0]
       : null;
   const editable =
     !!selectedHabit &&
@@ -144,8 +145,8 @@ export default function Insights() {
                 'Tap a tile to inspect its date. Marking or undoing a win needs a separate confirmation.'}
             </Text>
             <Text style={styles.legend}>
-              ✓ Win · soft ○ Within tolerance · • Pending / missed · – Rest{'\n'}Empty outline:
-              before start · Dashed outline: future
+              ✓ Win · soft ○ Within tolerance · • Pending / missed · – Rest{'\n'}Corner mark: has
+              note. Empty outline: before start · Dashed outline: future
             </Text>
           </View>
         }
@@ -215,6 +216,20 @@ export default function Insights() {
           key={`${selected.id}:${selected.day}`}
           habitTitle={selectedHabit.title}
           cell={cell}
+          note={
+            notes.find(
+              (note) => note.habitId === selectedHabit.id && note.localDate === selected.day,
+            )?.text ?? ''
+          }
+          noteEditable={
+            !selectedHabit.archivedAt &&
+            selected.day >= selectedHabit.startsOn &&
+            selected.day <= today
+          }
+          onSaveNote={(text) => {
+            saveDayNote(repository, deviceClock, selectedHabit.id, selected.day, text);
+            refresh();
+          }}
           editable={editable}
           onClose={() => setSelected(null)}
           onChange={(completed) => {

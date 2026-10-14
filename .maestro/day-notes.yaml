@@ -1,0 +1,76 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn:
+    id: add-habit
+    retryTapIfNoChange: true
+- tapOn:
+    id: habit-name
+- inputText: Quiet reading
+- tapOn: Done typing
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
+- tapOn:
+    id: save-habit
+- tapOn: View Quiet reading, 0 wins in a row
+- tapOn:
+    id: inspect-today
+- scrollUntilVisible:
+    element:
+      id: day-note
+    direction: DOWN
+- tapOn:
+    id: day-note
+- inputText: A chapter before bed
+- scrollUntilVisible:
+    element: Done typing
+    direction: DOWN
+- tapOn: Done typing
+- scrollUntilVisible:
+    element:
+      id: save-day-note
+    direction: DOWN
+- tapOn:
+    id: save-day-note
+- assertVisible: Note saved.
+- takeScreenshot: day-note-saved
+- scrollUntilVisible:
+    element: Close day
+    direction: DOWN
+- tapOn: Close day
+- tapOn: Go back
+- assertVisible: View Quiet reading, 0 wins in a row
+- tapOn: Complete Quiet reading today
+- assertVisible: View Quiet reading, 1 win in a row
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible: View Quiet reading, 1 win in a row
+    timeout: 120000
+- tapOn: View Quiet reading, 1 win in a row
+- tapOn:
+    id: inspect-today
+- scrollUntilVisible:
+    element: A chapter before bed
+    direction: DOWN
+- assertVisible: A chapter before bed
+- scrollUntilVisible:
+    element: Clear note
+    direction: DOWN
+- tapOn: Clear note
+- tapOn:
+    id: save-day-note
+- assertVisible: Note cleared.
+- scrollUntilVisible:
+    element: Close day
+    direction: DOWN
+- tapOn: Close day
+- tapOn: Go back
+- assertVisible: View Quiet reading, 1 win in a row

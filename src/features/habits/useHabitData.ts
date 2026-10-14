@@ -28,6 +28,7 @@ export function useHabitData() {
     refresh,
     habits: repository.listHabits(),
     completions: repository.listCompletions(),
+    notes: repository.listNotes(),
     today: localDay(deviceClock.now(), deviceClock.timezone()),
   };
 }

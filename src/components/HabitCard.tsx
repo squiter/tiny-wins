@@ -1,3 +1,5 @@
+import type { DayNote } from '../domain/notes';
+import { NoteMarker } from './NoteMarker';
 import { useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -18,6 +20,7 @@ import { HabitIcon } from './HabitIcon';
 interface Props {
   habit: Habit;
   completions: Completion[];
+  notes: DayNote[];
   today: LocalDate;
   onToggle(): void;
   onView(): void;
@@ -27,13 +30,14 @@ interface Props {
 export function HabitCard({
   habit,
   completions,
+  notes,
   today,
   onToggle,
   onView,
   onInspect,
   ordering,
 }: Props) {
-  const cells = history(habit, completions, today);
+  const cells = history(habit, completions, today, notes);
   const due = scheduledOn(habit.schedule, today);
   const done = cells[13]?.state === 'complete';
   const color = habitColors[habit.color];
@@ -136,7 +140,7 @@ export function HabitCard({
       </View>
       <View style={styles.grid}>
         {cells.map((cell) => {
-          const label = `${cell.day}: ${cell.state === 'complete' ? 'completed' : cell.state === 'before-start' || cell.state === 'not-scheduled' ? (cell.state === 'not-scheduled' ? 'not scheduled' : 'before habit started') : cell.state === 'grace' ? 'within streak tolerance' : cell.today ? 'pending' : 'not completed'}${cell.today ? ', today' : ''}`;
+          const label = `${cell.day}: ${cell.state === 'complete' ? 'completed' : cell.state === 'before-start' || cell.state === 'not-scheduled' ? (cell.state === 'not-scheduled' ? 'not scheduled' : 'before habit started') : cell.state === 'grace' ? 'within streak tolerance' : cell.today ? 'pending' : 'not completed'}${cell.today ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`;
           const style = [
             styles.cell,
             {
@@ -164,6 +168,7 @@ export function HabitCard({
               hitSlop={6}
               style={style}
             >
+              {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
               <Text
                 maxFontSizeMultiplier={1}
                 style={[styles.cellMark, { color: done ? '#FFFFFF' : color }]}
@@ -179,6 +184,7 @@ export function HabitCard({
               accessibilityLabel={`Inspect ${habit.title}, ${label}`}
               style={style}
             >
+              {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
               <Text
                 maxFontSizeMultiplier={1}
                 style={[
