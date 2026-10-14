@@ -12,3 +12,5 @@ Open questions: physical-device accessibility, Android runtime and upstream audi
 Handoff summary: implementation, local and browser verification delivered; waiting for matching hosted iOS acceptance.
 
 Native run 38558317364: both app compilations and hosted verify passed. First-win preserved undo/restart (failure screenshot/tree shows the expected 0-win label) but the label arrived beyond the standard assertion wait; use bounded post-restart waits. Advanced control incremented to 1 (captured label/copy), but the value/control lay below the visible viewport; explicitly scroll to controls/value and expose numeric Text to accessibility. Capture also shows editor header overlapping the iOS status bar; add a provider at each modal root before repeating acceptance.
+
+Run 38562219217 confirms the safe-area repair visually. Both flows stopped at Maestro hideKeyboard: its heuristic tapped the Study icon while the software keyboard stayed open. Provide an explicit cross-platform Done typing action using Keyboard.dismiss; keyboard Done also dismisses instead of prematurely submitting the whole habit. Flows use this real control, keeping all assertions.

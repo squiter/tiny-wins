@@ -12,7 +12,7 @@ appId: app.tinywins.mobile
 - tapOn:
     id: habit-name
 - inputText: Read one page
-- hideKeyboard
+- tapOn: Done typing
 - takeScreenshot: habit-editor-safe-area
 - tapOn: Book icon
 - tapOn: coral color
@@ -61,7 +61,7 @@ appId: app.tinywins.mobile
     id: habit-name
 - eraseText
 - inputText: Read a chapter
-- hideKeyboard
+- tapOn: Done typing
 - scrollUntilVisible:
     element:
       id: save-habit
@@ -75,7 +75,7 @@ appId: app.tinywins.mobile
 - tapOn:
     id: habit-name
 - inputText: Walk
-- hideKeyboard
+- tapOn: Done typing
 - tapOn: Walk icon
 - scrollUntilVisible:
     element:

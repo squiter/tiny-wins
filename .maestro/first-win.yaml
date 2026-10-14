@@ -12,7 +12,7 @@ appId: app.tinywins.mobile
 - tapOn:
     id: habit-name
 - inputText: Read one page
-- hideKeyboard
+- tapOn: Done typing
 - scrollUntilVisible:
     element:
       id: save-habit

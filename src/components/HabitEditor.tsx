@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Modal,
   Platform,
@@ -50,6 +51,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
   const [days, setDays] = useState<Weekday[]>(
     habit ? plannedDays(habit.schedule) : [...allWeekdays],
   );
+  const [typing, setTyping] = useState(false);
   const [advanced, setAdvanced] = useState(false);
   const [streakTolerance, setStreakTolerance] = useState(
     habit ? plannedTolerance(habit.schedule) : 0,
@@ -115,8 +117,20 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 placeholderTextColor={theme.muted}
                 style={styles.input}
                 returnKeyType="done"
-                onSubmitEditing={save}
+                onFocus={() => setTyping(true)}
+                onBlur={() => setTyping(false)}
+                onSubmitEditing={() => Keyboard.dismiss()}
               />
+              {typing && (
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityLabel="Done typing"
+                  onPress={() => Keyboard.dismiss()}
+                  style={styles.secondary}
+                >
+                  <Text style={styles.secondaryText}>Done typing</Text>
+                </Pressable>
+              )}
               <Text style={styles.label}>Icon</Text>
               <View
                 style={styles.options}

@@ -11,3 +11,5 @@ Grace tiles use the habit's soft surface and a small hollow circle, with explici
 The feature adapts Org Habit's minimum/maximum repetition interval idea, without copying its overdue-color graph: https://orgmode.org/manual/Tracking-your-habits.html.
 
 Hosted iOS execution exposed an existing full-screen modal safe-area overlap; each modal now owns a SafeAreaProvider outside its scroll/animated contents, following [the library guidance](https://appandflow.github.io/react-native-safe-area-context/api/safe-area-provider/). The numeric tolerance is explicitly accessible. Native flows scroll the advanced controls into view and wait for the same persisted sequence label after restart; no assertion is removed.
+
+The editor exposes Done typing while the name is focused; keyboard Done dismisses input without creating/saving the habit. Users can finish configuring frequency/flexibility before explicit submission. Native tests use this semantic control instead of Maestro keyboard-dismiss heuristics, which were observed tapping an unrelated icon. Uses standard React Native Keyboard.dismiss on both platforms, with no dependency or permission change.
