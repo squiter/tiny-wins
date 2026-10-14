@@ -15,3 +15,5 @@ Renewable per-habit streak flexibility and softly colored grace tiles are delive
 Day notes are implemented in task 012 with local/browser verification and backup v3 compatibility. Native note save/restart/clear acceptance PASSED in run 38584048001. Saved system/light/dark appearance is implemented in task 013; run 38606371018 passes all four iPhone note/appearance/core flows. Widget feasibility remains task 014; implementation needs its own platform decisions.
 
 New owner priorities (2026-10-14): next slices are cute/cozy visual refinement and saved celebration-animation controls. Language support and localized habit suggestions follow. Audio remains a separately scoped dependency/platform decision.
+
+Tasks 015/016 implement cozy surfaces and explicit/saved visual feedback. Native run 38616623661 passes all five feature/core flows; task 016 is complete. Task 015 still requires the repaired enlarged-text flow, whose first attempt tapped a row outside the scroll viewport. Next product slice: language support and localized, editable starter habits.

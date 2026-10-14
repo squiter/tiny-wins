@@ -6,7 +6,13 @@ appId: app.tinywins.mobile
     visible: View Read a chapter, 1 win in a row
     timeout: 120000
 - takeScreenshot: cozy-large-text-today
+- scrollUntilVisible:
+    element: View Read a chapter, 1 win in a row
+    direction: DOWN
+    centerElement: true
+- takeScreenshot: cozy-large-text-habit
 - tapOn: View Read a chapter, 1 win in a row
+- assertVisible: Edit habit
 - takeScreenshot: cozy-large-text-detail
 - tapOn: Edit habit
 - assertVisible: Close habit editor
