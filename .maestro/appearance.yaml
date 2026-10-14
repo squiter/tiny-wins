@@ -11,6 +11,7 @@ appId: app.tinywins.mobile
     element:
       id: appearance-dark
     direction: DOWN
+    centerElement: true
 - tapOn:
     id: appearance-dark
 - assertVisible: Dark appearance, selected
@@ -26,6 +27,7 @@ appId: app.tinywins.mobile
     element:
       id: appearance-dark
     direction: DOWN
+    centerElement: true
 - assertVisible: Dark appearance, selected
 - tapOn:
     id: appearance-light

@@ -1,6 +1,6 @@
 # Task: 012 — Contextual day notes
 
-Status: in progress
+Status: complete
 Goal: Save a short plain-text note for each habit/date through the day inspector.
 Non-goals: Rich journal, reminders, widgets, synchronization, translated interface.
 Files/modules allowed: Domain notes/backups/calendars, habit repository and SQLite adapter, day inspector and calendar surfaces, backup controls, tests/flows/docs.
@@ -23,3 +23,5 @@ Open questions: Native accessibility and Android runtime remain separate accepta
 Handoff summary: Local and browser gates pass. Hosted native note/restart/clear flow added; iPhone runtime run 38577008176 failed on 577c189 on final notes/appearance app commit 577c189. Hosted verify passes and Android native compilation passes (38575036565). Owner planning edits in IMPLEMENTATION_PLAN.md are preserved unstaged.
 
 Native diagnosis (run 38577008176): first-win and management passed. The note keyboard covered offscreen actions; taps produced extra letters instead of saving. The Settings tab's actual native label includes “tab, 3 of 3”, so the exact selector missed it. Inspector actions now live in a fixed footer above the keyboard, with bounded height/automatic keyboard insets. Note flow additionally asserts exact text before saving; appearance selects the observed tab label. Run new feature flows before regression flows, with separate JUnit reports; all four remain required. Second execution pending.
+
+Final note acceptance: run 38584048001 PASSED day-notes on iPhone 17 Pro / iOS 26.5, verifying exact input, save, restart, completion independence and explicit clear while retaining the win. Native screenshot: docs/screenshots/day-note-ios-saved.png. Other flow outcomes are recorded separately; this pass does not claim physical accessibility or Android runtime.
