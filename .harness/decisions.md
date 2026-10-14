@@ -14,3 +14,6 @@
 - Consistency includes today's pending opportunity; insights weight active-habit opportunities over 30 days and retain archived all-time wins.
 
 - Week-start preferences are device presentation settings, saved with additive schema v4; they do not alter eligibility/history or version 1 habit backup semantics (ADR-011).
+
+- Insights will gain individual binary victory tile walls as a central product view; task 008 is planned, not implemented.
+- Dependency overrides and exact-version local security mitigations are explicit temporary measures (ADR-012); raw audit remains a required failing gate until upstream/security review resolves it.

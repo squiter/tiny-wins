@@ -46,3 +46,7 @@ PR #1 was merged at the owner's request (merge commit `818295f`), and subsequent
 Task 007 adds saved Sunday/Monday calendar layout preferences. Migration v4 adds a constrained singleton row without rewriting habit/completion data. Monthly and yearly grids share pure label/offset logic. Version 1 habit backups do not replace device presentation preferences.
 
 Validation: 61 tests (47 unit, 14 integration), strict types/lint/format and all-platform exports; browser Sunday selection survives reload and keeps six habits/three wins. No additional dependency. Native runtime, dependency audit, licensing and store gates remain as described above.
+
+## Security follow-up
+
+Task 009 removed all 15 moderate audit findings and added tested, guarded local mitigations for the two high-severity root advisories. Raw audit retains 18 propagated high alerts because upstream corrected releases are unavailable; no suppression was applied. Clean Node 24/26 verification passes 64 tests and all-platform exports. Current evidence and limits are in CI_SECURITY_REPORT.md and ADR-012. Insights victory tiles are planned in task 008 per the owner reference, and deferred for this slice.

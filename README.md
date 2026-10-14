@@ -54,4 +54,6 @@ The locked Expo SQLite web worker has a response-length bug repaired by the guar
 
 ## GitHub automation
 
-[Repository](https://github.com/squiter/tiny-wins) and [Actions](https://github.com/squiter/tiny-wins/actions). Every push and PR runs Node 24 verification and a separate dependency audit. Android builds an arm64 debug APK; iOS builds an unsigned simulator app on macOS 26. Artifacts expire after seven days. Debug artifacts require the Expo development server; neither workflow publishes to a store. The audit is currently failing and remains a release gate.
+[Repository](https://github.com/squiter/tiny-wins) and [Actions](https://github.com/squiter/tiny-wins/actions). Pushes to main and pull requests run Node 24 verification and a separate dependency audit. Android builds an arm64 debug APK; iOS builds an unsigned ARM64 simulator app on macOS 26. Artifacts expire after seven days. Debug artifacts require the Expo development server; neither workflow publishes to a store. The audit is currently failing and remains a release gate.
+
+Security remediation and the remaining upstream blockers are documented in [CI/security report](docs/CI_SECURITY_REPORT.md) and ADR-012. npm ci also applies version/source-guarded temporary mitigations; no audit finding is suppressed.

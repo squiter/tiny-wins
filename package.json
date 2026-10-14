@@ -24,7 +24,7 @@
     "web": "npm run preview",
     "build:web": "expo export --platform web",
     "preview": "npm run build:web && node scripts/preview.mjs",
-    "postinstall": "node scripts/patch-expo-sqlite.mjs"
+    "postinstall": "node scripts/patch-expo-sqlite.mjs && node scripts/patch-security-dependencies.mjs"
   },
   "dependencies": {
     "@expo-google-fonts/fraunces": "0.4.1",
@@ -55,12 +55,19 @@
     "@types/node": "26.6.5",
     "@types/react": "19.2.4",
     "better-sqlite3": "13.0.3",
-    "drizzle-kit": "0.31.11",
     "eslint": "9.39.5",
     "eslint-config-expo": "57.0.2",
     "eslint-import-resolver-typescript": "4.4.5",
     "prettier": "3.9.10",
     "typescript": "6.0.3",
     "vitest": "5.0.4"
+  },
+  "overrides": {
+    "xcode": {
+      "uuid": "11.1.1"
+    },
+    "query-string": {
+      "decode-uri-component": "0.5.0"
+    }
   }
 }
