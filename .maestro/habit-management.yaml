@@ -2,6 +2,10 @@ appId: app.tinywins.mobile
 ---
 - launchApp:
     clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
 - tapOn:
     id: add-habit
 - tapOn:

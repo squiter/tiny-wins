@@ -11,3 +11,5 @@ Manual dispatch can test an existing successful main artifact. Successful main p
 Save JUnit, debug output, simulator screenshot and Metro logs even when a flow fails. Never describe infrastructure/selector/launch failures as app acceptance or skip an assertion to make the job green. Simulator evidence complements, rather than replaces, physical-device accessibility, backup file dialogs and Android emulator acceptance.
 
 Sources: official Maestro CLI installation/commands docs and mobile-dev-inc/Maestro cli-2.11.0 release. Runtime acceptance status belongs in task 010; the version-based npm audit remains a separate open gate.
+
+Reference links: [CLI 2.11.0 release](https://github.com/mobile-dev-inc/Maestro/releases/tag/cli-2.11.0), [CLI commands](https://docs.maestro.dev/maestro-cli/maestro-cli-commands-and-options), [CLI environment variables](https://docs.maestro.dev/maestro-cli/environment-variables), [pinned error-report API setting](https://github.com/mobile-dev-inc/Maestro/blob/cli-2.11.0/maestro-cli/src/main/java/maestro/cli/util/EnvUtils.kt). The startup wait observes the New habit control instead of assuming a cold debug bundle is ready immediately.

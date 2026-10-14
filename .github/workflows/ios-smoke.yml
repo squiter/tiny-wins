@@ -64,11 +64,11 @@ jobs:
         run: |
           set -euo pipefail
           xcrun simctl list devices available --json > "$RUNNER_TEMP/tiny-wins-devices.json"
-          udid=$(node -e 'const d=require(process.argv[1]);const phone=Object.values(d.devices).flat().find(d=>d.isAvailable && d.name.startsWith("iPhone") && d.state==="Shutdown");if(!phone)throw new Error("No available iPhone simulator");console.log(phone.udid)' "$RUNNER_TEMP/tiny-wins-devices.json")
+          udid=$(node -e 'const d=require(process.argv[1]);const phone=Object.entries(d.devices).filter(([runtime])=>runtime.includes(".iOS-")).sort(([a],[b])=>b.localeCompare(a,undefined,{numeric:true})).flatMap(([,devices])=>devices).find(d=>d.isAvailable && d.name.startsWith("iPhone") && d.state==="Shutdown");if(!phone)throw new Error("No available iPhone simulator");console.log(phone.udid)' "$RUNNER_TEMP/tiny-wins-devices.json")
           echo "TINY_WINS_SIMULATOR=$udid" >> "$GITHUB_ENV"
           echo "Booting iPhone simulator $udid"
-          open -a Simulator
           xcrun simctl boot "$udid"
+          open -a Simulator --args -CurrentDeviceUDID "$udid"
           xcrun simctl bootstatus "$udid" -b
           xcrun simctl install "$udid" "$RUNNER_TEMP/tiny-wins-app/TinyWins.app"
       - name: Start local development bundle server
