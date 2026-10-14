@@ -61,11 +61,15 @@ export function DayInspector({
     <Modal visible transparent animationType="none" onRequestClose={onClose}>
       <SafeAreaProvider>
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          behavior={Platform.OS === 'ios' ? 'height' : undefined}
           style={styles.overlay}
         >
-          <SafeAreaView style={styles.sheet}>
-            <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.content}>
+          <SafeAreaView style={[styles.sheet, !noteEditable && { height: note ? '65%' : '45%' }]}>
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              automaticallyAdjustKeyboardInsets={Platform.OS === 'ios'}
+              contentContainerStyle={styles.content}
+            >
               {!!habitTitle && <Text style={styles.text}>{habitTitle}</Text>}
               <Text accessibilityRole="header" style={styles.title}>
                 {label}
@@ -120,59 +124,14 @@ export function DayInspector({
                       <Text style={styles.text}>
                         {draft.length}/{noteLimit}
                       </Text>
-                      {typing && (
-                        <Pressable
-                          accessibilityRole="button"
-                          onPress={() => Keyboard.dismiss()}
-                          style={styles.close}
-                        >
-                          <Text style={styles.text}>Done typing</Text>
-                        </Pressable>
-                      )}
-                      <Pressable
-                        testID="save-day-note"
-                        accessibilityRole="button"
-                        accessibilityState={{ disabled: draft === savedNote }}
-                        disabled={draft === savedNote}
-                        onPress={() => {
-                          try {
-                            onSaveNote(draft);
-                            const text = draft.trim();
-                            setDraft(text);
-                            setSavedNote(text);
-                            setMessage(text ? 'Note saved.' : 'Note cleared.');
-                            setError('');
-                            Keyboard.dismiss();
-                          } catch (failure) {
-                            setError(
-                              failure instanceof Error
-                                ? failure.message
-                                : 'Could not save this note. Please try again.',
-                            );
-                          }
-                        }}
-                        style={[styles.button, draft === savedNote && { opacity: 0.5 }]}
-                      >
-                        <Text style={styles.buttonText}>Save note</Text>
-                      </Pressable>
-                      {!!draft && (
-                        <Pressable
-                          accessibilityRole="button"
-                          onPress={() => {
-                            setDraft('');
-                            setMessage('Press Save note to clear it.');
-                          }}
-                          style={styles.close}
-                        >
-                          <Text style={styles.text}>Clear note</Text>
-                        </Pressable>
-                      )}
                     </>
                   ) : (
                     <Text style={styles.text}>{note}</Text>
                   )}
                 </View>
               )}
+            </ScrollView>
+            <View style={styles.footer}>
               {!!message && (
                 <Text accessibilityRole="alert" style={styles.text}>
                   {message}
@@ -183,10 +142,67 @@ export function DayInspector({
                   {error}
                 </Text>
               )}
+              {typing ? (
+                <Pressable
+                  testID="day-note-done-typing"
+                  accessibilityRole="button"
+                  onPress={() => Keyboard.dismiss()}
+                  style={styles.button}
+                >
+                  <Text style={styles.buttonText}>Done typing</Text>
+                </Pressable>
+              ) : (
+                noteEditable && (
+                  <View style={styles.noteActions}>
+                    <Pressable
+                      testID="save-day-note"
+                      accessibilityRole="button"
+                      accessibilityState={{ disabled: draft === savedNote }}
+                      disabled={draft === savedNote}
+                      onPress={() => {
+                        try {
+                          onSaveNote(draft);
+                          const text = draft.trim();
+                          setDraft(text);
+                          setSavedNote(text);
+                          setMessage(text ? 'Note saved.' : 'Note cleared.');
+                          setError('');
+                          Keyboard.dismiss();
+                        } catch (failure) {
+                          setError(
+                            failure instanceof Error
+                              ? failure.message
+                              : 'Could not save this note. Please try again.',
+                          );
+                        }
+                      }}
+                      style={[
+                        styles.button,
+                        styles.noteAction,
+                        draft === savedNote && { opacity: 0.5 },
+                      ]}
+                    >
+                      <Text style={styles.buttonText}>Save note</Text>
+                    </Pressable>
+                    <Pressable
+                      accessibilityRole="button"
+                      accessibilityState={{ disabled: !draft }}
+                      disabled={!draft}
+                      onPress={() => {
+                        setDraft('');
+                        setMessage('Press Save note to clear it.');
+                      }}
+                      style={[styles.close, styles.noteAction, !draft && { opacity: 0.5 }]}
+                    >
+                      <Text style={styles.text}>Clear note</Text>
+                    </Pressable>
+                  </View>
+                )
+              )}
               <Pressable accessibilityRole="button" onPress={onClose} style={styles.close}>
                 <Text style={styles.text}>Close day</Text>
               </Pressable>
-            </ScrollView>
+            </View>
           </SafeAreaView>
         </KeyboardAvoidingView>
       </SafeAreaProvider>
@@ -200,9 +216,18 @@ const createStyles = (theme: ThemePalette) =>
       backgroundColor: theme.ivory,
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
-      maxHeight: '90%',
+      height: '90%',
     },
     content: { padding: 24, gap: 16 },
+    footer: {
+      paddingHorizontal: 24,
+      paddingTop: 12,
+      gap: 8,
+      borderTopWidth: 1,
+      borderColor: theme.stone,
+    },
+    noteActions: { flexDirection: 'row', gap: 12 },
+    noteAction: { flex: 1 },
     noteSection: { gap: 12, paddingTop: 16, borderTopWidth: 1, borderColor: theme.stone },
     noteTitle: { fontFamily: 'Inter_600SemiBold', fontSize: 16, color: theme.forest },
     noteInput: {

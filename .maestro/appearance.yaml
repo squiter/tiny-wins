@@ -6,7 +6,7 @@ appId: app.tinywins.mobile
     visible:
       id: add-habit
     timeout: 120000
-- tapOn: Settings
+- tapOn: Settings, tab, 3 of 3
 - scrollUntilVisible:
     element:
       id: appearance-dark
@@ -21,7 +21,7 @@ appId: app.tinywins.mobile
     visible:
       id: add-habit
     timeout: 120000
-- tapOn: Settings
+- tapOn: Settings, tab, 3 of 3
 - scrollUntilVisible:
     element:
       id: appearance-dark

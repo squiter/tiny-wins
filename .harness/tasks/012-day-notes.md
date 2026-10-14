@@ -20,4 +20,6 @@ Commands executed / results: `npm run verify` PASS: 63 unit + 19 integration tes
 
 Open questions: Native accessibility and Android runtime remain separate acceptance gates.
 
-Handoff summary: Local and browser gates pass. Hosted native note/restart/clear flow added; execution pending. Owner planning edits in IMPLEMENTATION_PLAN.md are preserved unstaged.
+Handoff summary: Local and browser gates pass. Hosted native note/restart/clear flow added; iPhone runtime run 38577008176 failed on 577c189 on final notes/appearance app commit 577c189. Hosted verify passes and Android native compilation passes (38575036565). Owner planning edits in IMPLEMENTATION_PLAN.md are preserved unstaged.
+
+Native diagnosis (run 38577008176): first-win and management passed. The note keyboard covered offscreen actions; taps produced extra letters instead of saving. The Settings tab's actual native label includes “tab, 3 of 3”, so the exact selector missed it. Inspector actions now live in a fixed footer above the keyboard, with bounded height/automatic keyboard insets. Note flow additionally asserts exact text before saving; appearance selects the observed tab label. Run new feature flows before regression flows, with separate JUnit reports; all four remain required. Second execution pending.

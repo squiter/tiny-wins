@@ -29,10 +29,13 @@ appId: app.tinywins.mobile
 - tapOn:
     id: day-note
 - inputText: A chapter before bed
+- assertVisible: A chapter before bed
 - scrollUntilVisible:
-    element: Done typing
+    element:
+      id: day-note-done-typing
     direction: DOWN
-- tapOn: Done typing
+- tapOn:
+    id: day-note-done-typing
 - scrollUntilVisible:
     element:
       id: save-day-note
