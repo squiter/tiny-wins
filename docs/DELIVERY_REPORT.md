@@ -50,3 +50,9 @@ Validation: 61 tests (47 unit, 14 integration), strict types/lint/format and all
 ## Security follow-up
 
 Task 009 removed all 15 moderate audit findings and added tested, guarded local mitigations for the two high-severity root advisories. Raw audit retains 18 propagated high alerts because upstream corrected releases are unavailable; no suppression was applied. Clean Node 24/26 verification passes 64 tests and all-platform exports. Current evidence and limits are in CI_SECURITY_REPORT.md and ADR-012. Insights victory tiles are planned in task 008 per the owner reference, and deferred for this slice.
+
+## Insights victory walls
+
+Task 008 / ADR-013 delivers the requested per-habit binary wall as the primary Insights surface, with Year default, Week/Month, aligned period navigation and Today. Only real wins fill tiles; archived histories persist and rest/future/pre-creation states remain distinct. Explicit date confirmation uses the existing service and names the habit.
+
+Validation: 71 tests (54 unit, 17 integration), strict types/lint/format and all-platform exports. Browser confirms 365 dates in the annual wall, month/week layouts, explicit undo/re-mark and preservation of the original six habits/three wins. Screenshots: `screenshots/insights-tiles-year-390.png`, `screenshots/insights-tiles-month-360.png`. Annual tiny tiles have a larger calendar alternative; native screen-reader, enlarged text and motion acceptance remain pending. Security audit retains its documented upstream blockers.

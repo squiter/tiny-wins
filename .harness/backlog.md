@@ -1,6 +1,6 @@
 # Remaining delivery work
 
-1. Insights per-habit binary victory tile walls with period controls: owner priority, planned in task 008 after CI/security work.
+1. Insights per-habit binary victory tile walls are implemented in task 008; refine density and device accessibility from real use.
 2. Native device/simulator runtime: Maestro first-win and management restart flows, file picker/share/restore, VoiceOver/TalkBack, enlarged text and reduced motion.
 3. Resolve dependency audit findings before release; retain the failing gate.
 4. Native CI artifacts and direct main delivery: PR #1 merged by owner request; verify locally before each main push.

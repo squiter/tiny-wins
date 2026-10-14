@@ -15,5 +15,5 @@
 
 - Week-start preferences are device presentation settings, saved with additive schema v4; they do not alter eligibility/history or version 1 habit backup semantics (ADR-011).
 
-- Insights will gain individual binary victory tile walls as a central product view; task 008 is planned, not implemented.
+- Insights will gain individual binary victory tile walls as a central product view; task 008 is implemented after the owner authorized continued work; native visual/accessibility acceptance remains pending.
 - Dependency overrides and exact-version local security mitigations are explicit temporary measures (ADR-012); raw audit remains a required failing gate until upstream/security review resolves it.

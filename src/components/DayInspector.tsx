@@ -5,11 +5,13 @@ import type { HistoryCell } from '../domain/habit';
 import { theme } from '../theme/tokens';
 export function DayInspector({
   cell,
+  habitTitle,
   editable,
   onChange,
   onClose,
 }: {
   cell: HistoryCell;
+  habitTitle?: string;
   editable: boolean;
   onChange(completed: boolean): void;
   onClose(): void;
@@ -33,6 +35,7 @@ export function DayInspector({
     <Modal visible transparent animationType="none" onRequestClose={onClose}>
       <View style={styles.overlay}>
         <SafeAreaView style={styles.sheet}>
+          {!!habitTitle && <Text style={styles.text}>{habitTitle}</Text>}
           <Text accessibilityRole="header" style={styles.title}>
             {label}
           </Text>

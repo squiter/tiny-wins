@@ -27,13 +27,18 @@ function safeDay(value?: string): LocalDate | null {
 }
 export default function HabitDetail() {
   const { weekStartsOn } = usePreferences();
-  const { id, day } = useLocalSearchParams<{ id: string; day?: string }>();
+  const { id, day, periodStart } = useLocalSearchParams<{
+    id: string;
+    day?: string;
+    periodStart?: string;
+  }>();
+  const initialDay = safeDay(periodStart) ?? safeDay(day);
   const { repository, refresh, habits, completions, today } = useHabitData();
   const habit = habits.find((value) => value.id === id);
   const [monthIndex, setMonthIndex] = useState(
-    Number(today.slice(0, 4)) * 12 + Number(today.slice(5, 7)) - 1,
+    Number((initialDay ?? today).slice(0, 4)) * 12 + Number((initialDay ?? today).slice(5, 7)) - 1,
   );
-  const [year, setYear] = useState(Number(today.slice(0, 4)));
+  const [year, setYear] = useState(Number((initialDay ?? today).slice(0, 4)));
   const [editing, setEditing] = useState(false);
   const [selected, setSelected] = useState<LocalDate | null>(safeDay(day));
   const [error, setError] = useState('');
@@ -143,7 +148,12 @@ export default function HabitDetail() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel="Next month"
-            disabled={monthIndex >= Number(today.slice(0, 4)) * 12 + Number(today.slice(5, 7)) - 1}
+            disabled={
+              monthIndex >=
+              Number((initialDay ?? today).slice(0, 4)) * 12 +
+                Number((initialDay ?? today).slice(5, 7)) -
+                1
+            }
             onPress={() => setMonthIndex(monthIndex + 1)}
             style={styles.action}
           >
