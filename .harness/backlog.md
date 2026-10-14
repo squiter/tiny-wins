@@ -9,3 +9,5 @@
 Implemented slices: compact Today, names/icons/colors/order/archive/restore; selected weekdays with effective-date history; monthly/yearly detail and eligible-day metrics; versioned export and atomic merge restore. See tasks 003–005 for actual evidence and limitations.
 
 Calendar week-start preferences are implemented in task 007.
+
+Renewable per-habit streak flexibility and softly colored grace tiles are delivered in task 011, with local/browser and hosted iPhone configuration/persistence acceptance. No new dependency or destructive schema migration.
