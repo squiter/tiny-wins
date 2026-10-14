@@ -59,3 +59,5 @@ The locked Expo SQLite web worker has a response-length bug repaired by the guar
 Security remediation and the remaining upstream blockers are documented in [CI/security report](docs/CI_SECURITY_REPORT.md) and ADR-012. npm ci also applies version/source-guarded temporary mitigations; no audit finding is suppressed.
 
 The iOS simulator smoke workflow reuses a matching successful main build and runs create/check/restart/undo plus habit management in an isolated iPhone simulator. It can be dispatched with an existing build run ID; future successful main iOS builds trigger it automatically. Reports and simulator diagnostics expire after seven days. Passing compilation and passing runtime flows are separate claims.
+
+Hosted iPhone runtime acceptance passes both first-win/restart/undo and management/archive/restore flows on iPhone 17 Pro / iOS 26.5: [run 38515314849](https://github.com/squiter/tiny-wins/actions/runs/38515314849). Evidence and remaining native gates are in task 010 and the delivery report.
