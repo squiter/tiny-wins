@@ -61,7 +61,7 @@ export function HabitCard({
       <View style={styles.header}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`View ${habit.title}`}
+          accessibilityLabel={`View ${habit.title}, ${due ? `${streak} day${streak === 1 ? '' : 's'} in a row` : 'Not scheduled today'}`}
           disabled={!!ordering}
           onPress={onView}
           style={styles.edit}
