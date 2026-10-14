@@ -43,7 +43,7 @@ Veja [READINESS.md](READINESS.md) para os resultados reais. Os próximos trabalh
 
 1. Resolver o bloqueio de segurança: a auditoria ainda registra 18 alertas altos derivados de duas dependências de ferramentas. Existem mitigações testadas, mas o gate continua reprovado. Não usar `npm audit fix --force`: a sugestão atual volta para Expo 44 e quebra a base escolhida.
 2. Criar e configurar um ícone próprio; revisar abertura, versão, número de build e identidade final.
-3. Corrigir e testar a configuração de aparência: `app.json` ainda força `light`, embora Settings ofereça System. O código já tem paletas; precisamos validar o acompanhamento real do sistema no binário final. [Configuração Expo](https://docs.expo.dev/develop/user-interface/color-themes/).
+3. Corrigir e testar a configuração de aparência: A configuração agora permite aparência automática (task 020); precisamos confirmar o acompanhamento real do sistema e os overrides salvos no binário final. [Configuração Expo](https://docs.expo.dev/develop/user-interface/color-themes/).
 4. Testar exportação, cancelamento do seletor, restauração e preservação de histórico no iPhone. Conferir VoiceOver, movimento reduzido, reinstalação com restauração e atualização sem perda de dados.
 5. Testar iPad: `supportsTablet` está ativo. Precisamos de layout e capturas próprios, ou decidir explicitamente limitar o primeiro lançamento a iPhone antes de gerar o binário.
 

@@ -1,0 +1,20 @@
+# Task: 020 — Native system appearance and literal habit names
+
+Status: in progress
+Goal: Correct the native Light override and protect habit names from keyboard correction; strengthen native acceptance of both behaviors.
+Non-goals: New features, dependencies, signing/store/account changes, security suppression or data/schema changes.
+Files/modules allowed: app.json appearance only, HabitEditor, Settings theme observation ID, Maestro/hosted smoke flows, ADR-017 and harness/release documentation.
+Dependencies: Existing React Native appearance/input APIs and Expo config plugins; no new module.
+Acceptance criteria:
+
+- System follows the native OS appearance; saved Light/Dark override it and survive relaunch. Remove the native forced-Light style without changing identifiers/version/tablet support.
+- Keep Android's existing React Native OS-scheme fallback and both explicit themes; record native compilation and pending runtime evidence. Do not claim full Android SystemUI integration without its module.
+- Habit names retain the text the user supplies, with autocorrection disabled and native input owning its editing cursor. Initialize with defaultValue and continue updating the draft/preview onChangeText, avoiding per-keystroke native value forcing; existing validation/save/cancel stay intact.
+- Native flow asserts exact name before leaving the editor, then checks exact persisted title and completion. Diagnose malformed input rather than changing expected names or retrying creation.
+- Add a dedicated OS Dark/Light flow with simctl readback, resolved-theme assertions, saved overrides and captures; preserve all six existing flows and source/artifact guard.
+- Run npm run verify; inspect generated iOS appearance configuration; browser literal-name QA on synthetic data and matching hosted native validation when available.
+
+Required tests: Aggregate verification, Expo config introspection, browser name entry/cancel, hosted native name/System appearance and regressions.
+Commands executed / results: Native c8ab9ab run 38640708430 fails celebrations after inputText: expected Little reading, persisted ittleding rea (captured hierarchy); notes/appearance pass. Identical app source 6524866 run 38639073381 passed six flows. React Native documents controlled-value forcing and default autocorrection; cursor/keyboard interaction is a suspected contributor, not a proven sole cause. Registry latest remains braces 3.0.3 / node-forge 1.4.0; security gate unchanged.
+Open questions: Local Xcode unavailable; physical/Android runtime and security release gates remain.
+Handoff summary: Config now automatic; Expo introspection confirms UIUserInterfaceStyle=Automatic. Native title editing uses defaultValue/onChangeText and autoCorrect=false; preview/draft validation retained. Settings exposes resolved palette observation IDs. Two added native flows switch OS appearance via simctl with readback and verify saved overrides; six earlier flows/source matching unchanged. `npm run verify` PASS: 70 unit + 22 SQLite integration, types/lint/format and three exports. First typecheck exposed comparison against palette wrapper instead of its theme; corrected before successful gate. Browser 8091 at 390 verifies sequential Little reading input, autocorrect=off, Cancel/new blank draft, exact saved/reloaded name, existing-name prefill and editing/reloading Leitura à noite; sample archived afterwards. Capture docs/screenshots/literal-habit-name-390.jpg. Owner 8090 data untouched; QA tab/viewport/server cleaned up. Matching native build/runtime still pending; task remains in progress, no native root-cause fix claimed yet. Registry confirms no newer braces/forge versions; release security gate remains open. Next gate is new iPhone eight-flow acceptance, then native backup-dialog acceptance.

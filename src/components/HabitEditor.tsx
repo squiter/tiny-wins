@@ -110,7 +110,8 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
               <TextInput
                 testID="habit-name"
                 accessibilityLabel="Habit name"
-                value={title}
+                defaultValue={title}
+                autoCorrect={false}
                 onChangeText={(value) => {
                   setTitle(value);
                   setError('');

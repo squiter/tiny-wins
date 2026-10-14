@@ -1,5 +1,7 @@
 # Remaining delivery work
 
+Owner steering: fix current problems while enrollment is handled separately. Task [020](tasks/020-native-appearance-and-name-input.md) implements automatic native appearance and literal title editing, with exact-name and OS-theme acceptance. Local/browser gates pass; matching native eight-flow acceptance pending. Next: native backup dialogs/accessibility and security remediation when corrected upstream versions become available. No new product features added.
+
 Current priority (owner request, 2026-10-14): freeze optional feature additions and prepare the first paid App Store release. Task [019](tasks/019-app-store-preparation.md) records the readiness audit, Portuguese enrollment-to-publication guide and listing drafts. Owner confirms Tiny Wins and one-time paid download; has no Developer Program membership yet. Next implementation slice is release hardening: resolve security gate, app icon, native System appearance configuration, signed candidate/device backup/accessibility and iPad scope. Tasks 017/018 remain ready for later; they do not precede the release blockers. Follow [release readiness](../docs/release/READINESS.md), without interpreting draft copy or simulator builds as publication acceptance.
 
 1. Insights per-habit binary victory tile walls are implemented in task 008; refine density and device accessibility from real use.

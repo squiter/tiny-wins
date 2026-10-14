@@ -4,6 +4,8 @@ Reviewed 2026-10-14 against source `6524866`. **Not ready for submission.** The 
 
 ## Current evidence
 
+- Task 020 follow-up: local verification passes 92 tests/exports. Automatic config generates Automatic for iOS; literal title create/edit/reload passes in synthetic browser. Matching native eight-flow acceptance pending. Registry still publishes braces 3.0.3 and node-forge 1.4.0. Owner handles enrollment separately.
+
 - `npm run verify` on app source `7e38767`: 70 unit + 22 real SQLite tests, types/lint/format, iOS/Android/web exports PASS. `6524866` changes documentation only; hosted Validate 38636973295: verify PASS, separate audit FAIL.
 - `npm audit --json` refreshed 2026-10-14: 18 high, 0 moderate/critical. Roots: braces 3.0.3 and node-forge 1.4.0 via Expo CLI/Metro. Tested source patches do not make the published-version audit pass. See ADR-012 and CI_SECURITY_REPORT.
 - iPhone simulator 38629308028 on `a4c985c`: six flows PASS, including accessibility-large. This precedes the footer refinement; do not claim final-source runtime evidence from it.
@@ -20,7 +22,7 @@ Reviewed 2026-10-14 against source `6524866`. **Not ready for submission.** The 
 | Paid distribution   | Model confirmed; account setup pending                        | Owner activates Paid Apps Agreement, tax/bank details and chooses price/territories              |
 | Identity            | Name confirmed; availability/identifier unverified            | Register final App ID with owner's team before first upload                                      |
 | Branding            | Icon absent                                                   | Produce native store icon and opening appearance; review before config                           |
-| System appearance   | Native config forces Light                                    | Scope config repair and test OS Light/Dark while Settings is System; Android strategy required   |
+| System appearance   | Config corrected; runtime pending                             | Run matching OS Light/Dark and saved-override flows; Android RN fallback/runtime gate in ADR-017 |
 | Production artifact | Not built/signed                                              | Decide EAS/Xcode route, add reviewed release configuration, compile standalone signed .ipa       |
 | Native runtime      | Earlier source passes six simulator flows                     | Run same gates on final source; TestFlight install/offline/restart/update validation             |
 | Backup UX           | Browser/SQLite verified; device dialogs pending               | Export → cancel/import → restore on dedicated iPhone; no real user files                         |

@@ -1,0 +1,44 @@
+appId: app.tinywins.mobile
+---
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn: Settings, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: appearance-system
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: appearance-system
+- assertVisible: System appearance, selected
+- assertVisible:
+    id: settings-theme-dark
+- takeScreenshot: system-os-dark
+- tapOn:
+    id: appearance-light
+- assertVisible: Light appearance, selected
+- assertVisible:
+    id: settings-theme-light
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn: Settings, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: appearance-light
+    direction: DOWN
+    centerElement: true
+- assertVisible: Light appearance, selected
+- assertVisible:
+    id: settings-theme-light
+- tapOn:
+    id: appearance-system
+- assertVisible: System appearance, selected
+- assertVisible:
+    id: settings-theme-dark

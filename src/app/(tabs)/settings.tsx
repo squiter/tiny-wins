@@ -18,7 +18,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { deviceClock } from '../../lib/clock';
 import { BackupControls } from '../../components/BackupControls';
 import { useTheme, useThemeStyles } from '../../theme/useTheme';
-import type { ThemePalette } from '../../theme/tokens';
+import { darkPalette, type ThemePalette } from '../../theme/tokens';
 export default function Settings() {
   const { setAnimations, animationsAllowed } = useCelebrations();
   const { theme } = useTheme();
@@ -35,7 +35,10 @@ export default function Settings() {
     }
   }
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView
+      testID={theme === darkPalette.theme ? 'settings-theme-dark' : 'settings-theme-light'}
+      style={styles.safe}
+    >
       <ScrollView contentContainerStyle={styles.page}>
         <Text accessibilityRole="header" style={styles.heading}>
           Settings

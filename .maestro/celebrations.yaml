@@ -12,6 +12,7 @@ appId: app.tinywins.mobile
 - tapOn:
     id: habit-name
 - inputText: Little reading
+- assertVisible: Little reading
 - tapOn: Done typing
 - scrollUntilVisible:
     element:
@@ -20,6 +21,7 @@ appId: app.tinywins.mobile
     centerElement: true
 - tapOn:
     id: save-habit
+- assertVisible: View Little reading, 0 wins in a row
 - tapOn: Complete Little reading today
 - assertVisible: View Little reading, 1 win in a row
 - assertVisible: '(?s)All done for today!.*'
