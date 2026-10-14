@@ -56,3 +56,7 @@ Task 009 removed all 15 moderate audit findings and added tested, guarded local 
 Task 008 / ADR-013 delivers the requested per-habit binary wall as the primary Insights surface, with Year default, Week/Month, aligned period navigation and Today. Only real wins fill tiles; archived histories persist and rest/future/pre-creation states remain distinct. Explicit date confirmation uses the existing service and names the habit.
 
 Validation: 71 tests (54 unit, 17 integration), strict types/lint/format and all-platform exports. Browser confirms 365 dates in the annual wall, month/week layouts, explicit undo/re-mark and preservation of the original six habits/three wins. Screenshots: `screenshots/insights-tiles-year-390.png`, `screenshots/insights-tiles-month-360.png`. Annual tiny tiles have a larger calendar alternative; native screen-reader, enlarged text and motion acceptance remain pending. Security audit retains its documented upstream blockers.
+
+## Native compilation and simulator acceptance
+
+iOS [run 38495190148](https://github.com/squiter/tiny-wins/actions/runs/38495190148) and Android [run 38495190217](https://github.com/squiter/tiny-wins/actions/runs/38495190217) both compiled successfully on `886e0a7`. The same commit’s verify job passed; its audit job failed on the documented upstream version findings. Task 010 adds a matching-artifact iPhone simulator smoke gate with pinned Maestro, local Metro and persistent test diagnostics. Execution status is recorded in task 010; physical-device/accessibility and Android runtime remain separate gates.
