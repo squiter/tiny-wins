@@ -1,65 +1,150 @@
-# Tiny Wins
+# Tiny Wins 🌱
 
-Small steps. Big changes. A local-first habit tracker, built iOS-first with shared Android-ready React Native code.
+**Small steps. Big changes.**
 
-## See the app now
+A gentle habit tracker that turns everyday effort into a wall of little victories. Read a page, take a walk, drink some water — fill a tile and watch your progress grow.
 
-Run `npm run preview` and open http://localhost:8090 in a browser. It builds and serves the actual app with local SQLite persistence. Create a habit, complete today, reload and undo. The preview is a production export; restart the command to rebuild after code changes. Keep only one Tiny Wins preview tab open at a time. Browser data belongs to that browser and origin and is separate from iPhone/Android data.
+Built for **consistency over perfection**. Your past wins stay yours, even when a streak breaks.
 
-The existing Expo SQLite web adapter is alpha; this preview supports development and review while native device acceptance remains required. See ADR-006 for the boundary.
+[Try it locally](#try-it-locally) · [What you can do](#what-you-can-do-today) · [Roadmap](#whats-next) · [Development](#development)
 
-## Start
+## A little look inside
 
-Use Node 24 LTS and npm (see .nvmrc). From a clean checkout:
+<table>
+  <tr>
+    <th>Today</th>
+    <th>Insights · dark mode</th>
+    <th>A note for the day</th>
+  </tr>
+  <tr>
+    <td valign="top" align="center"><a href="docs/screenshots/readme-today-light-390.jpg"><img src="docs/screenshots/readme-today-light-390.jpg" width="260" alt="Today in light mode: six completed habits, 14 daily tiles per row, an all-done banner and a quiet typographic footer." /></a></td>
+    <td valign="top" align="center"><a href="docs/screenshots/readme-insights-dark-390.jpg"><img src="docs/screenshots/readme-insights-dark-390.jpg" width="260" alt="Insights in dark mode: week, month and year controls above a habit's annual victory wall and consistency summary." /></a></td>
+    <td valign="top" align="center"><a href="docs/screenshots/readme-day-note-dark-390.jpg"><img src="docs/screenshots/readme-day-note-dark-390.jpg" width="260" alt="Day inspector in dark mode: an optional reading note, a separate completion action and fixed Save note, Clear note and Close day controls." /></a></td>
+  </tr>
+  <tr>
+    <td align="center">Your next small win, one tap away.</td>
+    <td align="center">A whole year of effort, one tile at a time.</td>
+    <td align="center">Keep a little context alongside your progress.</td>
+  </tr>
+</table>
+
+Actual browser development previews with example habits, captured on October 14, 2026 from the current visual refresh (7e38767). Click a screenshot for the full-size view.
+
+## What you can do today
+
+| Make it yours                                              | See what you're building                                            | Keep your history                                                   |
+| ---------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Create and edit habits with names, icons and colors        | Complete or undo today's habit in one tap                           | Keep habits, wins and notes in local SQLite storage                 |
+| Choose every day or specific weekdays                      | See exactly **14 calendar days** on each Today row                  | Inspect a date and deliberately edit a past completion              |
+| Reorder habits, or archive and restore them                | Explore each habit's **week, month and year** victory wall          | Add a short note to a habit/date without changing its completion    |
+| Configure **0–7 days of streak flexibility**               | Track current/best streaks, total wins and eligible-day consistency | Export JSON backups and restore missing records after review        |
+| Choose light/dark appearance and Sunday/Monday week starts | Get immediate visual feedback, including an all-done banner         | Preserve original calendar dates when schedules or timezones change |
+
+Schedule and flexibility changes begin tomorrow, preserving earlier history. Notes support up to 280 characters and remain readable on archived habits. Backups include notes and flexibility settings; older v1/v2 files remain importable, and restore keeps existing local records.
+
+### A streak with room to breathe
+
+Read on Sunday, miss Monday, read again on Tuesday. With one day of flexibility, your sequence continues with **two actual wins**. Monday gets a soft **○** tile to recognize the breathing room.
+
+Each tile represents one calendar day. Completed days get **✓**; tolerated gaps get **○**; rest days stay distinct. Only completed days count as wins or toward consistency. An unfinished today can stay pending while you work on it.
+
+### Your habits stay with you
+
+The core app works offline and stores data on your device, without an account or telemetry. Export a backup when you want to keep another copy or move devices. Light and dark themes share the same habit identities, and completion feedback respects reduced motion.
+
+## What's next
+
+The [implementation plan](docs/IMPLEMENTATION_PLAN.md) guides these additions. They are planned work, with no promised release dates.
+
+| Direction                               | Planned additions                                                                                                           |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **A warmer everyday experience**        | A cuter, cozier visual refresh; richer individual-win and all-day celebrations; optional sounds and saved feedback controls |
+| **More ways to get started**            | Multiple interface languages and small, editable habit suggestions                                                          |
+| **Progress at a glance**                | Home-screen widgets with pending habits, victory tiles and quick check-ins where supported                                  |
+| **Routines that fit real life**         | Flexible goals such as “walk on three days each week,” plus deliberate pause/skip options                                   |
+| **A moment to focus**                   | A session stopwatch/countdown that offers a deliberate check-in when you finish                                             |
+| **A helpful nudge**                     | An optional daily review reminder and configurable per-habit reminders                                                      |
+| **Optional connections, further ahead** | iCloud synchronization between Apple devices, Todoist completion integration and exploration of Apple Health                |
+
+Future integrations need their own platform, privacy and reliability decisions. The core remains a quick binary check-in: one completed habit, one filled tile.
+
+## Try it locally
+
+Use **Node 24 LTS** and npm; the repository includes `.nvmrc`.
 
 ```sh
 npm ci
+npm run preview
+```
+
+Open **http://localhost:8090**. Create a habit, mark a win, reload and see it remain. The preview serves a production export; rerun the preview command after source changes to rebuild it.
+
+Keep one Tiny Wins preview tab open at a time. Browser storage belongs to that browser/origin and is separate from native device storage. The Expo SQLite web adapter is alpha; the preview supports development and review. See [ADR-006](docs/adr/006-browser-preview.md).
+
+### Run on a device or simulator
+
+```sh
 npm start
 ```
 
-Scan the Expo development server QR code with a compatible Expo Go installation, or use `npm run ios` / `npm run android` with Xcode or the Android SDK and installed simulators; these commands compile and install the native app. SQLite runs on the device. No server, account, or environment secrets are required. The bundle identifier is provisional until store registration.
+Use a compatible Expo Go installation, or compile a native development app with the appropriate local toolchain:
 
-Create daily or selected-weekday habits with a name, icon and color; tap a habit name to see its calendar and edit it. Schedule changes start tomorrow and preserve past history. Reorder with labeled up/down controls, or archive and restore without losing past wins. Advanced options configure Streak flexibility (0–7 missed scheduled days between wins, renewed by each win). Soft ○ tiles show days within tolerance; only completed days count toward wins and consistency. Policy edits start tomorrow. Today displays 14 calendar days and the current streak, with completion/undo in one tap. Insights shows each habit’s binary victory wall by week/month/year, with date inspection and eligible-day consistency. Inspect a day to add an optional 280-character plain-text note, independently of completion. A corner mark identifies noted dates on every calendar. Notes survive restart and backup/restore; archived notes stay readable. Settings follows the system appearance by default and saves a Light/Dark override, alongside your Sunday/Monday calendar preference, exports versioned JSON backups and restores missing data after review, without overwriting existing habits. SQLite stores habits and completion timezone context. Fonts ship with the bundle and do not require a runtime download.
+```sh
+npm run ios
+# or
+npm run android
+```
 
-## Commands
+Native builds require Xcode or the Android SDK and an installed simulator/device. The app needs no backend or environment secrets. Fonts ship with the bundle.
 
-| Command                    | Purpose                                                      |
-| -------------------------- | ------------------------------------------------------------ |
-| `npm ci`                   | Reproduce locked dependencies                                |
-| `npm start`                | Start Expo development server                                |
-| `npm run typecheck`        | Strict TypeScript                                            |
-| `npm run lint`             | Expo ESLint                                                  |
-| `npm run format`           | Apply formatting                                             |
-| `npm run format:check`     | Check formatting                                             |
-| `npm run test:unit`        | Deterministic calendar/domain tests                          |
-| `npm run test:integration` | Real SQLite + Drizzle migrations, close/reopen, writes       |
-| `npm run build`            | Export production JS/assets for iOS, Android and the preview |
-| `npm run verify`           | Types, lint, format, unit, integration, all platform exports |
-| `npm run test:e2e`         | Maestro flow on installed native app                         |
-| `npm run security`         | Audit dependencies; high/critical vulnerabilities fail       |
+## Development
 
-`build` produces JavaScript bundles, not signed installable binaries. To run Maestro, install Xcode/Android SDK and Maestro, build/install using `npx expo run:ios` or `npx expo run:android`, then run the E2E command. The flow clears the test application's data; use a dedicated test device. Expo Go does not have our app ID.
+**React Native + Expo + TypeScript** power the shared iOS/Android interface. **Expo Router** handles navigation; **Expo SQLite + Drizzle** handle local persistence. Calendar dates, schedules and streak rules live in pure TypeScript, behind repository interfaces. **Vitest** checks domain rules and real SQLite persistence; **Maestro** exercises native interactions.
 
-## Reading path
+```sh
+npm run verify
+```
 
-- [Primary implementation plan](docs/IMPLEMENTATION_PLAN.md); the supplied original remains unchanged under its original filename.
-- [Architecture](docs/ARCHITECTURE.md), [design/UX guide](docs/DESIGN_SYSTEM.md) and [ADRs](docs/adr).
-- [Contributing](CONTRIBUTING.md), [agent contract](AGENTS.md), [.harness/checks.md](.harness/checks.md).
-- [Current delivery report](docs/DELIVERY_REPORT.md), including native build evidence and backup limits.
-- [Bootstrap evidence and limitations](docs/BOOTSTRAP_REPORT.md), [habit management validation](docs/HABIT_MANAGEMENT_REPORT.md).
+This runs strict types, lint, formatting, deterministic unit tests, real SQLite integration tests and JavaScript exports for iOS, Android and web.
 
-License, store price, final identifiers and trademark rights remain owner decisions. No license has been selected; public source availability alone does not grant an open-source license. Official distribution is planned as a paid App Store download with no in-app payments.
+<details>
+<summary>Useful commands</summary>
 
-The locked Expo SQLite web worker has a response-length bug repaired by the guarded postinstall script. npm ci applies the repair automatically and integration tests cover large/multibyte responses. Consult ADR-008 before changing expo-sqlite.
+| Command                                   | Purpose                                                                |
+| ----------------------------------------- | ---------------------------------------------------------------------- |
+| `npm ci`                                  | Install locked dependencies and guarded compatibility/security patches |
+| `npm run preview`                         | Build and serve the browser preview                                    |
+| `npm start`                               | Start the Expo development server                                      |
+| `npm run ios` / `npm run android`         | Compile and run a native development app                               |
+| `npm run typecheck`                       | Check strict TypeScript                                                |
+| `npm run lint`                            | Run Expo ESLint                                                        |
+| `npm run format` / `npm run format:check` | Apply or check Prettier formatting                                     |
+| `npm run test:unit`                       | Test calendar and domain rules deterministically                       |
+| `npm run test:integration`                | Test real SQLite migrations, writes and close/reopen                   |
+| `npm run build`                           | Export production JavaScript and assets for all three platforms        |
+| `npm run test:e2e`                        | Run the first-win Maestro flow on an installed native app              |
+| `npm run security`                        | Audit dependencies; high/critical findings fail                        |
 
-## GitHub automation
+JavaScript exports are separate from compiled, signed native apps. Maestro clears the test app's data; use a dedicated test device. Expo Go does not use the app's native identifier.
 
-[Repository](https://github.com/squiter/tiny-wins) and [Actions](https://github.com/squiter/tiny-wins/actions). Pushes to main and pull requests run Node 24 verification and a separate dependency audit. Android builds an arm64 debug APK; iOS builds an unsigned ARM64 simulator app on macOS 26. Artifacts expire after seven days. Debug artifacts require the Expo development server; neither workflow publishes to a store. The audit is currently failing and remains a release gate.
+</details>
 
-Security remediation and the remaining upstream blockers are documented in [CI/security report](docs/CI_SECURITY_REPORT.md) and ADR-012. npm ci also applies version/source-guarded temporary mitigations; no audit finding is suppressed.
+### Builds, checks and release status
 
-The iOS simulator smoke workflow reuses a matching successful main build and runs create/check/restart/undo plus habit management in an isolated iPhone simulator. It can be dispatched with an existing build run ID; future successful main iOS builds trigger it automatically. Reports and simulator diagnostics expire after seven days. Passing compilation and passing runtime flows are separate claims.
+[GitHub Actions](https://github.com/squiter/tiny-wins/actions) runs verification, a separate dependency audit, Android debug builds, iOS simulator builds and native smoke flows. Debug artifacts require the Expo development server and expire after seven days.
 
-Hosted iPhone runtime acceptance passes both first-win/restart/undo and management/archive/restore flows on iPhone 17 Pro / iOS 26.5: [run 38515314849](https://github.com/squiter/tiny-wins/actions/runs/38515314849). Evidence and remaining native gates are in task 010 and the delivery report.
+Tiny Wins is **in active development**, with iOS as the first release target and a shared Android codebase. Native accessibility, enlarged-text review, file-dialog acceptance and Android runtime validation remain release work. Check the [delivery report](docs/DELIVERY_REPORT.md) and [harness tasks](.harness/tasks) for the evidence and open gates of each slice.
 
-Backups export format v3 to retain notes and streak flexibility; formats v1/v2 remain importable (v1 has zero tolerance). Existing schedule JSON without the new optional field keeps zero tolerance; no database rewrite is required.
+The dependency audit has documented upstream blockers and remains a release gate. Temporary mitigations and remaining findings are recorded in the [CI/security report](docs/CI_SECURITY_REPORT.md); findings are not suppressed. SQLite web compatibility patches are documented in [ADR-008](docs/adr/008-sqlite-web-bridge-fix.md).
+
+The official App Store release is planned as a **one-time paid download**, with no in-app payments or subscription. Store publication, final identifiers, branding and pricing are still pending. An open-source license has not yet been selected.
+
+## Explore the project
+
+- [Implementation plan](docs/IMPLEMENTATION_PLAN.md) — product direction and roadmap.
+- [Design system](docs/DESIGN_SYSTEM.md) and [inspirations](docs/inspirations) — the visual direction.
+- [Architecture](docs/ARCHITECTURE.md) and [decision records](docs/adr) — storage, dates, backups and platform boundaries.
+- [Delivery report](docs/DELIVERY_REPORT.md) — actual validation and remaining work.
+- [Contributing](CONTRIBUTING.md), [agent contract](AGENTS.md) and [harness checks](.harness/checks.md) — how changes are scoped and verified.
+
+**One small win is a good place to start.**
