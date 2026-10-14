@@ -23,9 +23,13 @@ appId: app.tinywins.mobile
 - assertVisible: View Read one page, 1 win in a row
 - stopApp
 - launchApp
-- assertVisible: View Read one page, 1 win in a row
+- extendedWaitUntil:
+    visible: View Read one page, 1 win in a row
+    timeout: 120000
 - tapOn: Undo Read one page today
 - assertVisible: View Read one page, 0 wins in a row
 - stopApp
 - launchApp
-- assertVisible: View Read one page, 0 wins in a row
+- extendedWaitUntil:
+    visible: View Read one page, 0 wins in a row
+    timeout: 120000

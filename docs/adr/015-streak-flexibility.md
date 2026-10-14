@@ -9,3 +9,5 @@ Store optional streakTolerance inside existing effective-date schedule JSON; abs
 Grace tiles use the habit's soft surface and a small hollow circle, with explicit accessible labels, legend and day inspection. Completed tiles retain solid color/check. Rename streak support text to wins in a row. Export backup v2 to preserve policy; import v1 with zero tolerance and validate v2 bounds. Existing merge behavior remains additive and preserves owner metadata.
 
 The feature adapts Org Habit's minimum/maximum repetition interval idea, without copying its overdue-color graph: https://orgmode.org/manual/Tracking-your-habits.html.
+
+Hosted iOS execution exposed an existing full-screen modal safe-area overlap; each modal now owns a SafeAreaProvider outside its scroll/animated contents, following [the library guidance](https://appandflow.github.io/react-native-safe-area-context/api/safe-area-provider/). The numeric tolerance is explicitly accessible. Native flows scroll the advanced controls into view and wait for the same persisted sequence label after restart; no assertion is removed.

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import type { HistoryCell } from '../domain/habit';
 import { theme } from '../theme/tokens';
 export function DayInspector({
@@ -34,45 +34,47 @@ export function DayInspector({
   }[cell.state];
   return (
     <Modal visible transparent animationType="none" onRequestClose={onClose}>
-      <View style={styles.overlay}>
-        <SafeAreaView style={styles.sheet}>
-          {!!habitTitle && <Text style={styles.text}>{habitTitle}</Text>}
-          <Text accessibilityRole="header" style={styles.title}>
-            {label}
-          </Text>
-          <Text style={styles.text}>{status}</Text>
-          {editable && (
-            <>
-              <Text style={styles.text}>This changes only the completion on {cell.day}.</Text>
-              <Pressable
-                accessibilityRole="button"
-                accessibilityLabel={`${cell.state === 'complete' ? 'Undo completion' : 'Mark completed'} for ${cell.day}`}
-                onPress={() => {
-                  try {
-                    onChange(cell.state !== 'complete');
-                    setError('');
-                  } catch {
-                    setError('Could not save this day. Please try again.');
-                  }
-                }}
-                style={styles.button}
-              >
-                <Text style={styles.buttonText}>
-                  {cell.state === 'complete' ? 'Undo completion' : 'Mark completed'}
-                </Text>
-              </Pressable>
-            </>
-          )}
-          {!!error && (
-            <Text accessibilityRole="alert" style={styles.text}>
-              {error}
+      <SafeAreaProvider>
+        <View style={styles.overlay}>
+          <SafeAreaView style={styles.sheet}>
+            {!!habitTitle && <Text style={styles.text}>{habitTitle}</Text>}
+            <Text accessibilityRole="header" style={styles.title}>
+              {label}
             </Text>
-          )}
-          <Pressable accessibilityRole="button" onPress={onClose} style={styles.close}>
-            <Text style={styles.text}>Close day</Text>
-          </Pressable>
-        </SafeAreaView>
-      </View>
+            <Text style={styles.text}>{status}</Text>
+            {editable && (
+              <>
+                <Text style={styles.text}>This changes only the completion on {cell.day}.</Text>
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityLabel={`${cell.state === 'complete' ? 'Undo completion' : 'Mark completed'} for ${cell.day}`}
+                  onPress={() => {
+                    try {
+                      onChange(cell.state !== 'complete');
+                      setError('');
+                    } catch {
+                      setError('Could not save this day. Please try again.');
+                    }
+                  }}
+                  style={styles.button}
+                >
+                  <Text style={styles.buttonText}>
+                    {cell.state === 'complete' ? 'Undo completion' : 'Mark completed'}
+                  </Text>
+                </Pressable>
+              </>
+            )}
+            {!!error && (
+              <Text accessibilityRole="alert" style={styles.text}>
+                {error}
+              </Text>
+            )}
+            <Pressable accessibilityRole="button" onPress={onClose} style={styles.close}>
+              <Text style={styles.text}>Close day</Text>
+            </Pressable>
+          </SafeAreaView>
+        </View>
+      </SafeAreaProvider>
     </Modal>
   );
 }

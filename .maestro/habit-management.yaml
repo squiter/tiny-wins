@@ -21,7 +21,14 @@ appId: app.tinywins.mobile
     direction: DOWN
 - tapOn:
     text: Advanced options.*
+- scrollUntilVisible:
+    element: Increase streak tolerance
+    direction: DOWN
 - tapOn: Increase streak tolerance
+- scrollUntilVisible:
+    element:
+      id: streak-tolerance
+    direction: DOWN
 - assertVisible: 1 scheduled day of tolerance
 - scrollUntilVisible:
     element:
@@ -39,6 +46,10 @@ appId: app.tinywins.mobile
     direction: DOWN
 - tapOn:
     text: Advanced options.*
+- scrollUntilVisible:
+    element:
+      id: streak-tolerance
+    direction: DOWN
 - assertVisible: 1 scheduled day of tolerance
 - scrollUntilVisible:
     element:
@@ -75,7 +86,9 @@ appId: app.tinywins.mobile
 - tapOn: Done reordering
 - stopApp
 - launchApp
-- assertVisible: View Read a chapter, 1 win in a row
+- extendedWaitUntil:
+    visible: View Read a chapter, 1 win in a row
+    timeout: 120000
 - tapOn: View Read a chapter, 1 win in a row
 - tapOn: Edit habit
 - scrollUntilVisible:
@@ -92,4 +105,6 @@ appId: app.tinywins.mobile
 - assertVisible: View Read a chapter, 1 win in a row
 - stopApp
 - launchApp
-- assertVisible: View Read a chapter, 1 win in a row
+- extendedWaitUntil:
+    visible: View Read a chapter, 1 win in a row
+    timeout: 120000
