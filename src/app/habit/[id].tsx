@@ -113,7 +113,9 @@ export default function HabitDetail() {
             onPress={back}
             style={styles.action}
           >
-            <Text style={styles.back}>‹</Text>
+            <Text maxFontSizeMultiplier={1} style={styles.back}>
+              ‹
+            </Text>
           </Pressable>
           <Text style={styles.eyebrow}>YOUR PROGRESS</Text>
           <Pressable
@@ -124,7 +126,7 @@ export default function HabitDetail() {
                 refresh();
               } else setEditing(true);
             }}
-            style={styles.action}
+            style={[styles.action, styles.editAction]}
           >
             <Text style={styles.link}>{habit.archivedAt ? 'Restore habit' : 'Edit habit'}</Text>
           </Pressable>
@@ -156,7 +158,9 @@ export default function HabitDetail() {
             onPress={() => setMonthIndex(monthIndex - 1)}
             style={styles.action}
           >
-            <Text style={styles.back}>‹</Text>
+            <Text maxFontSizeMultiplier={1} style={styles.back}>
+              ‹
+            </Text>
           </Pressable>
           <Text accessibilityRole="header" style={styles.year}>
             {monthLabel}
@@ -173,7 +177,9 @@ export default function HabitDetail() {
             onPress={() => setMonthIndex(monthIndex + 1)}
             style={styles.action}
           >
-            <Text style={styles.back}>›</Text>
+            <Text maxFontSizeMultiplier={1} style={styles.back}>
+              ›
+            </Text>
           </Pressable>
         </View>
         {!habit.archivedAt && (
@@ -212,7 +218,9 @@ export default function HabitDetail() {
             onPress={() => setYear(year - 1)}
             style={styles.action}
           >
-            <Text style={styles.back}>‹</Text>
+            <Text maxFontSizeMultiplier={1} style={styles.back}>
+              ‹
+            </Text>
           </Pressable>
           <Text accessibilityRole="header" style={styles.year}>
             {year}
@@ -224,7 +232,9 @@ export default function HabitDetail() {
             onPress={() => setYear(year + 1)}
             style={styles.action}
           >
-            <Text style={styles.back}>›</Text>
+            <Text maxFontSizeMultiplier={1} style={styles.back}>
+              ›
+            </Text>
           </Pressable>
         </View>
         <Text style={styles.support}>
@@ -312,10 +322,13 @@ const createStyles = (theme: ThemePalette) =>
       alignSelf: 'center',
       paddingBottom: 32,
     },
-    header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+    header: { flexDirection: 'row', gap: 8, alignItems: 'center' },
+    editAction: { maxWidth: '40%', flexShrink: 1 },
     action: { minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center' },
     back: { fontSize: 30, color: theme.forest },
     eyebrow: {
+      flex: 1,
+      textAlign: 'center',
       fontFamily: 'Inter_600SemiBold',
       fontSize: 11,
       letterSpacing: 1.3,
@@ -325,8 +338,14 @@ const createStyles = (theme: ThemePalette) =>
     identity: { flexDirection: 'row', gap: 12, alignItems: 'center' },
     heading: { fontFamily: 'Fraunces_600SemiBold', fontSize: 29, color: theme.forest },
     support: { fontFamily: 'Inter_400Regular', fontSize: 13, lineHeight: 20, color: theme.muted },
-    yearHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-    year: { fontFamily: 'Fraunces_600SemiBold', fontSize: 25, color: theme.forest },
+    yearHeader: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+    year: {
+      flex: 1,
+      textAlign: 'center',
+      fontFamily: 'Fraunces_600SemiBold',
+      fontSize: 25,
+      color: theme.forest,
+    },
     footer: {
       fontFamily: 'Fraunces_600SemiBold',
       fontSize: 21,

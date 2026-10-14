@@ -13,6 +13,9 @@ appId: app.tinywins.mobile
 - takeScreenshot: cozy-large-text-habit
 - tapOn: View Read a chapter, 1 win in a row
 - assertVisible: Edit habit
+- assertVisible: Go back
+- assertVisible: Previous month
+- assertVisible: Next month
 - takeScreenshot: cozy-large-text-detail
 - tapOn: Edit habit
 - assertVisible: Close habit editor
@@ -20,7 +23,11 @@ appId: app.tinywins.mobile
 - scrollUntilVisible:
     element: Cancel
     direction: DOWN
-    centerElement: true
+    centerElement: false
+- assertVisible: Save changes
+- assertVisible: Archive habit
+- assertVisible: Cancel
+- takeScreenshot: cozy-large-text-editor-actions
 - tapOn: Cancel
 - tapOn:
     id: inspect-today
@@ -29,3 +36,22 @@ appId: app.tinywins.mobile
 - tapOn: Close day
 - tapOn: Go back
 - assertVisible: View Read a chapter, 1 win in a row
+
+- tapOn: Insights, tab, 2 of 3
+- assertVisible: Week
+- assertVisible: Month
+- assertVisible: Year
+- takeScreenshot: cozy-large-text-insights
+- scrollUntilVisible:
+    element: View Read a chapter progress
+    direction: DOWN
+    centerElement: true
+- takeScreenshot: cozy-large-text-wall
+- tapOn: Settings, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: celebration-animations
+    direction: DOWN
+    centerElement: true
+- assertVisible: Celebration animations, on
+- takeScreenshot: cozy-large-text-settings
