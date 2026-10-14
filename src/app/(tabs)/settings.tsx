@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { deviceClock } from '../../lib/clock';
+import { BackupControls } from '../../components/BackupControls';
 import { theme } from '../../theme/tokens';
 export default function Settings() {
   return (
@@ -18,10 +19,11 @@ export default function Settings() {
               : 'Your habits and wins are stored on this device.'}
           </Text>
           <Text style={styles.copy}>
-            Tiny Wins does not send your habit data to a server. Keep your app data when moving
-            devices until backup is available.
+            Tiny Wins does not send your habit data to a server. Use a backup file when moving
+            devices.
           </Text>
         </View>
+        <BackupControls />
         <View style={styles.card}>
           <Text style={styles.title}>Your local calendar</Text>
           <Text style={styles.copy}>{deviceClock.timezone()}</Text>

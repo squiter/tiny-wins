@@ -19,6 +19,7 @@ import {
   restoreHabit,
   moveHabit,
 } from '../../src/features/habits/service';
+import { parseBackup, serializeBackup } from '../../src/domain/backup';
 import { dateKey } from '../../src/domain/calendar';
 const directories: string[] = [];
 const databases: Database.Database[] = [];
@@ -171,6 +172,62 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(() =>
       editHabit(connection.repository, 'read', 'Read', 'blue', 'book', clock, []),
     ).toThrow();
+  });
+  it('restores a file backup atomically, retains current edits and is idempotent after reopen', () => {
+    const original = open(':memory:');
+    createHabit(original.repository, clock, 'read', 'Read', 'coral', 'book');
+    toggleToday(original.repository, clock, 'read');
+    const backup = parseBackup(
+      serializeBackup(
+        original.repository.listHabits(),
+        original.repository.listCompletions(),
+        clock.now(),
+      ),
+    );
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-backup-'));
+    directories.push(directory);
+    const path = join(directory, 'restore.db');
+    let target = open(path);
+    expect(target.repository.mergeBackup(backup)).toEqual({ habitsAdded: 1, winsAdded: 1 });
+    editHabit(target.repository, 'read', 'A newer name', 'blue', 'water');
+    expect(target.repository.mergeBackup(backup)).toEqual({ habitsAdded: 0, winsAdded: 0 });
+    target.sqlite.close();
+    target = open(path);
+    expect(target.repository.getHabit('read')?.title).toBe('A newer name');
+    expect(target.repository.listCompletions()).toEqual(backup.completions);
+    const conflict = {
+      ...backup,
+      habits: [
+        { ...backup.habits[0]!, id: 'new' },
+        { ...backup.habits[0]!, startsOn: dateKey('2024-02-28') },
+      ],
+      completions: [],
+    };
+    expect(() => target.repository.mergeBackup(conflict)).toThrow('conflicts');
+    expect(target.repository.getHabit('new')).toBeUndefined();
+  });
+  it('reads multiple SQLite pages without missing or duplicating habits/wins', () => {
+    const { repository, sqlite } = open(':memory:');
+    const insert = sqlite.prepare(
+      'INSERT INTO habits (id,title,color,icon,starts_on,created_at,sort_order,schedule) VALUES (?,?,?,?,?,?,?,?)',
+    );
+    sqlite.transaction(() => {
+      for (let index = 0; index < 205; index++)
+        insert.run(
+          `habit-${index}`,
+          'Read',
+          'forest',
+          'book',
+          '2024-02-29',
+          '2024-02-29T12:00:00Z',
+          index,
+          JSON.stringify([{ from: '2024-02-29', days: [0, 1, 2, 3, 4, 5, 6] }]),
+        );
+    })();
+    for (const habit of repository.listHabits()) toggleToday(repository, clock, habit.id);
+    expect(repository.listHabits()).toHaveLength(205);
+    expect(new Set(repository.listHabits().map((habit) => habit.id)).size).toBe(205);
+    expect(repository.listCompletions()).toHaveLength(205);
   });
   it('keeps recorded dates immutable through midnight and timezone travel', () => {
     const { repository } = open(':memory:');

@@ -18,7 +18,7 @@ export default function TabLayout() {
         options={{
           title: 'Today',
           tabBarIcon: ({ color }) => (
-            <Text accessible={false} style={{ color, fontSize: 24 }}>
+            <Text accessible={false} aria-hidden={true} style={{ color, fontSize: 24 }}>
               ⌂
             </Text>
           ),
@@ -29,7 +29,7 @@ export default function TabLayout() {
         options={{
           title: 'Insights',
           tabBarIcon: ({ color }) => (
-            <Text accessible={false} style={{ color, fontSize: 24 }}>
+            <Text accessible={false} aria-hidden={true} style={{ color, fontSize: 24 }}>
               ▥
             </Text>
           ),
@@ -40,7 +40,7 @@ export default function TabLayout() {
         options={{
           title: 'Settings',
           tabBarIcon: ({ color }) => (
-            <Text accessible={false} style={{ color, fontSize: 23 }}>
+            <Text accessible={false} aria-hidden={true} style={{ color, fontSize: 23 }}>
               ⚙
             </Text>
           ),

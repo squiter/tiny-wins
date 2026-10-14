@@ -47,6 +47,7 @@ appId: app.tinywins.mobile
     element: Archive habit
     direction: DOWN
 - tapOn: Archive habit
+- tapOn: Go back
 - scrollUntilVisible:
     element: 'Archived habits \(1\)'
     direction: DOWN
