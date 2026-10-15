@@ -41,7 +41,7 @@ Registre o Apple ID numérico do cadastro, a equipe escolhida e o identificador 
 
 Veja [READINESS.md](READINESS.md) para os resultados reais. Os próximos trabalhos são:
 
-1. Resolver o bloqueio de segurança: a auditoria ainda registra 18 alertas altos derivados de duas dependências de ferramentas. Existem mitigações testadas, mas o gate continua reprovado. Não usar `npm audit fix --force`: a sugestão atual volta para Expo 44 e quebra a base escolhida.
+1. Acompanhar a segurança: o scanner bruto ainda registra 18 alertas altos de duas dependências de ferramentas. A política temporária aprovada na ADR-020 exige mitigações verificadas, testes e validade até 2026-10-22T00:00:00Z. Essas bibliotecas não aparecem no bundle iOS inspecionado; revisar novamente o pacote final assinado antes de enviar. Não usar `npm audit fix --force`: a sugestão atual volta para Expo 44 e quebra a base escolhida.
 2. Criar e configurar um ícone próprio; revisar abertura, versão, número de build e identidade final.
 3. Corrigir e testar a configuração de aparência: A configuração agora permite aparência automática (task 020); precisamos confirmar o acompanhamento real do sistema e os overrides salvos no binário final. [Configuração Expo](https://docs.expo.dev/develop/user-interface/color-themes/).
 4. Testar exportação, cancelamento do seletor, restauração e preservação de histórico no iPhone. Conferir VoiceOver, movimento reduzido, reinstalação com restauração e atualização sem perda de dados.

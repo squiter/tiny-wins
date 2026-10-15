@@ -1,6 +1,6 @@
-# ADR-020: Proposed temporary acceptance of verified patched dependencies
+# ADR-020: Temporary acceptance of verified patched tooling dependencies
 
-Status: **PROPOSED — not approved, not implemented.** Date: 2026-10-15.
+Status: **Accepted with conditions on 2026-10-15; implementation validated locally, hosted CI pending.**
 
 ## Problem and current evidence
 
@@ -8,11 +8,15 @@ Main ca24722 compiles on iOS and Android, passes verify, and passes eight iPhone
 
 The existing regression tests reject deep string/direct-AST brace recursion, reject malformed RSA DigestAlgorithm cardinality accepted by original forge, and accept legitimate patterns/signatures. These prove bounded mitigations, not absence of every possible exploit or vulnerability. The dependencies are introduced by Expo/Metro tooling; this is not blanket proof that every production artifact excludes them.
 
-## Decision for the owner to review
+## Owner decision and evidence
 
-Permit a temporary CI policy exception **only for those two advisories on the exact verified patched installed source**, until 2026-10-22T00:00:00Z. This is a change to the project's current rule that every high advisory blocks CI; it is not an upstream package fix or a claim of zero vulnerabilities. Approval of this document would authorize implementing that policy, not store submission or publication.
+Permit a temporary CI policy exception **only for those two advisories on the exact verified patched installed source**, until 2026-10-22T00:00:00Z. This is a change to the project's current rule that every high advisory blocks CI; it is not an upstream package fix or a claim of zero vulnerabilities. This approval authorizes the CI policy, not store submission or publication.
 
-If approved, implement all of these together:
+The owner conditionally authorized a temporary patch if this audit issue does not prevent App Store release. Official Apple guidelines require appropriate app/SDK security but specify no npm audit exit-code gate; the inference is that a tooling-only scanner alert is not an automatic App Review blocker. An iOS production export with source maps contains 1,685 module sources and no braces/node-forge modules. This supports a tooling-only classification for this JavaScript export, not a guarantee about the signed IPA or App Review. Final signed-candidate inspection remains a release gate. [Apple guideline 1.6 and SDK responsibility](https://developer.apple.com/app-store/review/guidelines/).
+
+CI additionally runs npm run security:bundle: an iOS production export/source-map inventory must contain app routes, valid sources and no braces/node-forge modules. Missing/malformed inventory or affected modules fail the job. The machine-readable inspection is saved beside the raw audit artifact. This enforces the tooling-only assumption on each CI run while retaining final signed-archive review.
+
+Implement all of these together:
 
 1. Retain unmodified raw npm audit JSON and its nonzero result visibly in the job summary/artifact. Keep npm run security as the raw local scanner; add a distinctly named policy check for CI.
 2. Permit only the two exact advisory IDs, affected package versions/paths and their derived dependency alerts. Fail on any other high/critical advisory, unknown propagation, unavailable/malformed audit response or scanner failure.
@@ -28,13 +32,13 @@ The exception would allow CI policy to pass for known patched packages while raw
 - Maintain audited forks replacing the affected dependencies. This transfers broader dependency maintenance to this small app and requires a separate scoped design/approval; do not rename a vulnerable package merely to escape scanning.
 - Do not use audit suppression, fabricated versions, continue-on-error, omission of tool dependencies, a lower severity threshold or forced SDK downgrade as a substitute for remediation.
 
-No option is activated by this proposal. ADR-012 states: “A release requires upstream updates or a separately reviewed security decision.” The current failing security gate remains active until an explicit owner decision.
+The owner decision authorizes only this bounded tooling exception. ADR-012 states: “A release requires upstream updates or a separately reviewed security decision.” Raw npm audit remains unchanged; the separate policy check can pass only with verified patches and reviewed ancestry. No store submission is authorized by this decision.
 
 Sources: [braces advisory](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm), [forge advisory](https://github.com/advisories/GHSA-86w9-cpqp-85rv), [existing mitigation decision](012-guarded-security-mitigations.md).
 
 ## Concrete patched-source candidate
 
-SHA-256 values from the clean npm ci installation verified on 2026-10-15. This is review evidence; no policy consumes these hashes yet. Changes to these bytes require another review.
+SHA-256 values from the clean npm ci installation verified on 2026-10-15. scripts/security/patch-manifest.json enforces these hashes, exact root package versions, installed paths and all 18 reviewed propagation entries. Changes to these bytes or ancestry require another review.
 
 | Package          | Patched source   | SHA-256                                                            |
 | ---------------- | ---------------- | ------------------------------------------------------------------ |

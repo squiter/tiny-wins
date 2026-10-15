@@ -18,3 +18,5 @@ android/
 expo-env.d.ts
 # @end expo-cli
 *.tinywins.json
+/dependency-audit.json
+/production-module-inspection.json

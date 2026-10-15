@@ -21,6 +21,8 @@
     "verify": "npm run typecheck && npm run lint && npm run format:check && npm run test:unit && npm run test:integration && npm run build",
     "test:e2e": "maestro test .maestro/first-win.yaml",
     "security": "npm audit --audit-level=high",
+    "security:policy": "node scripts/security/check-audit.mjs",
+    "security:bundle": "expo export --platform ios --source-maps --output-dir .expo/security-bundle && node scripts/security/check-bundle.mjs",
     "web": "npm run preview",
     "build:web": "expo export --platform web",
     "preview": "npm run build:web && node scripts/preview.mjs",

@@ -1,5 +1,7 @@
 # Remaining delivery work
 
+Current security decision: task [022](tasks/022-verified-tooling-audit-policy.md) implements the owner-conditionally-approved temporary tooling policy in ADR-020. Inspected production iOS source map excludes both affected packages; signed-candidate inspection remains required. Raw scanner stays nonzero/visible. CI requires exact patch hashes, reviewed ancestry, passing mitigation regressions and expiry before 2026-10-22T00:00:00Z. Earlier pending/unapproved policy statements below are historical and superseded.
+
 Build priority (2026-10-15): task [021](tasks/021-ci-failure-audit.md) confirms current iOS/Android compilation, verify and all eight iPhone flows PASS. Only dependency-audit fails. Clean install/regressions confirm existing source mitigations; upstream still has no patched release. [ADR-020](../docs/adr/020-proposed-patched-dependency-audit-policy.md) is an unapproved temporary policy proposal with exact hashes/expiry. Raw audit remains blocking; no exception has been applied. Await owner decision before changing policy.
 
 Owner steering: fix current problems while enrollment is handled separately. Task [020](tasks/020-native-appearance-and-name-input.md) implements automatic native appearance and literal title editing, with exact-name and OS-theme acceptance. Local/browser gates and matching native eight-flow acceptance on ca24722 PASS (run 38656406501). Next: native backup dialogs/accessibility and security remediation when corrected upstream versions become available. No new product features added.

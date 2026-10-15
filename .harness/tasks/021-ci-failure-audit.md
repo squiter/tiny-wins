@@ -1,6 +1,6 @@
 # Task: 021 — Resolve current CI failures
 
-Status: in progress (audit policy decision pending)
+Status: complete (diagnosis/evidence; conditional policy implementation is task 022)
 Goal: Establish current compilation/runtime results, reproduce the remaining failure and prepare a concrete remediation decision without hiding security findings.
 Non-goals: Features, store setup, forced SDK downgrade, dependency renaming, automatic advisory exceptions or weakened security checks.
 Files/modules allowed: CI audit evidence output, scoped proposed ADR, harness tasks/backlog and security/delivery/release evidence.
@@ -17,3 +17,5 @@ Required tests: Clean install, aggregate verify, audit command exit status/JSON 
 Commands executed / results: Clean npm ci PASS; npm run verify PASS (70 unit + 22 SQLite integration including mitigation regressions, types/lint/format, three exports). npm run --silent security -- --json exits 1 with valid JSON: 18 high / 0 moderate / 0 critical. Registry still reports braces 3.0.3 / node-forge 1.4.0; GitHub advisories list no patched release. ca24722 iOS/Android builds and eight-flow native JUnit/capture review PASS. Workflow audit remains blocking and now preserves its JSON artifact. Proposed ADR-020 includes exact patched-file hashes and expiration; unapproved, no exception implemented.
 Open questions: No published corrected braces/node-forge release on 2026-10-15. Raw audit remains a release gate; a separately reviewed policy decision is required by ADR-012 before any exception.
 Handoff summary: No security exception approved or applied.
+
+Owner follow-up conditionally approves a temporary patch if this issue is not an App Store blocker. Task 022 records Apple guidance, inspected iOS production module reachability and the strict expiring policy implementation. This supersedes earlier unapproved/pending statements; raw audit remains nonzero.

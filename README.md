@@ -137,9 +137,13 @@ JavaScript exports are separate from compiled, signed native apps. Maestro clear
 
 Tiny Wins is **in active development**, with iOS as the first release target and a shared Android codebase. Native accessibility, enlarged-text review, file-dialog acceptance and Android runtime validation remain release work. Check the [delivery report](docs/DELIVERY_REPORT.md) and [harness tasks](.harness/tasks) for the evidence and open gates of each slice.
 
-The dependency audit has documented upstream blockers and remains a release gate. Temporary mitigations and remaining findings are recorded in the [CI/security report](docs/CI_SECURITY_REPORT.md); findings are not suppressed. SQLite web compatibility patches are documented in [ADR-008](docs/adr/008-sqlite-web-bridge-fix.md).
+The raw dependency audit retains upstream alerts. A temporary, owner-approved [tooling policy](docs/adr/020-proposed-patched-dependency-audit-policy.md) checks exact patched sources, known advisories and expiration; unknown findings still block CI. Final signed-build dependency inspection remains a release gate. Temporary mitigations and remaining findings are recorded in the [CI/security report](docs/CI_SECURITY_REPORT.md); findings are not suppressed. SQLite web compatibility patches are documented in [ADR-008](docs/adr/008-sqlite-web-bridge-fix.md).
 
 The official App Store release is planned as a **one-time paid download**, with no in-app payments or subscription. Store publication, final identifiers, branding and pricing are still pending. An open-source license has not yet been selected.
+
+`npm run security:bundle` exports production iOS JS and rejects affected tooling modules.
+
+`npm run security:policy` evaluates the temporary patched-tooling policy and retains the unmodified raw audit report/result. A policy pass is not a clean raw audit.
 
 ## Explore the project
 
