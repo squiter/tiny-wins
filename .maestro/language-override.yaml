@@ -39,7 +39,7 @@ appId: app.tinywins.mobile
     direction: DOWN
 - tapOn:
     id: save-habit
-- assertVisible: Quiet reading
+- assertVisible: Ver Quiet reading, 0 vitória seguida
 - tapOn: Concluir Quiet reading hoje
 - assertVisible: '(?s)Tudo feito por hoje!.*'
 - takeScreenshot: language-portuguese-win
@@ -88,7 +88,7 @@ appId: app.tinywins.mobile
       id: add-habit
     timeout: 120000
 - assertVisible: Today
-- assertVisible: Quiet reading
+- assertVisible: View Quiet reading, 1 win in a row
 - tapOn: View Quiet reading, 1 win in a row
 - tapOn:
     id: inspect-today
