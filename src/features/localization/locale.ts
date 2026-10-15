@@ -45,7 +45,8 @@ export function formatNumber(
 export function pluralForm(value: number, language: InterfaceLanguage): 'one' | 'other' {
   if (!Number.isInteger(value) || value < 0)
     throw new Error('A displayed count must be a non-negative integer.');
-  return new Intl.PluralRules(language).select(value) === 'one' ? 'one' : 'other';
+  // Only whole counts and these two languages are supported. Hermes lacks PluralRules.
+  return value === 1 || (language === 'pt-BR' && value === 0) ? 'one' : 'other';
 }
 
 export function weekdayHeadings(language: InterfaceLanguage, startsOn: WeekStartsOn) {

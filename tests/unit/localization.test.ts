@@ -61,6 +61,22 @@ describe('interface language boundary', () => {
       expect(() => formatNumber(value, 'pt-BR')).toThrow();
   });
 
+  it('formats supported whole-count plurals when the native engine has no Intl.PluralRules', () => {
+    const descriptor = Object.getOwnPropertyDescriptor(Intl, 'PluralRules')!;
+    Object.defineProperty(Intl, 'PluralRules', { ...descriptor, value: undefined });
+    try {
+      for (const language of ['en', 'pt-BR'] as const) {
+        expect([0, 1, 2, 100, 1_000_000].map((n) => pluralForm(n, language))).toEqual(
+          language === 'en'
+            ? ['other', 'one', 'other', 'other', 'other']
+            : ['one', 'one', 'other', 'other', 'other'],
+        );
+      }
+    } finally {
+      Object.defineProperty(Intl, 'PluralRules', descriptor);
+    }
+  });
+
   it('rotates seven localized headings without changing the chosen week start', () => {
     const sunday = weekdayHeadings('pt-BR', 0);
     const monday = weekdayHeadings('pt-BR', 1);

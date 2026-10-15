@@ -17,7 +17,7 @@ appId: app.tinywins.mobile
 - assertVisible: Idioma
 - assertVisible:
     id: language-pt-BR
-    checked: true
+    text: 'Português \(Brasil\), selecionado'
 - takeScreenshot: language-portuguese-settings
 - stopApp
 - launchApp
@@ -78,6 +78,9 @@ appId: app.tinywins.mobile
 - tapOn:
     id: language-en
 - assertVisible: Language
+- assertVisible:
+    id: language-en
+    text: English, selected
 - stopApp
 - launchApp
 - extendedWaitUntil:

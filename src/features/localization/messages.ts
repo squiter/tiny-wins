@@ -2,6 +2,7 @@ import { formatNumber, pluralForm, type InterfaceLanguage } from './locale';
 
 // English source copy is the stable key; both languages share placeholders.
 export const portuguese = {
+  '{language}, selected': '{language}, selecionado',
   '{wins} of {planned} planned win': '{wins} de {planned} vitória planejada',
   Plant: 'Planta',
   Water: 'Água',

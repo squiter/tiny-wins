@@ -75,40 +75,42 @@ export default function Settings() {
             accessibilityLabel={t('Interface language')}
             style={styles.appearanceChoices}
           >
-            {(['system', 'en', 'pt-BR'] as const).map((value) => (
-              <Pressable
-                key={value}
-                testID={`language-${value}`}
-                accessibilityRole="radio"
-                accessibilityLabel={
-                  value === 'system'
-                    ? t('System')
-                    : value === 'en'
-                      ? 'English'
-                      : 'Português (Brasil)'
-                }
-                accessibilityState={{ checked: language === value }}
-                aria-checked={language === value}
-                onPress={() => {
-                  try {
-                    setLanguage(value);
-                    setError('');
-                  } catch {
-                    setError('We couldn’t save your preference. Please try again.');
+            {(['system', 'en', 'pt-BR'] as const).map((value) => {
+              const name =
+                value === 'system'
+                  ? t('System')
+                  : value === 'en'
+                    ? 'English'
+                    : 'Português (Brasil)';
+              return (
+                <Pressable
+                  key={value}
+                  testID={`language-${value}`}
+                  accessibilityRole="radio"
+                  accessibilityLabel={
+                    language === value ? t('{language}, selected', { language: name }) : name
                   }
-                }}
-                style={[styles.choice, language === value && styles.chosen]}
-              >
-                <Text style={[styles.choiceText, language === value && { color: theme.onPrimary }]}>
-                  {language === value ? '✓ ' : ''}
-                  {value === 'system'
-                    ? t('System')
-                    : value === 'en'
-                      ? 'English'
-                      : 'Português (Brasil)'}
-                </Text>
-              </Pressable>
-            ))}
+                  accessibilityState={{ checked: language === value }}
+                  aria-checked={language === value}
+                  onPress={() => {
+                    try {
+                      setLanguage(value);
+                      setError('');
+                    } catch {
+                      setError('We couldn’t save your preference. Please try again.');
+                    }
+                  }}
+                  style={[styles.choice, language === value && styles.chosen]}
+                >
+                  <Text
+                    style={[styles.choiceText, language === value && { color: theme.onPrimary }]}
+                  >
+                    {language === value ? '✓ ' : ''}
+                    {name}
+                  </Text>
+                </Pressable>
+              );
+            })}
           </View>
           <Text style={styles.copy}>
             {t(
