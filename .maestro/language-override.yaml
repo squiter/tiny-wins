@@ -31,6 +31,15 @@ appId: app.tinywins.mobile
     timeout: 120000
 - tapOn:
     id: add-habit
+    retryTapIfNoChange: true
+- runFlow:
+    when:
+      notVisible: Fechar editor de hábito
+    commands:
+      - tapOn:
+          id: add-habit
+          retryTapIfNoChange: true
+- assertVisible: Fechar editor de hábito
 - assertVisible: Novo hábito
 - tapOn:
     id: habit-name

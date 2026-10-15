@@ -9,6 +9,14 @@ appId: app.tinywins.mobile
 - tapOn:
     id: add-habit
     retryTapIfNoChange: true
+- runFlow:
+    when:
+      notVisible: Close habit editor
+    commands:
+      - tapOn:
+          id: add-habit
+          retryTapIfNoChange: true
+- assertVisible: Close habit editor
 - tapOn:
     id: habit-name
 - inputText: Read one page

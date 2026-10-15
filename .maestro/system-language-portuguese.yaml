@@ -58,6 +58,15 @@ appId: app.tinywins.mobile
 - tapOn: Hoje, tab, 1 of 3
 - tapOn:
     id: add-habit
+    retryTapIfNoChange: true
+- runFlow:
+    when:
+      notVisible: Fechar editor de hábito
+    commands:
+      - tapOn:
+          id: add-habit
+          retryTapIfNoChange: true
+- assertVisible: Fechar editor de hábito
 - assertVisible: Novo hábito
 - takeScreenshot: language-portuguese-large-editor
 - scrollUntilVisible:
@@ -68,5 +77,10 @@ appId: app.tinywins.mobile
 - takeScreenshot: language-portuguese-large-editor-actions
 - tapOn: Cancelar
 - tapOn: Progresso, tab, 2 of 3
+- assertVisible: Progresso
+- takeScreenshot: language-portuguese-large-insights-header
+- scrollUntilVisible:
+    element: Sua primeira vitória é um começo.
+    direction: DOWN
 - assertVisible: Sua primeira vitória é um começo.
 - takeScreenshot: language-portuguese-large-insights
