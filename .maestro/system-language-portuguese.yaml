@@ -10,7 +10,11 @@ appId: app.tinywins.mobile
     timeout: 120000
 - assertVisible: Hoje
 - assertVisible: Comece com uma pequena coisa.
-- tapOn: Ajustes, tab, 3 of 3
+- tapOn:
+    text: Ajustes, tab, 3 of 3
+    retryTapIfNoChange: true
+- assertVisible:
+    id: settings-theme-(light|dark)
 - scrollUntilVisible:
     element:
       id: language-system
@@ -34,7 +38,11 @@ appId: app.tinywins.mobile
       id: add-habit
     timeout: 120000
 - assertVisible: Today
-- tapOn: Settings, tab, 3 of 3
+- tapOn:
+    text: Settings, tab, 3 of 3
+    retryTapIfNoChange: true
+- assertVisible:
+    id: settings-theme-(light|dark)
 - scrollUntilVisible:
     element:
       id: language-system

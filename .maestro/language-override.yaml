@@ -6,7 +6,11 @@ appId: app.tinywins.mobile
     visible:
       id: add-habit
     timeout: 120000
-- tapOn: Settings, tab, 3 of 3
+- tapOn:
+    text: Settings, tab, 3 of 3
+    retryTapIfNoChange: true
+- assertVisible:
+    id: settings-theme-(light|dark)
 - scrollUntilVisible:
     element:
       id: language-pt-BR
@@ -88,7 +92,11 @@ appId: app.tinywins.mobile
 - takeScreenshot: language-portuguese-note-restart
 - tapOn: Fechar dia
 - tapOn: Voltar
-- tapOn: Ajustes, tab, 3 of 3
+- tapOn:
+    text: Ajustes, tab, 3 of 3
+    retryTapIfNoChange: true
+- assertVisible:
+    id: settings-theme-(light|dark)
 - scrollUntilVisible:
     element:
       id: language-en

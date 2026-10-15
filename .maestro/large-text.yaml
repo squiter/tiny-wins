@@ -47,7 +47,11 @@ appId: app.tinywins.mobile
     direction: DOWN
     centerElement: true
 - takeScreenshot: cozy-large-text-wall
-- tapOn: Settings, tab, 3 of 3
+- tapOn:
+    text: Settings, tab, 3 of 3
+    retryTapIfNoChange: true
+- assertVisible:
+    id: settings-theme-(light|dark)
 - scrollUntilVisible:
     element:
       id: celebration-animations

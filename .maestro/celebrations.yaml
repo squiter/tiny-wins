@@ -28,7 +28,11 @@ appId: app.tinywins.mobile
 - takeScreenshot: cozy-all-day
 - tapOn: Undo Little reading today
 - assertVisible: View Little reading, 0 wins in a row
-- tapOn: Settings, tab, 3 of 3
+- tapOn:
+    text: Settings, tab, 3 of 3
+    retryTapIfNoChange: true
+- assertVisible:
+    id: settings-theme-(light|dark)
 - scrollUntilVisible:
     element:
       id: celebration-animations
@@ -46,7 +50,11 @@ appId: app.tinywins.mobile
 - tapOn: Complete Little reading today
 - assertVisible: View Little reading, 1 win in a row
 - assertVisible: '(?s)All done for today!.*'
-- tapOn: Settings, tab, 3 of 3
+- tapOn:
+    text: Settings, tab, 3 of 3
+    retryTapIfNoChange: true
+- assertVisible:
+    id: settings-theme-(light|dark)
 - scrollUntilVisible:
     element:
       id: celebration-animations
