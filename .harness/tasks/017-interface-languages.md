@@ -1,6 +1,6 @@
 # Task: 017 — English and Brazilian Portuguese
 
-Status: ready
+Status: in progress
 Goal: Follow supported device language and offer a saved interface-language override, starting with English and Brazilian Portuguese.
 Non-goals: Translating user habit names/notes, changing calendar dates/schedules/week start, translation services, store metadata or release settings.
 Files/modules allowed: Typed interface copy/formatters, preference domain/repository/context and additive migration, UI strings/accessibility/errors, deterministic tests, native flows and documentation/ADR.
@@ -16,6 +16,6 @@ Acceptance criteria:
 - Keep existing English native regressions and add Portuguese selection/restart/check-in/note acceptance. Document actual system-language detection evidence and unavailable Android/physical checks.
 
 Required tests: Typed key coverage and deterministic plurals/date/number/fallback tests; real SQLite additive migration/reopen/restore preservation; npm run verify; browser English/Portuguese 360/390 and native language/restart/enlarged-text flows.
-Commands executed / results: Planning only; reviewed owner language refinement and current preference/appearance/feedback boundaries. No implementation or dependency change.
-Open questions: Confirm native device-language API feasibility and system-change behavior; record an ADR before preference/UI implementation.
-Handoff summary: Selected next slice after tasks 015/016. Scope is interface language; user data keeps its original text and calendar meaning.
+Commands executed / results: Task 025 implements the pure locale boundary, with six new tests; npm run verify PASS (92 unit + 23 integration, strict checks and all three JS exports). ADR-021 records fallback and date safety. Full catalog/UI, saved preference migration and native detection/acceptance are not yet implemented. No dependency change.
+Open questions: Native detection uses Expo SDK 57-compatible expo-localization (~57.0.2), pending explicit dependency authorization under AGENTS.md. Pure locale resolution/formatting can proceed independently.
+Handoff summary: First in the owner-approved sequence: languages → suggestions → flexible weekly goals → timer. Pure foundation complete in task 025; finish native detection authorization, catalog/UI and saved preference next. User data keeps its original text and calendar meaning.
