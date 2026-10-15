@@ -46,14 +46,30 @@ appId: app.tinywins.mobile
 - tapOn: Ver Quiet reading, 1 vitória seguida
 - tapOn:
     id: inspect-today
+- scrollUntilVisible:
+    element:
+      id: day-note
+    direction: DOWN
 - tapOn:
     id: day-note
 - inputText: Uma pagina, ja valeu.
+- assertVisible: Uma pagina, ja valeu.
+- scrollUntilVisible:
+    element:
+      id: day-note-done-typing
+    direction: DOWN
 - tapOn:
     id: day-note-done-typing
+- scrollUntilVisible:
+    element:
+      id: save-day-note
+    direction: DOWN
 - tapOn:
     id: save-day-note
 - assertVisible: Nota salva.
+- scrollUntilVisible:
+    element: Fechar dia
+    direction: DOWN
 - tapOn: Fechar dia
 - stopApp
 - launchApp
@@ -64,6 +80,9 @@ appId: app.tinywins.mobile
 - tapOn: Ver Quiet reading, 1 vitória seguida
 - tapOn:
     id: inspect-today
+- scrollUntilVisible:
+    element: Uma pagina, ja valeu.
+    direction: DOWN
 - assertVisible: Uma pagina, ja valeu.
 - assertVisible: Uma vitória para guardar.
 - takeScreenshot: language-portuguese-note-restart
