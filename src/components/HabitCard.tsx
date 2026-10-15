@@ -12,7 +12,8 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { currentStreak, history, type Completion, type Habit } from '../domain/habit';
+import { habitMetrics } from '../domain/metrics';
+import { history, type Completion, type Habit } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
 import { scheduledOn } from '../domain/schedule';
 import { useTheme, useThemeStyles } from '../theme/useTheme';
@@ -38,7 +39,7 @@ export function HabitCard({
   onInspect,
   ordering,
 }: Props) {
-  const { t, count, cellLabel } = useI18n();
+  const { t, count, cellLabel, weeklyProgress, shortWeekLabel } = useI18n();
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const cells = history(habit, completions, today, notes);
@@ -73,7 +74,13 @@ export function HabitCard({
     transform: [{ translateY: -12 * (1 - sparkle.value) }, { scale: 0.8 + 0.2 * sparkle.value }],
   }));
   const feedbackStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
-  const streak = currentStreak(habit, completions, today);
+  const metrics = habitMetrics(habit, completions, today);
+  const streak = metrics.currentStreak;
+  const status = metrics.weekly
+    ? `${weeklyProgress(metrics.weekly.wins, metrics.weekly.target)}${metrics.weekly.achieved ? ' ✓' : ''}`
+    : due
+      ? count(streak, '{count} win in a row', '{count} wins in a row')
+      : t('Not scheduled today');
   return (
     <Animated.View
       layout={LinearTransition.duration(180).reduceMotion(ReduceMotion.System)}
@@ -85,9 +92,7 @@ export function HabitCard({
           accessibilityRole="button"
           accessibilityLabel={t('View {title}, {status}', {
             title: habit.title,
-            status: due
-              ? count(streak, '{count} win in a row', '{count} wins in a row')
-              : t('Not scheduled today'),
+            status,
           })}
           disabled={!!ordering}
           onPress={onView}
@@ -101,10 +106,14 @@ export function HabitCard({
               {habit.title}
             </Text>
             <Text style={styles.support}>
-              {due
-                ? count(streak, '{count} win in a row', '{count} wins in a row')
-                : t('Not scheduled today')}
+              {status}
+              {metrics.weekly
+                ? ` · ${count(streak, '{count} week in a row', '{count} weeks in a row')}`
+                : ''}
             </Text>
+            {metrics.weekly && metrics.weekly.target < metrics.weekly.goal && (
+              <Text style={styles.support}>{shortWeekLabel(metrics.weekly.target)}</Text>
+            )}
           </View>
         </Pressable>
         {ordering ? (
@@ -207,7 +216,7 @@ export function HabitCard({
                 maxFontSizeMultiplier={1}
                 style={[styles.cellMark, { color: done ? theme.onHabit : color }]}
               >
-                {done ? '✓' : due ? '•' : '–'}
+                {done ? '✓' : cell.state === 'flexible' ? '◇' : due ? '•' : '–'}
               </Text>
             </Pressable>
           ) : (
@@ -230,9 +239,11 @@ export function HabitCard({
                   ? '✓'
                   : cell.state === 'grace'
                     ? '○'
-                    : cell.state === 'not-scheduled'
-                      ? '–'
-                      : ''}
+                    : cell.state === 'flexible'
+                      ? '◇'
+                      : cell.state === 'not-scheduled'
+                        ? '–'
+                        : ''}
               </Text>
             </Pressable>
           );

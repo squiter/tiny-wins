@@ -6,6 +6,8 @@ import {
   scheduledOn,
   validateTolerance,
   validateWeekdays,
+  validateWeeklyGoal,
+  type WeeklyGoal,
   type Weekday,
 } from '../../domain/schedule';
 import type { LocalDate } from '../../domain/calendar';
@@ -23,6 +25,7 @@ export function createHabit(
   icon: IconKey = 'plant',
   days: Weekday[] = [...allWeekdays],
   streakTolerance = 0,
+  weekly?: WeeklyGoal | null,
 ) {
   const now = clock.now();
   const timezone = clock.timezone();
@@ -40,8 +43,9 @@ export function createHabit(
     schedule: [
       {
         from: localDay(now, timezone),
-        days: validateWeekdays(days),
-        ...(validateTolerance(streakTolerance) > 0 ? { streakTolerance } : {}),
+        days: weekly ? [...allWeekdays] : validateWeekdays(days),
+        ...(weekly ? { weekly: validateWeeklyGoal(weekly) } : {}),
+        ...(!weekly && validateTolerance(streakTolerance) > 0 ? { streakTolerance } : {}),
       },
     ],
   });

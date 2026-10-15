@@ -1,0 +1,101 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn:
+    id: add-habit
+    retryTapIfNoChange: true
+- runFlow:
+    when:
+      notVisible: Close habit editor
+    commands:
+      - tapOn:
+          id: add-habit
+          retryTapIfNoChange: true
+- assertVisible: Close habit editor
+- tapOn:
+    id: habit-name
+- inputText: Walk freely
+- assertVisible: Walk freely
+- tapOn: Done typing
+- scrollUntilVisible:
+    element:
+      id: frequency-weekly
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: frequency-weekly
+- scrollUntilVisible:
+    element:
+      id: weekly-goal-decrease
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: weekly-goal-decrease
+- tapOn:
+    id: weekly-goal-decrease
+- assertVisible:
+    id: weekly-goal-target
+    text: 1 day each week
+- takeScreenshot: weekly-goal-editor
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
+- tapOn:
+    id: save-habit
+- assertVisible: View Walk freely, 0/1 day this week
+- assertVisible: Your week, your rhythm.
+- tapOn: Complete Walk freely today
+- assertVisible: View Walk freely, 1/1 day this week ✓
+- assertNotVisible: 'All done for today!.*'
+- takeScreenshot: weekly-goal-win
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible: View Walk freely, 1/1 day this week ✓
+    timeout: 120000
+- tapOn: View Walk freely, 1/1 day this week ✓
+- assertVisible: '.*Weekly goal met ✓.*'
+- scrollUntilVisible:
+    element: Current streak · weeks
+    direction: DOWN
+    centerElement: true
+- assertVisible: Current streak · weeks
+- scrollUntilVisible:
+    element: Edit habit
+    direction: UP
+- tapOn: Edit habit
+- assertVisible: Close habit editor
+- scrollUntilVisible:
+    element:
+      id: weekly-goal-increase
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: weekly-goal-increase
+- assertVisible:
+    id: weekly-goal-target
+    text: 2 days each week
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
+- tapOn:
+    id: save-habit
+- assertVisible: 'Schedule changes start on .*'
+- assertVisible: '.*Weekly goal met ✓.*'
+- tapOn: Go back
+- assertVisible: View Walk freely, 1/1 day this week ✓
+- tapOn: Undo Walk freely today
+- assertVisible: View Walk freely, 0/1 day this week
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible: View Walk freely, 0/1 day this week
+    timeout: 120000
+- takeScreenshot: weekly-goal-restart-undone

@@ -45,6 +45,8 @@ UPDATE habits SET sort_order = (
   `ALTER TABLE preferences ADD COLUMN appearance TEXT NOT NULL DEFAULT 'system' CHECK(appearance IN ('system', 'light', 'dark'));`,
   `ALTER TABLE preferences ADD COLUMN celebration_animations INTEGER NOT NULL DEFAULT 1 CHECK(celebration_animations IN (0, 1));`,
   `ALTER TABLE preferences ADD COLUMN language TEXT NOT NULL DEFAULT 'system' CHECK(language IN ('system', 'en', 'pt-BR'));`,
+  // New schedule JSON semantics need the existing downgrade guard, not a table rewrite.
+  `SELECT 1;`,
 ];
 export function migrate(database: MigrationDatabase) {
   database.execSync('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL;');

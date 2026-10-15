@@ -23,7 +23,12 @@ import {
 } from '../../src/features/habits/service';
 import { parseBackup, serializeBackup } from '../../src/domain/backup';
 import { currentStreak, calendarCells } from '../../src/domain/habit';
-import { allWeekdays, plannedTolerance } from '../../src/domain/schedule';
+import {
+  allWeekdays,
+  plannedTolerance,
+  plannedVersion,
+  versionOn,
+} from '../../src/domain/schedule';
 import { dateKey } from '../../src/domain/calendar';
 const directories: string[] = [];
 const databases: Database.Database[] = [];
@@ -55,6 +60,230 @@ const clock: Clock = {
   timezone: () => 'America/Sao_Paulo',
 };
 describe('real SQLite + shared Drizzle adapter', () => {
+  it('upgrades v8 without rewriting legacy JSON and keeps weekly policies across reopen, stable display preferences and atomic v4 restore', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-weekly-'));
+    directories.push(directory);
+    const path = join(directory, 'weekly.db');
+    let connection = open(path);
+    const at = (date: string): Clock => ({
+      now: () => new Date(`${date}T12:00:00Z`),
+      timezone: () => 'America/Sao_Paulo',
+    });
+    const monday = at('2024-12-23');
+    createHabit(connection.repository, monday, 'daily', 'Read daily', 'coral', 'book');
+    const legacy = connection.repository.getHabit('daily');
+    const legacyJson = connection.sqlite
+      .prepare("SELECT schedule FROM habits WHERE id = 'daily'")
+      .get();
+    connection.sqlite.exec('PRAGMA user_version = 8');
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 9 });
+    expect(
+      connection.sqlite.prepare("SELECT schedule FROM habits WHERE id = 'daily'").get(),
+    ).toEqual(legacyJson);
+    expect(connection.repository.getHabit('daily')).toEqual(legacy);
+    createHabit(
+      connection.repository,
+      monday,
+      'walk',
+      'Walk freely',
+      'teal',
+      'walk',
+      [...allWeekdays],
+      0,
+      { target: 3, weekStartsOn: 1 },
+    );
+    toggleToday(connection.repository, monday, 'walk');
+    toggleToday(connection.repository, monday, 'walk');
+    toggleToday(connection.repository, monday, 'walk');
+    setDayCompletion(connection.repository, at('2024-12-27'), 'walk', dateKey('2024-12-25'), true);
+    setDayCompletion(connection.repository, at('2024-12-27'), 'walk', dateKey('2024-12-25'), true);
+    expect(connection.repository.listCompletions()).toHaveLength(2);
+    connection.repository.setWeekStartsOn(0);
+    connection.repository.setLanguage('pt-BR');
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 9 });
+    expect(connection.repository.getHabit('daily')).toEqual(legacy);
+    expect(connection.repository.getHabit('walk')!.schedule[0]!.weekly).toEqual({
+      target: 3,
+      weekStartsOn: 1,
+    });
+    expect(connection.repository.getWeekStartsOn()).toBe(0);
+    const before = connection.repository.getHabit('walk')!;
+    editHabit(
+      connection.repository,
+      'walk',
+      before.title,
+      before.color,
+      before.icon,
+      at('2024-12-27'),
+      [...allWeekdays],
+      0,
+      { target: 2, weekStartsOn: 1 },
+    );
+    editHabit(
+      connection.repository,
+      'walk',
+      before.title,
+      before.color,
+      before.icon,
+      at('2024-12-27'),
+      [...allWeekdays],
+      0,
+      { target: 4, weekStartsOn: 1 },
+    );
+    expect(connection.repository.getHabit('walk')!.schedule).toEqual([
+      before.schedule[0],
+      {
+        from: dateKey('2024-12-30'),
+        days: [...allWeekdays],
+        weekly: { target: 4, weekStartsOn: 1 },
+      },
+    ]);
+    archiveHabit(connection.repository, at('2024-12-27'), 'walk');
+    expect(
+      versionOn(connection.repository.getHabit('walk')!.schedule, dateKey('2024-12-28'))!.days,
+    ).toEqual([]);
+    restoreHabit(connection.repository, 'walk', at('2024-12-28'));
+    const restored = connection.repository.getHabit('walk')!;
+    expect(versionOn(restored.schedule, dateKey('2024-12-29'))!.weekly?.target).toBe(3);
+    expect(versionOn(restored.schedule, dateKey('2024-12-30'))!.weekly?.target).toBe(4);
+    const backup = parseBackup(
+      serializeBackup(
+        connection.repository.listHabits(),
+        connection.repository.listCompletions(),
+        monday.now(),
+        connection.repository.listNotes(),
+      ),
+    );
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getHabit('walk')).toEqual(restored);
+    const target = open(join(directory, 'restored.db'));
+    target.repository.setWeekStartsOn(0);
+    target.repository.setLanguage('en');
+    expect(target.repository.mergeBackup(backup)).toEqual({
+      habitsAdded: 2,
+      winsAdded: 2,
+      notesAdded: 0,
+    });
+    expect(target.repository.mergeBackup(backup)).toEqual({
+      habitsAdded: 0,
+      winsAdded: 0,
+      notesAdded: 0,
+    });
+    expect(target.repository.getHabit('walk')!.schedule).toEqual(restored.schedule);
+    expect(target.repository.getLanguage()).toBe('en');
+    expect(target.repository.getWeekStartsOn()).toBe(0);
+    const conflict = structuredClone(backup);
+    conflict.habits.unshift({ ...restored, id: 'new-before-conflict' });
+    conflict.habits[1]!.startsOn = dateKey('2024-12-22');
+    conflict.habits[1]!.schedule[0]!.from = dateKey('2024-12-22');
+    expect(() => target.repository.mergeBackup(parseBackup(JSON.stringify(conflict)))).toThrow(
+      'conflicts',
+    );
+    expect(target.repository.getHabit('new-before-conflict')).toBeUndefined();
+    expect(() =>
+      createHabit(
+        target.repository,
+        monday,
+        'bad',
+        'Bad goal',
+        'teal',
+        'walk',
+        [...allWeekdays],
+        0,
+        { target: 8, weekStartsOn: 1 },
+      ),
+    ).toThrow();
+    expect(target.repository.getHabit('bad')).toBeUndefined();
+  });
+
+  it('converts modes at the next saved boundary and distinguishes weekly wins from daily all-done feedback', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-weekly-transition-'));
+    directories.push(directory);
+    const { repository } = open(join(directory, 'test.db'));
+    const at = (date: string): Clock => ({
+      now: () => new Date(`${date}T12:00:00Z`),
+      timezone: () => 'UTC',
+    });
+    createHabit(repository, at('2024-12-23'), 'daily', 'Daily', 'coral', 'book');
+    createHabit(
+      repository,
+      at('2024-12-23'),
+      'weekly',
+      'Weekly',
+      'teal',
+      'walk',
+      [...allWeekdays],
+      0,
+      { target: 1, weekStartsOn: 1 },
+    );
+    const weeklyOutcome = toggleToday(repository, at('2024-12-23'), 'weekly');
+    expect(checkInCelebration(repository, at('2024-12-23'), weeklyOutcome)).toBe('win');
+    const dailyOutcome = toggleToday(repository, at('2024-12-23'), 'daily');
+    expect(checkInCelebration(repository, at('2024-12-23'), dailyOutcome)).toBe('all-day');
+    const weekUndo = toggleToday(repository, at('2024-12-23'), 'weekly');
+    expect(checkInCelebration(repository, at('2024-12-23'), weekUndo)).toBeNull();
+    expect(
+      checkInCelebration(
+        repository,
+        at('2024-12-23'),
+        toggleToday(repository, at('2024-12-23'), 'weekly'),
+      ),
+    ).toBe('win');
+    const original = repository.getHabit('daily')!;
+    editHabit(
+      repository,
+      'daily',
+      original.title,
+      original.color,
+      original.icon,
+      at('2024-12-25'),
+      [...allWeekdays],
+      0,
+      { target: 3, weekStartsOn: 0 },
+    );
+    expect(repository.getHabit('daily')!.schedule[1]!.from).toBe('2024-12-29');
+    archiveHabit(repository, at('2024-12-25'), 'daily');
+    restoreHabit(repository, 'daily', at('2024-12-26'));
+    const policies = repository.getHabit('daily')!.schedule;
+    expect(versionOn(policies, dateKey('2024-12-27'))!.weekly).toBeUndefined();
+    expect(versionOn(policies, dateKey('2024-12-29'))!.weekly).toEqual({
+      target: 3,
+      weekStartsOn: 0,
+    });
+    parseBackup(
+      serializeBackup(
+        repository.listHabits(),
+        repository.listCompletions(),
+        at('2024-12-29').now(),
+      ),
+    );
+    expect(plannedVersion(policies).weekly?.weekStartsOn).toBe(0);
+    editHabit(
+      repository,
+      'daily',
+      original.title,
+      original.color,
+      original.icon,
+      at('2024-12-30'),
+      [1, 3, 5],
+      1,
+      null,
+    );
+    expect(repository.getHabit('daily')!.schedule.at(-1)).toEqual({
+      from: dateKey('2025-01-05'),
+      days: [1, 3, 5],
+      streakTolerance: 1,
+    });
+    expect(repository.listCompletions().find((win) => win.habitId === 'daily')?.localDate).toBe(
+      '2024-12-23',
+    );
+  });
+
   it('upgrades v7 language preference, preserves history and restores without replacing device language', () => {
     const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-language-'));
     directories.push(directory);
@@ -112,7 +341,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(connection.repository.getLanguage()).toBe('en');
     connection.repository.setLanguage('system');
     expect(connection.repository.listNotes()).toEqual(notes);
-    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 8 });
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 9 });
   });
 
   it('upgrades v6 animation preference, reopens and keeps history/backup restoration independent', () => {
@@ -368,7 +597,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(
       connection.sqlite.prepare('SELECT schedule FROM habits WHERE id=?').get('strict'),
     ).toEqual(legacyJson);
-    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 8 });
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 9 });
     const backup = parseBackup(
       serializeBackup(connection.repository.listHabits(), completions, later.now()),
     );
@@ -438,7 +667,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(repository.getHabit('b')?.startsOn).toBe('2024-02-29');
     expect(repository.listCompletions()[0]?.localDate).toBe('2024-02-29');
     migrate(adapter);
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 8 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 9 });
     sqlite.close();
     expect(open(path).repository.listCompletions()).toHaveLength(1);
   });
@@ -666,9 +895,12 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(repository.listHabits()).toHaveLength(1);
   });
   it('rejects unknown future schema without modifying user data', () => {
-    const { sqlite, adapter } = open(':memory:');
-    sqlite.exec('PRAGMA user_version = 9');
+    const { sqlite, adapter, repository } = open(':memory:');
+    createHabit(repository, clock, 'kept', 'Keep my history', 'forest');
+    const before = repository.listHabits();
+    sqlite.exec('PRAGMA user_version = 10');
     expect(() => migrate(adapter)).toThrow('newer Tiny Wins');
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 9 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 10 });
+    expect(repository.listHabits()).toEqual(before);
   });
 });

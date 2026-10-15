@@ -2,7 +2,8 @@ import type { DayNote } from './notes';
 import { streakProgress } from './streak';
 import { dateKey, shiftDay, type LocalDate } from './calendar';
 import { calendarCells, currentStreak, type Completion, type Habit } from './habit';
-import { scheduledOn } from './schedule';
+import { weeklyPeriods } from './weekly';
+import { versionOn, scheduledOn } from './schedule';
 export function habitMetrics(
   habit: Habit,
   completions: Completion[],
@@ -20,13 +21,25 @@ export function habitMetrics(
   for (let day = start; day <= end && day <= today; day = shiftDay(day, 1)) {
     if (day < habit.startsOn) continue;
     if (completed.has(day)) totalWins += 1;
-    if (!scheduledOn(habit.schedule, day)) continue;
+    if (!scheduledOn(habit.schedule, day) || versionOn(habit.schedule, day)?.weekly) continue;
     eligibleDays += 1;
     if (completed.has(day)) {
       eligibleWins += 1;
     }
   }
+  const periods = weeklyPeriods(habit, completed, today);
+  const assessedWeeks = periods.filter(
+    (week) => week.closed && week.end >= start && week.end <= end,
+  );
+  eligibleDays += assessedWeeks.length;
+  eligibleWins += assessedWeeks.filter((week) => week.achieved).length;
+  const weekly = versionOn(habit.schedule, today)?.weekly
+    ? (periods.find((week) => week.start <= today && week.end >= today) ?? null)
+    : null;
   return {
+    weekly,
+    hasWeeklyGoals: habit.schedule.some((version) => !!version.weekly),
+    streakUnit: versionOn(habit.schedule, today)?.weekly ? ('weeks' as const) : ('wins' as const),
     currentStreak: currentStreak(habit, completions, today),
     bestStreak,
     totalWins,
@@ -65,7 +78,18 @@ export function insights(habits: Habit[], completions: Completion[], today: Loca
     items,
     activeHabits: active.length,
     consistency: eligible ? Math.round((100 * wins) / eligible) : null,
-    bestCurrentStreak: Math.max(0, ...items.map((item) => item.metrics.currentStreak)),
+    bestCurrentStreak: Math.max(
+      0,
+      ...items
+        .filter((item) => item.metrics.streakUnit === 'wins')
+        .map((item) => item.metrics.currentStreak),
+    ),
+    bestCurrentWeeklyStreak: Math.max(
+      0,
+      ...items
+        .filter((item) => item.metrics.streakUnit === 'weeks')
+        .map((item) => item.metrics.currentStreak),
+    ),
     totalWins: habits.reduce(
       (sum, habit) => sum + habitMetrics(habit, completions, today).totalWins,
       0,

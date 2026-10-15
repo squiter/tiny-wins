@@ -1,3 +1,5 @@
+import type { WeeklyPeriod } from '../domain/weekly';
+import { WeeklyGoalProgress } from './WeeklyGoalProgress';
 import { useI18n } from '../features/localization/provider';
 import { useCelebrations } from '../features/feedback/provider';
 import { NoteMarker } from './NoteMarker';
@@ -24,6 +26,8 @@ export function VictoryWall({
   wins,
   eligibleWins,
   eligibleDays,
+  hasWeeklyGoals = false,
+  weekly = null,
   onInspect,
   onView,
 }: {
@@ -34,6 +38,8 @@ export function VictoryWall({
   wins: number;
   eligibleWins: number;
   eligibleDays: number;
+  hasWeeklyGoals?: boolean;
+  weekly?: WeeklyPeriod | null;
   onInspect(day: LocalDate): void;
   onView(): void;
 }) {
@@ -98,6 +104,7 @@ export function VictoryWall({
           {eligibleDays ? `${Math.round((100 * eligibleWins) / eligibleDays)}%` : '—'} ›
         </Text>
       </Pressable>
+      {cells.some((cell) => cell.today) && <WeeklyGoalProgress week={weekly} />}
       {period !== 'year' ? (
         <View style={styles.row}>
           {weekdays(weekStartsOn).map(({ short: label }, index) => (
@@ -167,11 +174,13 @@ export function VictoryWall({
                       ? '✓'
                       : cell.state === 'grace'
                         ? '○'
-                        : cell.state === 'not-scheduled'
-                          ? '–'
-                          : cell.state === 'missed'
-                            ? '•'
-                            : ''}
+                        : cell.state === 'flexible'
+                          ? '◇'
+                          : cell.state === 'not-scheduled'
+                            ? '–'
+                            : cell.state === 'missed'
+                              ? '•'
+                              : ''}
                   </Text>
                 </Pressable>
               ) : (
@@ -185,9 +194,17 @@ export function VictoryWall({
         ))}
       </View>
       <Text style={styles.copy}>
-        {progress(eligibleWins, eligibleDays)}
+        {hasWeeklyGoals
+          ? t('{wins} of {planned} assessed opportunities', {
+              wins: eligibleWins,
+              planned: eligibleDays,
+            })
+          : progress(eligibleWins, eligibleDays)}
         {eligibleDays > 0 && eligibleWins === eligibleDays ? t(' · All planned wins so far ✓') : ''}
       </Text>
+      {hasWeeklyGoals && (
+        <Text style={styles.copy}>{t('◇ Flexible day · only ✓ records a win.')}</Text>
+      )}
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={t('Explore {title} calendar with larger dates', { title: habit.title })}

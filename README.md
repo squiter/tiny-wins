@@ -32,19 +32,19 @@ Actual browser development previews with example habits. Today and Insights were
 
 ## What you can do today
 
-| Make it yours                                              | See what you're building                                            | Keep your history                                                   |
-| ---------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Create and edit habits with names, icons and colors        | Complete or undo today's habit in one tap                           | Keep habits, wins and notes in local SQLite storage                 |
-| Choose every day or specific weekdays                      | See exactly **14 calendar days** on each Today row                  | Inspect a date and deliberately edit a past completion              |
-| Reorder habits, or archive and restore them                | Explore each habit's **week, month and year** victory wall          | Add a short note to a habit/date without changing its completion    |
-| Configure **0–7 days of streak flexibility**               | Track current/best streaks, total wins and eligible-day consistency | Export JSON backups and restore missing records after review        |
-| Choose light/dark appearance and Sunday/Monday week starts | Get immediate visual feedback, including an all-done banner         | Preserve original calendar dates when schedules or timezones change |
+| Make it yours                                                | See what you're building                                            | Keep your history                                                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Create and edit habits with names, icons and colors          | Complete or undo today's habit in one tap                           | Keep habits, wins and notes in local SQLite storage                 |
+| Choose every day, specific weekdays or flexible weekly goals | See exactly **14 calendar days** on each Today row                  | Inspect a date and deliberately edit a past completion              |
+| Reorder habits, or archive and restore them                  | Explore each habit's **week, month and year** victory wall          | Add a short note to a habit/date without changing its completion    |
+| Configure **0–7 days of streak flexibility**                 | Track current/best streaks, total wins and eligible-day consistency | Export JSON backups and restore missing records after review        |
+| Choose light/dark appearance and Sunday/Monday week starts   | Get immediate visual feedback, including an all-done banner         | Preserve original calendar dates when schedules or timezones change |
 
 Choose **System, English or Português (Brasil)** in Settings to change the interface language. Your habit names and notes stay exactly as you wrote them, and the choice is saved on this device. In the browser preview, System follows the browser's language. [See the language choices](docs/screenshots/language-settings-pt-390.jpg); the complete ten-flow iPhone acceptance is recorded in [task 017](.harness/tasks/017-interface-languages.md).
 
 Creating a habit? Open **Need an idea?** for three optional starting points: read one page, drink water or take a short walk. Suggested names follow the interface language and stay fully editable, alongside icons and colors. Choosing an idea saves nothing; your chosen days and streak flexibility stay intact. [See the Portuguese editor](docs/screenshots/starter-ideas-pt-390.png).
 
-Schedule and flexibility changes begin tomorrow, preserving earlier history. Notes support up to 280 characters and remain readable on archived habits. Backups include notes and flexibility settings; older v1/v2 files remain importable, and restore keeps existing local records.
+Daily schedule and flexibility changes begin tomorrow. Weekly goal changes begin next week, preserving earlier history. Notes support up to 280 characters and remain readable on archived habits. Backups use v4 and include notes, flexibility and saved weekly policies; older v1/v2/v3 files remain importable, and restore keeps existing local records.
 
 ### A streak with room to breathe
 
@@ -52,13 +52,21 @@ Read on Sunday, miss Monday, read again on Tuesday. With one day of flexibility,
 
 Each tile represents one calendar day. Completed days get **✓**; tolerated gaps get **○**; rest days stay distinct. Only completed days count as wins or toward consistency. An unfinished today can stay pending while you work on it.
 
+### Your week, your rhythm
+
+Choose **Weekly goal** in the habit editor and aim for **1–7 different days each week**. You choose which days; extra wins stay yours, with at most one win per date. Today, detail and Insights show live weekly progress. Unfinished weekly dates get a neutral **◇**, and completed dates still get **✓**.
+
+A new weekly habit keeps the week boundary it was created with, even if you later change the calendar layout. Short first weeks and partially archived weeks cap the goal at the available active dates, with an explicit explanation. Achieved weeks build a sequence; an unfinished current week stays pending. Daily streak tolerance applies to daily schedules; weekly habits get their flexibility from their goal.
+
+Weekly consistency assesses **finished weeks** on their ending date, alongside elapsed scheduled dates for daily habits. The live current-week counter is separate. Every tile and total win stays on its original date. Weekly wins receive individual celebration; the daily planned banner counts daily schedules.
+
 ### Your habits stay with you
 
 The core app works offline and stores data on your device, without an account or telemetry. Export a backup when you want to keep another copy or move devices. Light and dark themes share the same habit identities, and completion feedback respects reduced motion.
 
 ## What's next
 
-Interface languages and editable habit suggestions are implemented. While Apple enrollment is with support, the next approved features are flexible weekly goals → session timer. Starter-idea native acceptance is tracked in [task 018](.harness/tasks/018-starter-habits.md). First-release preparation continues alongside this sequence. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
+Interface languages, editable habit suggestions and flexible weekly goals are implemented. While Apple enrollment is with support, the next approved feature is the session timer. Weekly native acceptance is tracked in [task 023](.harness/tasks/023-flexible-weekly-goals.md). Starter-idea native acceptance is tracked in [task 018](.harness/tasks/018-starter-habits.md). First-release preparation continues alongside this sequence. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
 
 The [implementation plan](docs/IMPLEMENTATION_PLAN.md) guides these additions. They are planned work, with no promised release dates.
 
@@ -66,7 +74,7 @@ The [implementation plan](docs/IMPLEMENTATION_PLAN.md) guides these additions. T
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | **A warmer everyday experience**        | Further cozy visual refinement and optional sounds                                                           |
 | **Progress at a glance**                | Home-screen widgets with pending habits, victory tiles and quick check-ins where supported                   |
-| **Routines that fit real life**         | Flexible goals such as “walk on three days each week,” plus deliberate pause/skip options                    |
+| **Routines that fit real life**         | Deliberate pause/skip options                                                                                |
 | **A moment to focus**                   | A session stopwatch/countdown that offers a deliberate check-in when you finish                              |
 | **A helpful nudge**                     | An optional daily review reminder and configurable per-habit reminders                                       |
 | **Optional connections, further ahead** | iCloud synchronization between Apple devices, Todoist completion integration and exploration of Apple Health |

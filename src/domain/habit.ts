@@ -1,7 +1,7 @@
 import type { DayNote } from './notes';
 import { streakProgress } from './streak';
 import { shiftDay, type LocalDate } from './calendar';
-import { scheduledOn, type ScheduleVersion } from './schedule';
+import { versionOn, scheduledOn, type ScheduleVersion } from './schedule';
 
 export const colorKeys = ['forest', 'blue', 'coral', 'violet', 'teal', 'amber'] as const;
 export type ColorKey = (typeof colorKeys)[number];
@@ -41,7 +41,7 @@ export interface HistoryCell {
   day: LocalDate;
   today: boolean;
   hasNote?: boolean;
-  state: 'complete' | 'grace' | 'missed' | 'before-start' | 'not-scheduled' | 'future';
+  state: 'complete' | 'grace' | 'flexible' | 'missed' | 'before-start' | 'not-scheduled' | 'future';
 }
 export function habitTitle(value: string): string {
   const title = value.trim();
@@ -78,9 +78,11 @@ export function calendarCells(
               ? 'before-start'
               : !scheduledOn(habit.schedule, day)
                 ? 'not-scheduled'
-                : grace.has(day)
-                  ? 'grace'
-                  : 'missed',
+                : versionOn(habit.schedule, day)?.weekly
+                  ? 'flexible'
+                  : grace.has(day)
+                    ? 'grace'
+                    : 'missed',
     });
   }
   return cells;

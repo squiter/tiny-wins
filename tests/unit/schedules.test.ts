@@ -73,6 +73,9 @@ describe('progress metrics and year grid', () => {
       dateKey('2024-03-04'),
     );
     expect(result).toEqual({
+      weekly: null,
+      hasWeeklyGoals: false,
+      streakUnit: 'wins',
       currentStreak: 2,
       bestStreak: 2,
       totalWins: 2,

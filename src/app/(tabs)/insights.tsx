@@ -172,6 +172,8 @@ export default function Insights() {
             wins={item.metrics.totalWins}
             eligibleWins={item.metrics.eligibleWins}
             eligibleDays={item.metrics.eligibleDays}
+            hasWeeklyGoals={item.metrics.hasWeeklyGoals}
+            weekly={item.metrics.weekly}
             onInspect={(day) => setSelected({ id: item.habit.id, day })}
             onView={() =>
               router.push({
@@ -230,13 +232,19 @@ export default function Insights() {
                 {
                   icon: '◎',
                   value: result.consistency === null ? '—' : `${result.consistency}%`,
-                  label: t('Consistency · planned days'),
+                  label: t(
+                    habits.some((habit) => habit.schedule.some((version) => version.weekly))
+                      ? 'Consistency · assessed opportunities'
+                      : 'Consistency · planned days',
+                  ),
                 },
               ]}
             />
             <Text style={styles.support}>
               {t(
-                'Consistency counts scheduled dates through today. Future days, rest days and dates before creation don’t count. Archived histories stay visible.',
+                habits.some((habit) => habit.schedule.some((version) => version.weekly))
+                  ? 'Daily schedules assess elapsed planned dates. Weekly goals assess closed weeks on their ending date; the open week stays pending. Tiles and total wins keep their original dates.'
+                  : 'Consistency counts scheduled dates through today. Future days, rest days and dates before creation don’t count. Archived histories stay visible.',
               )}
             </Text>
             <CozyNote message={t('A missed day never erases your wins.')} />

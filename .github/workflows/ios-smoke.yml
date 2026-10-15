@@ -19,8 +19,8 @@ jobs:
       group: ios-smoke-main
       cancel-in-progress: false
     runs-on: macos-26
-    # Ten language flows took 41m27s; starter selection/cancel/edit adds interactions.
-    timeout-minutes: 50
+    # Ten starter/language flows took 42m45s; weekly acceptance adds one focused flow.
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -99,7 +99,7 @@ jobs:
           MAESTRO_DISABLE_UPDATE_CHECK: 'true'
           MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
           MAESTRO_API_URL: http://127.0.0.1:9
-        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/feature-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/day-notes.yaml .maestro/appearance.yaml .maestro/celebrations.yaml .maestro/language-override.yaml
+        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/feature-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/day-notes.yaml .maestro/appearance.yaml .maestro/celebrations.yaml .maestro/language-override.yaml .maestro/weekly-goals.yaml
       - name: Preserve failed feature evidence before independent checks
         if: ${{ !cancelled() && steps.features.outcome == 'failure' }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -183,6 +183,20 @@ jobs:
             mkdir -p "$RUNNER_TEMP/tiny-wins-smoke"
             xcrun simctl io "$TINY_WINS_SIMULATOR" screenshot "$RUNNER_TEMP/tiny-wins-smoke/simulator.png"
           fi
+      - name: Preserve compact acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: tiny-wins-ios-acceptance
+          path: |
+            ${{ runner.temp }}/tiny-wins-smoke/*results.xml
+            ${{ runner.temp }}/tiny-wins-smoke/system-languages.json
+            ${{ runner.temp }}/tiny-wins-smoke/*content-size.txt
+            ${{ runner.temp }}/tiny-wins-smoke/system-dark.txt
+            ${{ runner.temp }}/tiny-wins-smoke/system-light.txt
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/takeScreenshot/*.png
+          if-no-files-found: error
+          retention-days: 7
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:

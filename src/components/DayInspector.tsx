@@ -75,6 +75,9 @@ export function DayInspector({
     timeZone: 'UTC',
   }).format(new Date(`${cell.day}T12:00:00Z`));
   const status = {
+    flexible: t(
+      'Choose the days for your weekly wins. This empty tile is not a missed daily task.',
+    ),
     complete: t('A win worth keeping.'),
     grace: t(
       'A little breathing room. Your sequence stayed intact; this day is not a completed win.',

@@ -74,9 +74,11 @@ export function MonthCalendar({
               ? '✓'
               : cell.state === 'grace'
                 ? '○'
-                : cell.state === 'not-scheduled'
-                  ? '–'
-                  : ''}
+                : cell.state === 'flexible'
+                  ? '◇'
+                  : cell.state === 'not-scheduled'
+                    ? '–'
+                    : ''}
           </Text>
         </Pressable>
       ))}

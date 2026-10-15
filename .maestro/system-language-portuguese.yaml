@@ -88,6 +88,22 @@ appId: app.tinywins.mobile
     text: 'Usar ideia: Fazer uma caminhada curta, selecionada'
 - takeScreenshot: starter-ideas-portuguese-large
 - scrollUntilVisible:
+    element:
+      id: frequency-weekly
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: frequency-weekly
+- scrollUntilVisible:
+    element:
+      id: weekly-goal-target
+    direction: DOWN
+    centerElement: true
+- assertVisible:
+    id: weekly-goal-target
+    text: 3 dias por semana
+- takeScreenshot: weekly-goal-portuguese-large
+- scrollUntilVisible:
     element: Cancelar
     direction: DOWN
 - assertVisible: Criar hábito

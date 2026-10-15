@@ -34,6 +34,19 @@ export function interfaceCopy(language: InterfaceLanguage) {
         wins,
         planned,
       }),
+    shortWeekLabel: (target: number) =>
+      count(
+        target,
+        'Short week: goal adjusted to {count} available day.',
+        'Short week: goal adjusted to {count} available days.',
+      ),
+    weeklyGoalName: (target: number) =>
+      count(target, '{count} day each week', '{count} days each week'),
+    weeklyProgress: (wins: number, target: number) =>
+      t(target === 1 ? '{wins}/{target} day this week' : '{wins}/{target} days this week', {
+        wins,
+        target,
+      }),
     t,
     count,
     date,
@@ -47,15 +60,17 @@ export function interfaceCopy(language: InterfaceLanguage) {
           ? 'completed'
           : cell.state === 'grace'
             ? 'within streak tolerance'
-            : cell.state === 'not-scheduled'
-              ? 'not scheduled'
-              : cell.state === 'before-start'
-                ? 'before habit started'
-                : cell.state === 'future'
-                  ? 'future'
-                  : cell.today
-                    ? 'pending'
-                    : 'not completed';
+            : cell.state === 'flexible'
+              ? 'Flexible day, no win recorded'
+              : cell.state === 'not-scheduled'
+                ? 'not scheduled'
+                : cell.state === 'before-start'
+                  ? 'before habit started'
+                  : cell.state === 'future'
+                    ? 'future'
+                    : cell.today
+                      ? 'pending'
+                      : 'not completed';
       return `${date(cell.day, { year: 'numeric', month: '2-digit', day: '2-digit' })}: ${t(state)}${cell.today ? t(', today') : ''}${cell.hasNote ? t(', has note') : ''}`;
     },
   };

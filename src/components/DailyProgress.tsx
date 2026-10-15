@@ -13,7 +13,15 @@ import Animated, {
 import { useTheme, useThemeStyles } from '../theme/useTheme';
 import type { ThemePalette } from '../theme/tokens';
 
-export function DailyProgress({ wins, planned }: { wins: number; planned: number }) {
+export function DailyProgress({
+  wins,
+  planned,
+  hasWeeklyGoals = false,
+}: {
+  wins: number;
+  planned: number;
+  hasWeeklyGoals?: boolean;
+}) {
   const { t, progress: progressLabel } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
@@ -71,15 +79,22 @@ export function DailyProgress({ wins, planned }: { wins: number; planned: number
             ? t('All done for today!\nYou grew a little.')
             : planned
               ? t('Small wins today,\nbrighter tomorrows.')
-              : t('A little room to breathe.')}
+              : hasWeeklyGoals
+                ? t('Your week, your rhythm.')
+                : t('A little room to breathe.')}
         </Text>
         <Text style={styles.copy}>
           {complete
             ? progressLabel(wins, planned)
             : planned
               ? progressLabel(wins, planned)
-              : t('Nothing planned today. Make the day yours.')}
+              : hasWeeklyGoals
+                ? t('Choose the days for your weekly wins.')
+                : t('Nothing planned today. Make the day yours.')}
         </Text>
+        {hasWeeklyGoals && planned > 0 && (
+          <Text style={styles.copy}>{t('Weekly goals follow your rhythm.')}</Text>
+        )}
         {planned > 0 && (
           <View accessible={false} style={styles.track}>
             <Animated.View style={[styles.fill, progressStyle]} />

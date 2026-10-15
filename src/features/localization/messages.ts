@@ -108,6 +108,52 @@ export const portuguese = {
   'New habit': 'Novo hábito',
   'One small step': 'Um pequeno passo',
   'Habit name': 'Nome do hábito',
+  '{wins}/{target} day this week': '{wins}/{target} dia nesta semana',
+  '{count} day each week': '{count} dia por semana',
+  '{count} days each week': '{count} dias por semana',
+  'Weekly goal': 'Meta semanal',
+  'Weekly goal, selected': 'Meta semanal, selecionada',
+  'Days each week': 'Dias por semana',
+  'Decrease weekly goal': 'Diminuir meta semanal',
+  'Increase weekly goal': 'Aumentar meta semanal',
+  'Choose a weekly goal from 1 to 7 days.': 'Escolha uma meta semanal de 1 a 7 dias.',
+  'The backup contains an invalid weekly policy.': 'O backup contém uma regra semanal inválida.',
+  'Weekly policy changes must start at a week boundary.':
+    'Mudanças de regras semanais precisam começar no início de uma semana.',
+  'Keep the saved weekly boundary.': 'Mantenha o início de semana salvo para este hábito.',
+  'Choose any days. Each date can hold one win, even after the goal is met.':
+    'Escolha quaisquer dias. Cada data pode ter uma vitória, mesmo depois de atingir a meta.',
+  'Weekly changes start next week. Earlier dates stay unchanged.':
+    'Mudanças de metas semanais começam na próxima semana. As datas anteriores são preservadas.',
+  'Weekly goals have room for rest days. Daily streak tolerance does not apply.':
+    'Metas semanais dão espaço para dias de descanso. A tolerância diária da sequência não se aplica.',
+  'Week: {start} → {end}. This habit keeps this boundary when calendar settings change.':
+    'Semana: {start} → {end}. Este hábito mantém esse início de semana quando os ajustes do calendário mudam.',
+  '{wins}/{target} days this week': '{wins}/{target} dias nesta semana',
+  'Weekly goal met ✓': 'Meta semanal atingida ✓',
+  'Short week: goal adjusted to {count} available day.':
+    'Semana curta: meta ajustada para {count} dia disponível.',
+  'Short week: goal adjusted to {count} available days.':
+    'Semana curta: meta ajustada para {count} dias disponíveis.',
+  '{count} week in a row': '{count} semana seguida',
+  '{count} weeks in a row': '{count} semanas seguidas',
+  'Current streak · weeks': 'Sequência atual · semanas',
+  'Best weekly streak · {year}': 'Melhor sequência semanal · {year}',
+  '{target} days each week': '{target} dias por semana',
+  'Schedule changes start on {date}.': 'Mudanças de frequência começam em {date}.',
+  'Flexible day, no win recorded': 'Dia flexível, sem vitória registrada',
+  'Choose the days for your weekly wins. This empty tile is not a missed daily task.':
+    'Escolha os dias das suas vitórias semanais. Este ladrilho vazio não é uma tarefa diária perdida.',
+  'Your week, your rhythm.': 'Sua semana, seu ritmo.',
+  'Choose the days for your weekly wins.': 'Escolha os dias das suas vitórias semanais.',
+  'Weekly goals follow your rhythm.': 'As metas semanais seguem o seu ritmo.',
+  'Weekly consistency uses finished weeks.': 'A consistência semanal usa semanas encerradas.',
+  'Consistency · assessed opportunities': 'Consistência · oportunidades avaliadas',
+  'Assessed opportunities': 'Oportunidades avaliadas',
+  '{wins} of {planned} assessed opportunities': '{wins} de {planned} oportunidades avaliadas',
+  'Daily schedules assess elapsed planned dates. Weekly goals assess closed weeks on their ending date; the open week stays pending. Tiles and total wins keep their original dates.':
+    'Hábitos diários avaliam as datas planejadas decorridas. Metas semanais avaliam semanas encerradas na data de término; a semana atual fica pendente. Ladrilhos e total de vitórias mantêm as datas originais.',
+  '◇ Flexible day · only ✓ records a win.': '◇ Dia flexível · só ✓ registra uma vitória.',
   'Need an idea?': 'Quer uma ideia?',
   'A small place to start': 'Um pequeno começo',
   'Choose an idea, then make it yours. Nothing is saved until you create the habit.':

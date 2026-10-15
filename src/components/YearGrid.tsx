@@ -89,11 +89,13 @@ export function YearGrid({
                       ? '✓'
                       : cell.state === 'grace'
                         ? '○'
-                        : cell.state === 'not-scheduled'
-                          ? '–'
-                          : cell.today
-                            ? '•'
-                            : ''}
+                        : cell.state === 'flexible'
+                          ? '◇'
+                          : cell.state === 'not-scheduled'
+                            ? '–'
+                            : cell.today
+                              ? '•'
+                              : ''}
                   </Text>
                 </Pressable>
               ))}

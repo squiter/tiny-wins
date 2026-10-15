@@ -1,6 +1,6 @@
 import { localDay } from '../../domain/calendar';
 import { completionCelebration, type CheckInOutcome } from '../../domain/feedback';
-import { scheduledOn } from '../../domain/schedule';
+import { versionOn, scheduledOn } from '../../domain/schedule';
 import type { Clock } from '../check-ins/service';
 import type { HabitRepository } from '../habits/repository';
 export function checkInCelebration(
@@ -11,11 +11,16 @@ export function checkInCelebration(
   if (!outcome.changed || !outcome.completed) return null;
   try {
     const today = localDay(clock.now(), clock.timezone());
+    const owner = repository.getHabit(outcome.habitId);
+    if (owner && versionOn(owner.schedule, outcome.day)?.weekly) return 'win' as const;
     const due = repository
       .listHabits()
       .filter(
         (habit) =>
-          !habit.archivedAt && habit.startsOn <= today && scheduledOn(habit.schedule, today),
+          !habit.archivedAt &&
+          habit.startsOn <= today &&
+          scheduledOn(habit.schedule, today) &&
+          !versionOn(habit.schedule, today)?.weekly,
       );
     const completed = new Set(
       repository

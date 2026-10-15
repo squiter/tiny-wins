@@ -10,13 +10,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { dateKey, type LocalDate } from '../../domain/calendar';
 import { calendarCells } from '../../domain/habit';
 import { habitMetrics, yearCells } from '../../domain/metrics';
-import { plannedDays, scheduledOn } from '../../domain/schedule';
+import { versionOn, plannedDays, scheduledOn } from '../../domain/schedule';
 import { useHabitData } from '../../features/habits/useHabitData';
 import { archiveHabit, editHabit, restoreHabit } from '../../features/habits/service';
 import { setDayCompletion } from '../../features/check-ins/service';
 import { deviceClock } from '../../lib/clock';
 import { HabitIcon } from '../../components/HabitIcon';
 import { HabitEditor, type HabitDraft } from '../../components/HabitEditor';
+import { WeeklyGoalProgress } from '../../components/WeeklyGoalProgress';
 import { StatsGrid } from '../../components/StatsGrid';
 import { MonthCalendar } from '../../components/MonthCalendar';
 import { YearGrid } from '../../components/YearGrid';
@@ -32,7 +33,7 @@ function safeDay(value?: string): LocalDate | null {
 }
 export default function HabitDetail() {
   const { announce } = useCelebrations();
-  const { t, language, weekdays } = useI18n();
+  const { t, language, weekdays, date, weeklyGoalName } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const { weekStartsOn } = usePreferences();
@@ -101,6 +102,7 @@ export default function HabitDetail() {
       deviceClock,
       draft.days,
       draft.streakTolerance,
+      draft.weekly,
     );
     refresh();
     setEditing(false);
@@ -144,17 +146,29 @@ export default function HabitDetail() {
             <Text style={styles.support}>
               {habit.archivedAt
                 ? t('Archived · past wins are saved')
-                : plannedDays(habit.schedule).length === 7
-                  ? t('Every day')
-                  : plannedDays(habit.schedule)
-                      .map((day) => weekdays(0)[day]!.full)
-                      .join(' · ')}
+                : versionOn(habit.schedule, today)?.weekly
+                  ? weeklyGoalName(versionOn(habit.schedule, today)!.weekly!.target)
+                  : (versionOn(habit.schedule, today)?.days ?? plannedDays(habit.schedule))
+                        .length === 7
+                    ? t('Every day')
+                    : (versionOn(habit.schedule, today)?.days ?? plannedDays(habit.schedule))
+                        .map((day) => weekdays(0)[day]!.full)
+                        .join(' · ')}
             </Text>
           </View>
         </View>
         {habit.schedule.at(-1)!.from > today && (
-          <Text style={styles.support}>{t('New schedule starts tomorrow.')}</Text>
+          <Text style={styles.support}>
+            {t('Schedule changes start on {date}.', {
+              date: date(habit.schedule.at(-1)!.from, {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              }),
+            })}
+          </Text>
         )}
+        <WeeklyGoalProgress week={metrics.weekly} />
         <View style={styles.yearHeader}>
           <Pressable
             accessibilityRole="button"
@@ -206,18 +220,34 @@ export default function HabitDetail() {
           color={habit.color}
           onInspect={setSelected}
         />
+        {metrics.hasWeeklyGoals && (
+          <Text style={styles.support}>{t('Weekly consistency uses finished weeks.')}</Text>
+        )}
         <StatsGrid
           items={[
-            { icon: '🌱', value: metrics.currentStreak, label: t('Current streak') },
+            {
+              icon: '🌱',
+              value: metrics.currentStreak,
+              label: t(
+                metrics.streakUnit === 'weeks' ? 'Current streak · weeks' : 'Current streak',
+              ),
+            },
             {
               icon: '🏆',
               value: metrics.bestStreak,
-              label: t('Best streak · {year}', { year: String(year) }),
+              label: t(
+                metrics.streakUnit === 'weeks'
+                  ? 'Best weekly streak · {year}'
+                  : 'Best streak · {year}',
+                { year: String(year) },
+              ),
             },
             {
               icon: '◎',
               value: metrics.consistency === null ? '—' : `${metrics.consistency}%`,
-              label: t('Consistency · {year}', { year: String(year) }),
+              label: metrics.hasWeeklyGoals
+                ? t('Consistency · assessed opportunities')
+                : t('Consistency · {year}', { year: String(year) }),
             },
             {
               icon: '✓',
@@ -258,6 +288,9 @@ export default function HabitDetail() {
             'Each square is one day. Tap a past day to inspect it; changes require a separate confirmation below.',
           )}
         </Text>
+        {metrics.hasWeeklyGoals && (
+          <Text style={styles.support}>{t('◇ Flexible day · only ✓ records a win.')}</Text>
+        )}
         <YearGrid
           weekStartsOn={weekStartsOn}
           cells={cells}
@@ -271,7 +304,9 @@ export default function HabitDetail() {
         </Text>
         <Text style={styles.support}>
           {t(
-            'Consistency includes scheduled dates through today. Days before creation, future days and rest days are excluded.',
+            metrics.hasWeeklyGoals
+              ? 'Daily schedules assess elapsed planned dates. Weekly goals assess closed weeks on their ending date; the open week stays pending. Tiles and total wins keep their original dates.'
+              : 'Consistency includes scheduled dates through today. Days before creation, future days and rest days are excluded.',
           )}
         </Text>
         {!!error && (
@@ -283,6 +318,7 @@ export default function HabitDetail() {
       </ScrollView>
       {editing && (
         <HabitEditor
+          today={today}
           habit={habit}
           onSave={save}
           onClose={() => setEditing(false)}

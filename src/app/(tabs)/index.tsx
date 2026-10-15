@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { randomUUID } from 'expo-crypto';
 import { useRepository } from '../../database/provider';
 import { localDay } from '../../domain/calendar';
-import { scheduledOn } from '../../domain/schedule';
+import { versionOn, scheduledOn } from '../../domain/schedule';
 import type { Habit } from '../../domain/habit';
 import { createHabit, toggleToday } from '../../features/check-ins/service';
 import { archiveHabit, editHabit, moveHabit, restoreHabit } from '../../features/habits/service';
@@ -56,7 +56,9 @@ export default function Today() {
   const archivedHabits = allHabits.filter((habit) => !!habit.archivedAt);
   const completions = repository.listCompletions();
   const notes = repository.listNotes();
-  const dueHabits = activeHabits.filter((habit) => scheduledOn(habit.schedule, today));
+  const dueHabits = activeHabits.filter(
+    (habit) => scheduledOn(habit.schedule, today) && !versionOn(habit.schedule, today)?.weekly,
+  );
   const wins = dueHabits.filter((habit) =>
     completions.some((record) => record.habitId === habit.id && record.localDate === today),
   ).length;
@@ -78,6 +80,7 @@ export default function Today() {
         deviceClock,
         draft.days,
         draft.streakTolerance,
+        draft.weekly,
       );
     else
       createHabit(
@@ -89,6 +92,7 @@ export default function Today() {
         draft.icon,
         draft.days,
         draft.streakTolerance,
+        draft.weekly,
       );
     update();
     setEditor(null);
@@ -151,7 +155,15 @@ export default function Today() {
             </Text>
           </Pressable>
         </View>
-        {!archived && <DailyProgress wins={wins} planned={dueHabits.length} />}
+        {!archived && (
+          <DailyProgress
+            wins={wins}
+            planned={dueHabits.length}
+            hasWeeklyGoals={activeHabits.some(
+              (habit) => !!versionOn(habit.schedule, today)?.weekly,
+            )}
+          />
+        )}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
             {archived
@@ -258,6 +270,9 @@ export default function Today() {
         {!archived && activeHabits.length > 0 && (
           <Text style={styles.legend}>
             {t('Past 14 days · today outlined · soft ○ within tolerance')}
+            {activeHabits.some((habit) => habit.schedule.some((version) => version.weekly))
+              ? ` · ${t('◇ Flexible day · only ✓ records a win.')}`
+              : ''}
           </Text>
         )}
         <Pressable
@@ -279,6 +294,7 @@ export default function Today() {
       </ScrollView>
       {editor && (
         <HabitEditor
+          today={today}
           key={editor.habit?.id ?? 'new'}
           habit={editor.habit}
           onSave={save}

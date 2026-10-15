@@ -8,11 +8,17 @@ import {
   type Habit,
   type IconKey,
 } from './habit';
-import { validateTolerance, validateWeekdays, type ScheduleVersion } from './schedule';
+import {
+  validateSchedulePolicies,
+  validateWeeklyGoal,
+  validateTolerance,
+  validateWeekdays,
+  type ScheduleVersion,
+} from './schedule';
 export const backupLimit = 5 * 1024 * 1024;
 export interface Backup {
   format: 'tiny-wins';
-  version: 1 | 2 | 3;
+  version: 1 | 2 | 3 | 4;
   exportedAt: string;
   habits: Habit[];
   completions: Completion[];
@@ -60,10 +66,20 @@ function habit(value: unknown, backupVersion: number): Habit {
   const schedule: ScheduleVersion[] = row.schedule.map((value: unknown) => {
     const version = object(value);
     if (!Array.isArray(version.days)) throw new Error('The backup contains an invalid schedule.');
+    if (backupVersion < 4 && (version.weekly !== undefined || version.resumeDays !== undefined))
+      throw new Error('This backup format is not supported.');
     const days = version.days.length ? validateWeekdays(version.days) : [];
     return {
       from: dateKey(text(version.from, 10)),
       days,
+      ...(version.resumeDays !== undefined
+        ? {
+            resumeDays: Array.isArray(version.resumeDays)
+              ? validateWeekdays(version.resumeDays)
+              : validateWeekdays([]),
+          }
+        : {}),
+      ...(version.weekly !== undefined ? { weekly: validateWeeklyGoal(version.weekly) } : {}),
       ...(backupVersion >= 2 && version.streakTolerance !== undefined
         ? { streakTolerance: validateTolerance(version.streakTolerance) }
         : {}),
@@ -74,6 +90,7 @@ function habit(value: unknown, backupVersion: number): Habit {
     schedule.some((version, index) => index > 0 && version.from <= schedule[index - 1]!.from)
   )
     throw new Error('The backup schedule dates are not in order.');
+  validateSchedulePolicies(schedule);
   return {
     id: id(row.id),
     title: habitTitle(text(row.title, 80)),
@@ -98,7 +115,7 @@ export function parseBackup(source: string): Backup {
   const data = object(value);
   if (
     data.format !== 'tiny-wins' ||
-    (data.version !== 1 && data.version !== 2 && data.version !== 3)
+    (data.version !== 1 && data.version !== 2 && data.version !== 3 && data.version !== 4)
   )
     throw new Error('This backup format is not supported.');
   if (
@@ -130,7 +147,7 @@ export function parseBackup(source: string): Backup {
     return { habitId, localDate, timezone, completedAt: timestamp(row.completedAt) };
   });
   const notes: DayNote[] = [];
-  if (data.version === 3) {
+  if (data.version === 3 || data.version === 4) {
     if (!Array.isArray(data.notes) || data.notes.length > 50000)
       throw new Error('The backup contains invalid notes.');
     const noteKeys = new Set<string>();
@@ -149,7 +166,7 @@ export function parseBackup(source: string): Backup {
   }
   return {
     format: 'tiny-wins',
-    version: data.version as 1 | 2 | 3,
+    version: data.version as 1 | 2 | 3 | 4,
     exportedAt: timestamp(data.exportedAt),
     habits,
     completions,
@@ -163,7 +180,7 @@ export function serializeBackup(
   notes: DayNote[] = [],
 ): string {
   const source = JSON.stringify(
-    { format: 'tiny-wins', version: 3, exportedAt: now.toISOString(), habits, completions, notes },
+    { format: 'tiny-wins', version: 4, exportedAt: now.toISOString(), habits, completions, notes },
     null,
     2,
   );

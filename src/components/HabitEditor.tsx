@@ -1,5 +1,7 @@
 import { useI18n, useMessage } from '../features/localization/provider';
 import { useState } from 'react';
+import type { LocalDate } from '../domain/calendar';
+import { usePreferences } from '../database/provider';
 import { starterIdeas, starterIdeaFields } from '../features/habits/starterIdeas';
 import {
   Keyboard,
@@ -24,6 +26,9 @@ import {
   type IconKey,
 } from '../domain/habit';
 import {
+  versionOn,
+  plannedVersion,
+  type WeeklyGoal,
   allWeekdays,
   plannedDays,
   plannedTolerance,
@@ -39,15 +44,26 @@ export interface HabitDraft {
   icon: IconKey;
   days: Weekday[];
   streakTolerance: number;
+  weekly: WeeklyGoal | null;
 }
 interface Props {
+  today: LocalDate;
   habit: Habit | null;
   onSave(draft: HabitDraft): void;
   onClose(): void;
   onArchive(): void;
 }
-export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
-  const { t, count, number, weekdayChoice, language } = useI18n();
+export function HabitEditor({ habit, today, onSave, onClose, onArchive }: Props) {
+  const { t, count, number, weekdayChoice, language, weekdays, weeklyGoalName } = useI18n();
+  const { weekStartsOn } = usePreferences();
+  const [weekly, setWeekly] = useState<WeeklyGoal | null>(
+    habit ? (plannedVersion(habit.schedule).weekly ?? null) : null,
+  );
+  const weeklyBoundary =
+    (habit
+      ? (plannedVersion(habit.schedule).weekly?.weekStartsOn ??
+        versionOn(habit.schedule, today)?.weekly?.weekStartsOn)
+      : undefined) ?? weekStartsOn;
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const reducedMotion = useReducedMotion();
@@ -69,7 +85,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
     let validated: string;
     try {
       validated = habitTitle(title);
-      validateWeekdays(days);
+      if (!weekly) validateWeekdays(days);
     } catch {
       setError(
         !title.trim() ? 'Use a habit name of 1–80 characters.' : 'Choose at least one weekday.',
@@ -77,7 +93,14 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
       return;
     }
     try {
-      onSave({ title: validated, color, icon, days, streakTolerance });
+      onSave({
+        title: validated,
+        color,
+        icon,
+        days: weekly ? [...allWeekdays] : days,
+        streakTolerance: weekly ? 0 : streakTolerance,
+        weekly,
+      });
     } catch {
       setError('We couldn’t save your habit. Please try again.');
     }
@@ -267,10 +290,13 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 <Pressable
                   accessibilityRole="button"
                   accessibilityLabel={t('Every day')}
-                  onPress={() => setDays([...allWeekdays])}
+                  onPress={() => {
+                    setWeekly(null);
+                    setDays([...allWeekdays]);
+                  }}
                   style={[
                     styles.frequency,
-                    { backgroundColor: days.length === 7 ? theme.mint : theme.surface },
+                    { backgroundColor: !weekly && days.length === 7 ? theme.mint : theme.surface },
                   ]}
                 >
                   <Text style={styles.label}>{t('Every day')}</Text>
@@ -278,81 +304,172 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 <Pressable
                   accessibilityRole="button"
                   accessibilityLabel={t('Weekdays')}
-                  onPress={() => setDays([1, 2, 3, 4, 5])}
+                  onPress={() => {
+                    setWeekly(null);
+                    setDays([1, 2, 3, 4, 5]);
+                  }}
                   style={styles.frequency}
                 >
                   <Text style={styles.label}>{t('Weekdays')}</Text>
                 </Pressable>
+                <Pressable
+                  testID="frequency-weekly"
+                  accessibilityRole="button"
+                  accessibilityState={{ selected: !!weekly }}
+                  accessibilityLabel={t(weekly ? 'Weekly goal, selected' : 'Weekly goal')}
+                  aria-pressed={!!weekly}
+                  onPress={() => setWeekly(weekly ?? { target: 3, weekStartsOn: weeklyBoundary })}
+                  style={[
+                    styles.frequency,
+                    { backgroundColor: weekly ? theme.mint : theme.surface },
+                  ]}
+                >
+                  <Text style={styles.label}>
+                    {t('Weekly goal')}
+                    {weekly ? ' ✓' : ''}
+                  </Text>
+                </Pressable>
               </View>
-              <View
-                style={styles.options}
-                role="group"
-                accessibilityLabel={t('Scheduled weekdays')}
-              >
-                {([1, 2, 3, 4, 5, 6, 0] as Weekday[]).map((day) => (
-                  <Pressable
-                    key={day}
-                    accessibilityRole="checkbox"
-                    aria-checked={days.includes(day)}
-                    accessibilityState={{ checked: days.includes(day) }}
-                    hitSlop={4}
-                    accessibilityLabel={
-                      [
-                        t('Sunday'),
-                        t('Monday'),
-                        t('Tuesday'),
-                        t('Wednesday'),
-                        t('Thursday'),
-                        t('Friday'),
-                        t('Saturday'),
-                      ][day]
-                    }
-                    onPress={() =>
-                      setDays(
-                        days.includes(day) ? days.filter((value) => value !== day) : [...days, day],
-                      )
-                    }
-                    style={[
-                      styles.day,
-                      { backgroundColor: days.includes(day) ? theme.forest : theme.surface },
-                    ]}
-                  >
-                    <Text
-                      style={{
-                        fontFamily: 'Inter_600SemiBold',
-                        color: days.includes(day) ? theme.onPrimary : theme.forest,
-                        fontSize: 13,
-                      }}
+              {weekly ? (
+                <View style={{ gap: 12 }}>
+                  <Text style={styles.label}>{t('Days each week')}</Text>
+                  <View style={styles.options}>
+                    <Pressable
+                      testID="weekly-goal-decrease"
+                      accessibilityRole="button"
+                      accessibilityLabel={t('Decrease weekly goal')}
+                      disabled={weekly.target === 1}
+                      accessibilityState={{ disabled: weekly.target === 1 }}
+                      onPress={() => setWeekly({ ...weekly, target: weekly.target - 1 })}
+                      style={[
+                        styles.iconOption,
+                        { borderColor: theme.stone, backgroundColor: theme.surface },
+                      ]}
                     >
-                      {weekdayChoice(day)}
+                      <Text style={styles.label}>−</Text>
+                    </Pressable>
+                    <Text
+                      testID="weekly-goal-target"
+                      accessible
+                      accessibilityLabel={weeklyGoalName(weekly.target)}
+                      style={[
+                        styles.label,
+                        { minWidth: 48, alignSelf: 'center', textAlign: 'center' },
+                      ]}
+                    >
+                      {number(weekly.target)}
                     </Text>
-                  </Pressable>
-                ))}
-              </View>
+                    <Pressable
+                      testID="weekly-goal-increase"
+                      accessibilityRole="button"
+                      accessibilityLabel={t('Increase weekly goal')}
+                      disabled={weekly.target === 7}
+                      accessibilityState={{ disabled: weekly.target === 7 }}
+                      onPress={() => setWeekly({ ...weekly, target: weekly.target + 1 })}
+                      style={[
+                        styles.iconOption,
+                        { borderColor: theme.stone, backgroundColor: theme.surface },
+                      ]}
+                    >
+                      <Text style={styles.label}>+</Text>
+                    </Pressable>
+                  </View>
+                  <Text style={styles.support}>
+                    {t('Choose any days. Each date can hold one win, even after the goal is met.')}
+                  </Text>
+                  <Text style={styles.support}>
+                    {t(
+                      'Week: {start} → {end}. This habit keeps this boundary when calendar settings change.',
+                      {
+                        start: weekdays(0)[weekly.weekStartsOn]!.full,
+                        end: weekdays(0)[weekly.weekStartsOn === 1 ? 0 : 6]!.full,
+                      },
+                    )}
+                  </Text>
+                </View>
+              ) : (
+                <View
+                  style={styles.options}
+                  role="group"
+                  accessibilityLabel={t('Scheduled weekdays')}
+                >
+                  {([1, 2, 3, 4, 5, 6, 0] as Weekday[]).map((day) => (
+                    <Pressable
+                      key={day}
+                      accessibilityRole="checkbox"
+                      aria-checked={days.includes(day)}
+                      accessibilityState={{ checked: days.includes(day) }}
+                      hitSlop={4}
+                      accessibilityLabel={
+                        [
+                          t('Sunday'),
+                          t('Monday'),
+                          t('Tuesday'),
+                          t('Wednesday'),
+                          t('Thursday'),
+                          t('Friday'),
+                          t('Saturday'),
+                        ][day]
+                      }
+                      onPress={() =>
+                        setDays(
+                          days.includes(day)
+                            ? days.filter((value) => value !== day)
+                            : [...days, day],
+                        )
+                      }
+                      style={[
+                        styles.day,
+                        { backgroundColor: days.includes(day) ? theme.forest : theme.surface },
+                      ]}
+                    >
+                      <Text
+                        style={{
+                          fontFamily: 'Inter_600SemiBold',
+                          color: days.includes(day) ? theme.onPrimary : theme.forest,
+                          fontSize: 13,
+                        }}
+                      >
+                        {weekdayChoice(day)}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </View>
+              )}
               <Text style={styles.support}>
-                {habit
-                  ? t('Frequency changes start tomorrow. Past wins stay on their original dates.')
-                  : t('Choose the days that work for you.')}
+                {habit && (weekly || habit.schedule.some((version) => version.weekly))
+                  ? t('Weekly changes start next week. Earlier dates stay unchanged.')
+                  : habit
+                    ? t('Frequency changes start tomorrow. Past wins stay on their original dates.')
+                    : t('Choose the days that work for you.')}
               </Text>
-              <Pressable
-                accessibilityRole="button"
-                accessibilityState={{ expanded: advanced }}
-                onPress={() => setAdvanced(!advanced)}
-                style={styles.secondary}
-              >
-                <Text style={styles.secondaryText}>
-                  {t('Advanced options')}
-                  {streakTolerance > 0
-                    ? count(
-                        streakTolerance,
-                        ' · {count} day tolerance',
-                        ' · {count} days tolerance',
-                      )
-                    : ''}{' '}
-                  {advanced ? '−' : '+'}
+              {weekly ? (
+                <Text style={styles.support}>
+                  {t(
+                    'Weekly goals have room for rest days. Daily streak tolerance does not apply.',
+                  )}
                 </Text>
-              </Pressable>
-              {advanced && (
+              ) : (
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityState={{ expanded: advanced }}
+                  onPress={() => setAdvanced(!advanced)}
+                  style={styles.secondary}
+                >
+                  <Text style={styles.secondaryText}>
+                    {t('Advanced options')}
+                    {streakTolerance > 0
+                      ? count(
+                          streakTolerance,
+                          ' · {count} day tolerance',
+                          ' · {count} days tolerance',
+                        )
+                      : ''}{' '}
+                    {advanced ? '−' : '+'}
+                  </Text>
+                </Pressable>
+              )}
+              {advanced && !weekly && (
                 <View style={styles.preview}>
                   <View style={{ flex: 1, gap: 8 }}>
                     <Text style={styles.label}>{t('Streak flexibility')}</Text>
@@ -530,7 +647,13 @@ const createStyles = (theme: ThemePalette) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
-    frequency: { borderRadius: 13, backgroundColor: theme.frequency, padding: 14, gap: 5 },
+    frequency: {
+      minHeight: 48,
+      borderRadius: 13,
+      backgroundColor: theme.frequency,
+      padding: 14,
+      gap: 5,
+    },
     support: { fontFamily: 'Inter_400Regular', fontSize: 13, color: theme.muted, lineHeight: 20 },
     error: { color: theme.charcoal, fontFamily: 'Inter_400Regular' },
     button: {
