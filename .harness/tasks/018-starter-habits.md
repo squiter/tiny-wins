@@ -1,6 +1,6 @@
 # Task: 018 — Editable starter habit ideas
 
-Status: ready
+Status: in progress
 Goal: Offer a small optional selection of localized habit ideas while creating a new habit.
 Non-goals: Onboarding, automatic sample records, quantity goals, suggested history/wins, recommendation services or changing existing habits.
 Files/modules allowed: Small typed idea catalog, localized names/copy, new-habit editor draft selection, tests/native flow and documentation.
@@ -16,6 +16,6 @@ Acceptance criteria:
 - Update harness/ADR or design notes with actual selection/edit/save/cancel/restart evidence.
 
 Required tests: Catalog uses valid existing icons/colors; draft selection has no persistence side effect; native choose idea → customize → save → restart, plus cancel/no-record acceptance; npm run verify and layout review.
-Commands executed / results: Planning only; reviewed owner suggestions priority and existing explicit creation contract. No records, implementation or dependencies added.
-Open questions: Final idea copy and placement are resolved within the scoped editor/design review.
+Commands executed / results: Implementation started after completed task 017. Selected slice: three collapsed, optional editor ideas (read a page, drink water, short walk), localized draft fields only. Preserve uncontrolled native name typing, explicit Save, schedule/tolerance and owner plan edits. npm run verify PASS (99 unit + 24 real SQLite = 123, types/lint/format and all three exports). Browser 8091 synthetic fixtures confirm all three Portuguese ideas, repeated selection preserving five weekdays and tolerance 2, cancellation/reload with blank new draft, fully editable name/icon/color, explicit Save with zero wins and literal title retained after reload/English switch. Reviewed Portuguese 390/360 wrapping and English copy. Added native assertions to retained first-win, language override and OS Portuguese/enlarged-text flows; hosted evidence pending. Final aggregate rerun after the explicit web expansion cue PASS. Existing habit editor hides ideas; customized title/icon/color survive reopen and language change. Native job budget is 50 minutes because the previous ten-flow baseline already took 41m27s; all ten cases and exact assertions are retained.
+Open questions: Hosted native acceptance and enlarged-text screenshot review pending. Local Maestro is not installed and Xcode selects CommandLineTools; no local device acceptance claimed. No new dependency, schema, permission or release configuration required.
 Handoff summary: Follow task 017 so suggestions are localized from the start. Every tile still represents one deliberate binary win.

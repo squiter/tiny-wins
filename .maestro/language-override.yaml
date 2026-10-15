@@ -42,10 +42,58 @@ appId: app.tinywins.mobile
 - assertVisible: Fechar editor de hábito
 - assertVisible: Novo hábito
 - tapOn:
+    id: toggle-starter-ideas
+- tapOn:
+    id: starter-idea-water
+- assertVisible:
     id: habit-name
+    text: Beber água
+- tapOn: Fechar editor de hábito
+- assertVisible: Comece com uma pequena coisa.
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- assertVisible: Comece com uma pequena coisa.
+- assertNotVisible: Ver Beber água, 0 vitória seguida
+- tapOn:
+    id: add-habit
+    retryTapIfNoChange: true
+- runFlow:
+    when:
+      notVisible: Fechar editor de hábito
+    commands:
+      - tapOn:
+          id: add-habit
+          retryTapIfNoChange: true
+- assertVisible: Fechar editor de hábito
+- tapOn:
+    id: toggle-starter-ideas
+- tapOn:
+    id: starter-idea-read
+- assertVisible:
+    id: habit-name
+    text: Ler uma página
+- assertVisible:
+    id: starter-idea-read
+    text: 'Usar ideia: Ler uma página, selecionada'
+- takeScreenshot: starter-ideas-portuguese
+- tapOn:
+    id: habit-name
+- eraseText
 - inputText: Quiet reading
 - assertVisible: Quiet reading
 - tapOn: Terminei de escrever
+- tapOn:
+    id: toggle-starter-ideas
+- scrollUntilVisible:
+    element: Ícone de Estudo
+    direction: DOWN
+    centerElement: true
+- tapOn: Ícone de Estudo
+- tapOn: Cor violeta
 - scrollUntilVisible:
     element:
       id: save-habit
@@ -57,6 +105,14 @@ appId: app.tinywins.mobile
 - assertVisible: '(?s)Tudo feito por hoje!.*'
 - takeScreenshot: language-portuguese-win
 - tapOn: Ver Quiet reading, 1 vitória seguida
+- tapOn: Editar hábito
+- assertVisible: Fechar editor de hábito
+- assertNotVisible:
+    id: toggle-starter-ideas
+- assertVisible:
+    id: habit-name
+    text: Quiet reading
+- tapOn: Fechar editor de hábito
 - tapOn:
     id: inspect-today
 - scrollUntilVisible:

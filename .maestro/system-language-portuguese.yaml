@@ -70,6 +70,24 @@ appId: app.tinywins.mobile
 - assertVisible: Novo hábito
 - takeScreenshot: language-portuguese-large-editor
 - scrollUntilVisible:
+    element:
+      id: toggle-starter-ideas
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: toggle-starter-ideas
+- scrollUntilVisible:
+    element:
+      id: starter-idea-walk
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: starter-idea-walk
+- assertVisible:
+    id: starter-idea-walk
+    text: 'Usar ideia: Fazer uma caminhada curta, selecionada'
+- takeScreenshot: starter-ideas-portuguese-large
+- scrollUntilVisible:
     element: Cancelar
     direction: DOWN
 - assertVisible: Criar hábito

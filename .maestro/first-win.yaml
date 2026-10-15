@@ -18,9 +18,21 @@ appId: app.tinywins.mobile
           retryTapIfNoChange: true
 - assertVisible: Close habit editor
 - tapOn:
+    id: toggle-starter-ideas
+- tapOn:
+    id: starter-idea-water
+- assertVisible:
+    id: starter-idea-water
+    text: 'Use idea: Drink water, selected'
+- tapOn:
+    id: starter-idea-read
+- assertVisible:
     id: habit-name
-- inputText: Read one page
-- tapOn: Done typing
+    text: Read one page
+- assertVisible:
+    id: starter-idea-read
+    text: 'Use idea: Read one page, selected'
+- takeScreenshot: starter-ideas-english
 - scrollUntilVisible:
     element:
       id: save-habit

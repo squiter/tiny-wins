@@ -42,6 +42,8 @@ Actual browser development previews with example habits. Today and Insights were
 
 Choose **System, English or Português (Brasil)** in Settings to change the interface language. Your habit names and notes stay exactly as you wrote them, and the choice is saved on this device. In the browser preview, System follows the browser's language. [See the language choices](docs/screenshots/language-settings-pt-390.jpg); the complete ten-flow iPhone acceptance is recorded in [task 017](.harness/tasks/017-interface-languages.md).
 
+Creating a habit? Open **Need an idea?** for three optional starting points: read one page, drink water or take a short walk. Names follow the interface language and stay fully editable, alongside icons and colors. Choosing an idea saves nothing; your chosen days and streak flexibility stay intact. [See the Portuguese editor](docs/screenshots/starter-ideas-pt-390.png).
+
 Schedule and flexibility changes begin tomorrow, preserving earlier history. Notes support up to 280 characters and remain readable on archived habits. Backups include notes and flexibility settings; older v1/v2 files remain importable, and restore keeps existing local records.
 
 ### A streak with room to breathe
@@ -56,14 +58,13 @@ The core app works offline and stores data on your device, without an account or
 
 ## What's next
 
-Interface languages are delivered. While Apple enrollment is with support, the next approved features are editable habit suggestions → flexible weekly goals → session timer. First-release preparation continues alongside this sequence. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
+Interface languages and editable habit suggestions are implemented. While Apple enrollment is with support, the next approved features are flexible weekly goals → session timer. Starter-idea native acceptance is tracked in [task 018](.harness/tasks/018-starter-habits.md). First-release preparation continues alongside this sequence. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
 
 The [implementation plan](docs/IMPLEMENTATION_PLAN.md) guides these additions. They are planned work, with no promised release dates.
 
 | Direction                               | Planned additions                                                                                            |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | **A warmer everyday experience**        | Further cozy visual refinement and optional sounds                                                           |
-| **More ways to get started**            | Small, editable habit suggestions                                                                            |
 | **Progress at a glance**                | Home-screen widgets with pending habits, victory tiles and quick check-ins where supported                   |
 | **Routines that fit real life**         | Flexible goals such as “walk on three days each week,” plus deliberate pause/skip options                    |
 | **A moment to focus**                   | A session stopwatch/countdown that offers a deliberate check-in when you finish                              |

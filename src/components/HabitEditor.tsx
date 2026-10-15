@@ -1,5 +1,6 @@
 import { useI18n, useMessage } from '../features/localization/provider';
 import { useState } from 'react';
+import { starterIdeas, starterIdeaFields } from '../features/habits/starterIdeas';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -46,11 +47,13 @@ interface Props {
   onArchive(): void;
 }
 export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
-  const { t, count, number, weekdayChoice } = useI18n();
+  const { t, count, number, weekdayChoice, language } = useI18n();
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const reducedMotion = useReducedMotion();
   const [title, setTitle] = useState(habit?.title ?? '');
+  const [nameRevision, setNameRevision] = useState(0);
+  const [ideasExpanded, setIdeasExpanded] = useState(false);
   const [color, setColor] = useState<ColorKey>(habit?.color ?? 'forest');
   const [icon, setIcon] = useState<IconKey>(habit?.icon ?? 'plant');
   const [days, setDays] = useState<Weekday[]>(
@@ -110,6 +113,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
               </View>
               <Text style={styles.label}>{t('Habit name')}</Text>
               <TextInput
+                key={nameRevision}
                 testID="habit-name"
                 accessibilityLabel={t('Habit name')}
                 defaultValue={title}
@@ -136,6 +140,77 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 >
                   <Text style={styles.secondaryText}>{t('Done typing')}</Text>
                 </Pressable>
+              )}
+              {!habit && (
+                <View style={styles.ideas}>
+                  <Pressable
+                    testID="toggle-starter-ideas"
+                    accessibilityRole="button"
+                    accessibilityLabel={t('Need an idea?')}
+                    accessibilityState={{ expanded: ideasExpanded }}
+                    aria-expanded={ideasExpanded}
+                    onPress={() => {
+                      Keyboard.dismiss();
+                      setIdeasExpanded(!ideasExpanded);
+                    }}
+                    style={styles.ideasToggle}
+                  >
+                    <Text style={[styles.secondaryText, { flex: 1 }]}>{t('Need an idea?')}</Text>
+                    <Text accessible={false} style={styles.secondaryText}>
+                      {ideasExpanded ? '−' : '+'}
+                    </Text>
+                  </Pressable>
+                  {ideasExpanded && (
+                    <View style={styles.ideasBody}>
+                      <Text accessibilityRole="header" style={styles.label}>
+                        {t('A small place to start')}
+                      </Text>
+                      <Text style={styles.support}>
+                        {t(
+                          'Choose an idea, then make it yours. Nothing is saved until you create the habit.',
+                        )}
+                      </Text>
+                      {starterIdeas.map((idea) => {
+                        const fields = starterIdeaFields(idea, language);
+                        const selected =
+                          title === fields.title && icon === fields.icon && color === fields.color;
+                        return (
+                          <Pressable
+                            key={idea.id}
+                            testID={`starter-idea-${idea.id}`}
+                            accessibilityRole="button"
+                            accessibilityState={{ selected }}
+                            accessibilityLabel={t(
+                              selected ? 'Use idea: {title}, selected' : 'Use idea: {title}',
+                              { title: fields.title },
+                            )}
+                            onPress={() => {
+                              Keyboard.dismiss();
+                              setTyping(false);
+                              setTitle(fields.title);
+                              setIcon(fields.icon);
+                              setColor(fields.color);
+                              setError('');
+                              // Remount only on deliberate idea selection. Ordinary native typing
+                              // stays uncontrolled to avoid cursor/character regressions.
+                              setNameRevision((revision) => revision + 1);
+                            }}
+                            style={[
+                              styles.idea,
+                              { borderColor: selected ? theme.forest : theme.stone },
+                            ]}
+                          >
+                            <HabitIcon icon={fields.icon} color={fields.color} />
+                            <Text style={[styles.label, { flex: 1 }]}>{fields.title}</Text>
+                            <Text accessible={false} style={styles.secondaryText}>
+                              {selected ? '✓' : '+'}
+                            </Text>
+                          </Pressable>
+                        );
+                      })}
+                    </View>
+                  )}
+                </View>
               )}
               <Text style={styles.label}>{t('Icon')}</Text>
               <View
@@ -413,6 +488,24 @@ const createStyles = (theme: ThemePalette) =>
       color: theme.charcoal,
       borderWidth: 1,
       borderColor: theme.stone,
+    },
+    ideas: { borderRadius: 16, backgroundColor: theme.surface },
+    ideasToggle: {
+      minHeight: 48,
+      padding: 12,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 12,
+    },
+    ideasBody: { padding: 12, paddingTop: 0, gap: 10 },
+    idea: {
+      minHeight: 64,
+      padding: 10,
+      borderRadius: 13,
+      borderWidth: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 12,
     },
     options: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
     iconOption: {

@@ -19,8 +19,8 @@ jobs:
       group: ios-smoke-main
       cancel-in-progress: false
     runs-on: macos-26
-    # Eight flows already took 32m48s; language adds two flows and an OS reboot.
-    timeout-minutes: 45
+    # Ten language flows took 41m27s; starter selection/cancel/edit adds interactions.
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:

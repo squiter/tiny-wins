@@ -27,3 +27,9 @@ Review Today with six habits at 390px and 360px, long names, the editor, orderin
 ## Deliberate celebrations
 
 A successful changed completion emits a transient event: a brief control/tile pulse for an individual win, and a botanical banner celebration when all positive scheduled opportunities today are complete. Reload, restored data, duplicates and failed writes never replay feedback. Undo restores static state. Settings saves the animation choice; system reduced motion overrides it. Disabling effects keeps completion symbols, counts and encouraging copy. No sound or haptic dependency is included; see ADR-019.
+
+## Optional starter ideas
+
+New-habit editors offer a collapsed “Need an idea?” section after the name field. Opening it reveals three small ideas: read one page, drink water and take a short walk. Each uses an existing icon/color and English or Brazilian Portuguese title. A full-width, at-least-64-point choice with a checkmark and explicit selected label updates only the editable name/icon/color. It preserves configured weekdays and streak flexibility; Save remains a separate deliberate action. Editing an existing habit never offers ideas.
+
+Selection resets the native name input only on that deliberate action; ordinary typing retains the established uncontrolled input to preserve native cursor/text behavior. Changing interface language never rewrites a draft or saved title. No template identifier, automatic samples, quantities, new schema, package, animation or onboarding is added. The section wraps naturally at 360/390 points and keeps the existing scrollable editor and reduced-motion behavior. Native enlarged-text evidence is recorded separately in task 018.
