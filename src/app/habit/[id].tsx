@@ -1,4 +1,4 @@
-import { useI18n } from '../../features/localization/provider';
+import { useI18n, useMessage } from '../../features/localization/provider';
 import { useCelebrations } from '../../features/feedback/provider';
 import { CozyNote } from '../../components/CozyNote';
 import { saveDayNote } from '../../features/habits/notes';
@@ -50,7 +50,7 @@ export default function HabitDetail() {
   const [year, setYear] = useState(Number((initialDay ?? today).slice(0, 4)));
   const [editing, setEditing] = useState(false);
   const [selected, setSelected] = useState<LocalDate | null>(safeDay(day));
-  const [error, setError] = useState('');
+  const [error, setError] = useMessage();
   const back = () => {
     if (router.canGoBack()) router.back();
     else router.replace('/');
@@ -292,7 +292,7 @@ export default function HabitDetail() {
               refresh();
               setEditing(false);
             } catch {
-              setError(t('Could not archive this habit. Please try again.'));
+              setError('Could not archive this habit. Please try again.');
             }
           }}
         />

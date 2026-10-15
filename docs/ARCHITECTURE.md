@@ -47,3 +47,7 @@ Schema v3 stores effective local schedule versions (ADR-009). Domain calculation
 Type checking first regenerates route declarations through Expo's own generator, matching its CLI. This prevents an old local .expo cache from hiding/misreporting route changes; generated declarations remain untracked.
 
 Device calendar preferences use their own repository contract, SQLite v4 singleton row and shared React context (ADR-011). Domain label/offset helpers affect presentation only; immutable local completion dates and schedule eligibility remain independent.
+
+## Interface language
+
+The localization feature uses expo-localization for the first preferred device language and a saved System/English/Português (Brasil) override. SQLite migration 8 adds only the constrained language preference; habit backup merge retains device preferences. The typed catalog covers app copy and accessibility; user names/notes remain literal. Presentation uses explicit Intl locales and UTC containers for immutable local dates. It does not change timezone, schedule or week-start semantics. Loading/recovery outside the database use system language. See ADR-021 and task 017 for native acceptance and platform limitations.

@@ -1,3 +1,4 @@
+import type { Weekday } from '../../domain/schedule';
 import type { HistoryCell } from '../../domain/habit';
 import type { LocalDate } from '../../domain/calendar';
 import type { WeekStartsOn } from '../../domain/preferences';
@@ -21,8 +22,13 @@ export function interfaceCopy(language: InterfaceLanguage) {
     translateCount(language, n, one, other);
   const date = (day: LocalDate, options: Omit<Intl.DateTimeFormatOptions, 'timeZone'>) =>
     formatCalendarDate(day, language, options);
+  const choices = weekdayHeadings(language, 0).map(
+    ({ full }) =>
+      full[0]!.toLocaleUpperCase(language) + full.slice(1, language === 'pt-BR' ? 3 : 2),
+  );
   return {
     language,
+    weekdayChoice: (day: Weekday) => choices[day]!,
     progress: (wins: number, planned: number) =>
       t(planned === 1 ? '{wins} of {planned} planned win' : '{wins} of {planned} planned wins', {
         wins,

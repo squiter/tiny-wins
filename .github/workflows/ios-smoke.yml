@@ -149,6 +149,8 @@ jobs:
           plutil -extract AppleLanguages json -o "$RUNNER_TEMP/tiny-wins-smoke/system-languages.json" "$preferences"
           xcrun simctl boot "$TINY_WINS_SIMULATOR"
           xcrun simctl bootstatus "$TINY_WINS_SIMULATOR" -b
+          xcrun simctl ui "$TINY_WINS_SIMULATOR" content_size accessibility-large
+          xcrun simctl ui "$TINY_WINS_SIMULATOR" content_size > "$RUNNER_TEMP/tiny-wins-smoke/system-language-content-size.txt"
           maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/system-language-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/system-language-portuguese.yaml
       - name: Capture simulator outcome
         if: always()

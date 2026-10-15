@@ -1,4 +1,4 @@
-import { useI18n } from '../features/localization/provider';
+import { useI18n, useMessage } from '../features/localization/provider';
 import { noteLimit } from '../domain/notes';
 import { useEffect, useRef, useState } from 'react';
 import Animated, {
@@ -45,7 +45,7 @@ export function DayInspector({
   onChange(completed: boolean): void;
   onClose(): void;
 }) {
-  const { t, language, number, failure: localizedFailure } = useI18n();
+  const { t, language, number } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const { event, animationsAllowed } = useCelebrations();
@@ -65,8 +65,8 @@ export function DayInspector({
   const [draft, setDraft] = useState(note);
   const [typing, setTyping] = useState(false);
   const [savedNote, setSavedNote] = useState(note);
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [message, setMessage] = useMessage();
+  const [error, setError, setFailure] = useMessage();
   const label = new Intl.DateTimeFormat(language, {
     weekday: 'long',
     year: 'numeric',
@@ -121,7 +121,7 @@ export function DayInspector({
                           onChange(cell.state !== 'complete');
                           setError('');
                         } catch {
-                          setError(t('Could not save this day. Please try again.'));
+                          setError('Could not save this day. Please try again.');
                         }
                       }}
                       style={styles.button}
@@ -201,16 +201,11 @@ export function DayInspector({
                           const text = draft.trim();
                           setDraft(text);
                           setSavedNote(text);
-                          setMessage(text ? t('Note saved.') : t('Note cleared.'));
+                          setMessage(text ? 'Note saved.' : 'Note cleared.');
                           setError('');
                           Keyboard.dismiss();
                         } catch (failure) {
-                          setError(
-                            localizedFailure(
-                              failure,
-                              'Could not save this note. Please try again.',
-                            ),
-                          );
+                          setFailure(failure, 'Could not save this note. Please try again.');
                         }
                       }}
                       style={[
@@ -227,7 +222,7 @@ export function DayInspector({
                       disabled={!draft}
                       onPress={() => {
                         setDraft('');
-                        setMessage(t('Press Save note to clear it.'));
+                        setMessage('Press Save note to clear it.');
                       }}
                       style={[styles.close, styles.noteAction, !draft && { opacity: 0.5 }]}
                     >

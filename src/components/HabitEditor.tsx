@@ -1,4 +1,4 @@
-import { useI18n } from '../features/localization/provider';
+import { useI18n, useMessage } from '../features/localization/provider';
 import { useState } from 'react';
 import {
   Keyboard,
@@ -46,7 +46,7 @@ interface Props {
   onArchive(): void;
 }
 export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
-  const { t, count, number, weekdays } = useI18n();
+  const { t, count, number, weekdayChoice } = useI18n();
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const reducedMotion = useReducedMotion();
@@ -61,7 +61,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
   const [streakTolerance, setStreakTolerance] = useState(
     habit ? plannedTolerance(habit.schedule) : 0,
   );
-  const [error, setError] = useState('');
+  const [error, setError] = useMessage();
   function save() {
     let validated: string;
     try {
@@ -69,16 +69,14 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
       validateWeekdays(days);
     } catch {
       setError(
-        !title.trim()
-          ? t('Use a habit name of 1–80 characters.')
-          : t('Choose at least one weekday.'),
+        !title.trim() ? 'Use a habit name of 1–80 characters.' : 'Choose at least one weekday.',
       );
       return;
     }
     try {
       onSave({ title: validated, color, icon, days, streakTolerance });
     } catch {
-      setError(t('We couldn’t save your habit. Please try again.'));
+      setError('We couldn’t save your habit. Please try again.');
     }
   }
   return (
@@ -251,7 +249,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                         fontSize: 13,
                       }}
                     >
-                      {weekdays(0)[day]!.full.slice(0, 2)}
+                      {weekdayChoice(day)}
                     </Text>
                   </Pressable>
                 ))}

@@ -1,4 +1,4 @@
-import { useI18n } from '../../features/localization/provider';
+import { useI18n, useMessage } from '../../features/localization/provider';
 import { useCelebrations } from '../../features/feedback/provider';
 import { CozyNote } from '../../components/CozyNote';
 import { saveDayNote } from '../../features/habits/notes';
@@ -34,7 +34,7 @@ export default function Insights() {
   const [period, setPeriod] = useState<ReportPeriod>('year');
   const [anchor, setAnchor] = useState(today);
   const [selected, setSelected] = useState<{ id: string; day: LocalDate } | null>(null);
-  const [notice, setNotice] = useState('');
+  const [notice, setNotice] = useMessage();
   const range = reportRange(period, anchor, weekStartsOn);
   const current = reportRange(period, today, weekStartsOn);
   const result = victoryReport(habits, completions, today, range, notes);
@@ -270,11 +270,9 @@ export default function Insights() {
               setDayCompletion(repository, deviceClock, selectedHabit.id, selected.day, completed),
             );
             refresh();
-            setNotice(
-              completed
-                ? t('{title}: one more tile filled. ✓', { title: selectedHabit.title })
-                : t('{title}: win undone.', { title: selectedHabit.title }),
-            );
+            setNotice(completed ? '{title}: one more tile filled. ✓' : '{title}: win undone.', {
+              title: selectedHabit.title,
+            });
             setSelected(null);
           }}
         />

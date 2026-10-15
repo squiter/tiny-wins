@@ -1,4 +1,5 @@
-import { useI18n } from '../../features/localization/provider';
+import type { MessageKey, MessageValues } from '../../features/localization/messages';
+import { useI18n, useMessage } from '../../features/localization/provider';
 import { useCelebrations } from '../../features/feedback/provider';
 import { CozyNote } from '../../components/CozyNote';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
@@ -31,7 +32,7 @@ export default function Today() {
   const [editor, setEditor] = useState<{ habit: Habit | null } | null>(null);
   const [ordering, setOrdering] = useState(false);
   const [archived, setArchived] = useState(false);
-  const [notice, setNotice] = useState('');
+  const [notice, setNotice] = useMessage();
   const update = useCallback(() => refresh((value) => value + 1), []);
   useFocusEffect(
     useCallback(() => {
@@ -94,13 +95,13 @@ export default function Today() {
     setArchived(false);
     setNotice('');
   }
-  function mutate(operation: () => void, message = '') {
+  function mutate(operation: () => void, message: MessageKey | '' = '', values?: MessageValues) {
     try {
       operation();
       update();
-      setNotice(message);
+      setNotice(message, values);
     } catch {
-      setNotice(t('We couldn’t save that change. Please try again.'));
+      setNotice('We couldn’t save that change. Please try again.');
     }
   }
   function archive() {
@@ -110,9 +111,9 @@ export default function Today() {
       archiveHabit(repository, deviceClock, habit.id);
       update();
       setEditor(null);
-      setNotice(t('{title} archived. You can restore it below.', { title: habit.title }));
+      setNotice('{title} archived. You can restore it below.', { title: habit.title });
     } catch {
-      setNotice(t('We couldn’t archive your habit. Please try again.'));
+      setNotice('We couldn’t archive your habit. Please try again.');
     }
   }
   return (
@@ -244,7 +245,8 @@ export default function Today() {
                 onPress={() =>
                   mutate(
                     () => restoreHabit(repository, habit.id, deviceClock),
-                    t('{title} restored. Find it in Today.', { title: habit.title }),
+                    '{title} restored. Find it in Today.',
+                    { title: habit.title },
                   )
                 }
                 style={styles.restore}

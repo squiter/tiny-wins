@@ -13,6 +13,28 @@ import { interfaceCopy } from '../../src/features/localization/presentation';
 const placeholders = (value: string) =>
   [...value.matchAll(/\{(\w+)\}/g)].map((match) => match[1]).sort();
 describe('localized interface copy', () => {
+  it('keeps Portuguese weekday choices visually distinct, including Wednesday/Thursday and Monday/Friday', () => {
+    expect(allWeekdays.map(interfaceCopy('pt-BR').weekdayChoice)).toEqual([
+      'Dom',
+      'Seg',
+      'Ter',
+      'Qua',
+      'Qui',
+      'Sex',
+      'Sáb',
+    ]);
+    expect(new Set(allWeekdays.map(interfaceCopy('pt-BR').weekdayChoice)).size).toBe(7);
+    expect(allWeekdays.map(interfaceCopy('en').weekdayChoice)).toEqual([
+      'Su',
+      'Mo',
+      'Tu',
+      'We',
+      'Th',
+      'Fr',
+      'Sa',
+    ]);
+  });
+
   it('provides nonempty Portuguese and matching interpolation slots for every English message', () => {
     for (const [english, pt] of Object.entries(portuguese)) {
       expect(pt.trim(), english).not.toBe('');

@@ -51,4 +51,4 @@ For each run record source SHA, version/build, device/OS, date, tester and evide
 - [ ] VoiceOver and enlarged text work on supported iPhone/iPad; privacy link is reachable.
 - [ ] No unapproved network collection; inspect final privacy manifest/export compliance.
 
-Future features remain tasks 014/017/018 and the owner roadmap. Portuguese is a worthwhile follow-up for a Brazilian audience, but current release copy must describe the English interface honestly. No release date committed.
+Task 017 implements English/Brazilian Portuguese interface selection; its final native acceptance remains tracked separately. Next approved feature order is editable suggestions (018), flexible weekly goals (023), then session timer (024); widgets remain task 014. Store copy must match the tested release candidate. No release date committed.

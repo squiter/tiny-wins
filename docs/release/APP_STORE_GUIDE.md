@@ -2,7 +2,7 @@
 
 Guia conferido em **14 de outubro de 2026**. Nome confirmado: **Tiny Wins**. Modelo confirmado: **compra única para baixar**, sem assinatura nem compras dentro do app. Você ainda não tem inscrição Apple Developer. O app está em preparação; ainda não está pronto para submissão.
 
-Use este guia junto com a [lista de liberação](READINESS.md). Minha recomendação é fechar a primeira versão com o núcleo atual e deixar widgets, sons, sugestões e integrações para depois. A interface atual é em inglês; português continua planejado. Não anuncie tradução antes de ela existir.
+Use este guia junto com a [lista de liberação](READINESS.md). Minha recomendação é fechar a primeira versão com o núcleo atual e deixar widgets, sons, sugestões e integrações para depois. A tarefa 017 implementa a interface em inglês e português do Brasil; acompanhe a aceitação nativa no harness antes de anunciar a versão para publicação.
 
 ## 1. Entenda as três etapas
 
@@ -33,7 +33,7 @@ Escolha o preço e os países de venda com base nas opções apresentadas no pai
 
 Antes de criar o cadastro, confirme o identificador definitivo. Hoje o projeto usa `app.tinywins.mobile`, mas ainda não verificamos sua disponibilidade na sua equipe Apple. O identificador acompanha assinatura e atualizações; não o trate como um campo provisório depois de publicar.
 
-Registre um App ID explícito no portal Apple Developer e, em App Store Connect, abra **Apps → + → New App**. Informe plataforma iOS, nome Tiny Wins, idioma principal English (a interface atual), o Bundle ID registrado e um SKU interno, por exemplo `tiny-wins-ios`. O SKU não é o nome exibido ao comprador. Confirme a disponibilidade do nome; a autorização do nome neste projeto não garante disponibilidade na loja. [Criar o cadastro](https://developer.apple.com/help/app-store-connect/create-an-app-record/add-a-new-app).
+Registre um App ID explícito no portal Apple Developer e, em App Store Connect, abra **Apps → + → New App**. Informe plataforma iOS, nome Tiny Wins, idioma principal English (ou Português (Brasil), conforme a ficha escolhida), o Bundle ID registrado e um SKU interno, por exemplo `tiny-wins-ios`. O SKU não é o nome exibido ao comprador. Confirme a disponibilidade do nome; a autorização do nome neste projeto não garante disponibilidade na loja. [Criar o cadastro](https://developer.apple.com/help/app-store-connect/create-an-app-record/add-a-new-app).
 
 Registre o Apple ID numérico do cadastro, a equipe escolhida e o identificador no registro de lançamento; credenciais ficam fora do Git. Revise também onde o app será disponibilizado, incluindo Mac/Vision Pro quando oferecidos pelo painel. Não habilite suporte anunciado sem testá-lo. [Submissão e disponibilidade](https://developer.apple.com/app-store/submitting/).
 

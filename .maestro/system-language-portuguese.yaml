@@ -19,11 +19,11 @@ appId: app.tinywins.mobile
 - assertVisible:
     id: language-system
     checked: true
-- assertVisible: Idioma da interface
+- assertVisible: Idioma
 - takeScreenshot: language-system-portuguese-large-settings
 - tapOn:
     id: language-en
-- assertVisible: Interface language
+- assertVisible: Language
 - stopApp
 - launchApp
 - extendedWaitUntil:
@@ -39,7 +39,7 @@ appId: app.tinywins.mobile
     centerElement: true
 - tapOn:
     id: language-system
-- assertVisible: Idioma da interface
+- assertVisible: Idioma
 - takeScreenshot: language-system-portuguese-restored
 - tapOn: Hoje, tab, 1 of 3
 - tapOn:

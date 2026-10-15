@@ -1,4 +1,4 @@
-import { useI18n } from '../features/localization/provider';
+import { useI18n, useMessage } from '../features/localization/provider';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useRepository } from '../database/provider';
@@ -8,15 +8,21 @@ import { deviceClock } from '../lib/clock';
 import { useTheme, useThemeStyles } from '../theme/useTheme';
 import type { ThemePalette } from '../theme/tokens';
 export function BackupControls() {
-  const { t, count, failure } = useI18n();
+  const { t, count } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const repository = useRepository();
   const [pending, setPending] = useState<Backup | null>(null);
   const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage, setFailure] = useMessage();
+  const [restored, setRestored] = useState<{
+    habitsAdded: number;
+    winsAdded: number;
+    notesAdded: number;
+  } | null>(null);
   async function exportFile() {
     setBusy(true);
+    setRestored(null);
     setMessage('');
     try {
       const now = deviceClock.now();
@@ -31,22 +37,23 @@ export function BackupControls() {
         `tiny-wins-${now.toISOString().replaceAll(':', '-')}.tinywins.json`,
         t('Save Tiny Wins backup'),
       );
-      setMessage(t('Backup file prepared. Keep it somewhere safe.'));
+      setMessage('Backup file prepared. Keep it somewhere safe.');
     } catch (error) {
-      setMessage(failure(error, 'Could not create a backup.'));
+      setFailure(error, 'Could not create a backup.');
     } finally {
       setBusy(false);
     }
   }
   async function selectFile() {
     setBusy(true);
+    setRestored(null);
     setMessage('');
     setPending(null);
     try {
       const source = await chooseBackupFile();
       if (source !== null) setPending(parseBackup(source));
     } catch (error) {
-      setMessage(failure(error, 'Could not read this backup.'));
+      setFailure(error, 'Could not read this backup.');
     } finally {
       setBusy(false);
     }
@@ -54,18 +61,14 @@ export function BackupControls() {
   function restore() {
     if (!pending) return;
     setBusy(true);
+    setRestored(null);
     try {
       const result = repository.mergeBackup(pending);
-      setMessage(
-        t('{habits} and {wins} and {notes} added. Your existing habits were kept.', {
-          habits: count(result.habitsAdded, '{count} habit', '{count} habits'),
-          wins: count(result.winsAdded, '{count} win', '{count} wins'),
-          notes: count(result.notesAdded, '{count} note', '{count} notes'),
-        }),
-      );
+      setRestored(result);
+      setMessage('');
       setPending(null);
     } catch (error) {
-      setMessage(failure(error, 'Could not restore this backup.'));
+      setFailure(error, 'Could not restore this backup.');
     } finally {
       setBusy(false);
     }
@@ -122,6 +125,15 @@ export function BackupControls() {
             <Text style={styles.secondaryText}>{t('Cancel restore')}</Text>
           </Pressable>
         </View>
+      )}
+      {restored && (
+        <Text accessibilityRole="alert" style={styles.copy}>
+          {t('{habits} and {wins} and {notes} added. Your existing habits were kept.', {
+            habits: count(restored.habitsAdded, '{count} habit', '{count} habits'),
+            wins: count(restored.winsAdded, '{count} win', '{count} wins'),
+            notes: count(restored.notesAdded, '{count} note', '{count} notes'),
+          })}
+        </Text>
       )}
       {!!message && (
         <Text accessibilityRole="alert" style={styles.copy}>

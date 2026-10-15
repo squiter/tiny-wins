@@ -1,7 +1,6 @@
-import { useI18n } from '../../features/localization/provider';
+import { useI18n, useMessage } from '../../features/localization/provider';
 import { useCelebrations } from '../../features/feedback/provider';
 import { CozyNote } from '../../components/CozyNote';
-import { useState } from 'react';
 import { usePreferences } from '../../database/provider';
 import type { WeekStartsOn } from '../../domain/preferences';
 import { router } from 'expo-router';
@@ -34,13 +33,13 @@ export default function Settings() {
     language,
     setLanguage,
   } = usePreferences();
-  const [error, setError] = useState('');
+  const [error, setError] = useMessage();
   function changeWeek(value: WeekStartsOn) {
     try {
       setWeekStartsOn(value);
       setError('');
     } catch {
-      setError(t('We couldn’t save your preference. Please try again.'));
+      setError('We couldn’t save your preference. Please try again.');
     }
   }
   return (
@@ -95,7 +94,7 @@ export default function Settings() {
                     setLanguage(value);
                     setError('');
                   } catch {
-                    setError(t('We couldn’t save your preference. Please try again.'));
+                    setError('We couldn’t save your preference. Please try again.');
                   }
                 }}
                 style={[styles.choice, language === value && styles.chosen]}
@@ -194,7 +193,7 @@ export default function Settings() {
                     setAppearance(value);
                     setError('');
                   } catch {
-                    setError(t('We couldn’t save your preference. Please try again.'));
+                    setError('We couldn’t save your preference. Please try again.');
                   }
                 }}
                 style={[styles.choice, appearance === value && styles.chosen]}
@@ -239,7 +238,7 @@ export default function Settings() {
                   setAnimations(value);
                   setError('');
                 } catch {
-                  setError(t('We couldn’t save your preference. Please try again.'));
+                  setError('We couldn’t save your preference. Please try again.');
                 }
               }}
               trackColor={{ false: theme.stone, true: theme.forest }}

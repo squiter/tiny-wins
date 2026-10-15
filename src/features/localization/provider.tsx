@@ -1,4 +1,12 @@
-import { createContext, useContext, useMemo, type PropsWithChildren } from 'react';
+import { portuguese, type MessageKey, type MessageValues } from './messages';
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useCallback,
+  type PropsWithChildren,
+} from 'react';
 import { useLocales } from 'expo-localization';
 import { usePreferences } from '../../database/provider';
 import { resolveLanguage } from './locale';
@@ -22,4 +30,19 @@ export function useSystemI18n() {
   const locales = useLocales();
   const language = resolveLanguage('system', locales[0]?.languageTag);
   return useMemo(() => interfaceCopy(language), [language]);
+}
+
+// Keep message intent in state so an already-visible notice follows language changes.
+export function useMessage() {
+  const { t } = useI18n();
+  const [message, setMessage] = useState<{ key: MessageKey; values?: MessageValues } | null>(null);
+  const show = useCallback(
+    (key: MessageKey | '', values?: MessageValues) => setMessage(key ? { key, values } : null),
+    [],
+  );
+  const showFailure = useCallback((error: unknown, fallback: MessageKey) => {
+    const key = error instanceof Error ? error.message : '';
+    setMessage({ key: Object.hasOwn(portuguese, key) ? (key as MessageKey) : fallback });
+  }, []);
+  return [message ? t(message.key, message.values) : '', show, showFailure] as const;
 }

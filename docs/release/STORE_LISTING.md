@@ -1,6 +1,6 @@
 # Store listing drafts — Tiny Wins
 
-Drafts only, not uploaded. The current interface is English. Portuguese copy below is an optional localized storefront description, not a claim that the app is translated. Confirm language choices, URLs, category, price and availability in App Store Connect.
+Drafts only, not uploaded. Task 017 implements English and Brazilian Portuguese interface copy and saved language selection; final native acceptance is tracked in its harness task. Portuguese storefront copy remains a draft until release gates pass. Confirm language choices, URLs, category, price and availability in App Store Connect.
 
 ## English storefront
 
@@ -22,7 +22,7 @@ Add a short note to a date, inspect your history, and deliberately correct past 
 
 Your habits stay on your device. Tiny Wins works offline, requires no account, and offers JSON backup export and restore. Choose light or dark appearance and control celebration animations.
 
-One purchase to download. No subscription or in-app purchases. The interface is currently in English.
+One purchase to download. No subscription or in-app purchases. Choose English or Brazilian Portuguese, or follow your device language. Habit names and notes stay as you wrote them.
 
 Keywords draft: habits,routine,streak,tracker,progress,daily,calendar,offline,consistency
 
@@ -34,7 +34,7 @@ Escolha uma rotina diária ou dias da semana, personalize ícones e cores e acom
 
 Guarde uma nota em uma data, corrija o histórico de forma consciente e arquive hábitos quando precisar de uma pausa. Seus dados ficam no aparelho, com exportação e restauração de backup em JSON.
 
-Compra única para baixar, sem assinatura ou compras dentro do app. A interface desta primeira versão está em inglês.
+Compra única para baixar, sem assinatura ou compras dentro do app. Escolha português do Brasil ou inglês, ou acompanhe o idioma do aparelho. Os nomes dos hábitos e as notas ficam como você escreveu.
 
 ## Notes for App Review
 
