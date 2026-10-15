@@ -42,7 +42,7 @@ Actual browser development previews with example habits. Today and Insights were
 
 Choose **System, English or Português (Brasil)** in Settings to change the interface language. Your habit names and notes stay exactly as you wrote them, and the choice is saved on this device. In the browser preview, System follows the browser's language. [See the language choices](docs/screenshots/language-settings-pt-390.jpg); the complete ten-flow iPhone acceptance is recorded in [task 017](.harness/tasks/017-interface-languages.md).
 
-Creating a habit? Open **Need an idea?** for three optional starting points: read one page, drink water or take a short walk. Names follow the interface language and stay fully editable, alongside icons and colors. Choosing an idea saves nothing; your chosen days and streak flexibility stay intact. [See the Portuguese editor](docs/screenshots/starter-ideas-pt-390.png).
+Creating a habit? Open **Need an idea?** for three optional starting points: read one page, drink water or take a short walk. Suggested names follow the interface language and stay fully editable, alongside icons and colors. Choosing an idea saves nothing; your chosen days and streak flexibility stay intact. [See the Portuguese editor](docs/screenshots/starter-ideas-pt-390.png).
 
 Schedule and flexibility changes begin tomorrow, preserving earlier history. Notes support up to 280 characters and remain readable on archived habits. Backups include notes and flexibility settings; older v1/v2 files remain importable, and restore keeps existing local records.
 
