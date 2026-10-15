@@ -1,5 +1,13 @@
 # CI and dependency remediation
 
+## Current status — 2026-10-15
+
+On ca24722, [iOS compilation 38655197293](https://github.com/squiter/tiny-wins/actions/runs/38655197293), [Android compilation 38655197167](https://github.com/squiter/tiny-wins/actions/runs/38655197167) and [eight iPhone flows 38656406501](https://github.com/squiter/tiny-wins/actions/runs/38656406501) PASS. [Validate 38655197157](https://github.com/squiter/tiny-wins/actions/runs/38655197157) passes verify; only dependency-audit fails. JUnit and OS readbacks/captures were reviewed. Earlier simulator failures are superseded, not ignored.
+
+A clean npm ci and npm run verify pass again: 70 unit + 22 SQLite integration tests, including exploit and valid-input mitigation regressions, strict checks and three exports. Raw audit JSON exits 1 with 18 high / 0 moderate / 0 critical. npm/GitHub advisories still list braces 3.0.3 and forge 1.4.0 without corrected releases. CI now preserves the full raw audit JSON as a seven-day artifact; its high/critical exit semantics are unchanged. No dependency update/downgrade was applied.
+
+[Proposed ADR-020](adr/020-proposed-patched-dependency-audit-policy.md) describes a temporary, expiring exception for the two exact advisories only if patched source hashes and exploit regressions pass. It contains concrete hashes and residual risks. It is **not approved or implemented**; the current gate remains red. ADR-012 requires a separately reviewed security decision before changing this policy.
+
 ## Diagnosis
 
 Main commit `8165536`, [Validate run 38492768239](https://github.com/squiter/tiny-wins/actions/runs/38492768239): `verify` passed; `dependency-audit` failed on 33 findings (18 high, 15 moderate). This was an actual security gate failure, not a test/build failure.

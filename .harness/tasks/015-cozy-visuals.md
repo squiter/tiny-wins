@@ -1,6 +1,6 @@
 # Task: 015 — Cozy visual refinement
 
-Status: in progress
+Status: complete
 Goal: Express the owner's saved botanical design board across the actual app.
 Non-goals: Navigation changes, new icon dependencies, generated UI mockups, sound.
 Files/modules allowed: Bundled decorative asset, shared illustration/footer/tab icons, theme tokens, main screens/cards/editors and documentation.
@@ -36,3 +36,5 @@ Focused normal-font browser check after responsive fix (isolated 8091, 360 × 84
 Native run 38629308028 on a4c985c PASSED all six flows: features 3/0 failures, regressions 2/0, enlarged text 1/0; simulator readback accessibility-large. Reviewed detail, editor actions, day inspector, Insights/wall and Settings captures. The detail caption and October/2026 wrap inside the screen, both arrows remain visible, editor actions remain readable, and the animation switch stays separate from its wrapped label. This evidence precedes the footer refinement below.
 
 Owner footer refinement implemented in shared CozyNote: remove the duplicate rabbit and colored card; retain muted serif encouragement with breathable spacing across Today/detail/Insights/Settings. `npm run verify` PASS (70 unit + 22 SQLite tests, types/lint/format, web/iOS/Android exports). Browser captures reviewed at light 360/390 and dark 360: `cozy-typographic-footer-light-390.png`, `cozy-typographic-footer-light-360.png`, `cozy-typographic-footer-dark-360.png`. Six-of-six banner retains the sole rabbit illustration; all rows keep 14 dates. Synthetic preview only; owner data unchanged. New footer native runtime validation awaits a fresh matching build, so task remains in progress. Next product slice: task 017 interface languages, then task 018 starter ideas.
+
+Final-source acceptance (reviewed 2026-10-15): ca24722 iOS compilation 38655197293 and Android compilation 38655197167 PASS. iPhone 17 Pro / iOS 26.5 run 38656406501 passes all eight flows: features 3/0 failures, regressions 2/0, System Dark 1/0, System Light 1/0, enlarged text 1/0. OS readbacks dark/light match resolved palette assertions; explicit overrides/restart and exact Little reading title pass. Reviewed native captures confirm sole rabbit banner/typographic footer and System palettes. Captures: docs/screenshots/cozy-ios-typographic-footer.png, system-appearance-ios-dark.png, system-appearance-ios-light.png. Supersedes earlier pending native statements. Physical accessibility, backup file dialogs, Android runtime and security remain distinct release gates.
