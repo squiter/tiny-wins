@@ -1,3 +1,4 @@
+import { useI18n } from '../features/localization/provider';
 import { useState } from 'react';
 import {
   Keyboard,
@@ -45,6 +46,7 @@ interface Props {
   onArchive(): void;
 }
 export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
+  const { t, count, number, weekdays } = useI18n();
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const reducedMotion = useReducedMotion();
@@ -67,14 +69,16 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
       validateWeekdays(days);
     } catch {
       setError(
-        !title.trim() ? 'Use a habit name of 1–80 characters.' : 'Choose at least one weekday.',
+        !title.trim()
+          ? t('Use a habit name of 1–80 characters.')
+          : t('Choose at least one weekday.'),
       );
       return;
     }
     try {
       onSave({ title: validated, color, icon, days, streakTolerance });
     } catch {
-      setError('We couldn’t save your habit. Please try again.');
+      setError(t('We couldn’t save your habit. Please try again.'));
     }
   }
   return (
@@ -90,26 +94,26 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 <Pressable
                   onPress={onClose}
                   accessibilityRole="button"
-                  accessibilityLabel="Close habit editor"
+                  accessibilityLabel={t('Close habit editor')}
                   style={styles.back}
                 >
                   <Text style={styles.backText}>‹</Text>
                 </Pressable>
                 <Text accessibilityRole="header" style={styles.heading}>
-                  {habit ? 'Edit habit' : 'New habit'}
+                  {habit ? t('Edit habit') : t('New habit')}
                 </Text>
                 <View style={{ width: 48 }} />
               </View>
               <View style={styles.preview}>
                 <HabitIcon color={color} icon={icon} />
                 <Text numberOfLines={2} style={styles.previewTitle}>
-                  {title.trim() || 'One small step'}
+                  {title.trim() || t('One small step')}
                 </Text>
               </View>
-              <Text style={styles.label}>Habit name</Text>
+              <Text style={styles.label}>{t('Habit name')}</Text>
               <TextInput
                 testID="habit-name"
-                accessibilityLabel="Habit name"
+                accessibilityLabel={t('Habit name')}
                 defaultValue={title}
                 autoCorrect={false}
                 onChangeText={(value) => {
@@ -117,7 +121,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                   setError('');
                 }}
                 maxLength={80}
-                placeholder="e.g. Read one page"
+                placeholder={t('e.g. Read one page')}
                 placeholderTextColor={theme.muted}
                 style={styles.input}
                 returnKeyType="done"
@@ -128,18 +132,18 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
               {typing && (
                 <Pressable
                   accessibilityRole="button"
-                  accessibilityLabel="Done typing"
+                  accessibilityLabel={t('Done typing')}
                   onPress={() => Keyboard.dismiss()}
                   style={styles.secondary}
                 >
-                  <Text style={styles.secondaryText}>Done typing</Text>
+                  <Text style={styles.secondaryText}>{t('Done typing')}</Text>
                 </Pressable>
               )}
-              <Text style={styles.label}>Icon</Text>
+              <Text style={styles.label}>{t('Icon')}</Text>
               <View
                 style={styles.options}
                 accessibilityRole="radiogroup"
-                accessibilityLabel="Habit icon"
+                accessibilityLabel={t('Habit icon')}
               >
                 {iconKeys.map((key) => (
                   <Pressable
@@ -148,7 +152,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                     accessibilityRole="radio"
                     aria-checked={key === icon}
                     accessibilityState={{ checked: key === icon }}
-                    accessibilityLabel={`${habitIcons[key].label} icon`}
+                    accessibilityLabel={t('{icon} icon', { icon: t(habitIcons[key].label) })}
                     style={[
                       styles.iconOption,
                       {
@@ -163,11 +167,11 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                   </Pressable>
                 ))}
               </View>
-              <Text style={styles.label}>Color</Text>
+              <Text style={styles.label}>{t('Color')}</Text>
               <View
                 style={styles.options}
                 accessibilityRole="radiogroup"
-                accessibilityLabel="Habit color"
+                accessibilityLabel={t('Habit color')}
               >
                 {colorKeys.map((key) => (
                   <Pressable
@@ -176,7 +180,7 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                     accessibilityRole="radio"
                     accessibilityState={{ checked: key === color }}
                     aria-checked={key === color}
-                    accessibilityLabel={`${key} color`}
+                    accessibilityLabel={t('{color} color', { color: t(key) })}
                     style={[styles.swatch, { backgroundColor: habitColors[key] }]}
                   >
                     <Text style={{ color: theme.onHabit, fontSize: 22 }}>
@@ -185,29 +189,33 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                   </Pressable>
                 ))}
               </View>
-              <Text style={styles.label}>Frequency</Text>
+              <Text style={styles.label}>{t('Frequency')}</Text>
               <View style={styles.options}>
                 <Pressable
                   accessibilityRole="button"
-                  accessibilityLabel="Every day"
+                  accessibilityLabel={t('Every day')}
                   onPress={() => setDays([...allWeekdays])}
                   style={[
                     styles.frequency,
                     { backgroundColor: days.length === 7 ? theme.mint : theme.surface },
                   ]}
                 >
-                  <Text style={styles.label}>Every day</Text>
+                  <Text style={styles.label}>{t('Every day')}</Text>
                 </Pressable>
                 <Pressable
                   accessibilityRole="button"
-                  accessibilityLabel="Weekdays"
+                  accessibilityLabel={t('Weekdays')}
                   onPress={() => setDays([1, 2, 3, 4, 5])}
                   style={styles.frequency}
                 >
-                  <Text style={styles.label}>Weekdays</Text>
+                  <Text style={styles.label}>{t('Weekdays')}</Text>
                 </Pressable>
               </View>
-              <View style={styles.options} role="group" accessibilityLabel="Scheduled weekdays">
+              <View
+                style={styles.options}
+                role="group"
+                accessibilityLabel={t('Scheduled weekdays')}
+              >
                 {([1, 2, 3, 4, 5, 6, 0] as Weekday[]).map((day) => (
                   <Pressable
                     key={day}
@@ -217,13 +225,13 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                     hitSlop={4}
                     accessibilityLabel={
                       [
-                        'Sunday',
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                        'Saturday',
+                        t('Sunday'),
+                        t('Monday'),
+                        t('Tuesday'),
+                        t('Wednesday'),
+                        t('Thursday'),
+                        t('Friday'),
+                        t('Saturday'),
                       ][day]
                     }
                     onPress={() =>
@@ -243,15 +251,15 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                         fontSize: 13,
                       }}
                     >
-                      {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'][day]}
+                      {weekdays(0)[day]!.full.slice(0, 2)}
                     </Text>
                   </Pressable>
                 ))}
               </View>
               <Text style={styles.support}>
                 {habit
-                  ? 'Frequency changes start tomorrow. Past wins stay on their original dates.'
-                  : 'Choose the days that work for you.'}
+                  ? t('Frequency changes start tomorrow. Past wins stay on their original dates.')
+                  : t('Choose the days that work for you.')}
               </Text>
               <Pressable
                 accessibilityRole="button"
@@ -260,9 +268,13 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 style={styles.secondary}
               >
                 <Text style={styles.secondaryText}>
-                  Advanced options
+                  {t('Advanced options')}
                   {streakTolerance > 0
-                    ? ` · ${streakTolerance} day${streakTolerance === 1 ? '' : 's'} tolerance`
+                    ? count(
+                        streakTolerance,
+                        ' · {count} day tolerance',
+                        ' · {count} days tolerance',
+                      )
                     : ''}{' '}
                   {advanced ? '−' : '+'}
                 </Text>
@@ -270,16 +282,18 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
               {advanced && (
                 <View style={styles.preview}>
                   <View style={{ flex: 1, gap: 8 }}>
-                    <Text style={styles.label}>Streak flexibility</Text>
+                    <Text style={styles.label}>{t('Streak flexibility')}</Text>
                     <Text style={styles.support}>
-                      Allow up to {streakTolerance} missed scheduled day
-                      {streakTolerance === 1 ? '' : 's'} between wins. Each win renews the
-                      allowance.
+                      {count(
+                        streakTolerance,
+                        'Allow up to {count} missed scheduled day between wins. Each win renews the allowance.',
+                        'Allow up to {count} missed scheduled days between wins. Each win renews the allowance.',
+                      )}
                     </Text>
                     <View style={styles.options}>
                       <Pressable
                         accessibilityRole="button"
-                        accessibilityLabel="Decrease streak tolerance"
+                        accessibilityLabel={t('Decrease streak tolerance')}
                         disabled={streakTolerance === 0}
                         accessibilityState={{ disabled: streakTolerance === 0 }}
                         onPress={() => setStreakTolerance(streakTolerance - 1)}
@@ -290,17 +304,21 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                       <Text
                         accessible
                         testID="streak-tolerance"
-                        accessibilityLabel={`${streakTolerance} scheduled day${streakTolerance === 1 ? '' : 's'} of tolerance`}
+                        accessibilityLabel={count(
+                          streakTolerance,
+                          '{count} scheduled day of tolerance',
+                          '{count} scheduled days of tolerance',
+                        )}
                         style={[
                           styles.label,
                           { minWidth: 48, textAlign: 'center', alignSelf: 'center' },
                         ]}
                       >
-                        {streakTolerance}
+                        {number(streakTolerance)}
                       </Text>
                       <Pressable
                         accessibilityRole="button"
-                        accessibilityLabel="Increase streak tolerance"
+                        accessibilityLabel={t('Increase streak tolerance')}
                         disabled={streakTolerance === 7}
                         accessibilityState={{ disabled: streakTolerance === 7 }}
                         onPress={() => setStreakTolerance(streakTolerance + 1)}
@@ -310,8 +328,10 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                       </Pressable>
                     </View>
                     <Text style={styles.support}>
-                      Soft ○ tiles keep your rhythm visible. Only completed days count as wins.
-                      {habit ? ' Changes start tomorrow.' : ''}
+                      {t(
+                        'Soft ○ tiles keep your rhythm visible. Only completed days count as wins.',
+                      )}
+                      {habit ? t(' Changes start tomorrow.') : ''}
                     </Text>
                   </View>
                 </View>
@@ -327,22 +347,26 @@ export function HabitEditor({ habit, onSave, onClose, onArchive }: Props) {
                 accessibilityRole="button"
                 style={styles.button}
               >
-                <Text style={styles.buttonText}>{habit ? 'Save changes' : 'Create habit'}</Text>
+                <Text style={styles.buttonText}>
+                  {habit ? t('Save changes') : t('Create habit')}
+                </Text>
               </Pressable>
               {habit && (
                 <View style={styles.archive}>
-                  <Text style={styles.support}>Taking a break? Your past wins will stay here.</Text>
+                  <Text style={styles.support}>
+                    {t('Taking a break? Your past wins will stay here.')}
+                  </Text>
                   <Pressable
                     onPress={onArchive}
                     accessibilityRole="button"
                     style={styles.secondary}
                   >
-                    <Text style={styles.secondaryText}>Archive habit</Text>
+                    <Text style={styles.secondaryText}>{t('Archive habit')}</Text>
                   </Pressable>
                 </View>
               )}
               <Pressable onPress={onClose} accessibilityRole="button" style={styles.secondary}>
-                <Text style={styles.support}>Cancel</Text>
+                <Text style={styles.support}>{t('Cancel')}</Text>
               </Pressable>
             </ScrollView>
           </KeyboardAvoidingView>

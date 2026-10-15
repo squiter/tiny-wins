@@ -1,3 +1,4 @@
+import { useI18n } from '../../features/localization/provider';
 import { useCelebrations } from '../../features/feedback/provider';
 import { CozyNote } from '../../components/CozyNote';
 import { saveDayNote } from '../../features/habits/notes';
@@ -9,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { dateKey, type LocalDate } from '../../domain/calendar';
 import { calendarCells } from '../../domain/habit';
 import { habitMetrics, yearCells } from '../../domain/metrics';
-import { plannedDays, scheduleLabel, scheduledOn } from '../../domain/schedule';
+import { plannedDays, scheduledOn } from '../../domain/schedule';
 import { useHabitData } from '../../features/habits/useHabitData';
 import { archiveHabit, editHabit, restoreHabit } from '../../features/habits/service';
 import { setDayCompletion } from '../../features/check-ins/service';
@@ -31,6 +32,7 @@ function safeDay(value?: string): LocalDate | null {
 }
 export default function HabitDetail() {
   const { announce } = useCelebrations();
+  const { t, language, weekdays } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const { weekStartsOn } = usePreferences();
@@ -57,13 +59,13 @@ export default function HabitDetail() {
     return (
       <SafeAreaView style={styles.safe}>
         <View style={styles.page}>
-          <Text style={styles.heading}>Habit not found</Text>
+          <Text style={styles.heading}>{t('Habit not found')}</Text>
           <Pressable
             accessibilityRole="button"
             onPress={() => router.replace('/')}
             style={styles.action}
           >
-            <Text style={styles.link}>Back to Today</Text>
+            <Text style={styles.link}>{t('Back to Today')}</Text>
           </Pressable>
         </View>
       </SafeAreaView>
@@ -80,7 +82,7 @@ export default function HabitDetail() {
   const monthStart = dateKey(`${monthYear}-${String(month).padStart(2, '0')}-01`);
   const monthEnd = dateKey(new Date(Date.UTC(monthYear, month, 0, 12)).toISOString().slice(0, 10));
   const monthCells = calendarCells(habit, completions, monthStart, monthEnd, today, notes);
-  const monthLabel = new Intl.DateTimeFormat('en-US', {
+  const monthLabel = new Intl.DateTimeFormat(language, {
     month: 'long',
     year: 'numeric',
     timeZone: 'UTC',
@@ -109,7 +111,7 @@ export default function HabitDetail() {
         <View style={styles.header}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Go back"
+            accessibilityLabel={t('Go back')}
             onPress={back}
             style={styles.action}
           >
@@ -117,7 +119,7 @@ export default function HabitDetail() {
               ‹
             </Text>
           </Pressable>
-          <Text style={styles.eyebrow}>YOUR PROGRESS</Text>
+          <Text style={styles.eyebrow}>{t('YOUR PROGRESS')}</Text>
           <Pressable
             accessibilityRole="button"
             onPress={() => {
@@ -128,7 +130,9 @@ export default function HabitDetail() {
             }}
             style={[styles.action, styles.editAction]}
           >
-            <Text style={styles.link}>{habit.archivedAt ? 'Restore habit' : 'Edit habit'}</Text>
+            <Text style={styles.link}>
+              {habit.archivedAt ? t('Restore habit') : t('Edit habit')}
+            </Text>
           </Pressable>
         </View>
         <View style={styles.identity}>
@@ -139,18 +143,22 @@ export default function HabitDetail() {
             </Text>
             <Text style={styles.support}>
               {habit.archivedAt
-                ? 'Archived · past wins are saved'
-                : scheduleLabel(plannedDays(habit.schedule))}
+                ? t('Archived · past wins are saved')
+                : plannedDays(habit.schedule).length === 7
+                  ? t('Every day')
+                  : plannedDays(habit.schedule)
+                      .map((day) => weekdays(0)[day]!.full)
+                      .join(' · ')}
             </Text>
           </View>
         </View>
         {habit.schedule.at(-1)!.from > today && (
-          <Text style={styles.support}>New schedule starts tomorrow.</Text>
+          <Text style={styles.support}>{t('New schedule starts tomorrow.')}</Text>
         )}
         <View style={styles.yearHeader}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Previous month"
+            accessibilityLabel={t('Previous month')}
             disabled={
               monthIndex <=
               Number(habit.startsOn.slice(0, 4)) * 12 + Number(habit.startsOn.slice(5, 7)) - 1
@@ -167,7 +175,7 @@ export default function HabitDetail() {
           </Text>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Next month"
+            accessibilityLabel={t('Next month')}
             disabled={
               monthIndex >=
               Number((initialDay ?? today).slice(0, 4)) * 12 +
@@ -189,7 +197,7 @@ export default function HabitDetail() {
             onPress={() => setSelected(today)}
             style={styles.action}
           >
-            <Text style={styles.link}>Add a note for today</Text>
+            <Text style={styles.link}>{t('Add a note for today')}</Text>
           </Pressable>
         )}
         <MonthCalendar
@@ -200,20 +208,28 @@ export default function HabitDetail() {
         />
         <StatsGrid
           items={[
-            { icon: '🌱', value: metrics.currentStreak, label: 'Current streak' },
-            { icon: '🏆', value: metrics.bestStreak, label: `Best streak · ${year}` },
+            { icon: '🌱', value: metrics.currentStreak, label: t('Current streak') },
+            {
+              icon: '🏆',
+              value: metrics.bestStreak,
+              label: t('Best streak · {year}', { year: String(year) }),
+            },
             {
               icon: '◎',
               value: metrics.consistency === null ? '—' : `${metrics.consistency}%`,
-              label: `Consistency · ${year}`,
+              label: t('Consistency · {year}', { year: String(year) }),
             },
-            { icon: '✓', value: metrics.totalWins, label: `Total wins · ${year}` },
+            {
+              icon: '✓',
+              value: metrics.totalWins,
+              label: t('Total wins · {year}', { year: String(year) }),
+            },
           ]}
         />
         <View style={styles.yearHeader}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Previous year"
+            accessibilityLabel={t('Previous year')}
             disabled={year <= Number(habit.startsOn.slice(0, 4))}
             onPress={() => setYear(year - 1)}
             style={styles.action}
@@ -227,7 +243,7 @@ export default function HabitDetail() {
           </Text>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Next year"
+            accessibilityLabel={t('Next year')}
             disabled={year >= Number(today.slice(0, 4))}
             onPress={() => setYear(year + 1)}
             style={styles.action}
@@ -238,8 +254,9 @@ export default function HabitDetail() {
           </Pressable>
         </View>
         <Text style={styles.support}>
-          Each square is one day. Tap a past day to inspect it; changes require a separate
-          confirmation below.
+          {t(
+            'Each square is one day. Tap a past day to inspect it; changes require a separate confirmation below.',
+          )}
         </Text>
         <YearGrid
           weekStartsOn={weekStartsOn}
@@ -248,19 +265,21 @@ export default function HabitDetail() {
           onInspect={setSelected}
         />
         <Text style={styles.support}>
-          Colored ✓ completed · soft ○ within tolerance · pale missed · dashed – not scheduled ·
-          blank before start or future. Corner mark: has note. Today is outlined.
+          {t(
+            'Colored ✓ completed · soft ○ within tolerance · pale missed · dashed – not scheduled · blank before start or future. Corner mark: has note. Today is outlined.',
+          )}
         </Text>
         <Text style={styles.support}>
-          Consistency includes scheduled dates through today. Days before creation, future days and
-          rest days are excluded.
+          {t(
+            'Consistency includes scheduled dates through today. Days before creation, future days and rest days are excluded.',
+          )}
         </Text>
         {!!error && (
           <Text accessibilityRole="alert" style={styles.support}>
             {error}
           </Text>
         )}
-        <CozyNote message="Progress happens one small step at a time." />
+        <CozyNote message={t('Progress happens one small step at a time.')} />
       </ScrollView>
       {editing && (
         <HabitEditor
@@ -273,7 +292,7 @@ export default function HabitDetail() {
               refresh();
               setEditing(false);
             } catch {
-              setError('Could not archive this habit. Please try again.');
+              setError(t('Could not archive this habit. Please try again.'));
             }
           }}
         />

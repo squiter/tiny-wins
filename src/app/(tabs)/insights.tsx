@@ -1,3 +1,4 @@
+import { useI18n } from '../../features/localization/provider';
 import { useCelebrations } from '../../features/feedback/provider';
 import { CozyNote } from '../../components/CozyNote';
 import { saveDayNote } from '../../features/habits/notes';
@@ -25,6 +26,7 @@ import { useTheme, useThemeStyles } from '../../theme/useTheme';
 import type { ThemePalette } from '../../theme/tokens';
 export default function Insights() {
   const { announce } = useCelebrations();
+  const { t, language } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const { repository, refresh, habits, completions, notes, today } = useHabitData();
@@ -52,7 +54,7 @@ export default function Insights() {
     !!cell &&
     (cell.state === 'complete' || cell.state === 'missed' || cell.state === 'grace');
   const format = (day: LocalDate, options: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'UTC' }).format(
+    new Intl.DateTimeFormat(language, { ...options, timeZone: 'UTC' }).format(
       new Date(`${day}T12:00:00Z`),
     );
   const label =
@@ -78,28 +80,30 @@ export default function Insights() {
         ListHeaderComponent={
           <View style={styles.intro}>
             <Text accessibilityRole="header" style={styles.heading}>
-              Insights
+              {t('Insights')}
             </Text>
             <Text style={styles.support}>
-              One tile, one tiny win. Look at what you’re building.
+              {t('One tile, one tiny win. Look at what you’re building.')}
             </Text>
             <View
               accessibilityRole="radiogroup"
-              accessibilityLabel="Report period"
+              accessibilityLabel={t('Report period')}
               style={styles.periods}
             >
               {reportPeriods.map((value) => (
                 <Pressable
                   key={value}
                   accessibilityRole="radio"
-                  accessibilityLabel={value[0]!.toUpperCase() + value.slice(1)}
+                  accessibilityLabel={t(
+                    value === 'week' ? 'Week' : value === 'month' ? 'Month' : 'Year',
+                  )}
                   accessibilityState={{ checked: period === value }}
                   aria-checked={period === value}
                   onPress={() => changePeriod(value)}
                   style={[styles.period, period === value && styles.chosen]}
                 >
                   <Text style={[styles.link, period === value && { color: theme.onPrimary }]}>
-                    {value[0]!.toUpperCase() + value.slice(1)}
+                    {t(value === 'week' ? 'Week' : value === 'month' ? 'Month' : 'Year')}
                   </Text>
                 </Pressable>
               ))}
@@ -107,7 +111,7 @@ export default function Insights() {
             <View style={styles.navigation}>
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel="Previous report period"
+                accessibilityLabel={t('Previous report period')}
                 accessibilityState={{ disabled: range.start <= firstRange.start }}
                 disabled={range.start <= firstRange.start}
                 onPress={() => {
@@ -123,18 +127,18 @@ export default function Insights() {
               </Text>
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel="Return report to today"
+                accessibilityLabel={t('Return report to today')}
                 onPress={() => {
                   setAnchor(today);
                   setNotice('');
                 }}
                 style={styles.today}
               >
-                <Text style={styles.link}>Today</Text>
+                <Text style={styles.link}>{t('Today')}</Text>
               </Pressable>
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel="Next report period"
+                accessibilityLabel={t('Next report period')}
                 accessibilityState={{ disabled: range.start >= current.start }}
                 disabled={range.start >= current.start}
                 onPress={() => {
@@ -148,11 +152,14 @@ export default function Insights() {
             </View>
             <Text accessibilityLiveRegion="polite" style={styles.support}>
               {notice ||
-                'Tap a tile to inspect its date. Marking or undoing a win needs a separate confirmation.'}
+                t(
+                  'Tap a tile to inspect its date. Marking or undoing a win needs a separate confirmation.',
+                )}
             </Text>
             <Text style={styles.legend}>
-              ✓ Win · soft ○ Within tolerance · • Pending / missed · – Rest{'\n'}Corner mark: has
-              note. Empty outline: before start · Dashed outline: future
+              {t(
+                '✓ Win · soft ○ Within tolerance · • Pending / missed · – Rest\nCorner mark: has note. Empty outline: before start · Dashed outline: future',
+              )}
             </Text>
           </View>
         }
@@ -183,37 +190,56 @@ export default function Insights() {
         ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Text style={styles.section}>Your first win starts something.</Text>
-            <Text style={styles.support}>Create a habit in Today to begin filling your wall.</Text>
+            <Text style={styles.section}>{t('Your first win starts something.')}</Text>
+            <Text style={styles.support}>
+              {t('Create a habit in Today to begin filling your wall.')}
+            </Text>
             <Pressable
               accessibilityRole="button"
               onPress={() => router.replace('/')}
               style={styles.today}
             >
-              <Text style={styles.link}>Go to Today →</Text>
+              <Text style={styles.link}>{t('Go to Today →')}</Text>
             </Pressable>
           </View>
         }
         ListFooterComponent={
           <View style={styles.summary}>
             <Text accessibilityRole="header" style={styles.section}>
-              This {period}, together
+              {t(
+                period === 'week'
+                  ? 'This week, together'
+                  : period === 'month'
+                    ? 'This month, together'
+                    : 'This year, together',
+              )}
             </Text>
             <StatsGrid
               items={[
-                { icon: '✓', value: result.totalWins, label: `Wins this ${period}` },
+                {
+                  icon: '✓',
+                  value: result.totalWins,
+                  label: t(
+                    period === 'week'
+                      ? 'Wins this week'
+                      : period === 'month'
+                        ? 'Wins this month'
+                        : 'Wins this year',
+                  ),
+                },
                 {
                   icon: '◎',
                   value: result.consistency === null ? '—' : `${result.consistency}%`,
-                  label: 'Consistency · planned days',
+                  label: t('Consistency · planned days'),
                 },
               ]}
             />
             <Text style={styles.support}>
-              Consistency counts scheduled dates through today. Future days, rest days and dates
-              before creation don’t count. Archived histories stay visible.
+              {t(
+                'Consistency counts scheduled dates through today. Future days, rest days and dates before creation don’t count. Archived histories stay visible.',
+              )}
             </Text>
-            <CozyNote message="A missed day never erases your wins." />
+            <CozyNote message={t('A missed day never erases your wins.')} />
           </View>
         }
       />
@@ -246,8 +272,8 @@ export default function Insights() {
             refresh();
             setNotice(
               completed
-                ? `${selectedHabit.title}: one more tile filled. ✓`
-                : `${selectedHabit.title}: win undone.`,
+                ? t('{title}: one more tile filled. ✓', { title: selectedHabit.title })
+                : t('{title}: win undone.', { title: selectedHabit.title }),
             );
             setSelected(null);
           }}

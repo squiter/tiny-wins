@@ -1,7 +1,8 @@
+import type { MessageKey } from '../features/localization/messages';
 import { Text, View } from 'react-native';
 import type { ColorKey, IconKey } from '../domain/habit';
 import { useTheme } from '../theme/useTheme';
-export const habitIcons: Record<IconKey, { glyph: string; label: string }> = {
+export const habitIcons: Record<IconKey, { glyph: string; label: MessageKey }> = {
   plant: { glyph: '🌱', label: 'Plant' },
   water: { glyph: '💧', label: 'Water' },
   book: { glyph: '📖', label: 'Book' },

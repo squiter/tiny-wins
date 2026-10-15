@@ -1,3 +1,4 @@
+import { useI18n } from '../../features/localization/provider';
 import { useCelebrations } from '../../features/feedback/provider';
 import { CozyNote } from '../../components/CozyNote';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
@@ -21,6 +22,7 @@ import type { ThemePalette } from '../../theme/tokens';
 
 export default function Today() {
   const { announce } = useCelebrations();
+  const { t, count, language } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const repository = useRepository();
@@ -57,7 +59,7 @@ export default function Today() {
   const wins = dueHabits.filter((habit) =>
     completions.some((record) => record.habitId === habit.id && record.localDate === today),
   ).length;
-  const dateLabel = new Intl.DateTimeFormat('en-US', {
+  const dateLabel = new Intl.DateTimeFormat(language, {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
@@ -98,7 +100,7 @@ export default function Today() {
       update();
       setNotice(message);
     } catch {
-      setNotice('We couldn’t save that change. Please try again.');
+      setNotice(t('We couldn’t save that change. Please try again.'));
     }
   }
   function archive() {
@@ -108,9 +110,9 @@ export default function Today() {
       archiveHabit(repository, deviceClock, habit.id);
       update();
       setEditor(null);
-      setNotice(`${habit.title} archived. You can restore it below.`);
+      setNotice(t('{title} archived. You can restore it below.', { title: habit.title }));
     } catch {
-      setNotice('We couldn’t archive your habit. Please try again.');
+      setNotice(t('We couldn’t archive your habit. Please try again.'));
     }
   }
   return (
@@ -130,14 +132,16 @@ export default function Today() {
         <View style={styles.header}>
           <View style={{ flex: 1 }}>
             <Text accessibilityRole="header" style={styles.heading}>
-              {archived ? 'Archived' : 'Today'}
+              {archived ? t('Archived') : t('Today')}
             </Text>
-            <Text style={styles.date}>{archived ? 'Your wins are always yours.' : dateLabel}</Text>
+            <Text style={styles.date}>
+              {archived ? t('Your wins are always yours.') : dateLabel}
+            </Text>
           </View>
           <Pressable
             testID="add-habit"
             accessibilityRole="button"
-            accessibilityLabel="New habit"
+            accessibilityLabel={t('New habit')}
             onPress={() => setEditor({ habit: null })}
             style={styles.add}
           >
@@ -150,17 +154,17 @@ export default function Today() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
             {archived
-              ? `${archivedHabits.length} saved habit${archivedHabits.length === 1 ? '' : 's'}`
-              : 'Your habits'}
+              ? count(archivedHabits.length, '{count} saved habit', '{count} saved habits')
+              : t('Your habits')}
           </Text>
           {!archived && activeHabits.length > 1 && (
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel={ordering ? 'Done reordering' : 'Reorder habits'}
+              accessibilityLabel={ordering ? t('Done reordering') : t('Reorder habits')}
               onPress={() => setOrdering(!ordering)}
               style={styles.textButton}
             >
-              <Text style={styles.link}>{ordering ? 'Done' : 'Reorder'}</Text>
+              <Text style={styles.link}>{ordering ? t('Done') : t('Reorder')}</Text>
             </Pressable>
           )}
         </View>
@@ -169,7 +173,7 @@ export default function Today() {
             <Text style={[styles.support, { flex: 1 }]}>{notice}</Text>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Dismiss message"
+              accessibilityLabel={t('Dismiss message')}
               onPress={() => setNotice('')}
               style={styles.dismiss}
             >
@@ -179,16 +183,16 @@ export default function Today() {
         )}
         {!archived && activeHabits.length === 0 && (
           <View style={styles.empty}>
-            <Text style={styles.emptyTitle}>Start with one small thing.</Text>
+            <Text style={styles.emptyTitle}>{t('Start with one small thing.')}</Text>
             <Text style={styles.emptyCopy}>
-              A glass of water. A page of a book. A moment to breathe. Make it yours.
+              {t('A glass of water. A page of a book. A moment to breathe. Make it yours.')}
             </Text>
             <Pressable
               accessibilityRole="button"
               onPress={() => setEditor({ habit: null })}
               style={styles.primary}
             >
-              <Text style={styles.primaryText}>Create your first habit</Text>
+              <Text style={styles.primaryText}>{t('Create your first habit')}</Text>
             </Pressable>
           </View>
         )}
@@ -220,9 +224,9 @@ export default function Today() {
           ))}
         {archived && archivedHabits.length === 0 && (
           <View style={styles.empty}>
-            <Text style={styles.emptyTitle}>Nothing tucked away.</Text>
+            <Text style={styles.emptyTitle}>{t('Nothing tucked away.')}</Text>
             <Text style={styles.emptyCopy}>
-              Archived habits appear here, with their past wins kept safe.
+              {t('Archived habits appear here, with their past wins kept safe.')}
             </Text>
           </View>
         )}
@@ -232,25 +236,27 @@ export default function Today() {
               <HabitIcon color={habit.color} icon={habit.icon} />
               <View style={{ flex: 1 }}>
                 <Text style={styles.habitTitle}>{habit.title}</Text>
-                <Text style={styles.support}>Past wins are saved</Text>
+                <Text style={styles.support}>{t('Past wins are saved')}</Text>
               </View>
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel={`Restore ${habit.title}`}
+                accessibilityLabel={t('Restore {title}', { title: habit.title })}
                 onPress={() =>
                   mutate(
                     () => restoreHabit(repository, habit.id, deviceClock),
-                    `${habit.title} restored. Find it in Today.`,
+                    t('{title} restored. Find it in Today.', { title: habit.title }),
                   )
                 }
                 style={styles.restore}
               >
-                <Text style={styles.link}>Restore</Text>
+                <Text style={styles.link}>{t('Restore')}</Text>
               </Pressable>
             </View>
           ))}
         {!archived && activeHabits.length > 0 && (
-          <Text style={styles.legend}>Past 14 days · today outlined · soft ○ within tolerance</Text>
+          <Text style={styles.legend}>
+            {t('Past 14 days · today outlined · soft ○ within tolerance')}
+          </Text>
         )}
         <Pressable
           accessibilityRole="button"
@@ -262,10 +268,12 @@ export default function Today() {
           style={styles.archiveLink}
         >
           <Text style={styles.link}>
-            {archived ? '← Back to Today' : `Archived habits (${archivedHabits.length})`}
+            {archived
+              ? t('← Back to Today')
+              : t('Archived habits ({count})', { count: archivedHabits.length })}
           </Text>
         </Pressable>
-        <CozyNote message="Consistency over perfection." />
+        <CozyNote message={t('Consistency over perfection.')} />
       </ScrollView>
       {editor && (
         <HabitEditor

@@ -1,3 +1,4 @@
+import type { LanguagePreference } from '../features/localization/locale';
 import {
   createContext,
   useContext,
@@ -14,6 +15,8 @@ import { migrate, type MigrationDatabase } from './migrations';
 import * as schema from './schema';
 import type { Appearance, WeekStartsOn } from '../domain/preferences';
 const PreferencesContext = createContext<{
+  language: LanguagePreference;
+  setLanguage(value: LanguagePreference): void;
   celebrationAnimations: boolean;
   setCelebrationAnimations(value: boolean): void;
   appearance: Appearance;
@@ -26,6 +29,14 @@ const Context = createContext<HabitRepository | null>(null);
 function RepositoryProvider({ children }: PropsWithChildren) {
   const sqlite = useSQLiteContext();
   const repository = useMemo(() => sqliteRepository(drizzle(sqlite, { schema })), [sqlite]);
+  const [language, setLanguageState] = useState(() => repository.getLanguage());
+  const setLanguage = useCallback(
+    (value: LanguagePreference) => {
+      repository.setLanguage(value);
+      setLanguageState(value);
+    },
+    [repository],
+  );
   const [celebrationAnimations, setCelebrations] = useState(() =>
     repository.getCelebrationAnimations(),
   );
@@ -54,6 +65,8 @@ function RepositoryProvider({ children }: PropsWithChildren) {
   );
   const preferences = useMemo(
     () => ({
+      language,
+      setLanguage,
       weekStartsOn,
       setWeekStartsOn,
       appearance,
@@ -62,6 +75,8 @@ function RepositoryProvider({ children }: PropsWithChildren) {
       setCelebrationAnimations,
     }),
     [
+      language,
+      setLanguage,
       weekStartsOn,
       setWeekStartsOn,
       appearance,

@@ -55,6 +55,66 @@ const clock: Clock = {
   timezone: () => 'America/Sao_Paulo',
 };
 describe('real SQLite + shared Drizzle adapter', () => {
+  it('upgrades v7 language preference, preserves history and restores without replacing device language', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-language-'));
+    directories.push(directory);
+    const path = join(directory, 'language.db');
+    let connection = open(path);
+    createHabit(connection.repository, clock, 'read', 'Ler à noite', 'coral', 'book');
+    editHabit(
+      connection.repository,
+      'read',
+      'Ler à noite',
+      'coral',
+      'book',
+      clock,
+      [...allWeekdays],
+      1,
+    );
+    toggleToday(connection.repository, clock, 'read');
+    saveDayNote(
+      connection.repository,
+      clock,
+      'read',
+      dateKey('2024-02-29'),
+      'Uma página, já valeu.',
+    );
+    connection.repository.setAppearance('dark');
+    connection.repository.setWeekStartsOn(0);
+    connection.repository.setCelebrationAnimations(false);
+    const habits = connection.repository.listHabits();
+    const wins = connection.repository.listCompletions();
+    const notes = connection.repository.listNotes();
+    connection.sqlite.exec('ALTER TABLE preferences DROP COLUMN language; PRAGMA user_version = 7');
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getLanguage()).toBe('system');
+    connection.repository.setLanguage('pt-BR');
+    expect(() => connection.repository.setLanguage('pt' as 'pt-BR')).toThrow();
+    expect(() => connection.sqlite.exec("UPDATE preferences SET language = 'fr'")).toThrow();
+    migrate(connection.adapter);
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getLanguage()).toBe('pt-BR');
+    expect(connection.repository.getAppearance()).toBe('dark');
+    expect(connection.repository.getWeekStartsOn()).toBe(0);
+    expect(connection.repository.getCelebrationAnimations()).toBe(false);
+    expect(connection.repository.listHabits()).toEqual(habits);
+    expect(connection.repository.listCompletions()).toEqual(wins);
+    expect(connection.repository.listNotes()).toEqual(notes);
+    connection.repository.mergeBackup(
+      parseBackup(serializeBackup(habits, wins, clock.now(), notes)),
+    );
+    expect(connection.repository.getLanguage()).toBe('pt-BR');
+    connection.repository.setLanguage('en');
+    connection.sqlite.close();
+    connection = open(path);
+    expect(connection.repository.getLanguage()).toBe('en');
+    connection.repository.setLanguage('system');
+    expect(connection.repository.listNotes()).toEqual(notes);
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 8 });
+  });
+
   it('upgrades v6 animation preference, reopens and keeps history/backup restoration independent', () => {
     const directory = mkdtempSync(join(tmpdir(), 'tiny-wins-effects-'));
     directories.push(directory);
@@ -68,7 +128,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     const wins = connection.repository.listCompletions();
     const notes = connection.repository.listNotes();
     connection.sqlite.exec(
-      'ALTER TABLE preferences DROP COLUMN celebration_animations; PRAGMA user_version = 6',
+      'ALTER TABLE preferences DROP COLUMN language; ALTER TABLE preferences DROP COLUMN celebration_animations; PRAGMA user_version = 6',
     );
     connection.sqlite.close();
     connection = open(path);
@@ -140,7 +200,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     const wins = connection.repository.listCompletions();
     const notes = connection.repository.listNotes();
     connection.sqlite.exec(
-      'ALTER TABLE preferences DROP COLUMN celebration_animations; ALTER TABLE preferences DROP COLUMN appearance; PRAGMA user_version = 5',
+      'ALTER TABLE preferences DROP COLUMN language; ALTER TABLE preferences DROP COLUMN celebration_animations; ALTER TABLE preferences DROP COLUMN appearance; PRAGMA user_version = 5',
     );
     connection.sqlite.close();
     connection = open(path);
@@ -179,7 +239,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     toggleToday(connection.repository, clock, 'read');
     const wins = connection.repository.listCompletions();
     connection.sqlite.exec(
-      'ALTER TABLE preferences DROP COLUMN celebration_animations; ALTER TABLE preferences DROP COLUMN appearance; DROP TABLE notes; PRAGMA user_version = 4',
+      'ALTER TABLE preferences DROP COLUMN language; ALTER TABLE preferences DROP COLUMN celebration_animations; ALTER TABLE preferences DROP COLUMN appearance; DROP TABLE notes; PRAGMA user_version = 4',
     );
     connection.sqlite.close();
     connection = open(path);
@@ -308,7 +368,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(
       connection.sqlite.prepare('SELECT schedule FROM habits WHERE id=?').get('strict'),
     ).toEqual(legacyJson);
-    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 7 });
+    expect(connection.sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 8 });
     const backup = parseBackup(
       serializeBackup(connection.repository.listHabits(), completions, later.now()),
     );
@@ -378,7 +438,7 @@ describe('real SQLite + shared Drizzle adapter', () => {
     expect(repository.getHabit('b')?.startsOn).toBe('2024-02-29');
     expect(repository.listCompletions()[0]?.localDate).toBe('2024-02-29');
     migrate(adapter);
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 7 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 8 });
     sqlite.close();
     expect(open(path).repository.listCompletions()).toHaveLength(1);
   });
@@ -607,8 +667,8 @@ describe('real SQLite + shared Drizzle adapter', () => {
   });
   it('rejects unknown future schema without modifying user data', () => {
     const { sqlite, adapter } = open(':memory:');
-    sqlite.exec('PRAGMA user_version = 8');
+    sqlite.exec('PRAGMA user_version = 9');
     expect(() => migrate(adapter)).toThrow('newer Tiny Wins');
-    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 8 });
+    expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 9 });
   });
 });

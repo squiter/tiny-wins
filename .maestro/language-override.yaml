@@ -1,0 +1,91 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn: Settings, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: language-pt-BR
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: language-pt-BR
+- assertVisible: Idioma da interface
+- takeScreenshot: language-portuguese-settings
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn:
+    id: add-habit
+- assertVisible: Novo hábito
+- tapOn:
+    id: habit-name
+- inputText: Quiet reading
+- assertVisible: Quiet reading
+- tapOn: Terminei de escrever
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
+- tapOn:
+    id: save-habit
+- assertVisible: Quiet reading
+- tapOn: Concluir Quiet reading hoje
+- assertVisible: '(?s)Tudo feito por hoje!.*'
+- takeScreenshot: language-portuguese-win
+- tapOn: Ver Quiet reading, 1 vitória seguida
+- tapOn:
+    id: inspect-today
+- tapOn:
+    id: day-note
+- inputText: Uma pagina, ja valeu.
+- tapOn:
+    id: day-note-done-typing
+- tapOn:
+    id: save-day-note
+- assertVisible: Nota salva.
+- tapOn: Fechar dia
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn: Ver Quiet reading, 1 vitória seguida
+- tapOn:
+    id: inspect-today
+- assertVisible: Uma pagina, ja valeu.
+- assertVisible: Uma vitória para guardar.
+- takeScreenshot: language-portuguese-note-restart
+- tapOn: Fechar dia
+- tapOn: Voltar
+- tapOn: Ajustes, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: language-en
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: language-en
+- assertVisible: Interface language
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- assertVisible: Today
+- assertVisible: Quiet reading
+- tapOn: View Quiet reading, 1 win in a row
+- tapOn:
+    id: inspect-today
+- assertVisible: Uma pagina, ja valeu.
+- assertVisible: A win worth keeping.
+- tapOn: Close day

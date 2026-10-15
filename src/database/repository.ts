@@ -1,3 +1,4 @@
+import { validateLanguagePreference } from '../features/localization/locale';
 import { and, asc, eq } from 'drizzle-orm';
 import type { BaseSQLiteDatabase } from 'drizzle-orm/sqlite-core';
 import type { HabitRepository } from '../features/habits/repository';
@@ -15,6 +16,18 @@ export function sqliteRepository(
   db: BaseSQLiteDatabase<'sync', unknown, typeof schema>,
 ): HabitRepository & PreferencesRepository {
   const repository: HabitRepository & PreferencesRepository = {
+    getLanguage: () =>
+      validateLanguagePreference(
+        db.select().from(schema.preferences).where(eq(schema.preferences.id, 1)).get()?.language ??
+          'system',
+      ),
+    setLanguage: (value) => {
+      const language = validateLanguagePreference(value);
+      db.insert(schema.preferences)
+        .values({ id: 1, language })
+        .onConflictDoUpdate({ target: schema.preferences.id, set: { language } })
+        .run();
+    },
     getCelebrationAnimations: () =>
       validateCelebrationAnimations(
         db.select().from(schema.preferences).where(eq(schema.preferences.id, 1)).get()

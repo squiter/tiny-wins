@@ -1,7 +1,9 @@
+import { useI18n } from '../../features/localization/provider';
 import { Tabs } from 'expo-router';
 import { TabIcon } from '../../components/TabIcon';
 import { useTheme } from '../../theme/useTheme';
 export default function TabLayout() {
+  const { t } = useI18n();
   const { theme } = useTheme();
   return (
     <Tabs
@@ -17,21 +19,21 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Today',
+          title: t('Today'),
           tabBarIcon: ({ color }) => <TabIcon name="today" color={color} />,
         }}
       />
       <Tabs.Screen
         name="insights"
         options={{
-          title: 'Insights',
+          title: t('Insights'),
           tabBarIcon: ({ color }) => <TabIcon name="insights" color={color} />,
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
-          title: 'Settings',
+          title: t('Settings'),
           tabBarIcon: ({ color }) => <TabIcon name="settings" color={color} />,
         }}
       />

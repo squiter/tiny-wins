@@ -1,5 +1,6 @@
+import { useI18n } from '../features/localization/provider';
 import { NoteMarker } from './NoteMarker';
-import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
+import { calendarOffset, type WeekStartsOn } from '../domain/preferences';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { HistoryCell, ColorKey } from '../domain/habit';
 import { useTheme, useThemeStyles } from '../theme/useTheme';
@@ -18,7 +19,7 @@ const months = [
   'October',
   'November',
   'December',
-];
+] as const;
 export function YearGrid({
   cells,
   color,
@@ -30,6 +31,7 @@ export function YearGrid({
   weekStartsOn: WeekStartsOn;
   onInspect(day: LocalDate): void;
 }) {
+  const { t, cellLabel, weekdays } = useI18n();
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   return (
@@ -40,10 +42,10 @@ export function YearGrid({
         return (
           <View key={month} style={styles.month}>
             <Text accessibilityRole="header" style={styles.title}>
-              {month}
+              {t(month)}
             </Text>
             <View style={styles.days}>
-              {calendarWeekdays(weekStartsOn).map((label, i) => (
+              {weekdays(weekStartsOn).map(({ short: label }, i) => (
                 <Text accessible={false} key={`label-${i}`} style={styles.weekday}>
                   {label}
                 </Text>
@@ -58,7 +60,7 @@ export function YearGrid({
                   accessibilityRole="button"
                   accessibilityState={{ disabled: cell.state === 'future' }}
                   disabled={cell.state === 'future'}
-                  accessibilityLabel={`${cell.day}: ${cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`}
+                  accessibilityLabel={cellLabel(cell)}
                   onPress={() => onInspect(cell.day)}
                   style={[
                     styles.cell,

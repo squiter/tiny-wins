@@ -1,3 +1,4 @@
+import { useI18n } from '../features/localization/provider';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTheme, useThemeStyles } from '../theme/useTheme';
 import type { ThemePalette } from '../theme/tokens';
@@ -6,6 +7,7 @@ export function StatsGrid({
 }: {
   items: { label: string; value: string | number; icon: string }[];
 }) {
+  const { number } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   return (
@@ -15,7 +17,9 @@ export function StatsGrid({
           <Text accessible={false} style={styles.icon}>
             {item.icon}
           </Text>
-          <Text style={styles.value}>{item.value}</Text>
+          <Text style={styles.value}>
+            {typeof item.value === 'number' ? number(item.value) : item.value}
+          </Text>
           <Text style={styles.label}>{item.label}</Text>
         </View>
       ))}

@@ -1,0 +1,58 @@
+appId: app.tinywins.mobile
+---
+# CI changes the dedicated simulator's OS language before this flow.
+# No saved language override: Portuguese must come from the native API.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- assertVisible: Hoje
+- assertVisible: Comece com uma pequena coisa.
+- tapOn: Ajustes, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: language-system
+    direction: DOWN
+    centerElement: true
+- assertVisible:
+    id: language-system
+    checked: true
+- assertVisible: Idioma da interface
+- takeScreenshot: language-system-portuguese-large-settings
+- tapOn:
+    id: language-en
+- assertVisible: Interface language
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- assertVisible: Today
+- tapOn: Settings, tab, 3 of 3
+- scrollUntilVisible:
+    element:
+      id: language-system
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: language-system
+- assertVisible: Idioma da interface
+- takeScreenshot: language-system-portuguese-restored
+- tapOn: Hoje, tab, 1 of 3
+- tapOn:
+    id: add-habit
+- assertVisible: Novo hábito
+- takeScreenshot: language-portuguese-large-editor
+- scrollUntilVisible:
+    element: Cancelar
+    direction: DOWN
+- assertVisible: Criar hábito
+- assertVisible: Cancelar
+- takeScreenshot: language-portuguese-large-editor-actions
+- tapOn: Cancelar
+- tapOn: Progresso, tab, 2 of 3
+- assertVisible: Sua primeira vitória é um começo.
+- takeScreenshot: language-portuguese-large-insights

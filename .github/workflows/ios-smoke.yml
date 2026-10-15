@@ -96,7 +96,7 @@ jobs:
           MAESTRO_DISABLE_UPDATE_CHECK: 'true'
           MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
           MAESTRO_API_URL: http://127.0.0.1:9
-        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/feature-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/day-notes.yaml .maestro/appearance.yaml .maestro/celebrations.yaml
+        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/feature-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/day-notes.yaml .maestro/appearance.yaml .maestro/celebrations.yaml .maestro/language-override.yaml
       - name: Run restart and management regression flows
         env:
           MAESTRO_DRIVER_STARTUP_TIMEOUT: '240000'
@@ -133,6 +133,23 @@ jobs:
           xcrun simctl ui "$TINY_WINS_SIMULATOR" content_size accessibility-large
           xcrun simctl ui "$TINY_WINS_SIMULATOR" content_size > "$RUNNER_TEMP/tiny-wins-smoke/content-size.txt"
           maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/large-text-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/large-text.yaml
+      - name: Verify native Portuguese system language and enlarged copy
+        env:
+          MAESTRO_DRIVER_STARTUP_TIMEOUT: '240000'
+          MAESTRO_CLI_NO_ANALYTICS: 'true'
+          MAESTRO_DISABLE_UPDATE_CHECK: 'true'
+          MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
+          MAESTRO_API_URL: http://127.0.0.1:9
+        run: |
+          set -euo pipefail
+          xcrun simctl shutdown "$TINY_WINS_SIMULATOR"
+          preferences="$HOME/Library/Developer/CoreSimulator/Devices/$TINY_WINS_SIMULATOR/data/Library/Preferences/.GlobalPreferences.plist"
+          plutil -replace AppleLanguages -json '["pt-BR","en"]' "$preferences"
+          plutil -replace AppleLocale -string pt_BR "$preferences"
+          plutil -extract AppleLanguages json -o "$RUNNER_TEMP/tiny-wins-smoke/system-languages.json" "$preferences"
+          xcrun simctl boot "$TINY_WINS_SIMULATOR"
+          xcrun simctl bootstatus "$TINY_WINS_SIMULATOR" -b
+          maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/system-language-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/system-language-portuguese.yaml
       - name: Capture simulator outcome
         if: always()
         run: |

@@ -1,5 +1,5 @@
 import { backupLimit } from '../../domain/backup';
-export async function saveBackupFile(source: string, filename: string) {
+export async function saveBackupFile(source: string, filename: string, _dialogTitle: string) {
   const url = URL.createObjectURL(new Blob([source], { type: 'application/json' }));
   const link = document.createElement('a');
   link.href = url;

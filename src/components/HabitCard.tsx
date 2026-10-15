@@ -1,3 +1,4 @@
+import { useI18n } from '../features/localization/provider';
 import { useCelebrations } from '../features/feedback/provider';
 import type { DayNote } from '../domain/notes';
 import { NoteMarker } from './NoteMarker';
@@ -37,6 +38,7 @@ export function HabitCard({
   onInspect,
   ordering,
 }: Props) {
+  const { t, count, cellLabel } = useI18n();
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const cells = history(habit, completions, today, notes);
@@ -81,7 +83,12 @@ export function HabitCard({
       <View style={styles.header}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`View ${habit.title}, ${due ? `${streak} win${streak === 1 ? '' : 's'} in a row` : 'Not scheduled today'}`}
+          accessibilityLabel={t('View {title}, {status}', {
+            title: habit.title,
+            status: due
+              ? count(streak, '{count} win in a row', '{count} wins in a row')
+              : t('Not scheduled today'),
+          })}
           disabled={!!ordering}
           onPress={onView}
           style={styles.edit}
@@ -94,14 +101,16 @@ export function HabitCard({
               {habit.title}
             </Text>
             <Text style={styles.support}>
-              {due ? `${streak} win${streak === 1 ? '' : 's'} in a row` : 'Not scheduled today'}
+              {due
+                ? count(streak, '{count} win in a row', '{count} wins in a row')
+                : t('Not scheduled today')}
             </Text>
           </View>
         </Pressable>
         {ordering ? (
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel={`Move ${habit.title} down`}
+            accessibilityLabel={t('Move {title} down', { title: habit.title })}
             accessibilityState={{ disabled: ordering.last }}
             disabled={ordering.last}
             onPress={() => ordering.move(1)}
@@ -116,7 +125,9 @@ export function HabitCard({
               accessibilityRole="checkbox"
               accessibilityState={{ checked: done, disabled: !due && !done }}
               aria-checked={done}
-              accessibilityLabel={`${done ? 'Undo' : 'Complete'} ${habit.title} today`}
+              accessibilityLabel={t(done ? 'Undo {title} today' : 'Complete {title} today', {
+                title: habit.title,
+              })}
               disabled={!due && !done}
               onPress={onToggle}
               style={[
@@ -141,7 +152,7 @@ export function HabitCard({
         {ordering && (
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel={`Move ${habit.title} up`}
+            accessibilityLabel={t('Move {title} up', { title: habit.title })}
             accessibilityState={{ disabled: ordering.first }}
             disabled={ordering.first}
             onPress={() => ordering.move(-1)}
@@ -163,7 +174,7 @@ export function HabitCard({
       </Animated.Text>
       <View style={styles.grid}>
         {cells.map((cell) => {
-          const label = `${cell.day}: ${cell.state === 'complete' ? 'completed' : cell.state === 'before-start' || cell.state === 'not-scheduled' ? (cell.state === 'not-scheduled' ? 'not scheduled' : 'before habit started') : cell.state === 'grace' ? 'within streak tolerance' : cell.today ? 'pending' : 'not completed'}${cell.today ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`;
+          const label = cellLabel(cell);
           const style = [
             styles.cell,
             {
@@ -204,7 +215,7 @@ export function HabitCard({
               key={cell.day}
               onPress={() => onInspect(cell.day)}
               accessibilityRole="button"
-              accessibilityLabel={`Inspect ${habit.title}, ${label}`}
+              accessibilityLabel={t('Inspect {title}, {date}', { title: habit.title, date: label })}
               style={style}
             >
               {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}

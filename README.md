@@ -40,6 +40,8 @@ Actual browser development previews with example habits, captured on October 14,
 | Configure **0–7 days of streak flexibility**               | Track current/best streaks, total wins and eligible-day consistency | Export JSON backups and restore missing records after review        |
 | Choose light/dark appearance and Sunday/Monday week starts | Get immediate visual feedback, including an all-done banner         | Preserve original calendar dates when schedules or timezones change |
 
+Choose **System, English or Português (Brasil)** in Settings to change the interface language. Your habit names and notes stay exactly as you wrote them, and the choice is saved on this device. Native acceptance for this new slice is tracked in [task 017](.harness/tasks/017-interface-languages.md).
+
 Schedule and flexibility changes begin tomorrow, preserving earlier history. Notes support up to 280 characters and remain readable on archived habits. Backups include notes and flexibility settings; older v1/v2 files remain importable, and restore keeps existing local records.
 
 ### A streak with room to breathe
@@ -54,7 +56,7 @@ The core app works offline and stores data on your device, without an account or
 
 ## What's next
 
-First-release preparation is now the priority. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
+While Apple enrollment is with support, the current feature sequence is interface languages → editable habit suggestions → flexible weekly goals → session timer. First-release preparation continues alongside this sequence. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
 
 The [implementation plan](docs/IMPLEMENTATION_PLAN.md) guides these additions. They are planned work, with no promised release dates.
 

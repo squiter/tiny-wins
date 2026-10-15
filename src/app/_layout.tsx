@@ -1,3 +1,4 @@
+import { LocalizationProvider, useSystemI18n } from '../features/localization/provider';
 import { FeedbackProvider } from '../features/feedback/provider';
 import { Stack, type ErrorBoundaryProps } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -10,6 +11,7 @@ import { DatabaseProvider } from '../database/provider';
 import { useSystemTheme, useTheme } from '../theme/useTheme';
 import { recoverApp } from '../lib/recover';
 export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
+  const { t } = useSystemI18n();
   const { theme } = useSystemTheme();
   return (
     <View
@@ -22,12 +24,12 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
       }}
     >
       <Text accessibilityRole="header" style={{ fontSize: 26, color: theme.forest }}>
-        Could not open your habits
+        {t('Could not open your habits')}
       </Text>
       <Text style={{ color: theme.charcoal, fontSize: 16, lineHeight: 24 }}>
         {Platform.OS === 'web'
-          ? 'Close any other Tiny Wins tabs and try again.'
-          : 'Please try again. If this continues, close and reopen Tiny Wins.'}
+          ? t('Close any other Tiny Wins tabs and try again.')
+          : t('Please try again. If this continues, close and reopen Tiny Wins.')}
       </Text>
       <Pressable
         accessibilityRole="button"
@@ -39,12 +41,13 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
           alignItems: 'center',
         }}
       >
-        <Text style={{ color: theme.onPrimary, fontSize: 16 }}>Try again</Text>
+        <Text style={{ color: theme.onPrimary, fontSize: 16 }}>{t('Try again')}</Text>
       </Pressable>
     </View>
   );
 }
 export default function Layout() {
+  const { t } = useSystemI18n();
   const { theme } = useSystemTheme();
   const [loaded, error] = useFonts({ Fraunces_600SemiBold, Inter_400Regular, Inter_600SemiBold });
   if (!loaded && !error)
@@ -57,14 +60,16 @@ export default function Layout() {
           alignItems: 'center',
         }}
       >
-        <Text style={{ color: theme.charcoal }}>Getting your tiny wins ready…</Text>
+        <Text style={{ color: theme.charcoal }}>{t('Getting your tiny wins ready…')}</Text>
       </View>
     );
   return (
     <DatabaseProvider>
-      <FeedbackProvider>
-        <ThemedRoutes />
-      </FeedbackProvider>
+      <LocalizationProvider>
+        <FeedbackProvider>
+          <ThemedRoutes />
+        </FeedbackProvider>
+      </LocalizationProvider>
     </DatabaseProvider>
   );
 }

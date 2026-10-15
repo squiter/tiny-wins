@@ -1,5 +1,6 @@
+import { useI18n } from '../features/localization/provider';
 import { NoteMarker } from './NoteMarker';
-import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
+import { calendarOffset, type WeekStartsOn } from '../domain/preferences';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { HistoryCell, ColorKey } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
@@ -16,12 +17,13 @@ export function MonthCalendar({
   weekStartsOn: WeekStartsOn;
   onInspect(day: LocalDate): void;
 }) {
+  const { cellLabel, weekdays } = useI18n();
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const offset = cells[0] ? calendarOffset(cells[0].day, weekStartsOn) : 0;
   return (
     <View style={styles.grid}>
-      {calendarWeekdays(weekStartsOn).map((label, index) => (
+      {weekdays(weekStartsOn).map(({ short: label }, index) => (
         <Text accessible={false} key={`weekday-${index}`} style={styles.label}>
           {label}
         </Text>
@@ -34,7 +36,7 @@ export function MonthCalendar({
           key={cell.day}
           testID={`month-day-${cell.day}`}
           accessibilityRole="button"
-          accessibilityLabel={`${cell.day}: ${cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`}
+          accessibilityLabel={cellLabel(cell)}
           disabled={cell.state === 'future'}
           accessibilityState={{ disabled: cell.state === 'future' }}
           onPress={() => onInspect(cell.day)}

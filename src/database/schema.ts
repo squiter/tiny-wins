@@ -1,3 +1,4 @@
+import type { LanguagePreference } from '../features/localization/locale';
 import { sqliteTable, text, integer, primaryKey } from 'drizzle-orm/sqlite-core';
 import type { ColorKey, IconKey } from '../domain/habit';
 import type { ScheduleVersion } from '../domain/schedule';
@@ -32,6 +33,7 @@ export const preferences = sqliteTable('preferences', {
   celebrationAnimations: integer('celebration_animations', { mode: 'boolean' })
     .notNull()
     .default(true),
+  language: text('language').$type<LanguagePreference>().notNull().default('system'),
   appearance: text('appearance').$type<Appearance>().notNull().default('system'),
   weekStartsOn: integer('week_starts_on').$type<WeekStartsOn>().notNull().default(1),
 });

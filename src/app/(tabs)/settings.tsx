@@ -1,3 +1,4 @@
+import { useI18n } from '../../features/localization/provider';
 import { useCelebrations } from '../../features/feedback/provider';
 import { CozyNote } from '../../components/CozyNote';
 import { useState } from 'react';
@@ -21,17 +22,25 @@ import { useTheme, useThemeStyles } from '../../theme/useTheme';
 import { darkPalette, type ThemePalette } from '../../theme/tokens';
 export default function Settings() {
   const { setAnimations, animationsAllowed } = useCelebrations();
+  const { t } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
-  const { weekStartsOn, setWeekStartsOn, appearance, setAppearance, celebrationAnimations } =
-    usePreferences();
+  const {
+    weekStartsOn,
+    setWeekStartsOn,
+    appearance,
+    setAppearance,
+    celebrationAnimations,
+    language,
+    setLanguage,
+  } = usePreferences();
   const [error, setError] = useState('');
   function changeWeek(value: WeekStartsOn) {
     try {
       setWeekStartsOn(value);
       setError('');
     } catch {
-      setError('We couldn’t save your preference. Please try again.');
+      setError(t('We couldn’t save your preference. Please try again.'));
     }
   }
   return (
@@ -41,35 +50,93 @@ export default function Settings() {
     >
       <ScrollView contentContainerStyle={styles.page}>
         <Text accessibilityRole="header" style={styles.heading}>
-          Settings
+          {t('Settings')}
         </Text>
         <View style={styles.card}>
-          <Text style={styles.title}>Your habits stay with you</Text>
+          <Text style={styles.title}>{t('Your habits stay with you')}</Text>
           <Text style={styles.copy}>
             {Platform.OS === 'web'
-              ? 'This preview stores your wins in this browser. Keep one Tiny Wins tab open at a time.'
-              : 'Your habits and wins are stored on this device.'}
+              ? t(
+                  'This preview stores your wins in this browser. Keep one Tiny Wins tab open at a time.',
+                )
+              : t('Your habits and wins are stored on this device.')}
           </Text>
           <Text style={styles.copy}>
-            Tiny Wins does not send your habit data to a server. Use a backup file when moving
-            devices.
+            {t(
+              'Tiny Wins does not send your habit data to a server. Use a backup file when moving devices.',
+            )}
           </Text>
         </View>
         <View style={styles.card}>
           <Text accessibilityRole="header" style={styles.title}>
-            Make the calendar yours
+            {t('Language')}
           </Text>
-          <Text style={styles.copy}>Start your week on</Text>
           <View
             accessibilityRole="radiogroup"
-            accessibilityLabel="First day of the week"
+            accessibilityLabel={t('Interface language')}
+            style={styles.appearanceChoices}
+          >
+            {(['system', 'en', 'pt-BR'] as const).map((value) => (
+              <Pressable
+                key={value}
+                testID={`language-${value}`}
+                accessibilityRole="radio"
+                accessibilityLabel={
+                  value === 'system'
+                    ? t('System')
+                    : value === 'en'
+                      ? 'English'
+                      : 'Português (Brasil)'
+                }
+                accessibilityState={{ checked: language === value }}
+                aria-checked={language === value}
+                onPress={() => {
+                  try {
+                    setLanguage(value);
+                    setError('');
+                  } catch {
+                    setError(t('We couldn’t save your preference. Please try again.'));
+                  }
+                }}
+                style={[styles.choice, language === value && styles.chosen]}
+              >
+                <Text style={[styles.choiceText, language === value && { color: theme.onPrimary }]}>
+                  {language === value ? '✓ ' : ''}
+                  {value === 'system'
+                    ? t('System')
+                    : value === 'en'
+                      ? 'English'
+                      : 'Português (Brasil)'}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+          <Text style={styles.copy}>
+            {t(
+              'System follows your device language. Habit names and notes stay as you wrote them.',
+            )}
+          </Text>
+          {!!error && (
+            <Text accessibilityRole="alert" style={styles.copy}>
+              {error}
+            </Text>
+          )}
+        </View>
+        <View style={styles.card}>
+          <Text accessibilityRole="header" style={styles.title}>
+            {t('Make the calendar yours')}
+          </Text>
+          <Text style={styles.copy}>{t('Start your week on')}</Text>
+          <View
+            accessibilityRole="radiogroup"
+            accessibilityLabel={t('First day of the week')}
             style={styles.choices}
           >
             {([1, 0] as const).map((value) => (
               <Pressable
                 key={value}
                 accessibilityRole="radio"
-                accessibilityLabel={value === 1 ? 'Monday' : 'Sunday'}
+                accessibilityLabel={value === 1 ? t('Monday') : t('Sunday')}
                 accessibilityState={{ checked: weekStartsOn === value }}
                 aria-checked={weekStartsOn === value}
                 onPress={() => changeWeek(value)}
@@ -79,14 +146,15 @@ export default function Settings() {
                   style={[styles.choiceText, weekStartsOn === value && { color: theme.onPrimary }]}
                 >
                   {weekStartsOn === value ? '✓ ' : ''}
-                  {value === 1 ? 'Monday' : 'Sunday'}
+                  {value === 1 ? t('Monday') : t('Sunday')}
                 </Text>
               </Pressable>
             ))}
           </View>
           <Text style={styles.copy}>
-            Saved on this device. Changes the monthly and yearly calendar layout. Your schedules and
-            past wins stay the same.
+            {t(
+              'Saved on this device. Changes the monthly and yearly calendar layout. Your schedules and past wins stay the same.',
+            )}
           </Text>
           {!!error && (
             <Text accessibilityRole="alert" style={styles.copy}>
@@ -96,12 +164,12 @@ export default function Settings() {
         </View>
         <View style={styles.card}>
           <Text accessibilityRole="header" style={styles.title}>
-            Make yourself comfortable
+            {t('Make yourself comfortable')}
           </Text>
-          <Text style={styles.copy}>Appearance</Text>
+          <Text style={styles.copy}>{t('Appearance')}</Text>
           <View
             accessibilityRole="radiogroup"
-            accessibilityLabel="Appearance"
+            accessibilityLabel={t('Appearance')}
             style={styles.appearanceChoices}
           >
             {(['system', 'light', 'dark'] as const).map((value) => (
@@ -109,7 +177,16 @@ export default function Settings() {
                 key={value}
                 testID={`appearance-${value}`}
                 accessibilityRole="radio"
-                accessibilityLabel={`${value[0]!.toUpperCase()}${value.slice(1)} appearance${appearance === value ? ', selected' : ''}`}
+                accessibilityLabel={t(
+                  appearance === value
+                    ? '{appearance} appearance, selected'
+                    : '{appearance} appearance',
+                  {
+                    appearance: t(
+                      value === 'system' ? 'System' : value === 'light' ? 'Light' : 'Dark',
+                    ),
+                  },
+                )}
                 accessibilityState={{ checked: appearance === value }}
                 aria-checked={appearance === value}
                 onPress={() => {
@@ -117,7 +194,7 @@ export default function Settings() {
                     setAppearance(value);
                     setError('');
                   } catch {
-                    setError('We couldn’t save your preference. Please try again.');
+                    setError(t('We couldn’t save your preference. Please try again.'));
                   }
                 }}
                 style={[styles.choice, appearance === value && styles.chosen]}
@@ -126,15 +203,15 @@ export default function Settings() {
                   style={[styles.choiceText, appearance === value && { color: theme.onPrimary }]}
                 >
                   {appearance === value ? '✓ ' : ''}
-                  {value[0]!.toUpperCase()}
-                  {value.slice(1)}
+                  {t(value === 'system' ? 'System' : value === 'light' ? 'Light' : 'Dark')}
                 </Text>
               </Pressable>
             ))}
           </View>
           <Text style={styles.copy}>
-            System follows your device. Your choice is saved here; your wins and notes stay the
-            same.
+            {t(
+              'System follows your device. Your choice is saved here; your wins and notes stay the same.',
+            )}
           </Text>
           {!!error && (
             <Text accessibilityRole="alert" style={styles.copy}>
@@ -144,21 +221,25 @@ export default function Settings() {
         </View>
         <View style={styles.card}>
           <Text accessibilityRole="header" style={styles.title}>
-            Celebrate your little wins
+            {t('Celebrate your little wins')}
           </Text>
           <View style={styles.feedbackChoice}>
-            <Text style={[styles.copy, { flex: 1 }]}>Celebration animations</Text>
+            <Text style={[styles.copy, { flex: 1 }]}>{t('Celebration animations')}</Text>
             <Switch
               testID="celebration-animations"
               hitSlop={12}
-              accessibilityLabel={`Celebration animations, ${celebrationAnimations ? 'on' : 'off'}`}
+              accessibilityLabel={t(
+                celebrationAnimations
+                  ? 'Celebration animations, on'
+                  : 'Celebration animations, off',
+              )}
               value={celebrationAnimations}
               onValueChange={(value) => {
                 try {
                   setAnimations(value);
                   setError('');
                 } catch {
-                  setError('We couldn’t save your preference. Please try again.');
+                  setError(t('We couldn’t save your preference. Please try again.'));
                 }
               }}
               trackColor={{ false: theme.stone, true: theme.forest }}
@@ -166,12 +247,13 @@ export default function Settings() {
             />
           </View>
           <Text style={styles.copy}>
-            Gentle feedback for a win, and a little extra warmth when your day is complete. System
-            reduced motion always takes priority.
+            {t(
+              'Gentle feedback for a win, and a little extra warmth when your day is complete. System reduced motion always takes priority.',
+            )}
           </Text>
           {celebrationAnimations && !animationsAllowed && (
             <Text style={styles.copy}>
-              Your device requests reduced motion, so wins stay quietly celebrated.
+              {t('Your device requests reduced motion, so wins stay quietly celebrated.')}
             </Text>
           )}
           {!!error && (
@@ -182,11 +264,12 @@ export default function Settings() {
         </View>
         <BackupControls />
         <View style={styles.card}>
-          <Text style={styles.title}>Your local calendar</Text>
+          <Text style={styles.title}>{t('Your local calendar')}</Text>
           <Text style={styles.copy}>{deviceClock.timezone()}</Text>
           <Text style={styles.copy}>
-            A win belongs to the calendar date you completed it on. Travel does not move your past
-            wins.
+            {t(
+              'A win belongs to the calendar date you completed it on. Travel does not move your past wins.',
+            )}
           </Text>
         </View>
         <Pressable
@@ -194,18 +277,18 @@ export default function Settings() {
           onPress={() => router.push({ pathname: '/', params: { archived: '1' } })}
           style={styles.card}
         >
-          <Text style={styles.title}>Archived habits →</Text>
-          <Text style={styles.copy}>Take a break and come back when you’re ready.</Text>
+          <Text style={styles.title}>{t('Archived habits →')}</Text>
+          <Text style={styles.copy}>{t('Take a break and come back when you’re ready.')}</Text>
         </Pressable>
         <Pressable
           accessibilityRole="link"
           onPress={() => void Linking.openURL('https://github.com/squiter/tiny-wins')}
           style={styles.card}
         >
-          <Text style={styles.title}>View the project on GitHub ↗</Text>
+          <Text style={styles.title}>{t('View the project on GitHub ↗')}</Text>
           <Text style={styles.copy}>Tiny Wins · 0.1.0</Text>
         </Pressable>
-        <CozyNote message="Small steps. Big changes." />
+        <CozyNote message={t('Small steps. Big changes.')} />
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,3 +1,4 @@
+import { useI18n } from '../features/localization/provider';
 import { BotanicalMark } from './BotanicalMark';
 import { useCelebrations } from '../features/feedback/provider';
 import { CozyIllustration } from './CozyIllustration';
@@ -13,6 +14,7 @@ import { useTheme, useThemeStyles } from '../theme/useTheme';
 import type { ThemePalette } from '../theme/tokens';
 
 export function DailyProgress({ wins, planned }: { wins: number; planned: number }) {
+  const { t, progress: progressLabel } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const complete = planned > 0 && wins === planned;
@@ -66,17 +68,17 @@ export function DailyProgress({ wins, planned }: { wins: number; planned: number
       <View style={styles.body} accessibilityLiveRegion="polite">
         <Text style={styles.heading}>
           {complete
-            ? 'All done for today!\nYou grew a little.'
+            ? t('All done for today!\nYou grew a little.')
             : planned
-              ? 'Small wins today,\nbrighter tomorrows.'
-              : 'A little room to breathe.'}
+              ? t('Small wins today,\nbrighter tomorrows.')
+              : t('A little room to breathe.')}
         </Text>
         <Text style={styles.copy}>
           {complete
-            ? `${wins} of ${planned} planned wins`
+            ? progressLabel(wins, planned)
             : planned
-              ? `${wins} of ${planned} planned wins`
-              : 'Nothing planned today. Make the day yours.'}
+              ? progressLabel(wins, planned)
+              : t('Nothing planned today. Make the day yours.')}
         </Text>
         {planned > 0 && (
           <View accessible={false} style={styles.track}>

@@ -1,3 +1,4 @@
+import { useI18n } from '../features/localization/provider';
 import { noteLimit } from '../domain/notes';
 import { useEffect, useRef, useState } from 'react';
 import Animated, {
@@ -44,6 +45,7 @@ export function DayInspector({
   onChange(completed: boolean): void;
   onClose(): void;
 }) {
+  const { t, language, number, failure: localizedFailure } = useI18n();
   const { theme } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const { event, animationsAllowed } = useCelebrations();
@@ -65,7 +67,7 @@ export function DayInspector({
   const [savedNote, setSavedNote] = useState(note);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const label = new Intl.DateTimeFormat('en-US', {
+  const label = new Intl.DateTimeFormat(language, {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -73,12 +75,14 @@ export function DayInspector({
     timeZone: 'UTC',
   }).format(new Date(`${cell.day}T12:00:00Z`));
   const status = {
-    complete: 'A win worth keeping.',
-    grace: 'A little breathing room. Your sequence stayed intact; this day is not a completed win.',
-    missed: 'A new start is always possible.',
-    'before-start': 'This date is before your habit started.',
-    'not-scheduled': 'A day to rest. Nothing was planned.',
-    future: 'This day is still ahead.',
+    complete: t('A win worth keeping.'),
+    grace: t(
+      'A little breathing room. Your sequence stayed intact; this day is not a completed win.',
+    ),
+    missed: t('A new start is always possible.'),
+    'before-start': t('This date is before your habit started.'),
+    'not-scheduled': t('A day to rest. Nothing was planned.'),
+    future: t('This day is still ahead.'),
   }[cell.state];
   return (
     <Modal visible transparent animationType="none" onRequestClose={onClose}>
@@ -100,23 +104,30 @@ export function DayInspector({
               <Text style={styles.text}>{status}</Text>
               {editable && (
                 <>
-                  <Text style={styles.text}>This changes only the completion on {cell.day}.</Text>
+                  <Text style={styles.text}>
+                    {t('This changes only the completion on {date}.', { date: label })}
+                  </Text>
                   <Animated.View style={feedbackStyle}>
                     <Pressable
                       accessibilityRole="button"
-                      accessibilityLabel={`${cell.state === 'complete' ? 'Undo completion' : 'Mark completed'} for ${cell.day}`}
+                      accessibilityLabel={t(
+                        cell.state === 'complete'
+                          ? 'Undo completion for {date}'
+                          : 'Mark completed for {date}',
+                        { date: label },
+                      )}
                       onPress={() => {
                         try {
                           onChange(cell.state !== 'complete');
                           setError('');
                         } catch {
-                          setError('Could not save this day. Please try again.');
+                          setError(t('Could not save this day. Please try again.'));
                         }
                       }}
                       style={styles.button}
                     >
                       <Text style={styles.buttonText}>
-                        {cell.state === 'complete' ? 'Undo completion' : 'Mark completed'}
+                        {cell.state === 'complete' ? t('Undo completion') : t('Mark completed')}
                       </Text>
                     </Pressable>
                   </Animated.View>
@@ -124,15 +135,15 @@ export function DayInspector({
               )}
               {(noteEditable || !!note) && (
                 <View style={styles.noteSection}>
-                  <Text style={styles.noteTitle}>A little context</Text>
+                  <Text style={styles.noteTitle}>{t('A little context')}</Text>
                   {noteEditable ? (
                     <>
                       <Text style={styles.text}>
-                        An optional note for this day. It won’t change your win.
+                        {t('An optional note for this day. It won’t change your win.')}
                       </Text>
                       <TextInput
                         testID="day-note"
-                        accessibilityLabel={`Note for ${cell.day}`}
+                        accessibilityLabel={t('Note for {date}', { date: label })}
                         value={draft}
                         onChangeText={(value) => {
                           setDraft(value);
@@ -140,14 +151,14 @@ export function DayInspector({
                         }}
                         multiline
                         maxLength={noteLimit}
-                        placeholder="What would you like to remember?"
+                        placeholder={t('What would you like to remember?')}
                         placeholderTextColor={theme.muted}
                         onFocus={() => setTyping(true)}
                         onBlur={() => setTyping(false)}
                         style={styles.noteInput}
                       />
                       <Text style={styles.text}>
-                        {draft.length}/{noteLimit}
+                        {number(draft.length)}/{number(noteLimit)}
                       </Text>
                     </>
                   ) : (
@@ -174,7 +185,7 @@ export function DayInspector({
                   onPress={() => Keyboard.dismiss()}
                   style={styles.button}
                 >
-                  <Text style={styles.buttonText}>Done typing</Text>
+                  <Text style={styles.buttonText}>{t('Done typing')}</Text>
                 </Pressable>
               ) : (
                 noteEditable && (
@@ -190,14 +201,15 @@ export function DayInspector({
                           const text = draft.trim();
                           setDraft(text);
                           setSavedNote(text);
-                          setMessage(text ? 'Note saved.' : 'Note cleared.');
+                          setMessage(text ? t('Note saved.') : t('Note cleared.'));
                           setError('');
                           Keyboard.dismiss();
                         } catch (failure) {
                           setError(
-                            failure instanceof Error
-                              ? failure.message
-                              : 'Could not save this note. Please try again.',
+                            localizedFailure(
+                              failure,
+                              'Could not save this note. Please try again.',
+                            ),
                           );
                         }
                       }}
@@ -207,7 +219,7 @@ export function DayInspector({
                         draft === savedNote && { opacity: 0.5 },
                       ]}
                     >
-                      <Text style={styles.buttonText}>Save note</Text>
+                      <Text style={styles.buttonText}>{t('Save note')}</Text>
                     </Pressable>
                     <Pressable
                       accessibilityRole="button"
@@ -215,17 +227,17 @@ export function DayInspector({
                       disabled={!draft}
                       onPress={() => {
                         setDraft('');
-                        setMessage('Press Save note to clear it.');
+                        setMessage(t('Press Save note to clear it.'));
                       }}
                       style={[styles.close, styles.noteAction, !draft && { opacity: 0.5 }]}
                     >
-                      <Text style={styles.text}>Clear note</Text>
+                      <Text style={styles.text}>{t('Clear note')}</Text>
                     </Pressable>
                   </View>
                 )
               )}
               <Pressable accessibilityRole="button" onPress={onClose} style={styles.close}>
-                <Text style={styles.text}>Close day</Text>
+                <Text style={styles.text}>{t('Close day')}</Text>
               </Pressable>
             </View>
           </SafeAreaView>

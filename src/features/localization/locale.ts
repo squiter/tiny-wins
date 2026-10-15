@@ -17,11 +17,10 @@ export function resolveLanguage(
 ): InterfaceLanguage {
   const choice = validateLanguagePreference(preference);
   if (choice !== 'system') return choice;
-  try {
-    return new Intl.Locale(preferredDeviceLanguage ?? 'en').language === 'pt' ? 'pt-BR' : 'en';
-  } catch {
+  // Native modules provide BCP 47 tags. Avoid requiring Intl.Locale on Hermes.
+  if (!preferredDeviceLanguage || !/^[a-z]{2,8}(?:-[a-z0-9]{1,8})*$/i.test(preferredDeviceLanguage))
     return 'en';
-  }
+  return preferredDeviceLanguage.split('-')[0]!.toLowerCase() === 'pt' ? 'pt-BR' : 'en';
 }
 
 export function formatCalendarDate(

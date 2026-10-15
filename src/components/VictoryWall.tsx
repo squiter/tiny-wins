@@ -1,3 +1,4 @@
+import { useI18n } from '../features/localization/provider';
 import { useCelebrations } from '../features/feedback/provider';
 import { NoteMarker } from './NoteMarker';
 import { useEffect, useRef } from 'react';
@@ -10,7 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import type { HistoryCell, Habit } from '../domain/habit';
 import type { LocalDate } from '../domain/calendar';
-import { calendarOffset, calendarWeekdays, type WeekStartsOn } from '../domain/preferences';
+import { calendarOffset, type WeekStartsOn } from '../domain/preferences';
 import type { ReportPeriod } from '../domain/report';
 import { useTheme, useThemeStyles } from '../theme/useTheme';
 import type { ThemePalette } from '../theme/tokens';
@@ -36,6 +37,7 @@ export function VictoryWall({
   onInspect(day: LocalDate): void;
   onView(): void;
 }) {
+  const { t, count, cellLabel, weekdays, progress } = useI18n();
   const { theme, habitColors, habitSurfaces } = useTheme();
   const styles = useThemeStyles(createStyles, theme);
   const columns = period === 'year' ? 35 : 7;
@@ -68,7 +70,7 @@ export function VictoryWall({
     <Animated.View testID={`victory-wall-${habit.id}`} style={[styles.card, feedback]}>
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel={`View ${habit.title} progress`}
+        accessibilityLabel={t('View {title} progress', { title: habit.title })}
         onPress={onView}
         style={styles.header}
       >
@@ -76,8 +78,20 @@ export function VictoryWall({
         <View style={styles.identity}>
           <Text style={styles.name}>{habit.title}</Text>
           <Text style={styles.copy}>
-            {habit.archivedAt ? 'Archived · ' : ''}
-            {wins} win{wins === 1 ? '' : 's'} this {period}
+            {habit.archivedAt ? t('Archived · ') : ''}
+            {count(
+              wins,
+              period === 'week'
+                ? '{count} win this week'
+                : period === 'month'
+                  ? '{count} win this month'
+                  : '{count} win this year',
+              period === 'week'
+                ? '{count} wins this week'
+                : period === 'month'
+                  ? '{count} wins this month'
+                  : '{count} wins this year',
+            )}
           </Text>
         </View>
         <Text style={[styles.rate, { color }]}>
@@ -86,7 +100,7 @@ export function VictoryWall({
       </Pressable>
       {period !== 'year' ? (
         <View style={styles.row}>
-          {calendarWeekdays(weekStartsOn).map((label, index) => (
+          {weekdays(weekStartsOn).map(({ short: label }, index) => (
             <Text accessible={false} key={index} style={styles.weekday}>
               {label}
             </Text>
@@ -94,8 +108,8 @@ export function VictoryWall({
         </View>
       ) : (
         <View style={styles.axis}>
-          <Text style={styles.copy}>Jan → Dec</Text>
-          <Text style={styles.copy}>One tile, one day</Text>
+          <Text style={styles.copy}>{t('Jan → Dec')}</Text>
+          <Text style={styles.copy}>{t('One tile, one day')}</Text>
         </View>
       )}
       <View style={styles.wall}>
@@ -107,7 +121,7 @@ export function VictoryWall({
                   key={cell.day}
                   testID={`insights-day-${habit.id}-${cell.day}`}
                   accessibilityRole="button"
-                  accessibilityLabel={`${habit.title}, ${cell.day}: ${cell.today && cell.state === 'missed' ? 'pending, today' : cell.state === 'grace' ? 'within streak tolerance' : cell.state.replaceAll('-', ' ')}${cell.today && cell.state !== 'missed' ? ', today' : ''}${cell.hasNote ? ', has note' : ''}`}
+                  accessibilityLabel={`${habit.title}, ${cellLabel(cell)}`}
                   onPress={() => onInspect(cell.day)}
                   style={[
                     styles.tile,
@@ -171,16 +185,16 @@ export function VictoryWall({
         ))}
       </View>
       <Text style={styles.copy}>
-        {eligibleWins} of {eligibleDays} planned wins
-        {eligibleDays > 0 && eligibleWins === eligibleDays ? ' · All planned wins so far ✓' : ''}
+        {progress(eligibleWins, eligibleDays)}
+        {eligibleDays > 0 && eligibleWins === eligibleDays ? t(' · All planned wins so far ✓') : ''}
       </Text>
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel={`Explore ${habit.title} calendar with larger dates`}
+        accessibilityLabel={t('Explore {title} calendar with larger dates', { title: habit.title })}
         onPress={onView}
         style={styles.explore}
       >
-        <Text style={styles.link}>Explore calendar →</Text>
+        <Text style={styles.link}>{t('Explore calendar →')}</Text>
       </Pressable>
     </Animated.View>
   );
