@@ -1,6 +1,6 @@
 # ADR-020: Temporary acceptance of verified patched tooling dependencies
 
-Status: **Accepted with conditions on 2026-10-15; implementation validated locally, hosted CI pending.**
+Status: **Accepted with conditions on 2026-10-15; implementation validated locally and in hosted CI 38728133305.**
 
 ## Problem and current evidence
 
