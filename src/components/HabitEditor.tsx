@@ -437,7 +437,10 @@ export function HabitEditor({ habit, today, onSave, onClose, onArchive }: Props)
                 </View>
               )}
               <Text style={styles.support}>
-                {habit && (weekly || habit.schedule.some((version) => version.weekly))
+                {habit &&
+                (weekly ||
+                  plannedVersion(habit.schedule).weekly ||
+                  versionOn(habit.schedule, today)?.weekly)
                   ? t('Weekly changes start next week. Earlier dates stay unchanged.')
                   : habit
                     ? t('Frequency changes start tomorrow. Past wins stay on their original dates.')
