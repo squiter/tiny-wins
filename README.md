@@ -14,21 +14,21 @@ Built for **consistency over perfection**. Your past wins stay yours, even when 
   <tr>
     <th>Today</th>
     <th>Insights · dark mode</th>
-    <th>A note for the day</th>
+    <th>A note · Português (Brasil)</th>
   </tr>
   <tr>
     <td valign="top" align="center"><a href="docs/screenshots/readme-today-light-390.jpg"><img src="docs/screenshots/readme-today-light-390.jpg" width="260" alt="Today in light mode: six completed habits, 14 daily tiles per row, an all-done banner and a quiet typographic footer." /></a></td>
     <td valign="top" align="center"><a href="docs/screenshots/readme-insights-dark-390.jpg"><img src="docs/screenshots/readme-insights-dark-390.jpg" width="260" alt="Insights in dark mode: week, month and year controls above a habit's annual victory wall and consistency summary." /></a></td>
-    <td valign="top" align="center"><a href="docs/screenshots/readme-day-note-dark-390.jpg"><img src="docs/screenshots/readme-day-note-dark-390.jpg" width="260" alt="Day inspector in dark mode: an optional reading note, a separate completion action and fixed Save note, Clear note and Close day controls." /></a></td>
+    <td valign="top" align="center"><a href="docs/screenshots/language-day-note-pt-360.jpg"><img src="docs/screenshots/language-day-note-pt-360.jpg" width="260" alt="Day inspector in Brazilian Portuguese: an unchanged English habit name, an accented saved note and separate completion and note controls." /></a></td>
   </tr>
   <tr>
     <td align="center">Your next small win, one tap away.</td>
     <td align="center">A whole year of effort, one tile at a time.</td>
-    <td align="center">Keep a little context alongside your progress.</td>
+    <td align="center">Your words stay yours in either interface language.</td>
   </tr>
 </table>
 
-Actual browser development previews with example habits, captured on October 14, 2026 from the current visual refresh (7e38767). Click a screenshot for the full-size view.
+Actual browser development previews with example habits. Today and Insights were captured on October 14, 2026 for the visual refresh; the Portuguese note was captured on October 15 for the language review. Click a screenshot for the full-size view.
 
 ## What you can do today
 
@@ -40,7 +40,7 @@ Actual browser development previews with example habits, captured on October 14,
 | Configure **0–7 days of streak flexibility**               | Track current/best streaks, total wins and eligible-day consistency | Export JSON backups and restore missing records after review        |
 | Choose light/dark appearance and Sunday/Monday week starts | Get immediate visual feedback, including an all-done banner         | Preserve original calendar dates when schedules or timezones change |
 
-Choose **System, English or Português (Brasil)** in Settings to change the interface language. Your habit names and notes stay exactly as you wrote them, and the choice is saved on this device. Native acceptance for this new slice is tracked in [task 017](.harness/tasks/017-interface-languages.md).
+Choose **System, English or Português (Brasil)** in Settings to change the interface language. Your habit names and notes stay exactly as you wrote them, and the choice is saved on this device. In the browser preview, System follows the browser's language. [See the language choices](docs/screenshots/language-settings-pt-390.jpg); the complete ten-flow iPhone acceptance is recorded in [task 017](.harness/tasks/017-interface-languages.md).
 
 Schedule and flexibility changes begin tomorrow, preserving earlier history. Notes support up to 280 characters and remain readable on archived habits. Backups include notes and flexibility settings; older v1/v2 files remain importable, and restore keeps existing local records.
 
@@ -56,19 +56,19 @@ The core app works offline and stores data on your device, without an account or
 
 ## What's next
 
-While Apple enrollment is with support, the current feature sequence is interface languages → editable habit suggestions → flexible weekly goals → session timer. First-release preparation continues alongside this sequence. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
+Interface languages are delivered. While Apple enrollment is with support, the next approved features are editable habit suggestions → flexible weekly goals → session timer. First-release preparation continues alongside this sequence. Start with the [Portuguese App Store guide](docs/release/APP_STORE_GUIDE.md), [release readiness checklist](docs/release/READINESS.md) and [store listing drafts](docs/release/STORE_LISTING.md). The app is not yet ready for submission; security, signed production/device testing, branding and store setup remain open gates.
 
 The [implementation plan](docs/IMPLEMENTATION_PLAN.md) guides these additions. They are planned work, with no promised release dates.
 
-| Direction                               | Planned additions                                                                                                           |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| **A warmer everyday experience**        | A cuter, cozier visual refresh; richer individual-win and all-day celebrations; optional sounds and saved feedback controls |
-| **More ways to get started**            | Multiple interface languages and small, editable habit suggestions                                                          |
-| **Progress at a glance**                | Home-screen widgets with pending habits, victory tiles and quick check-ins where supported                                  |
-| **Routines that fit real life**         | Flexible goals such as “walk on three days each week,” plus deliberate pause/skip options                                   |
-| **A moment to focus**                   | A session stopwatch/countdown that offers a deliberate check-in when you finish                                             |
-| **A helpful nudge**                     | An optional daily review reminder and configurable per-habit reminders                                                      |
-| **Optional connections, further ahead** | iCloud synchronization between Apple devices, Todoist completion integration and exploration of Apple Health                |
+| Direction                               | Planned additions                                                                                            |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **A warmer everyday experience**        | Further cozy visual refinement and optional sounds                                                           |
+| **More ways to get started**            | Small, editable habit suggestions                                                                            |
+| **Progress at a glance**                | Home-screen widgets with pending habits, victory tiles and quick check-ins where supported                   |
+| **Routines that fit real life**         | Flexible goals such as “walk on three days each week,” plus deliberate pause/skip options                    |
+| **A moment to focus**                   | A session stopwatch/countdown that offers a deliberate check-in when you finish                              |
+| **A helpful nudge**                     | An optional daily review reminder and configurable per-habit reminders                                       |
+| **Optional connections, further ahead** | iCloud synchronization between Apple devices, Todoist completion integration and exploration of Apple Health |
 
 Future integrations need their own platform, privacy and reliability decisions. The core remains a quick binary check-in: one completed habit, one filled tile.
 

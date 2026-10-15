@@ -1,6 +1,6 @@
 # Store listing drafts — Tiny Wins
 
-Drafts only, not uploaded. Task 017 implements English and Brazilian Portuguese interface copy and saved language selection; final native acceptance is tracked in its harness task. Portuguese storefront copy remains a draft until release gates pass. Confirm language choices, URLs, category, price and availability in App Store Connect.
+Drafts only, not uploaded. Task 017 implements English and Brazilian Portuguese interface copy and saved language selection; its ten-flow iPhone acceptance passes in run 38785809828. Signed-candidate, platform-dialog and storefront-language review remain release gates; no static release-language configuration was changed. Portuguese storefront copy remains a draft until release gates pass. Confirm language choices, URLs, category, price and availability in App Store Connect.
 
 ## English storefront
 

@@ -17,7 +17,7 @@ Acceptance criteria:
 
 Required tests: npm run verify, focused locale unit tests and diff review. No UI/persistence behavior changes in this foundation; native acceptance belongs to 017.
 Commands executed / results: npm run verify PASS: 92 unit + 23 real SQLite integration tests, strict types, lint, format and iOS/Android/web JS exports. Six new deterministic locale cases cover fallback/overrides, local-date safety, plural and numeric formatting, and calendar headings. Initial excess-property test typing corrected before final successful aggregate. git diff --check PASS. No runtime UI change; Maestro is unavailable locally and Xcode points to CommandLineTools. No device claim.
-Open questions: Native module authorization remains pending separately; no dependency is added in this task.
-Handoff summary: First implementation increment of 017. The app remains English until the full interface slice passes its acceptance gates.
+Open questions: Resolved by explicit owner authorization in task 017; no dependency was added in this foundation slice.
+Handoff summary: First implementation increment of 017. Full interface delivery is now complete in task 017 with matching ten-flow native acceptance 38785809828; original foundation-only evidence above remains historical.
 
 Follow-up in task 017 (2026-10-15): the owner authorized expo-localization ~57.0.2 and the full saved interface is implemented. Native evidence on 54ad668 exposes a missing Hermes Intl.PluralRules constructor, despite passing Node/browser checks. Correction 1ce3fc9 keeps Intl date/number formatting but makes the two supported whole-count rules explicit, with a regression that removes that constructor. See ADR-021 and task 017 for final-source build/runtime status; the pending authorization and English-only statements above describe this foundation's original delivery only.

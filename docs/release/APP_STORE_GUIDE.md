@@ -2,7 +2,7 @@
 
 Guia conferido em **14 de outubro de 2026**. Nome confirmado: **Tiny Wins**. Modelo confirmado: **compra única para baixar**, sem assinatura nem compras dentro do app. Você ainda não tem inscrição Apple Developer. O app está em preparação; ainda não está pronto para submissão.
 
-Use este guia junto com a [lista de liberação](READINESS.md). Minha recomendação é fechar a primeira versão com o núcleo atual e deixar widgets, sons, sugestões e integrações para depois. A tarefa 017 implementa a interface em inglês e português do Brasil; acompanhe a aceitação nativa no harness antes de anunciar a versão para publicação.
+Use este guia junto com a [lista de liberação](READINESS.md). Enquanto a inscrição está com o suporte, a ordem aprovada é sugestões editáveis, metas semanais flexíveis e timer de sessão; widgets, sons e integrações continuam para etapas futuras. A tarefa 017 entrega inglês e português do Brasil, com dez cenários aprovados no iPhone simulado (38785809828). Isso não substitui os testes do candidato assinado nem a revisão dos idiomas e das telas da loja antes da publicação.
 
 ## 1. Entenda as três etapas
 
