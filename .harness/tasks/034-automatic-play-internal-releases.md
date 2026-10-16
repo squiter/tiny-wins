@@ -1,6 +1,6 @@
 # Task: 034 — Automatic protected Google Play internal releases
 
-Status: prepared — GitHub restrictions/credentials and Google OIDC configured; hosted authentication and Play acceptance pending
+Status: prepared — GitHub/Google configured and hosted authentication PASS; Play permissions/first-app/pilot acceptance pending
 Goal: Automate validated release tags → signed AAB → Play internal testing without per-release approval; use constrained credentials and short-lived Google authentication.
 Non-goals: Production publication, accepting legal terms, payments, bypassing pending Play account checks, generating a permanent Google service-account JSON key, changing app UI/data, or touching the owner's plan edits.
 Files/modules allowed: Android candidate/release workflows and focused release scripts/tests, release guide, ADR-024, this task/backlog/evidence; GitHub environment/secrets/variables/rules required for this authorized setup.
@@ -37,3 +37,5 @@ Handoff summary: Restricted GitHub signing credentials are ready, and local rele
 ## Recovered Cloud setup — 2026-10-16
 
 Owner supplied project `tiny-wins-511823` and confirmed at action time the restricted Google identity binding and registration of public GitHub identifiers. Recovered the existing Firefox Cloud Shell; verified project number 295413158727. Executed the reviewed bootstrap: required APIs enabled, dedicated `tiny-wins-play` service account, `tiny-wins-github` pool and `android-release` provider created; impersonation binding limited to repository ID 1418132621. Read back ACTIVE provider, exact owner/repository/workflow/tag/environment conditions and an empty list of user-managed service-account keys. Registered and read back both public identifiers in GitHub android-publish. PLAY_INTERNAL_ENABLED remains false. No store access grant, release tag, workflow push or hosted token-exchange claim. Evidence: `.harness/evidence/034-automation/google-oidc-bootstrap.json`. Next: publish/review workflow source, validate hosted authentication, then app-scoped Play permissions/first upload/pilot gates before enabling publishing.
+
+Hosted OIDC follow-up (task 036): source workflow published in 059dca8 and manual auth-only diagnostic run 38981458656 attempt 2 PASS. Initial runtime exposed the repository's immutable OIDC subject format; corrected only subject equality in Google and the bootstrap helper, preserving all other constraints. 174 final local tests pass in the isolated publication snapshot. No AAB was built, no Play API call was made, no artifacts were created and PLAY_INTERNAL_ENABLED remains false. Frozen evidence: .harness/evidence/036-oidc/acceptance-summary.json. Earlier pending-auth notes above are historical; app access/first upload/pilot remain pending.

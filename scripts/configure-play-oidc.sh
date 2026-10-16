@@ -20,7 +20,7 @@ fi
 if ! gcloud iam workload-identity-pools describe "$pool" --location=global --project="$project" >/dev/null 2>&1; then
   gcloud iam workload-identity-pools create "$pool" --location=global --display-name='Tiny Wins GitHub releases' --project="$project"
 fi
-condition="assertion.repository_id == '1418132621' && assertion.repository_owner_id == '238017' && assertion.ref.startsWith('refs/tags/android-v') && assertion.workflow_ref.startsWith('squiter/tiny-wins/.github/workflows/android-release.yml@refs/tags/android-v') && assertion.sub == 'repo:squiter/tiny-wins:environment:android-publish'"
+condition="assertion.repository_id == '1418132621' && assertion.repository_owner_id == '238017' && assertion.ref.startsWith('refs/tags/android-v') && assertion.workflow_ref.startsWith('squiter/tiny-wins/.github/workflows/android-release.yml@refs/tags/android-v') && assertion.sub == 'repo:squiter@238017/tiny-wins@1418132621:environment:android-publish'"
 mapping='google.subject=assertion.sub,attribute.repository_id=assertion.repository_id,attribute.repository_owner_id=assertion.repository_owner_id'
 if gcloud iam workload-identity-pools providers describe "$provider" --workload-identity-pool="$pool" --location=global --project="$project" >/dev/null 2>&1; then
   gcloud iam workload-identity-pools providers update-oidc "$provider" --workload-identity-pool="$pool" --location=global --issuer-uri=https://token.actions.githubusercontent.com --attribute-mapping="$mapping" --attribute-condition="$condition" --project="$project"

@@ -175,3 +175,18 @@ it('isolates the manual OIDC diagnostic from signing, release jobs and token out
   expect(workflow.jobs.verify.if).toContain("github.event_name == 'push'");
   expect(workflow.jobs.publish.needs).toContain('verify');
 });
+
+it('matches the immutable OIDC subject enabled on this repository', async () => {
+  const setup = await readFile('scripts/configure-play-oidc.sh', 'utf8');
+  expect(setup).toContain(
+    "assertion.sub == 'repo:squiter@238017/tiny-wins@1418132621:environment:android-publish'",
+  );
+  expect(setup).not.toContain(
+    "assertion.sub == 'repo:squiter/tiny-wins:environment:android-publish'",
+  );
+  expect(setup).toContain("assertion.repository_id == '1418132621'");
+  expect(setup).toContain("assertion.repository_owner_id == '238017'");
+  expect(setup).toContain(
+    "assertion.workflow_ref.startsWith('squiter/tiny-wins/.github/workflows/android-release.yml@refs/tags/android-v')",
+  );
+});

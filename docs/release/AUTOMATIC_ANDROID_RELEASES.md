@@ -4,11 +4,11 @@ Decisão do titular em 16/10/2026, tarefa 034: automatizar assinatura e envio ao
 
 ## Estado atual
 
-- Código do fluxo preparado localmente; publicação do workflow no GitHub e execução real ainda precisam ser registradas na tarefa 034.
+- Workflow e helpers publicados no GitHub (059dca8). Diagnóstico real de autenticação aprovado na tarefa 036; compilação assinada e publicação Play por esse workflow ainda pendentes.
 - GitHub já tem os ambientes android-signing e android-publish, limitados às referências permitidas, sem revisores obrigatórios e sem bypass das regras de ambiente.
 - Regras ativas: somente administradores atualizam main e criam tags android-v*; tags de release não podem ser reescritas ou apagadas. Hoje o único colaborador administrador é o titular.
 - As quatro credenciais de upload foram copiadas do documento verificado no cofre Private do 1Password para Secrets do ambiente android-signing, após autorização explícita do titular. A presença dos quatro nomes foi conferida sem exibir valores. Nada é gravado como arquivo no Git; credenciais não entram no artefato. O certificado público também foi configurado como variável e PLAY_INTERNAL_ENABLED permanece false.
-- Google Cloud configurado no projeto tiny-wins-511823 (número 295413158727): conta tiny-wins-play e provedor OIDC android-release no pool tiny-wins-github. Restrições de proprietário/repositório/workflow/tag/ambiente conferidas no Google; dois identificadores públicos registrados e conferidos em android-publish no GitHub. Nenhuma chave permanente de conta de serviço existe. A autenticação real de uma Action ainda precisa ser exercitada.
+- Google Cloud configurado no projeto tiny-wins-511823 (número 295413158727): conta tiny-wins-play e provedor OIDC android-release no pool tiny-wins-github. Restrições de proprietário/repositório/workflow/tag/ambiente conferidas no Google; dois identificadores públicos registrados e conferidos em android-publish no GitHub. Nenhuma chave permanente de conta de serviço existe. A autenticação real da Action passou no [diagnóstico 38981458656, tentativa 2](https://github.com/squiter/tiny-wins/actions/runs/38981458656/attempts/2).
 - Conta Play: identidade/telefone e primeiro app ainda pendentes. Publicação automática deve continuar desativada até concluir esses passos, o primeiro envio e a instalação/atualização piloto.
 
 ## Fluxo após a configuração inicial
@@ -56,8 +56,10 @@ Um repositório público não torna Secrets públicos. Ainda assim, código mali
 
 Se falhar, não enfraquecer gates nem apagar dados do app. Conferir a execução e a Play Console antes de repetir um envio, especialmente se o resultado do commit estiver incerto. O publicador limpa apenas a própria edição não confirmada. Em caso de suspeita de vazamento, desativar PLAY_INTERNAL_ENABLED, revogar a confiança OIDC e solicitar troca da chave de upload; recuperar a cópia correta no 1Password. Nunca colocar credenciais em issues, logs ou relatórios.
 
-A automação continua sujeita às validações/processamento da loja e à validade da política de segurança do projeto. Não há promessa de publicação instantânea ou de gates sempre aprovados. A primeira execução real e a autenticação Google ainda precisam de evidência, além dos testes locais do publicador.
+A automação continua sujeita às validações/processamento da loja e à validade da política de segurança do projeto. Não há promessa de publicação instantânea ou de gates sempre aprovados. A autenticação Google foi comprovada no diagnóstico; a primeira compilação assinada/envio Play desse workflow ainda precisa de evidência, além dos testes locais do publicador.
 
 ## Diagnóstico de autenticação sem publicação
 
 A execução manual do mesmo workflow aceita somente uma tag dedicada `android-voidc-check-*`, apontando para um commit da main. Essas tags são excluídas do gatilho automático de release e continuam sujeitas às mesmas regras imutáveis e condições Google para `android-v*`. O job `auth-check` usa somente android-publish, confirma a origem na main e obtém um token de dez minutos com a mesma configuração de autenticação da publicação. Não recebe secrets de assinatura, não compila, não cria artefatos e não chama a API Play. O token é apenas verificado como não vazio, sem ser impresso. Em execução manual, os jobs de release permanecem ignorados. PLAY_INTERNAL_ENABLED continua false; sucesso deste diagnóstico não comprova permissões Play ou instalação/atualização.
+
+Diagnóstico aceito em 16/10/2026: token Google de 600 segundos emitido e verificado; assinatura/build/publish ignorados e zero artefatos. A primeira tentativa recusou o subject antigo; o GitHub deste repositório usa o formato imutável `repo:squiter@238017/tiny-wins@1418132621:environment:android-publish`. A regra foi corrigida sem retirar nenhuma outra restrição e o helper passou a usar esse formato. [Referência oficial GitHub](https://docs.github.com/en/actions/reference/security/oidc). Tokens não foram impressos; varredura do log deste diagnóstico não encontrou os padrões de credenciais avaliados. A auditoria completa do repositório permanece uma tarefa separada.

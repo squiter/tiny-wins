@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-16",
+  "status": "PASS: real GitHub OIDC federation and short-lived Google access token minted",
+  "run_url": "https://github.com/squiter/tiny-wins/actions/runs/38981458656",
+  "run_id": 38981458656,
+  "run_attempt": 2,
+  "source": "059dca806a2a1ea82c5189063b97d3a094cfb528",
+  "tag": "android-voidc-check-20261016-1",
+  "event": "workflow_dispatch",
+  "conclusion": "success",
+  "created_at": "2026-10-16T23:31:08Z",
+  "updated_at": "2026-10-16T23:31:21Z",
+  "jobs": [
+    {
+      "name": "auth-check",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "build",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "skipped"
+    }
+  ],
+  "authentication": {
+    "project": "tiny-wins-511823",
+    "service_account": "tiny-wins-play@tiny-wins-511823.iam.gserviceaccount.com",
+    "token_lifetime_seconds": 600,
+    "scope": "https://www.googleapis.com/auth/androidpublisher",
+    "credential_file_created": false,
+    "export_environment_variables": false
+  },
+  "diagnosis": {
+    "attempt_1": "Google rejected the legacy name-only subject condition. No token issued and release jobs skipped.",
+    "github_oidc_metadata": {
+      "use_default": true,
+      "use_immutable_subject": true,
+      "sub_claim_prefix": "repo:squiter@238017/tiny-wins@1418132621"
+    },
+    "correction": "Updated only subject equality to repo:squiter@238017/tiny-wins@1418132621:environment:android-publish; owner/repository IDs, workflow path, tag prefix and environment restrictions retained. Bootstrap helper and regression test updated.",
+    "reference": "https://docs.github.com/en/actions/reference/security/oidc"
+  },
+  "log_review": {
+    "sha256": "6878fc6962b03f48a6257d6941e7c352dc53f6c865a17a6f27878655406cf264",
+    "google_oauth_token_patterns": 0,
+    "raw_jwt_patterns": 0,
+    "github_token_patterns": 0,
+    "private_key_patterns": 0,
+    "raw_logs_location": "Private temporary directory only; no raw logs committed.",
+    "limitation": "Pattern review of this diagnostic run is not an absolute guarantee or the separate full-repository audit."
+  },
+  "artifacts": 0,
+  "PLAY_INTERNAL_ENABLED": false,
+  "verify": {
+    "unit_tests": 118,
+    "integration_tests": 56,
+    "types_lint_format": true,
+    "exports": ["ios", "android", "web"],
+    "isolated_snapshot": true,
+    "log": "/private/tmp/tiny-wins-oidc-036-final-verify.log"
+  },
+  "limits": [
+    "No Play API request, upload or publication",
+    "No signing or AAB build in the diagnostic",
+    "Play app permissions/first-app/pilot remain pending",
+    "Concurrent security audit and owner planning edits left untouched"
+  ]
+}
