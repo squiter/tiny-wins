@@ -1,5 +1,7 @@
 # Tiny Wins landing page
 
+[Open the public site](https://squiter.github.io/tiny-wins/). First successful deployment: [38936101284](https://github.com/squiter/tiny-wins/actions/runs/38936101284).
+
 Static Portuguese marketing site, hosted separately from the Expo browser preview. No build or dependency installation.
 
 Preview from the repository root:
