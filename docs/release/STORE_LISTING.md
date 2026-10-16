@@ -1,6 +1,6 @@
 # Store listing drafts — Tiny Wins
 
-Drafts only, not uploaded. Task 017 implements English and Brazilian Portuguese interface copy and saved language selection; its ten-flow iPhone acceptance passes in run 38785809828. Signed-candidate, platform-dialog and storefront-language review remain release gates; no static release-language configuration was changed. Portuguese storefront copy remains a draft until release gates pass. Confirm language choices, URLs, category, price and availability in App Store Connect.
+Drafts only, not uploaded. Task 023 weekly goals has full eleven-case iPhone simulator acceptance in 38835720955; this is separate from the signed production candidate. Task 017 implements English and Brazilian Portuguese interface copy and saved language selection; its ten-flow iPhone acceptance passes in run 38785809828. Signed-candidate, platform-dialog and storefront-language review remain release gates; no static release-language configuration was changed. Portuguese storefront copy remains a draft until release gates pass. Confirm language choices, URLs, category, price and availability in App Store Connect.
 
 ## English storefront
 

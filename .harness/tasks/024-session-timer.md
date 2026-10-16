@@ -1,6 +1,6 @@
 # Task: 024 — Optional habit session timer
 
-Status: planned, after 023
+Status: planned, next after accepted 023
 Goal: Offer an optional focus session associated with a habit and an explicit check-in when finished.
 Non-goals: Automatic completion, background alarms, notifications, activity tracking or changing binary wins into duration scores.
 Files/modules allowed: Timer domain/use case, habit detail UI, deterministic tests, native flows and docs/ADR.
@@ -16,4 +16,4 @@ Acceptance criteria:
 Required tests: Deterministic injected-clock/lifecycle tests; npm run verify; narrow/enlarged text browser and iOS/Android lifecycle smoke acceptance where available.
 Commands executed / results: Planning only, placed after flexible weekly goals by owner request on 2026-10-15.
 Open questions: Countdown versus stopwatch, process-restart behavior and supported background scope require an ADR.
-Handoff summary: Fourth in the approved sequence. Implement weekly goals first; this task is not implemented.
+Handoff summary: Fourth in the approved sequence. Weekly goals 023 now has full eleven-case native acceptance (38835720955); this task is next and is not implemented.
