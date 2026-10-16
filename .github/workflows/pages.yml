@@ -5,11 +5,13 @@ on:
     paths:
       - website/**
       - scripts/check-website.py
+      - scripts/check-website-language.mjs
       - .github/workflows/pages.yml
   pull_request:
     paths:
       - website/**
       - scripts/check-website.py
+      - scripts/check-website-language.mjs
       - .github/workflows/pages.yml
   workflow_dispatch:
 permissions:
@@ -26,6 +28,8 @@ jobs:
           persist-credentials: false
       - name: Check local links, assets and publication boundary
         run: python3 scripts/check-website.py
+      - name: Check browser language resolution and localized URLs
+        run: node --test scripts/check-website-language.mjs
       - name: Upload website only
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4

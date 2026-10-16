@@ -83,7 +83,7 @@ Future integrations need their own platform, privacy and reliability decisions. 
 
 ## Public landing page
 
-The [public landing page](https://squiter.github.io/tiny-wins/) ([maintenance guide](docs/WEBSITE.md)) lives in `website/`, with real example screenshots, release status, support and privacy pages. Its own [Pages workflow](.github/workflows/pages.yml) publishes only that folder; site-only changes skip native builds. Store links remain unavailable until launch. See [task 026](.harness/tasks/026-public-landing-page.md) for deployment evidence.
+The [public landing page](https://squiter.github.io/tiny-wins/) ([maintenance guide](docs/WEBSITE.md)) lives in `website/`, with phone-proportioned example screenshots, browser-following English/Portuguese selection, release status, support and privacy pages. Its own [Pages workflow](.github/workflows/pages.yml) publishes only that folder; site-only changes skip native builds. Store links remain unavailable until launch. See [task 026](.harness/tasks/026-public-landing-page.md) for deployment evidence.
 
 ## Try it locally
 

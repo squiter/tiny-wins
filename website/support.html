@@ -1,57 +1,71 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en" data-site-root="./" data-page="support.html">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Suporte — Tiny Wins</title>
+    <title>Support — Tiny Wins</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="alternate" hreflang="en" href="support.html" />
+    <link rel="alternate" hreflang="pt-BR" href="pt/support.html" />
+    <script type="module" src="language.mjs"></script>
   </head>
   <body>
-    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <a class="skip" href="#conteudo">Skip to content</a>
     <header class="site-header wrap">
       <a class="brand" href="./"
         ><img src="favicon.svg" width="30" height="30" alt="" />tiny wins</a
       >
-      <nav aria-label="Navegação"><a href="./">Voltar ao início</a></nav>
+      <nav aria-label="Navigation"><a href="./">Back to home</a></nav>
+      <div class="language-control">
+        <label for="site-language">Language</label
+        ><select disabled id="site-language" aria-label="Language">
+          <option value="auto">Browser language</option>
+          <option value="en">English</option>
+          <option value="pt-BR">Português</option>
+        </select>
+      </div>
     </header>
+    <noscript
+      ><p class="wrap language-fallback">
+        <a href="pt/support.html" lang="pt-BR">Português</a>
+      </p></noscript
+    >
     <main id="conteudo" class="document wrap">
-      <p class="eyebrow">SUPORTE</p>
-      <h1>Vamos dar o próximo passo?</h1>
+      <p class="eyebrow">SUPPORT</p>
+      <h1>Let’s take the next small step.</h1>
       <p>
-        O Tiny Wins ainda está em desenvolvimento. Se encontrou um problema ou quer sugerir uma
-        melhoria, fale com a gente pelo repositório do projeto.
+        Tiny Wins is still in development. Found a problem or have an idea? Get in touch through the
+        project’s repository.
       </p>
       <a class="button" href="https://github.com/squiter/tiny-wins/issues"
-        >Ver e relatar problemas ↗</a
+        >Browse and report issues ↗</a
       >
       <p class="quiet">
-        Para abrir um relato, é preciso ter uma conta no GitHub. Os relatos são públicos: não envie
-        backups, dados pessoais ou o histórico dos seus hábitos.
+        You need a GitHub account to open an issue. Issues are public: please don’t share backups,
+        personal information or your habit history.
       </p>
-      <h2>Onde ficam meus hábitos?</h2>
+      <h2>Where are my habits stored?</h2>
       <p>
-        No seu aparelho. O app funciona offline e não exige conta. Exporte um backup nas
-        configurações antes de trocar de aparelho ou desinstalar o app.
+        On your device. The app works offline and requires no account. Export a backup in Settings
+        before changing devices or uninstalling the app.
       </p>
-      <h2>Já posso baixar?</h2>
+      <h2>Can I download it yet?</h2>
       <p>
-        Ainda não. O primeiro lançamento está planejado para iPhone; a versão Android está em
-        desenvolvimento. Os links das lojas aparecerão na página inicial quando estiverem
-        disponíveis.
+        Not yet. The first release is planned for iPhone; Android is in development. Store links
+        will appear on the home page when they are available.
       </p>
-      <h2>Como será a compra?</h2>
+      <h2>How will purchasing work?</h2>
       <p>
-        A versão oficial para iPhone será uma compra única para baixar, sem assinatura ou compras
-        dentro do app. O preço ainda será definido.
+        The official iPhone app will be a one-time paid download, without subscriptions or in-app
+        purchases. The price is still to be decided.
       </p>
     </main>
     <footer class="site-footer wrap">
       <div>
         <span>Tiny Wins</span>
-        <nav aria-label="Rodapé">
-          <a href="./">Início</a><a href="support.html">Suporte</a
-          ><a href="privacy.html">Privacidade</a>
+        <nav aria-label="Footer">
+          <a href="./">Home</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a>
         </nav>
       </div>
     </footer>

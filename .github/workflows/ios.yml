@@ -5,11 +5,13 @@ on:
     paths-ignore:
       - website/**
       - scripts/check-website.py
+      - scripts/check-website-language.mjs
       - .github/workflows/pages.yml
   pull_request:
     paths-ignore:
       - website/**
       - scripts/check-website.py
+      - scripts/check-website-language.mjs
       - .github/workflows/pages.yml
   workflow_dispatch:
 permissions:
