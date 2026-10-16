@@ -109,8 +109,9 @@ jobs:
             ${{ runner.temp }}/tiny-wins-smoke/feature-results.xml
             ${{ runner.temp }}/tiny-wins-smoke/metro.log
             ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/commands.json
-            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/screen-hierarchy/**
-            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/screenshots/**
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/screen-hierarchy/**/*.xml
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/screen-hierarchy/**/*.json
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/screenshots/**/*.png
             ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/logs/maestro.log
             ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/logs/device-xctest.log
           if-no-files-found: error
@@ -201,6 +202,22 @@ jobs:
         if: always()
         with:
           name: tiny-wins-ios-smoke
-          path: ${{ runner.temp }}/tiny-wins-smoke
+          # Never upload the complete simulator folder: OS dumps include unrelated
+          # system tokens/asset metadata. Keep only explicit synthetic test evidence.
+          path: |
+            ${{ runner.temp }}/tiny-wins-smoke/*results.xml
+            ${{ runner.temp }}/tiny-wins-smoke/metro.log
+            ${{ runner.temp }}/tiny-wins-smoke/system-languages.json
+            ${{ runner.temp }}/tiny-wins-smoke/*content-size.txt
+            ${{ runner.temp }}/tiny-wins-smoke/system-dark.txt
+            ${{ runner.temp }}/tiny-wins-smoke/system-light.txt
+            ${{ runner.temp }}/tiny-wins-smoke/simulator.png
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/commands.json
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/screen-hierarchy/**/*.xml
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/screen-hierarchy/**/*.json
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/screenshots/**/*.png
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/takeScreenshot/*.png
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/logs/maestro.log
+            ${{ runner.temp }}/tiny-wins-smoke/screenshots/**/logs/device-xctest.log
           if-no-files-found: warn
           retention-days: 7
