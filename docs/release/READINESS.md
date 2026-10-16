@@ -1,8 +1,10 @@
 # First release readiness — Tiny Wins
 
-Reviewed 2026-10-15. Task 017 app source `1ce3fc9` has full acceptance in `7ef64bc`; task 018 app source `763ad37` adds editable starter ideas and has the evidence below. **Not ready for submission; remaining signed-production/device/store gates still apply.** The owner confirms Tiny Wins and a one-time paid download; enrollment/access is with Apple support. Preparation does not authorize signing agreements or spending on the owner's behalf.
+Reviewed 2026-10-15. Task 023 app source `cbb1610` adds flexible weekly goals; its current evidence follows. Tasks 017/018 remain covered by the regression suite below. **Not ready for submission; remaining signed-production/device/store gates still apply.** The owner confirms Tiny Wins and a one-time paid download; enrollment/access is with Apple support. Preparation does not authorize signing agreements or spending on the owner's behalf.
 
 ## Current evidence
+
+- Task 023: flexible 1–7 day weekly goals, fixed saved boundaries, capped short weeks, week streaks and closed-week consistency. Local and hosted Validate 38811565182 PASS: 115 unit + 26 integration tests including real SQLite (141 total), types/lint/format and web/iOS/Android exports. Metadata-only migration 9 preserves existing JSON/rows; backup v4 retains weekly policies and imports v1–v3. Isolated browser review covers English/Portuguese, light/dark 360/390 layouts, cancellation, check-in/reload, effective edits, archive/restore and unchanged saved boundaries after calendar preference changes. Matching Android native build 38811565261 PASS. iOS native build 38811565130 PASS. Simulator run 38813401722 attempt 2 passed 9/11 cases; weekly Save was partly off-screen and the OS-Portuguese Settings navigation tap did not change screens. Captures diagnosed before harness interaction fixes; full eleven-case acceptance remains pending in task 023. No package, permission, destructive schema or release setting changed.
 
 - Task 018: optional, localized, fully editable new-habit ideas are implemented. Local and hosted Validate 38798469531 PASS: 99 unit + 24 integration tests including real SQLite (123 total), types/lint/format and all exports. Native iOS 38798469626 / Android 38798469627 builds PASS. Full ten-case iPhone 17 Pro / iOS 26.5 runtime 38800367178 PASS in 42m45s; six retrieved JUnit files contain ten SUCCESS cases, no failures/errors/skipped cases. Reviewed both languages, customized saved appearance and enlarged walking/Save/Cancel captures. OS readback confirms pt-BR/en and accessibility-large. No schema, dependency, permission or release setting changed.
 
@@ -15,7 +17,7 @@ Reviewed 2026-10-15. Task 017 app source `1ce3fc9` has full acceptance in `7ef64
 
 | Gate                | State                                                         | Concrete next action                                                                                                                        |
 | ------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Core MVP            | Implemented, local verification passes                        | Task 018 accepted; follow approved slices 023 → 024 while enrollment is with support; retain regression gates                               |
+| Core MVP            | Implemented, local verification passes                        | Task 023 native acceptance pending; timer 024 follows; retain regression gates                                                              |
 | Security            | Raw 18 high; conditional tooling policy                       | ADR-020 accepts exact verified tooling patches until 2026-10-22T00:00:00Z; inspect signed candidate and adopt upstream fixes when available |
 | Apple account       | Enrollment/access with support                                | Owner resolves access and confirms enrollment/team; owner handles agreements and payments                                                   |
 | Paid distribution   | Model confirmed; account setup pending                        | Owner activates Paid Apps Agreement, tax/bank details and chooses price/territories                                                         |
@@ -40,6 +42,7 @@ For each run record source SHA, version/build, device/OS, date, tester and evide
 - [ ] Fresh install opens without Metro or login, works in airplane mode.
 - [ ] Create → complete → close/reopen retains exactly 14 date cells and saved history.
 - [ ] Schedule/tolerance changes preserve earlier dates; archived habits and notes restore.
+- [ ] Weekly goals preserve saved boundaries, short-week targets, next-week edits and actual winning dates across update/restart; backup v4 restores weekly policies.
 - [ ] Individual/all-day feedback, disabled feedback and OS reduced motion behave correctly.
 - [ ] System, Light and Dark preferences follow intended native behavior after restart.
 - [ ] Device language and saved interface overrides preserve wins/notes after updates; platform dialogs and declared/storefront languages match the release candidate.
@@ -49,4 +52,4 @@ For each run record source SHA, version/build, device/OS, date, tester and evide
 - [ ] VoiceOver and enlarged text work on supported iPhone/iPad; privacy link is reachable.
 - [ ] No unapproved network collection; inspect final privacy manifest/export compliance.
 
-Task 017 is complete: English/Brazilian Portuguese interface selection and matching ten-flow iPhone acceptance PASS. Review platform-owned dialog localization and declared/storefront languages against the signed release candidate; no static release-language change was authorized in this slice. Task 018 optional editable suggestions is also complete with ten-flow run 38800367178. Next approved feature order is flexible weekly goals (023), then session timer (024); widgets remain task 014. Store copy must match the tested release candidate. No release date committed.
+Task 017 is complete: English/Brazilian Portuguese interface selection and matching ten-flow iPhone acceptance PASS. Review platform-owned dialog localization and declared/storefront languages against the signed release candidate; no static release-language change was authorized in this slice. Task 018 optional editable suggestions is also complete with ten-flow run 38800367178. Task 023 weekly goals has local/browser acceptance; matching native acceptance is pending. Session timer (024) follows; widgets remain task 014. Store copy must match the tested release candidate. No release date committed.

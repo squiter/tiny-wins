@@ -46,6 +46,8 @@ appId: app.tinywins.mobile
     element:
       id: save-habit
     direction: DOWN
+    centerElement: true
+- takeScreenshot: weekly-goal-editor-actions
 - tapOn:
     id: save-habit
 - assertVisible: View Walk freely, 0/1 day this week
@@ -85,6 +87,7 @@ appId: app.tinywins.mobile
     element:
       id: save-habit
     direction: DOWN
+    centerElement: true
 - tapOn:
     id: save-habit
 - assertVisible: 'Schedule changes start on .*'

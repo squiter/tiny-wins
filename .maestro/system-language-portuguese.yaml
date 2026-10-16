@@ -13,6 +13,16 @@ appId: app.tinywins.mobile
 - tapOn:
     text: Ajustes, tab, 3 of 3
     retryTapIfNoChange: true
+# A cold OS-language reboot can drop the first navigation tap. Reopen the
+# same tab once only when its required screen root has not appeared.
+- runFlow:
+    when:
+      notVisible:
+        id: settings-theme-(light|dark)
+    commands:
+      - tapOn:
+          text: Ajustes, tab, 3 of 3
+          retryTapIfNoChange: true
 - assertVisible:
     id: settings-theme-(light|dark)
 - scrollUntilVisible:

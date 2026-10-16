@@ -2,7 +2,7 @@
 
 Guia conferido em **14 de outubro de 2026**. Nome confirmado: **Tiny Wins**. Modelo confirmado: **compra única para baixar**, sem assinatura nem compras dentro do app. Você ainda não tem inscrição Apple Developer. O app está em preparação; ainda não está pronto para submissão.
 
-Use este guia junto com a [lista de liberação](READINESS.md). Enquanto a inscrição está com o suporte, as sugestões editáveis já estão concluídas; os próximos passos aprovados são metas semanais flexíveis e timer de sessão; widgets, sons e integrações continuam para etapas futuras. As tarefas 017/018 entregam inglês, português do Brasil e sugestões opcionais, com dez cenários aprovados no iPhone simulado na versão atual (38800367178). Isso não substitui os testes do candidato assinado nem a revisão dos idiomas e das telas da loja antes da publicação.
+Use este guia junto com a [lista de liberação](READINESS.md). Enquanto a inscrição está com o suporte, as sugestões editáveis e as metas semanais flexíveis estão implementadas; a aceitação nativa das metas está registrada na tarefa 023. O próximo passo aprovado é o timer de sessão; widgets, sons e integrações continuam para etapas futuras. As tarefas 017/018 entregam inglês, português do Brasil e sugestões opcionais, com dez cenários aprovados no iPhone simulado na versão das sugestões (38800367178). A tarefa 023 adiciona metas semanais, migração de metadados 9 e backup v4; consulte a lista de liberação para o resultado nativo da revisão atual. Isso não substitui os testes do candidato assinado nem a revisão dos idiomas e das telas da loja antes da publicação.
 
 ## 1. Entenda as três etapas
 
@@ -47,7 +47,7 @@ Veja [READINESS.md](READINESS.md) para os resultados reais. Os próximos trabalh
 4. Testar exportação, cancelamento do seletor, restauração e preservação de histórico no iPhone. Conferir VoiceOver, movimento reduzido, reinstalação com restauração e atualização sem perda de dados.
 5. Testar iPad: `supportsTablet` está ativo. Precisamos de layout e capturas próprios, ou decidir explicitamente limitar o primeiro lançamento a iPhone antes de gerar o binário.
 
-Novas features não corrigem esses bloqueios. O resultado de simulador com seis fluxos aprovados é útil, mas não substitui essa validação de produção.
+Novas features não corrigem esses bloqueios. Os resultados dos fluxos no simulador são úteis, mas não substituem essa validação de produção.
 
 ## 6. Gere o build de produção
 
@@ -68,7 +68,7 @@ A compilação precisa usar um SDK aceito pela Apple na data do upload. Reconfir
 
 Instale o TestFlight no iPhone, distribua primeiro para o grupo interno elegível e instale o build enviado. Testadores externos podem exigir avaliação beta. Use a versão sem servidor de desenvolvimento, inclusive em modo avião. [TestFlight](https://developer.apple.com/testflight/).
 
-Use hábitos fictícios para testar: criar, completar, fechar/reabrir, alterar frequência, tolerância, nota, desfazer uma data, arquivar/restaurar, mudar tema e exportar/restaurar um backup. Anote aparelho, iOS, versão/build e resultado. Teste atualização sobre um build anterior; não desinstale para simular atualização. Para reinstalação, exporte antes e restaure depois: não há sincronização própria do app.
+Use hábitos fictícios para testar: criar, completar, fechar/reabrir, alterar frequência, tolerância e meta semanal, conferir semanas parciais e mudanças futuras, editar nota, desfazer uma data, arquivar/restaurar, mudar tema e exportar/restaurar um backup. Anote aparelho, iOS, versão/build e resultado. Teste atualização sobre um build anterior; não desinstale para simular atualização. Para reinstalação, exporte antes e restaure depois: não há sincronização própria do app.
 
 ## 8. Prepare a página da loja
 

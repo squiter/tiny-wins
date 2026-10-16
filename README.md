@@ -14,21 +14,21 @@ Built for **consistency over perfection**. Your past wins stay yours, even when 
   <tr>
     <th>Today</th>
     <th>Insights · dark mode</th>
-    <th>A note · Português (Brasil)</th>
+    <th>Weekly goals · Português (Brasil)</th>
   </tr>
   <tr>
     <td valign="top" align="center"><a href="docs/screenshots/readme-today-light-390.jpg"><img src="docs/screenshots/readme-today-light-390.jpg" width="260" alt="Today in light mode: six completed habits, 14 daily tiles per row, an all-done banner and a quiet typographic footer." /></a></td>
     <td valign="top" align="center"><a href="docs/screenshots/readme-insights-dark-390.jpg"><img src="docs/screenshots/readme-insights-dark-390.jpg" width="260" alt="Insights in dark mode: week, month and year controls above a habit's annual victory wall and consistency summary." /></a></td>
-    <td valign="top" align="center"><a href="docs/screenshots/language-day-note-pt-360.jpg"><img src="docs/screenshots/language-day-note-pt-360.jpg" width="260" alt="Day inspector in Brazilian Portuguese: an unchanged English habit name, an accented saved note and separate completion and note controls." /></a></td>
+    <td valign="top" align="center"><a href="docs/screenshots/weekly-today-pt-light-390.jpg"><img src="docs/screenshots/weekly-today-pt-light-390.jpg" width="260" alt="Today in Brazilian Portuguese: a completed weekly goal, a short first-week goal with explicit adjustment and exactly 14 binary date tiles per habit." /></a></td>
   </tr>
   <tr>
     <td align="center">Your next small win, one tap away.</td>
     <td align="center">A whole year of effort, one tile at a time.</td>
-    <td align="center">Your words stay yours in either interface language.</td>
+    <td align="center">Choose your winning days throughout the week.</td>
   </tr>
 </table>
 
-Actual browser development previews with example habits. Today and Insights were captured on October 14, 2026 for the visual refresh; the Portuguese note was captured on October 15 for the language review. Click a screenshot for the full-size view.
+Actual browser development previews with example habits. Today and Insights were captured on October 14, 2026 for the visual refresh; the Portuguese weekly goals were captured on October 15 for task 023. Click a screenshot for the full-size view.
 
 ## What you can do today
 
@@ -58,7 +58,7 @@ Choose **Weekly goal** in the habit editor and aim for **1–7 different days ea
 
 A new weekly habit keeps the week boundary it was created with, even if you later change the calendar layout. Short first weeks and partially archived weeks cap the goal at the available active dates, with an explicit explanation. Achieved weeks build a sequence; an unfinished current week stays pending. Daily streak tolerance applies to daily schedules; weekly habits get their flexibility from their goal.
 
-Weekly consistency assesses **finished weeks** on their ending date, alongside elapsed scheduled dates for daily habits. The live current-week counter is separate. Every tile and total win stays on its original date. Weekly wins receive individual celebration; the daily planned banner counts daily schedules.
+Weekly consistency assesses **finished weeks** on their ending date, alongside elapsed scheduled dates for daily habits. The live current-week counter is separate. Every tile and total win stays on its original date. Weekly wins receive individual celebration; the daily planned banner counts daily schedules. [See the weekly editor](docs/screenshots/weekly-editor-pt-dark-360.jpg), [short first-week detail](docs/screenshots/weekly-detail-pt-light-390.jpg) and [live progress in Insights](docs/screenshots/weekly-insights-pt-light-360.jpg).
 
 ### Your habits stay with you
 
