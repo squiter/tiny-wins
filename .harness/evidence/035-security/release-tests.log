@@ -1,0 +1,9 @@
+
+ RUN  v5.0.4 /Users/squiter/dev/code/tiny-wins
+
+
+ Test Files  2 passed (2)
+      Tests  24 passed (24)
+   Start at  20:16:21
+   Duration  242ms (tests 45%, import 40%, transform 10%, worker 6%)
+

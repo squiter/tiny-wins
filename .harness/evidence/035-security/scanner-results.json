@@ -1,0 +1,42 @@
+{
+  "gitleaksVersion": "8.30.1",
+  "officialArchiveChecksumVerified": true,
+  "redaction": 100,
+  "history": {
+    "exit": 1,
+    "findings": 1,
+    "verifiedFileIntegrityDigest": 1
+  },
+  "logs": {
+    "exit": 0,
+    "findings": 0
+  },
+  "oidcSuccessfulAttempt": {
+    "exit": 0,
+    "findings": 0,
+    "tokenEnvMasked": true
+  },
+  "artifactSnapshots": [
+    {
+      "bytes": 9264372253,
+      "exit": 1,
+      "findings": 2677
+    },
+    {
+      "bytes": 5403576497,
+      "exit": 1,
+      "findings": 619
+    }
+  ],
+  "artifactCategories": {
+    "TCC request identifier": 1572,
+    "OS UUID": 162,
+    "WidgetKit locale identifier": 1248,
+    "Apple service correlation identifier": 39,
+    "hex digest/identifier": 122,
+    "Apple MobileAsset decryption material": 129,
+    "Square-pattern matches verified as OS UUID parts": 24
+  },
+  "unclassified": 0,
+  "confirmedProjectCredentials": 0
+}

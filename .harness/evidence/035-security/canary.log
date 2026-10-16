@@ -1,0 +1,1 @@
+PASS: HTTP response-body and network-header/cause canaries never appear in CLI output; both failures exit closed.

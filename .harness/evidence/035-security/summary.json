@@ -1,0 +1,176 @@
+{
+  "date": "2026-10-16",
+  "timezone": "America/Sao_Paulo",
+  "outcome": "No confirmed public Tiny Wins credential exposure found in examined material; excessive public simulator diagnostics corrected. Limits below are material.",
+  "securityFixCommit": "d0ee0f148d86ff1d5769ab0d73de560dde23d08c",
+  "reviewedHead": "2afbed1d6a6babf2990233f3186f0c8bf75ddc12",
+  "secretInventory": {
+    "repositoryActions": 0,
+    "dependabot": 0,
+    "android-signing": [
+      "ANDROID_UPLOAD_KEYSTORE_BASE64",
+      "ANDROID_UPLOAD_STORE_PASSWORD",
+      "ANDROID_UPLOAD_KEY_ALIAS",
+      "ANDROID_UPLOAD_KEY_PASSWORD"
+    ],
+    "android-publish": 0,
+    "github-pages": 0,
+    "secretPlaintextRead": false
+  },
+  "variables": {
+    "PLAY_INTERNAL_ENABLED": "boolean control",
+    "ANDROID_UPLOAD_CERT_SHA256": "public certificate fingerprint",
+    "GOOGLE_WORKLOAD_IDENTITY_PROVIDER": "public resource identifier",
+    "GOOGLE_PLAY_SERVICE_ACCOUNT": "public account identifier, no private key"
+  },
+  "githubProtections": {
+    "defaultTokenPermissions": "read",
+    "actionsCanApprovePullRequestReviews": false,
+    "secretScanning": "enabled",
+    "pushProtection": "enabled",
+    "availableSecretAlerts": 0,
+    "mainUpdatesAndAndroidTagCreation": "admins only",
+    "androidTagUpdateDeletion": "denied without bypass",
+    "oidcSubject": "immutable repository and owner IDs",
+    "pinnedWorkflowActions": true,
+    "repositoryEnforcesPinning": false
+  },
+  "logs": {
+    "originalRuns": 246,
+    "additionalRuns": 2,
+    "uniqueRuns": 248,
+    "archivesIncludingOidcAttempts": 249,
+    "gitleaksIndicators": 0,
+    "oidcDiagnosticRun": 38981458656,
+    "oidcAttempt1": "failed, logs scanned",
+    "oidcAttempt2": "success, logs scanned; token env masked; zero default/explicit-pattern indicators",
+    "oidcTokenLifetimeSeconds": 600,
+    "realStoredSigningValuesUnavailableThroughApi": true
+  },
+  "artifacts": {
+    "inventoried": 169,
+    "manifestsInspected": 169,
+    "outerZipEntries": 2311,
+    "recognizedCredentialFilenames": 0,
+    "completeTextReads": 168,
+    "partialTextReads": [
+      {
+        "id": 12064947466,
+        "name": "tiny-wins-ios-smoke",
+        "error": "URLError",
+        "reason": "ConnectionResetError",
+        "attempts": 2
+      }
+    ],
+    "textFiles": 1470,
+    "textBytes": 14667948750,
+    "selectedCompleteArtifactByteScans": 6,
+    "rawGitleaksExit": 1,
+    "rawGitleaksIndicators": 3296,
+    "classification": {
+      "TCC request identifier": 1572,
+      "OS UUID": 162,
+      "WidgetKit locale identifier": 1248,
+      "Apple service correlation identifier": 39,
+      "hex digest/identifier": 122,
+      "Apple MobileAsset decryption material": 129,
+      "Square-pattern matches verified as OS UUID parts": 24
+    },
+    "unclassified": 0
+  },
+  "source": {
+    "initialHistoricalBlobPatternScan": 972,
+    "laterGitleaksHistoryCommits": 61,
+    "rawHistoryGitleaksExit": 1,
+    "historyIndicators": 1,
+    "historyTriage": "SHA256 of src/theme/tokens.ts in evidence, recomputed and equal; no credential",
+    "sources": {
+      ".github/workflows/pages.yml": {
+        "workingTreeSha256": "b96f16e3d3ff3b153c51b95286f0f2b6cd9d37dd872593dbe3bd4cd4bec3dc89",
+        "publishedSha256": "b96f16e3d3ff3b153c51b95286f0f2b6cd9d37dd872593dbe3bd4cd4bec3dc89",
+        "localDiffers": false
+      },
+      ".github/workflows/ios-smoke.yml": {
+        "workingTreeSha256": "9c3fc824703680a8a8a5f02c82c7afeed8f57980e8af25f6043ca2a6273bc5ad",
+        "publishedSha256": "9c3fc824703680a8a8a5f02c82c7afeed8f57980e8af25f6043ca2a6273bc5ad",
+        "localDiffers": false
+      },
+      ".github/workflows/android-candidate.yml": {
+        "workingTreeSha256": "fd51611e492695d3c928ebdd5faf966abcd9e45a9b7f3dc5232c217d985afcb8",
+        "publishedSha256": "21ce5e15590fb4e302804384fe0e063a4ef515459d6a249b2337d9b7fc877710",
+        "localDiffers": true
+      },
+      ".github/workflows/ios.yml": {
+        "workingTreeSha256": "b488ec9e0288fe3d71053cc76ad38208d9b711ff71ea69214aa44556be4e259a",
+        "publishedSha256": "b488ec9e0288fe3d71053cc76ad38208d9b711ff71ea69214aa44556be4e259a",
+        "localDiffers": false
+      },
+      ".github/workflows/android.yml": {
+        "workingTreeSha256": "628caa000cc2b1db742eb3f9043b86789eed58510c708cd62d09f347ac4dc07c",
+        "publishedSha256": "628caa000cc2b1db742eb3f9043b86789eed58510c708cd62d09f347ac4dc07c",
+        "localDiffers": false
+      },
+      ".github/workflows/android-release.yml": {
+        "workingTreeSha256": "4952981b48a48a0e42b3c5332189e8d5599ff352c6d223df058e3256dbe92fa6",
+        "publishedSha256": "4952981b48a48a0e42b3c5332189e8d5599ff352c6d223df058e3256dbe92fa6",
+        "localDiffers": false
+      },
+      ".github/workflows/ci.yml": {
+        "workingTreeSha256": "6a397ce6ebd8e41169a9115f7b854e757e84fa1bc63e8aabdb53aa5627fd16dd",
+        "publishedSha256": "6a397ce6ebd8e41169a9115f7b854e757e84fa1bc63e8aabdb53aa5627fd16dd",
+        "localDiffers": false
+      },
+      "scripts/android-release.gradle": {
+        "workingTreeSha256": "2427e720c8533c4f7c906991d434798f78cdd38bbc1314d3175e67d4c1ec1923",
+        "publishedSha256": "2427e720c8533c4f7c906991d434798f78cdd38bbc1314d3175e67d4c1ec1923",
+        "localDiffers": false
+      },
+      "scripts/prepare-android-release.mjs": {
+        "workingTreeSha256": "b180c901c03e6c63453a05478fb8744b8bef00dcf9f3704f901f3d5dc3c954bd",
+        "publishedSha256": "b180c901c03e6c63453a05478fb8744b8bef00dcf9f3704f901f3d5dc3c954bd",
+        "localDiffers": false
+      },
+      "scripts/android-release-plan.mjs": {
+        "workingTreeSha256": "8f35ca4debbb53d6e52cdea6feb754bd7ced602bd0c6756cfb21f89138127eeb",
+        "publishedSha256": "8f35ca4debbb53d6e52cdea6feb754bd7ced602bd0c6756cfb21f89138127eeb",
+        "localDiffers": false
+      },
+      "scripts/configure-play-oidc.sh": {
+        "workingTreeSha256": "d9ed14386b2a409f6c50ad1fdd7f1323dadf05f788a8992b1fb6efb969273b58",
+        "publishedSha256": "d9ed14386b2a409f6c50ad1fdd7f1323dadf05f788a8992b1fb6efb969273b58",
+        "localDiffers": false
+      },
+      "scripts/build-android-candidate.sh": {
+        "workingTreeSha256": "f79dba771404cd8e5eaf6fd00c26f6346330c2382a9552163b7eb4858f968117",
+        "publishedSha256": "f79dba771404cd8e5eaf6fd00c26f6346330c2382a9552163b7eb4858f968117",
+        "localDiffers": false
+      },
+      "scripts/publish-play-internal.mjs": {
+        "workingTreeSha256": "9b33f88a278e371a707aec7961dcfff999f0bc86cc278308e4c76664d4c2b27f",
+        "publishedSha256": "9b33f88a278e371a707aec7961dcfff999f0bc86cc278308e4c76664d4c2b27f",
+        "localDiffers": false
+      }
+    }
+  },
+  "validation": {
+    "verify": "PASS: 118 unit + 57 integration = 175; types/lint/format and iOS/Android/web exports",
+    "releaseRegressionCases": 24,
+    "syntheticHttpAndNetworkCanaries": 2,
+    "canaryDisclosures": 0,
+    "artifactGlobRegression": "PASS: required reports/screenshots/hierarchies retained, raw system logs and representative credential paths excluded",
+    "hostedValidate": "https://github.com/squiter/tiny-wins/actions/runs/38981990855",
+    "hostedValidateStatus": "success (verify and dependency-audit); contains artifact correction",
+    "ownEarlierRun": "38981880090 superseded/cancelled by concurrent commit; not represented as failed tests"
+  },
+  "followup": "Legacy manual candidate still needs its separately reviewed local environment binding published; do not broaden secrets to repository scope. Inspect first actual hosted signing/Play publication output before distribution.",
+  "limits": [
+    "One historical artifact text read remains partial after connection reset on attempt 2.",
+    "Media and most historical nested compiled binaries not exhaustively OCRd/decompiled; six selected whole-artifact byte scans complement member/text review.",
+    "No exact comparison against stored signing secret plaintext: GitHub does not return it. Arbitrary encodings/password formats may evade scanners.",
+    "Deleted/removed material, attacker-held copies and future runs are outside this snapshot.",
+    "Live Google IAM permissions/trust configuration not independently audited; actual restricted OIDC success/failure logs were examined.",
+    "No actual signed hosted AAB/Play publish was executed by this audit.",
+    "Historical platform diagnostic artifacts were not deleted; scanner findings are classified, not suppressed."
+  ],
+  "dataHandling": "No raw credential values, raw OS dumps, signed URLs or unredacted scanner candidates included in committed evidence. Only names, counts, classifications, file fingerprints and public workflow links."
+}
