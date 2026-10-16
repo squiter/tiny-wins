@@ -1,0 +1,161 @@
+name: Android internal release
+on:
+  push:
+    tags: ['android-v*', '!android-voidc-check-*']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-internal-release
+  cancel-in-progress: false
+jobs:
+  auth-check:
+    if: github.event_name == 'workflow_dispatch' && github.repository == 'squiter/tiny-wins' && startsWith(github.ref, 'refs/tags/android-voidc-check-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: android-publish
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Require diagnostic commit from main
+        env:
+          CHECK_SHA: ${{ github.sha }}
+        run: git merge-base --is-ancestor "$CHECK_SHA" origin/main
+      - name: Require configured Google identity
+        env:
+          PROVIDER: ${{ vars.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          SERVICE_ACCOUNT: ${{ vars.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+        run: test -n "$PROVIDER" && test -n "$SERVICE_ACCOUNT"
+      - id: auth
+        name: Mint short-lived Google token
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/androidpublisher
+          access_token_lifetime: 600s
+          create_credentials_file: false
+          export_environment_variables: false
+      - name: Verify token issued without disclosing it
+        env:
+          GOOGLE_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+        run: |
+          test -n "$GOOGLE_ACCESS_TOKEN"
+          printf '%s\n' 'Google OIDC authentication succeeded. Token lifetime: 600s. No Play request, upload, signing or artifact was performed.' >> "$GITHUB_STEP_SUMMARY"
+  verify:
+    if: github.event_name == 'push' && github.repository == 'squiter/tiny-wins'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      package_name: ${{ steps.plan.outputs.package_name }}
+      version_code: ${{ steps.plan.outputs.version_code }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Require release commit from main
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: git merge-base --is-ancestor "$RELEASE_SHA" origin/main
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - id: plan
+        run: node scripts/android-release-plan.mjs
+      - run: npm ci
+      - run: npm run verify
+      - run: npm run security:bundle
+      - run: npm run security:policy
+  build:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: android-signing
+    outputs:
+      artifact_id: ${{ steps.artifact.outputs.artifact-id }}
+    env:
+      TW_ANDROID_CONFIRMED_PACKAGE: ${{ needs.verify.outputs.package_name }}
+      TW_ANDROID_VERSION_CODE: ${{ needs.verify.outputs.version_code }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: 17
+      - run: npm ci
+      - run: npx expo prebuild --platform android --no-install
+      - name: Sign candidate with the upload key only
+        env:
+          TW_ANDROID_UPLOAD_KEYSTORE_BASE64: ${{ secrets.ANDROID_UPLOAD_KEYSTORE_BASE64 }}
+          TW_ANDROID_UPLOAD_STORE_PASSWORD: ${{ secrets.ANDROID_UPLOAD_STORE_PASSWORD }}
+          TW_ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.ANDROID_UPLOAD_KEY_ALIAS }}
+          TW_ANDROID_UPLOAD_KEY_PASSWORD: ${{ secrets.ANDROID_UPLOAD_KEY_PASSWORD }}
+          TW_ANDROID_UPLOAD_CERT_SHA256: ${{ vars.ANDROID_UPLOAD_CERT_SHA256 }}
+        run: bash scripts/build-android-candidate.sh
+      - id: artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: tiny-wins-internal-${{ github.run_number }}
+          path: candidate/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Report when publishing is disabled
+        if: vars.PLAY_INTERNAL_ENABLED != 'true'
+        run: echo 'Signed candidate built only. Play publishing is disabled until account/API/first-app setup is complete.' >> "$GITHUB_STEP_SUMMARY"
+  publish:
+    needs: [verify, build]
+    if: vars.PLAY_INTERNAL_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: android-publish
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      TW_ANDROID_CONFIRMED_PACKAGE: ${{ needs.verify.outputs.package_name }}
+      TW_ANDROID_VERSION_CODE: ${{ needs.verify.outputs.version_code }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact_id }}
+          merge-multiple: true
+          path: candidate
+      - name: Require initial Google setup
+        env:
+          PROVIDER: ${{ vars.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          SERVICE_ACCOUNT: ${{ vars.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+        run: test -n "$PROVIDER" && test -n "$SERVICE_ACCOUNT"
+      - id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/androidpublisher
+          access_token_lifetime: 600s
+          create_credentials_file: false
+          export_environment_variables: false
+      - name: Publish only to internal testing
+        env:
+          PLAY_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+        run: node scripts/publish-play-internal.mjs

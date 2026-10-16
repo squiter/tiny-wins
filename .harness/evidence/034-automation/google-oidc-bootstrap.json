@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-16",
+  "status": "Google identity provisioned and public GitHub environment variables verified; hosted authentication and Play permissions pending",
+  "authorization": "Owner confirmed restricted identity binding and public identifier registration in this recovered side conversation.",
+  "project_id": "tiny-wins-511823",
+  "project_number": "295413158727",
+  "service_account": "tiny-wins-play@tiny-wins-511823.iam.gserviceaccount.com",
+  "provider": "projects/295413158727/locations/global/workloadIdentityPools/tiny-wins-github/providers/android-release",
+  "issuer": "https://token.actions.githubusercontent.com",
+  "provider_state": "ACTIVE",
+  "attribute_condition": "assertion.repository_id == '1418132621' && assertion.repository_owner_id == '238017' && assertion.ref.startsWith('refs/tags/android-v') && assertion.workflow_ref.startsWith('squiter/tiny-wins/.github/workflows/android-release.yml@refs/tags/android-v') && assertion.sub == 'repo:squiter/tiny-wins:environment:android-publish'",
+  "service_account_binding": {
+    "role": "roles/iam.workloadIdentityUser",
+    "member": "principalSet://iam.googleapis.com/projects/295413158727/locations/global/workloadIdentityPools/tiny-wins-github/attribute.repository_id/1418132621"
+  },
+  "user_managed_service_account_keys": [],
+  "github": {
+    "repository": "squiter/tiny-wins",
+    "environment": "android-publish",
+    "variables_read_back": ["GOOGLE_WORKLOAD_IDENTITY_PROVIDER", "GOOGLE_PLAY_SERVICE_ACCOUNT"],
+    "PLAY_INTERNAL_ENABLED": false
+  },
+  "verification": [
+    "Cloud Shell bootstrap completion marker observed",
+    "gcloud provider describe: exact condition, mappings, issuer and ACTIVE state read back",
+    "gcloud service-account keys list --managed-by=user: empty array",
+    "GitHub API: both variable values match provider/account",
+    "gh variable get PLAY_INTERNAL_ENABLED: false"
+  ],
+  "not_executed": [
+    "No JSON credential key created",
+    "No Play app permission granted",
+    "No workflow source push or release tag",
+    "No GitHub OIDC token exchange/runtime execution",
+    "No Play upload or publishing enabled"
+  ],
+  "note": "Identifiers and certificate metadata are public configuration; no passwords, private-key bytes, bearer tokens or Cloud Shell authentication material retained."
+}
