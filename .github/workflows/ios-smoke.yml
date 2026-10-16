@@ -99,7 +99,7 @@ jobs:
           MAESTRO_DISABLE_UPDATE_CHECK: 'true'
           MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED: 'true'
           MAESTRO_API_URL: http://127.0.0.1:9
-        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/feature-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/day-notes.yaml .maestro/appearance.yaml .maestro/celebrations.yaml .maestro/language-override.yaml .maestro/weekly-goals.yaml
+        run: maestro --device "$TINY_WINS_SIMULATOR" test --format JUNIT --output "$RUNNER_TEMP/tiny-wins-smoke/feature-results.xml" --debug-output "$RUNNER_TEMP/tiny-wins-smoke/debug" --test-output-dir "$RUNNER_TEMP/tiny-wins-smoke/screenshots" .maestro/weekly-goals.yaml .maestro/day-notes.yaml .maestro/appearance.yaml .maestro/celebrations.yaml .maestro/language-override.yaml
       - name: Preserve failed feature evidence before independent checks
         if: ${{ !cancelled() && steps.features.outcome == 'failure' }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
