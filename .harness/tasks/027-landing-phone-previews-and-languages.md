@@ -1,6 +1,6 @@
 # Task: 027 — Phone-sized previews and bilingual landing page
 
-Status: implemented; publication verification pending
+Status: complete
 Goal: Replace scroll-length screenshot mockups with honest phone viewport captures; deliver English/Portuguese pages with browser language detection and a saved override.
 Non-goals: App feature changes, dependencies, store settings, tracking or edits to the owner's implementation-plan changes.
 Files/modules allowed: website/, website check scripts and Pages workflow/native path filters, docs/WEBSITE.md, ADR-023, README and harness.
@@ -25,6 +25,6 @@ Commands executed / results:
 - Actual UI verified English/Browser initial state → Portuguese → reload → root without query retains Portuguese → Support → English retains support page → Privacy → Browser reset → home; direct root after reset resolves English/Browser. English #lancamento → Portuguese preserves #lancamento. Portuguese privacy copy and language preference disclosure reviewed. No horizontal overflow (345/360 and 375/390). Viewport reset.
 - Browser Portuguese/unsupported-language resolution and blocked storage are deterministic tests, not claims of changing the host browser's settings. No-JS static alternative paths checked; disabling the live browser's JavaScript was not tested.
 - Initial localhost browser connection timed out despite HTTP 200 from curl; documented browser recovery opened a fresh tab at confirmed 127.0.0.1:8093 successfully. No app server or personal habit data was touched.
-- Published Pages check pending commit/push. No native E2E: app UI/storage unchanged.
+- Published Pages check/deploy PASS on 4109ad0: [38945464089](https://github.com/squiter/tiny-wins/actions/runs/38945464089). Public browser review confirmed English → Portuguese → Support → English (same page) → Privacy → Browser reset, plus all three loaded intrinsic sizes under /tiny-wins/. Final full-page capture: /tmp/tiny-wins-landing-phone-live.jpg. No native E2E: app UI/storage unchanged.
   Open questions: None blocking. Store links/price remain deferred.
-  Handoff summary: Preserve owner-modified docs/IMPLEMENTATION_PLAN.md and existing app work.
+  Handoff summary: Published at https://squiter.github.io/tiny-wins/. Website and support/privacy now use browser-following English/Portuguese with a saved override. All three screenshots have real phone proportions. Owner-modified docs/IMPLEMENTATION_PLAN.md remains untouched (79 additions/1 deletion); no app changes. Next: replace store status panels with actual URLs when stores launch.
