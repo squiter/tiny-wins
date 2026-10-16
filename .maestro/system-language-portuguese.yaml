@@ -69,9 +69,11 @@ appId: app.tinywins.mobile
 - tapOn:
     id: add-habit
     retryTapIfNoChange: true
+- waitForAnimationToEnd
 - runFlow:
     when:
-      notVisible: Fechar editor de hábito
+      visible:
+        id: add-habit
     commands:
       - tapOn:
           id: add-habit
@@ -116,10 +118,13 @@ appId: app.tinywins.mobile
 - scrollUntilVisible:
     element: Cancelar
     direction: DOWN
+    centerElement: true
 - assertVisible: Criar hábito
 - assertVisible: Cancelar
 - takeScreenshot: language-portuguese-large-editor-actions
 - tapOn: Cancelar
+- assertVisible:
+    id: add-habit
 - tapOn: Progresso, tab, 2 of 3
 - assertVisible: Progresso
 - takeScreenshot: language-portuguese-large-insights-header

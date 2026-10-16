@@ -14,9 +14,11 @@ Description:
 
 Tiny Wins is a gentle habit tracker for everyday progress. Read a page, take a walk, drink some water — complete a habit and fill a tile.
 
-Choose daily or weekday routines, give each habit its own icon and color, and see the past 14 days at a glance. Explore your week, month and year through a wall of binary victory tiles.
+Choose daily routines, specific weekdays or a flexible goal of 1–7 winning days each week. Give each habit its own icon and color, and see the past 14 days at a glance. Explore your week, month and year through a wall of binary victory tiles.
 
-Keep room to breathe with optional streak flexibility. Tolerated gaps have their own gentle marker; only completed days count as wins. A missed day never erases your earlier effort.
+Work toward a weekly goal on the days that suit you, and see achieved weeks build a sequence. Every actual win stays on its original date.
+
+Keep room to breathe with optional daily streak flexibility. Tolerated gaps have their own gentle marker; only completed days count as wins. A missed day never erases your earlier effort.
 
 Add a short note to a date, inspect your history, and deliberately correct past entries. Archive a habit when you need a break and restore it later.
 
@@ -30,7 +32,7 @@ Keywords draft: habits,routine,streak,tracker,progress,daily,calendar,offline,co
 
 Tiny Wins é um app de hábitos para valorizar pequenas conquistas. Leia uma página, caminhe, beba água: complete um hábito e preencha um ladrilho.
 
-Escolha uma rotina diária ou dias da semana, personalize ícones e cores e acompanhe seus últimos 14 dias. Explore suas vitórias na semana, no mês e no ano. Configure uma tolerância para manter espaço para respirar: dias tolerados têm uma marca própria e apenas dias concluídos contam como vitórias.
+Escolha uma rotina diária, dias específicos ou uma meta flexível de 1–7 dias por semana. Personalize ícones e cores e acompanhe seus últimos 14 dias. Explore suas vitórias na semana, no mês e no ano. Nas metas semanais, escolha os dias que funcionam para você e acompanhe a sequência de semanas conquistadas. Nos hábitos diários, configure uma tolerância para manter espaço para respirar: dias tolerados têm uma marca própria e apenas dias concluídos contam como vitórias.
 
 Guarde uma nota em uma data, corrija o histórico de forma consciente e arquive hábitos quando precisar de uma pausa. Seus dados ficam no aparelho, com exportação e restauração de backup em JSON.
 
@@ -54,6 +56,7 @@ Tiny Wins is a local habit tracker. It requires no account, login or server. Cre
 2. Insights: one tile per day, week/month/year navigation.
 3. Streak flexibility: a completed sequence with a soft tolerated gap.
 4. Day note: optional context with separate completion and save actions.
-5. Settings: appearance/animation choices and portable backups.
+5. Weekly goal: choose your days and show an achieved week with real binary wins.
+6. Settings: appearance/animation choices and portable backups.
 
 Use fictional habits. Capture real final-build screens in accepted device dimensions before adding any surrounding storefront artwork. Do not show widgets, sounds, reminders or translated app controls before they ship.
