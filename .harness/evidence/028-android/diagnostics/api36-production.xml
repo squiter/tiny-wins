@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="4" failures="1" time="425.453" timestamp="2026-10-16T16:37:42">
+    <testcase id="day-notes" name="day-notes" classname="day-notes" file=".maestro/day-notes.yaml" time="121.031" timestamp="2026-10-16T16:37:42" status="SUCCESS"/>
+    <testcase id="weekly-goals" name="weekly-goals" classname="weekly-goals" file=".maestro/weekly-goals.yaml" time="137.119" timestamp="2026-10-16T16:39:43" status="SUCCESS"/>
+    <testcase id="navigation" name="navigation" classname="navigation" file=".maestro/android-acceptance/navigation.yaml" time="31.536" timestamp="2026-10-16T16:42:00" status="SUCCESS"/>
+    <testcase id="backup-export" name="backup-export" classname="backup-export" file=".maestro/android-acceptance/backup-export.yaml" time="135.737" timestamp="2026-10-16T16:42:32" status="ERROR">
+      <failure>Assertion is false: "Save Tiny Wins backup" is visible</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

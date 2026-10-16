@@ -39,7 +39,7 @@ const createStyles = (theme: ThemePalette) =>
       borderWidth: 1,
       borderColor: theme.stone,
     },
-    icon: { fontSize: 21 },
+    icon: { fontSize: 21, color: theme.forest },
     value: { fontFamily: 'Fraunces_600SemiBold', fontSize: 29, color: theme.forest },
     label: { fontFamily: 'Inter_400Regular', fontSize: 13, color: theme.muted, lineHeight: 19 },
   });

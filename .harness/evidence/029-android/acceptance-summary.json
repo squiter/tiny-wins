@@ -1,0 +1,56 @@
+{
+  "baseCommit": "464dfdb5d15c7c6887875dfd1bd6214541b9c4ed",
+  "apkSha256": "fa48baacec9f0932819c5e20024434f5cad5a78f44f7f0bd242c0c9a54d56040",
+  "servedBundle": {
+    "sha256": "efd0e2a4db9806f1ef9714ff0ce148211957255ef658a178ec973f7ce15e9347",
+    "dev": false,
+    "nativeVariant": "debug",
+    "standalone": false
+  },
+  "sourceHashes": {
+    "src/components/HabitCard.tsx": "d7e74a0e565435fa8818db69a31c79c0d390c6f9715c72b35fdc75bdfd4b6515",
+    "src/components/VictoryWall.tsx": "6208f41eedc5e8c4d5952d7a2750f8b0e921fc14ee825784b31218b267a07618",
+    "src/components/MonthCalendar.tsx": "345bd9f41ee9e08216b86edf756a4902662a966633757a146acc78b5b96d76ca",
+    "src/components/YearGrid.tsx": "4849d34f580190caee30b603b8ded99d66d566a3ee3cfcd3c443721805571ff5",
+    "src/components/StatsGrid.tsx": "6cbbb402073580a954d43ef8ca5b5005a96aed0e74d03f583dde04d028d33e70"
+  },
+  "nativeGeometry": "geometry.json",
+  "reviewedApis": [29, 36],
+  "normalDisplay": "1080x2220 at 440 dpi, font scale 1.0",
+  "largeDisplay": "990x2035 at 440 dpi, font scale 1.5",
+  "data": "Synthetic fixture only",
+  "gridReviewBundleSha256": "86472e65d9be331c1214f541aa97eb86a5559cc0722fad8248e269254eb797bc",
+  "finalColorFixNativeReport": "note-tiles.xml",
+  "acceptedReports": [
+    {
+      "file": "design-review.xml",
+      "tests": 1,
+      "failures": 0
+    },
+    {
+      "file": "day-notes.xml",
+      "tests": 1,
+      "failures": 0
+    },
+    {
+      "file": "habit-management.xml",
+      "tests": 1,
+      "failures": 0
+    },
+    {
+      "file": "large-text.xml",
+      "tests": 1,
+      "failures": 0
+    },
+    {
+      "file": "portuguese-large.xml",
+      "tests": 1,
+      "failures": 0
+    },
+    {
+      "file": "note-tiles.xml",
+      "tests": 1,
+      "failures": 0
+    }
+  ]
+}

@@ -7,7 +7,7 @@ appId: app.tinywins.mobile
       id: add-habit
     timeout: 120000
 - tapOn:
-    text: Settings, tab, 3 of 3
+    text: Settings(, tab, 3 of 3)?
     retryTapIfNoChange: true
 - assertVisible:
     id: settings-theme-(light|dark)
@@ -27,7 +27,7 @@ appId: app.tinywins.mobile
       id: add-habit
     timeout: 120000
 - tapOn:
-    text: Settings, tab, 3 of 3
+    text: Settings(, tab, 3 of 3)?
     retryTapIfNoChange: true
 - assertVisible:
     id: settings-theme-(light|dark)

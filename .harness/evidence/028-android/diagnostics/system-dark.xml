@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028" tests="1" failures="1" time="33.551" timestamp="2026-10-16T16:33:13">
+    <testcase id="system-appearance-dark" name="system-appearance-dark" classname="system-appearance-dark" file=".maestro/system-appearance-dark.yaml" time="33.538" timestamp="2026-10-16T16:33:13" status="ERROR">
+      <failure>Assertion is false: id: settings-theme-dark is visible</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

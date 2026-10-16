@@ -90,10 +90,7 @@ export function DayInspector({
   return (
     <Modal visible transparent animationType="none" onRequestClose={onClose}>
       <SafeAreaProvider>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'height' : undefined}
-          style={styles.overlay}
-        >
+        <KeyboardAvoidingView behavior="height" style={styles.overlay}>
           <SafeAreaView style={[styles.sheet, !noteEditable && { height: note ? '65%' : '45%' }]}>
             <ScrollView
               keyboardShouldPersistTaps="handled"

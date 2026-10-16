@@ -20,3 +20,10 @@ expo-env.d.ts
 *.tinywins.json
 /dependency-audit.json
 /production-module-inspection.json
+
+# Android upload/app-signing private credentials (never commit)
+*.jks
+*.keystore
+*.p12
+.credentials/
+candidate/

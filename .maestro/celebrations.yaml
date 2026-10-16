@@ -37,7 +37,7 @@ appId: app.tinywins.mobile
 - tapOn: Undo Little reading today
 - assertVisible: View Little reading, 0 wins in a row
 - tapOn:
-    text: Settings, tab, 3 of 3
+    text: Settings(, tab, 3 of 3)?
     retryTapIfNoChange: true
 - assertVisible:
     id: settings-theme-(light|dark)
@@ -59,7 +59,7 @@ appId: app.tinywins.mobile
 - assertVisible: View Little reading, 1 win in a row
 - assertVisible: '(?s)All done for today!.*'
 - tapOn:
-    text: Settings, tab, 3 of 3
+    text: Settings(, tab, 3 of 3)?
     retryTapIfNoChange: true
 - assertVisible:
     id: settings-theme-(light|dark)

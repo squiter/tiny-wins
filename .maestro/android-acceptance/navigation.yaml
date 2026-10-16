@@ -1,0 +1,27 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn:
+    id: add-habit
+- assertVisible: Close habit editor
+- tapOn:
+    id: habit-name
+- inputText: Unsaved Android draft
+- assertVisible: Unsaved Android draft
+- pressKey: back
+- assertVisible: Close habit editor
+- assertVisible: Unsaved Android draft
+- takeScreenshot: android-keyboard-dismissed
+- pressKey: back
+- assertVisible:
+    id: add-habit
+- assertVisible: Start with one small thing.
+- stopApp
+- launchApp
+- assertVisible: Start with one small thing.
+- takeScreenshot: android-back-cancel-restart

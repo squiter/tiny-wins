@@ -1,0 +1,75 @@
+appId: app.tinywins.mobile
+---
+# Dedicated emulator only: 360 dp / font scale 1.5, system language English.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn:
+    id: add-habit
+- assertVisible: Close habit editor
+- tapOn:
+    id: habit-name
+- inputText: A quiet moment to read a chapter before bedtime
+- assertVisible:
+    id: habit-name
+    text: A quiet moment to read a chapter before bedtime
+- scrollUntilVisible:
+    element: Done typing
+    direction: DOWN
+- tapOn: Done typing
+- scrollUntilVisible:
+    element:
+      id: save-habit
+    direction: DOWN
+- tapOn:
+    id: save-habit
+- tapOn: Complete A quiet moment to read a chapter before bedtime today
+- assertVisible: View A quiet moment to read a chapter before bedtime, 1 win in a row
+- tapOn: Settings
+- scrollUntilVisible:
+    element:
+      id: language-pt-BR
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
+- tapOn:
+    id: language-pt-BR
+- assertVisible: Idioma
+- takeScreenshot: design-portuguese-settings-large
+- scrollUntilVisible:
+    element:
+      id: appearance-dark
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
+- tapOn:
+    id: appearance-dark
+- tapOn: Hoje
+- scrollUntilVisible:
+    element: Ver A quiet moment to read a chapter before bedtime, 1 vitória seguida
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
+- takeScreenshot: design-portuguese-long-name-today-large
+- tapOn: Progresso
+- tapOn: Mês
+- scrollUntilVisible:
+    element: Explorar calendário de A quiet moment to read a chapter before bedtime com datas maiores
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
+- takeScreenshot: design-portuguese-insights-month-large
+- scrollUntilVisible:
+    element: Ano
+    direction: UP
+    timeout: 60000
+- tapOn: Ano
+- scrollUntilVisible:
+    element: Explorar calendário de A quiet moment to read a chapter before bedtime com datas maiores
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
+- takeScreenshot: design-portuguese-insights-year-large

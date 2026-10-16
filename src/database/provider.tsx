@@ -25,6 +25,9 @@ const PreferencesContext = createContext<{
   setWeekStartsOn(value: WeekStartsOn): void;
 } | null>(null);
 const initialize = async (database: MigrationDatabase) => migrate(database);
+// A failed provider can close asynchronously after retry mounts its replacement.
+// Do not let those lifetimes share the native cached connection.
+const databaseOptions = { useNewConnection: true };
 const Context = createContext<HabitRepository | null>(null);
 function RepositoryProvider({ children }: PropsWithChildren) {
   const sqlite = useSQLiteContext();
@@ -93,7 +96,7 @@ function RepositoryProvider({ children }: PropsWithChildren) {
 }
 export function DatabaseProvider({ children }: PropsWithChildren) {
   return (
-    <SQLiteProvider databaseName="tiny-wins.db" onInit={initialize}>
+    <SQLiteProvider databaseName="tiny-wins.db" options={databaseOptions} onInit={initialize}>
       <RepositoryProvider>{children}</RepositoryProvider>
     </SQLiteProvider>
   );

@@ -1,0 +1,37 @@
+// Applied only by the manual Google Play candidate workflow after Expo prebuild.
+def requiredReleaseValue = { String name ->
+    def value = System.getenv(name)
+    if (!value) throw new GradleException("Missing release setting: " + name)
+    value
+}
+def candidateVersion = requiredReleaseValue('TW_ANDROID_VERSION_CODE')
+if (!(candidateVersion ==~ /[1-9][0-9]*/) || candidateVersion.toLong() > 2100000000L) {
+    throw new GradleException('Invalid release version code')
+}
+def confirmedPackage = requiredReleaseValue('TW_ANDROID_CONFIRMED_PACKAGE')
+if (android.defaultConfig.applicationId != confirmedPackage) {
+    throw new GradleException('Release package confirmation mismatch')
+}
+def uploadAlias = requiredReleaseValue('TW_ANDROID_UPLOAD_KEY_ALIAS')
+if (uploadAlias.equalsIgnoreCase('androiddebugkey')) {
+    throw new GradleException('Debug signing is not permitted for release candidates')
+}
+android {
+    defaultConfig {
+        versionCode candidateVersion.toInteger()
+    }
+    signingConfigs {
+        tinyWinsUpload {
+            storeFile file(requiredReleaseValue('TW_ANDROID_UPLOAD_KEYSTORE'))
+            storePassword requiredReleaseValue('TW_ANDROID_UPLOAD_STORE_PASSWORD')
+            keyAlias uploadAlias
+            keyPassword requiredReleaseValue('TW_ANDROID_UPLOAD_KEY_PASSWORD')
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.tinyWinsUpload
+            debuggable false
+        }
+    }
+}

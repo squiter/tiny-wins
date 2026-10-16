@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="1" failures="1" time="124.194" timestamp="2026-10-16T17:54:17">
+    <testcase id="launch-retry" name="launch-retry" classname="launch-retry" file=".maestro/android-acceptance/launch-retry.yaml" time="124.185" timestamp="2026-10-16T17:54:17" status="ERROR">
+      <failure>Assertion is false: id: add-habit is visible</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

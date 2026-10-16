@@ -45,59 +45,71 @@ export function YearGrid({
               {t(month)}
             </Text>
             <View style={styles.days}>
-              {weekdays(weekStartsOn).map(({ short: label }, i) => (
-                <Text accessible={false} key={`label-${i}`} style={styles.weekday}>
-                  {label}
-                </Text>
-              ))}
-              {Array.from({ length: offset }, (_, i) => (
-                <View key={`blank-${i}`} style={styles.cell} />
-              ))}
-              {days.map((cell) => (
-                <Pressable
-                  key={cell.day}
-                  testID={`day-${cell.day}`}
-                  accessibilityRole="button"
-                  accessibilityState={{ disabled: cell.state === 'future' }}
-                  disabled={cell.state === 'future'}
-                  accessibilityLabel={cellLabel(cell)}
-                  onPress={() => onInspect(cell.day)}
-                  style={[
-                    styles.cell,
-                    {
-                      backgroundColor:
-                        cell.state === 'complete'
-                          ? habitColors[color]
-                          : cell.state === 'grace'
-                            ? habitSurfaces[color]
-                            : theme.ivory,
-                      borderWidth: cell.today ? 2 : cell.state === 'not-scheduled' ? 1 : 0,
-                      borderColor: cell.today ? habitColors[color] : theme.stone,
-                      borderStyle: cell.state === 'not-scheduled' ? 'dashed' : 'solid',
-                    },
-                  ]}
-                >
-                  {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
-                  <Text
-                    maxFontSizeMultiplier={1}
-                    style={{
-                      fontSize: 7,
-                      color: cell.state === 'complete' ? theme.onHabit : theme.muted,
-                    }}
-                  >
-                    {cell.state === 'complete'
-                      ? '✓'
-                      : cell.state === 'grace'
-                        ? '○'
-                        : cell.state === 'flexible'
-                          ? '◇'
-                          : cell.state === 'not-scheduled'
-                            ? '–'
-                            : cell.today
-                              ? '•'
-                              : ''}
+              <View style={styles.row}>
+                {weekdays(weekStartsOn).map(({ short: label }, i) => (
+                  <Text accessible={false} key={`label-${i}`} style={styles.weekday}>
+                    {label}
                   </Text>
-                </Pressable>
+                ))}
+              </View>
+              {Array.from({ length: Math.ceil((days.length + offset) / 7) }, (_, row) => (
+                <View key={row} style={styles.row}>
+                  {Array.from({ length: 7 }, (_, column) => {
+                    const cell = days[row * 7 + column - offset];
+                    return cell ? (
+                      <Pressable
+                        key={cell.day}
+                        testID={`day-${cell.day}`}
+                        accessibilityRole="button"
+                        accessibilityState={{ disabled: cell.state === 'future' }}
+                        disabled={cell.state === 'future'}
+                        accessibilityLabel={cellLabel(cell)}
+                        onPress={() => onInspect(cell.day)}
+                        style={styles.cell}
+                      >
+                        <View
+                          pointerEvents="none"
+                          style={[
+                            styles.cellSurface,
+                            {
+                              backgroundColor:
+                                cell.state === 'complete'
+                                  ? habitColors[color]
+                                  : cell.state === 'grace'
+                                    ? habitSurfaces[color]
+                                    : theme.ivory,
+                              borderWidth: cell.today ? 2 : cell.state === 'not-scheduled' ? 1 : 0,
+                              borderColor: cell.today ? habitColors[color] : theme.stone,
+                              borderStyle: cell.state === 'not-scheduled' ? 'dashed' : 'solid',
+                            },
+                          ]}
+                        />
+                        {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
+                        <Text
+                          maxFontSizeMultiplier={1}
+                          style={{
+                            fontSize: 7,
+                            color: cell.state === 'complete' ? theme.onHabit : theme.muted,
+                          }}
+                        >
+                          {cell.state === 'complete'
+                            ? '✓'
+                            : cell.state === 'grace'
+                              ? '○'
+                              : cell.state === 'flexible'
+                                ? '◇'
+                                : cell.state === 'not-scheduled'
+                                  ? '–'
+                                  : cell.today
+                                    ? '•'
+                                    : ''}
+                        </Text>
+                      </Pressable>
+                    ) : (
+                      <View key={`blank-${column}`} style={styles.cell} />
+                    );
+                  })}
+                </View>
               ))}
             </View>
           </View>
@@ -121,17 +133,19 @@ const createStyles = (theme: ThemePalette) =>
       gap: 10,
     },
     title: { fontFamily: 'Inter_600SemiBold', fontSize: 13, color: theme.forest },
-    days: { flexDirection: 'row', flexWrap: 'wrap', gap: 2 },
+    days: { gap: 2 },
+    row: { flexDirection: 'row', gap: 2 },
     weekday: {
-      width: '12.8%',
+      flex: 1,
       textAlign: 'center',
       fontFamily: 'Inter_400Regular',
       fontSize: 8,
       color: theme.muted,
       marginBottom: 2,
     },
+    cellSurface: { ...StyleSheet.absoluteFill, borderRadius: 3 },
     cell: {
-      width: '12.8%',
+      flex: 1,
       aspectRatio: 1,
       borderRadius: 3,
       alignItems: 'center',

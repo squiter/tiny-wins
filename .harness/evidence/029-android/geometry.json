@@ -1,0 +1,5137 @@
+{
+  "today-before": {
+    "count": 14,
+    "sizes": [
+      [37, 38],
+      [38, 38],
+      [49, 49]
+    ],
+    "today": [
+      {
+        "label": "Little reading, 10/16/2026: completed, today",
+        "bounds": "[792,1163][841,1212]",
+        "width": 49,
+        "height": 49
+      }
+    ],
+    "cells": [
+      {
+        "label": "Inspect Little reading, 10/03/2026: before habit started",
+        "bounds": "[228,1163][266,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/04/2026: before habit started",
+        "bounds": "[271,1163][308,1201]",
+        "width": 37,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/05/2026: before habit started",
+        "bounds": "[315,1163][353,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/06/2026: before habit started",
+        "bounds": "[358,1163][396,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/07/2026: before habit started",
+        "bounds": "[401,1163][439,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/08/2026: before habit started",
+        "bounds": "[445,1163][483,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/09/2026: before habit started",
+        "bounds": "[488,1163][526,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/10/2026: before habit started",
+        "bounds": "[532,1163][570,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/11/2026: before habit started",
+        "bounds": "[575,1163][613,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/12/2026: before habit started",
+        "bounds": "[618,1163][656,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/13/2026: before habit started",
+        "bounds": "[662,1163][700,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/14/2026: before habit started",
+        "bounds": "[705,1163][743,1201]",
+        "width": 38,
+        "height": 38
+      },
+      {
+        "label": "Inspect Little reading, 10/15/2026: before habit started",
+        "bounds": "[748,1163][785,1201]",
+        "width": 37,
+        "height": 38
+      },
+      {
+        "label": "Little reading, 10/16/2026: completed, today",
+        "bounds": "[792,1163][841,1212]",
+        "width": 49,
+        "height": 49
+      }
+    ]
+  },
+  "today-after": {
+    "count": 14,
+    "sizes": [
+      [38, 39],
+      [39, 39]
+    ],
+    "today": [
+      {
+        "label": "Read one page, 10/16/2026: completed, today",
+        "bounds": "[802,1163][841,1202]",
+        "width": 39,
+        "height": 39
+      }
+    ],
+    "cells": [
+      {
+        "label": "Inspect Read one page, 10/03/2026: before habit started",
+        "bounds": "[228,1163][267,1202]",
+        "width": 39,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/04/2026: before habit started",
+        "bounds": "[272,1163][311,1202]",
+        "width": 39,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/05/2026: before habit started",
+        "bounds": "[316,1163][354,1202]",
+        "width": 38,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/06/2026: before habit started",
+        "bounds": "[360,1163][398,1202]",
+        "width": 38,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/07/2026: before habit started",
+        "bounds": "[405,1163][443,1202]",
+        "width": 38,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/08/2026: before habit started",
+        "bounds": "[449,1163][488,1202]",
+        "width": 39,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/09/2026: before habit started",
+        "bounds": "[493,1163][532,1202]",
+        "width": 39,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/10/2026: before habit started",
+        "bounds": "[537,1163][576,1202]",
+        "width": 39,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/11/2026: before habit started",
+        "bounds": "[581,1163][620,1202]",
+        "width": 39,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/12/2026: before habit started",
+        "bounds": "[625,1163][663,1202]",
+        "width": 38,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/13/2026: before habit started",
+        "bounds": "[669,1163][707,1202]",
+        "width": 38,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/14/2026: before habit started",
+        "bounds": "[714,1163][752,1202]",
+        "width": 38,
+        "height": 39
+      },
+      {
+        "label": "Inspect Read one page, 10/15/2026: before habit started",
+        "bounds": "[758,1163][797,1202]",
+        "width": 39,
+        "height": 39
+      },
+      {
+        "label": "Read one page, 10/16/2026: completed, today",
+        "bounds": "[802,1163][841,1202]",
+        "width": 39,
+        "height": 39
+      }
+    ]
+  },
+  "insights-before": {
+    "count": 365,
+    "sizes": [
+      [20, 21],
+      [21, 21],
+      [21, 22],
+      [22, 22],
+      [23, 23],
+      [24, 23],
+      [26, 27]
+    ],
+    "today": [
+      {
+        "label": "Little reading, 10/16/2026: completed, today",
+        "bounds": "[369,1582][395,1609]",
+        "width": 26,
+        "height": 27
+      }
+    ],
+    "cells": [
+      {
+        "label": "Little reading, 01/01/2026: before habit started",
+        "bounds": "[144,1370][165,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/02/2026: before habit started",
+        "bounds": "[171,1370][192,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/03/2026: before habit started",
+        "bounds": "[198,1370][219,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/04/2026: before habit started",
+        "bounds": "[225,1370][246,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/05/2026: before habit started",
+        "bounds": "[252,1370][273,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/06/2026: before habit started",
+        "bounds": "[279,1370][300,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/07/2026: before habit started",
+        "bounds": "[306,1370][327,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/08/2026: before habit started",
+        "bounds": "[333,1370][354,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/09/2026: before habit started",
+        "bounds": "[360,1370][382,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/10/2026: before habit started",
+        "bounds": "[387,1370][409,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/11/2026: before habit started",
+        "bounds": "[414,1370][436,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/12/2026: before habit started",
+        "bounds": "[441,1370][463,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/13/2026: before habit started",
+        "bounds": "[467,1370][489,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/14/2026: before habit started",
+        "bounds": "[494,1370][516,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/15/2026: before habit started",
+        "bounds": "[521,1370][542,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/16/2026: before habit started",
+        "bounds": "[548,1370][569,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/17/2026: before habit started",
+        "bounds": "[575,1370][596,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/18/2026: before habit started",
+        "bounds": "[602,1370][623,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/19/2026: before habit started",
+        "bounds": "[629,1370][650,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/20/2026: before habit started",
+        "bounds": "[656,1370][677,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/21/2026: before habit started",
+        "bounds": "[683,1370][704,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/22/2026: before habit started",
+        "bounds": "[710,1370][731,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/23/2026: before habit started",
+        "bounds": "[737,1370][759,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/24/2026: before habit started",
+        "bounds": "[764,1370][786,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/25/2026: before habit started",
+        "bounds": "[791,1370][813,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/26/2026: before habit started",
+        "bounds": "[818,1370][840,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/27/2026: before habit started",
+        "bounds": "[844,1370][866,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/28/2026: before habit started",
+        "bounds": "[871,1370][893,1392]",
+        "width": 22,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/29/2026: before habit started",
+        "bounds": "[898,1370][919,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/30/2026: before habit started",
+        "bounds": "[925,1370][946,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 01/31/2026: before habit started",
+        "bounds": "[952,1370][973,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 02/01/2026: before habit started",
+        "bounds": "[979,1370][1000,1392]",
+        "width": 21,
+        "height": 22
+      },
+      {
+        "label": "Little reading, 02/02/2026: before habit started",
+        "bounds": "[80,1397][101,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/03/2026: before habit started",
+        "bounds": "[106,1397][127,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/04/2026: before habit started",
+        "bounds": "[133,1397][154,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/05/2026: before habit started",
+        "bounds": "[159,1397][180,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/06/2026: before habit started",
+        "bounds": "[186,1397][207,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/07/2026: before habit started",
+        "bounds": "[212,1397][233,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/08/2026: before habit started",
+        "bounds": "[239,1397][260,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/09/2026: before habit started",
+        "bounds": "[265,1397][286,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/10/2026: before habit started",
+        "bounds": "[292,1397][313,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/11/2026: before habit started",
+        "bounds": "[318,1397][339,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/12/2026: before habit started",
+        "bounds": "[345,1397][366,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/13/2026: before habit started",
+        "bounds": "[371,1397][392,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/14/2026: before habit started",
+        "bounds": "[397,1397][418,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/15/2026: before habit started",
+        "bounds": "[424,1397][445,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/16/2026: before habit started",
+        "bounds": "[450,1397][471,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/17/2026: before habit started",
+        "bounds": "[477,1397][498,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/18/2026: before habit started",
+        "bounds": "[503,1397][524,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/19/2026: before habit started",
+        "bounds": "[530,1397][550,1418]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/20/2026: before habit started",
+        "bounds": "[556,1397][577,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/21/2026: before habit started",
+        "bounds": "[583,1397][604,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/22/2026: before habit started",
+        "bounds": "[609,1397][630,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/23/2026: before habit started",
+        "bounds": "[636,1397][657,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/24/2026: before habit started",
+        "bounds": "[662,1397][683,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/25/2026: before habit started",
+        "bounds": "[689,1397][710,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/26/2026: before habit started",
+        "bounds": "[715,1397][736,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/27/2026: before habit started",
+        "bounds": "[741,1397][762,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 02/28/2026: before habit started",
+        "bounds": "[768,1397][789,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/01/2026: before habit started",
+        "bounds": "[794,1397][815,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/02/2026: before habit started",
+        "bounds": "[821,1397][842,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/03/2026: before habit started",
+        "bounds": "[847,1397][868,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/04/2026: before habit started",
+        "bounds": "[874,1397][895,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/05/2026: before habit started",
+        "bounds": "[900,1397][921,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/06/2026: before habit started",
+        "bounds": "[927,1397][948,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/07/2026: before habit started",
+        "bounds": "[953,1397][974,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/08/2026: before habit started",
+        "bounds": "[980,1397][1001,1418]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/09/2026: before habit started",
+        "bounds": "[80,1423][101,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/10/2026: before habit started",
+        "bounds": "[106,1423][127,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/11/2026: before habit started",
+        "bounds": "[133,1423][154,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/12/2026: before habit started",
+        "bounds": "[159,1423][180,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/13/2026: before habit started",
+        "bounds": "[186,1423][207,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/14/2026: before habit started",
+        "bounds": "[212,1423][233,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/15/2026: before habit started",
+        "bounds": "[239,1423][260,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/16/2026: before habit started",
+        "bounds": "[265,1423][286,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/17/2026: before habit started",
+        "bounds": "[292,1423][313,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/18/2026: before habit started",
+        "bounds": "[318,1423][339,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/19/2026: before habit started",
+        "bounds": "[345,1423][366,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/20/2026: before habit started",
+        "bounds": "[371,1423][392,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/21/2026: before habit started",
+        "bounds": "[397,1423][418,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/22/2026: before habit started",
+        "bounds": "[424,1423][445,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/23/2026: before habit started",
+        "bounds": "[450,1423][471,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/24/2026: before habit started",
+        "bounds": "[477,1423][498,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/25/2026: before habit started",
+        "bounds": "[503,1423][524,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/26/2026: before habit started",
+        "bounds": "[530,1423][550,1444]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/27/2026: before habit started",
+        "bounds": "[556,1423][577,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/28/2026: before habit started",
+        "bounds": "[583,1423][604,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/29/2026: before habit started",
+        "bounds": "[609,1423][630,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/30/2026: before habit started",
+        "bounds": "[636,1423][657,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 03/31/2026: before habit started",
+        "bounds": "[662,1423][683,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/01/2026: before habit started",
+        "bounds": "[689,1423][710,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/02/2026: before habit started",
+        "bounds": "[715,1423][736,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/03/2026: before habit started",
+        "bounds": "[741,1423][762,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/04/2026: before habit started",
+        "bounds": "[768,1423][789,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/05/2026: before habit started",
+        "bounds": "[794,1423][815,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/06/2026: before habit started",
+        "bounds": "[821,1423][842,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/07/2026: before habit started",
+        "bounds": "[847,1423][868,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/08/2026: before habit started",
+        "bounds": "[874,1423][895,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/09/2026: before habit started",
+        "bounds": "[900,1423][921,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/10/2026: before habit started",
+        "bounds": "[927,1423][948,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/11/2026: before habit started",
+        "bounds": "[953,1423][974,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/12/2026: before habit started",
+        "bounds": "[980,1423][1001,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/13/2026: before habit started",
+        "bounds": "[80,1450][101,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/14/2026: before habit started",
+        "bounds": "[106,1450][127,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/15/2026: before habit started",
+        "bounds": "[133,1450][154,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/16/2026: before habit started",
+        "bounds": "[159,1450][180,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/17/2026: before habit started",
+        "bounds": "[186,1450][207,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/18/2026: before habit started",
+        "bounds": "[212,1450][233,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/19/2026: before habit started",
+        "bounds": "[239,1450][260,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/20/2026: before habit started",
+        "bounds": "[265,1450][286,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/21/2026: before habit started",
+        "bounds": "[292,1450][313,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/22/2026: before habit started",
+        "bounds": "[318,1450][339,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/23/2026: before habit started",
+        "bounds": "[345,1450][366,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/24/2026: before habit started",
+        "bounds": "[371,1450][392,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/25/2026: before habit started",
+        "bounds": "[397,1450][418,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/26/2026: before habit started",
+        "bounds": "[424,1450][445,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/27/2026: before habit started",
+        "bounds": "[450,1450][471,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/28/2026: before habit started",
+        "bounds": "[477,1450][498,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/29/2026: before habit started",
+        "bounds": "[503,1450][524,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 04/30/2026: before habit started",
+        "bounds": "[530,1450][550,1471]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/01/2026: before habit started",
+        "bounds": "[556,1450][577,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/02/2026: before habit started",
+        "bounds": "[583,1450][604,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/03/2026: before habit started",
+        "bounds": "[609,1450][630,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/04/2026: before habit started",
+        "bounds": "[636,1450][657,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/05/2026: before habit started",
+        "bounds": "[662,1450][683,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/06/2026: before habit started",
+        "bounds": "[689,1450][710,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/07/2026: before habit started",
+        "bounds": "[715,1450][736,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/08/2026: before habit started",
+        "bounds": "[741,1450][762,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/09/2026: before habit started",
+        "bounds": "[768,1450][789,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/10/2026: before habit started",
+        "bounds": "[794,1450][815,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/11/2026: before habit started",
+        "bounds": "[821,1450][842,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/12/2026: before habit started",
+        "bounds": "[847,1450][868,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/13/2026: before habit started",
+        "bounds": "[874,1450][895,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/14/2026: before habit started",
+        "bounds": "[900,1450][921,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/15/2026: before habit started",
+        "bounds": "[927,1450][948,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/16/2026: before habit started",
+        "bounds": "[953,1450][974,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/17/2026: before habit started",
+        "bounds": "[980,1450][1001,1471]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/18/2026: before habit started",
+        "bounds": "[80,1476][101,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/19/2026: before habit started",
+        "bounds": "[106,1476][127,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/20/2026: before habit started",
+        "bounds": "[133,1476][154,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/21/2026: before habit started",
+        "bounds": "[159,1476][180,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/22/2026: before habit started",
+        "bounds": "[186,1476][207,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/23/2026: before habit started",
+        "bounds": "[212,1476][233,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/24/2026: before habit started",
+        "bounds": "[239,1476][260,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/25/2026: before habit started",
+        "bounds": "[265,1476][286,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/26/2026: before habit started",
+        "bounds": "[292,1476][313,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/27/2026: before habit started",
+        "bounds": "[318,1476][339,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/28/2026: before habit started",
+        "bounds": "[345,1476][366,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/29/2026: before habit started",
+        "bounds": "[371,1476][392,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/30/2026: before habit started",
+        "bounds": "[397,1476][418,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 05/31/2026: before habit started",
+        "bounds": "[424,1476][445,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/01/2026: before habit started",
+        "bounds": "[450,1476][471,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/02/2026: before habit started",
+        "bounds": "[477,1476][498,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/03/2026: before habit started",
+        "bounds": "[503,1476][524,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/04/2026: before habit started",
+        "bounds": "[530,1476][550,1497]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/05/2026: before habit started",
+        "bounds": "[556,1476][577,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/06/2026: before habit started",
+        "bounds": "[583,1476][604,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/07/2026: before habit started",
+        "bounds": "[609,1476][630,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/08/2026: before habit started",
+        "bounds": "[636,1476][657,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/09/2026: before habit started",
+        "bounds": "[662,1476][683,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/10/2026: before habit started",
+        "bounds": "[689,1476][710,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/11/2026: before habit started",
+        "bounds": "[715,1476][736,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/12/2026: before habit started",
+        "bounds": "[741,1476][762,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/13/2026: before habit started",
+        "bounds": "[768,1476][789,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/14/2026: before habit started",
+        "bounds": "[794,1476][815,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/15/2026: before habit started",
+        "bounds": "[821,1476][842,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/16/2026: before habit started",
+        "bounds": "[847,1476][868,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/17/2026: before habit started",
+        "bounds": "[874,1476][895,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/18/2026: before habit started",
+        "bounds": "[900,1476][921,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/19/2026: before habit started",
+        "bounds": "[927,1476][948,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/20/2026: before habit started",
+        "bounds": "[953,1476][974,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/21/2026: before habit started",
+        "bounds": "[980,1476][1001,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/22/2026: before habit started",
+        "bounds": "[80,1503][101,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/23/2026: before habit started",
+        "bounds": "[106,1503][127,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/24/2026: before habit started",
+        "bounds": "[133,1503][154,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/25/2026: before habit started",
+        "bounds": "[159,1503][180,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/26/2026: before habit started",
+        "bounds": "[186,1503][207,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/27/2026: before habit started",
+        "bounds": "[212,1503][233,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/28/2026: before habit started",
+        "bounds": "[239,1503][260,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/29/2026: before habit started",
+        "bounds": "[265,1503][286,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 06/30/2026: before habit started",
+        "bounds": "[292,1503][313,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/01/2026: before habit started",
+        "bounds": "[318,1503][339,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/02/2026: before habit started",
+        "bounds": "[345,1503][366,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/03/2026: before habit started",
+        "bounds": "[371,1503][392,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/04/2026: before habit started",
+        "bounds": "[397,1503][418,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/05/2026: before habit started",
+        "bounds": "[424,1503][445,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/06/2026: before habit started",
+        "bounds": "[450,1503][471,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/07/2026: before habit started",
+        "bounds": "[477,1503][498,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/08/2026: before habit started",
+        "bounds": "[503,1503][524,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/09/2026: before habit started",
+        "bounds": "[530,1503][550,1524]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/10/2026: before habit started",
+        "bounds": "[556,1503][577,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/11/2026: before habit started",
+        "bounds": "[583,1503][604,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/12/2026: before habit started",
+        "bounds": "[609,1503][630,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/13/2026: before habit started",
+        "bounds": "[636,1503][657,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/14/2026: before habit started",
+        "bounds": "[662,1503][683,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/15/2026: before habit started",
+        "bounds": "[689,1503][710,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/16/2026: before habit started",
+        "bounds": "[715,1503][736,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/17/2026: before habit started",
+        "bounds": "[741,1503][762,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/18/2026: before habit started",
+        "bounds": "[768,1503][789,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/19/2026: before habit started",
+        "bounds": "[794,1503][815,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/20/2026: before habit started",
+        "bounds": "[821,1503][842,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/21/2026: before habit started",
+        "bounds": "[847,1503][868,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/22/2026: before habit started",
+        "bounds": "[874,1503][895,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/23/2026: before habit started",
+        "bounds": "[900,1503][921,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/24/2026: before habit started",
+        "bounds": "[927,1503][948,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/25/2026: before habit started",
+        "bounds": "[953,1503][974,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/26/2026: before habit started",
+        "bounds": "[980,1503][1001,1524]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/27/2026: before habit started",
+        "bounds": "[80,1529][101,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/28/2026: before habit started",
+        "bounds": "[106,1529][127,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/29/2026: before habit started",
+        "bounds": "[133,1529][154,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/30/2026: before habit started",
+        "bounds": "[159,1529][180,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 07/31/2026: before habit started",
+        "bounds": "[186,1529][207,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/01/2026: before habit started",
+        "bounds": "[212,1529][233,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/02/2026: before habit started",
+        "bounds": "[239,1529][260,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/03/2026: before habit started",
+        "bounds": "[265,1529][286,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/04/2026: before habit started",
+        "bounds": "[292,1529][313,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/05/2026: before habit started",
+        "bounds": "[318,1529][339,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/06/2026: before habit started",
+        "bounds": "[345,1529][366,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/07/2026: before habit started",
+        "bounds": "[371,1529][392,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/08/2026: before habit started",
+        "bounds": "[397,1529][418,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/09/2026: before habit started",
+        "bounds": "[424,1529][445,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/10/2026: before habit started",
+        "bounds": "[450,1529][471,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/11/2026: before habit started",
+        "bounds": "[477,1529][498,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/12/2026: before habit started",
+        "bounds": "[503,1529][524,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/13/2026: before habit started",
+        "bounds": "[530,1529][550,1550]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/14/2026: before habit started",
+        "bounds": "[556,1529][577,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/15/2026: before habit started",
+        "bounds": "[583,1529][604,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/16/2026: before habit started",
+        "bounds": "[609,1529][630,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/17/2026: before habit started",
+        "bounds": "[636,1529][657,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/18/2026: before habit started",
+        "bounds": "[662,1529][683,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/19/2026: before habit started",
+        "bounds": "[689,1529][710,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/20/2026: before habit started",
+        "bounds": "[715,1529][736,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/21/2026: before habit started",
+        "bounds": "[741,1529][762,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/22/2026: before habit started",
+        "bounds": "[768,1529][789,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/23/2026: before habit started",
+        "bounds": "[794,1529][815,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/24/2026: before habit started",
+        "bounds": "[821,1529][842,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/25/2026: before habit started",
+        "bounds": "[847,1529][868,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/26/2026: before habit started",
+        "bounds": "[874,1529][895,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/27/2026: before habit started",
+        "bounds": "[900,1529][921,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/28/2026: before habit started",
+        "bounds": "[927,1529][948,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/29/2026: before habit started",
+        "bounds": "[953,1529][974,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/30/2026: before habit started",
+        "bounds": "[980,1529][1001,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 08/31/2026: before habit started",
+        "bounds": "[80,1556][101,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/01/2026: before habit started",
+        "bounds": "[106,1556][127,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/02/2026: before habit started",
+        "bounds": "[133,1556][154,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/03/2026: before habit started",
+        "bounds": "[159,1556][180,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/04/2026: before habit started",
+        "bounds": "[186,1556][207,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/05/2026: before habit started",
+        "bounds": "[212,1556][233,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/06/2026: before habit started",
+        "bounds": "[239,1556][260,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/07/2026: before habit started",
+        "bounds": "[265,1556][286,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/08/2026: before habit started",
+        "bounds": "[292,1556][313,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/09/2026: before habit started",
+        "bounds": "[318,1556][339,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/10/2026: before habit started",
+        "bounds": "[345,1556][366,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/11/2026: before habit started",
+        "bounds": "[371,1556][392,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/12/2026: before habit started",
+        "bounds": "[397,1556][418,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/13/2026: before habit started",
+        "bounds": "[424,1556][445,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/14/2026: before habit started",
+        "bounds": "[450,1556][471,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/15/2026: before habit started",
+        "bounds": "[477,1556][498,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/16/2026: before habit started",
+        "bounds": "[503,1556][524,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/17/2026: before habit started",
+        "bounds": "[530,1556][550,1577]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/18/2026: before habit started",
+        "bounds": "[556,1556][577,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/19/2026: before habit started",
+        "bounds": "[583,1556][604,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/20/2026: before habit started",
+        "bounds": "[609,1556][630,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/21/2026: before habit started",
+        "bounds": "[636,1556][657,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/22/2026: before habit started",
+        "bounds": "[662,1556][683,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/23/2026: before habit started",
+        "bounds": "[689,1556][710,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/24/2026: before habit started",
+        "bounds": "[715,1556][736,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/25/2026: before habit started",
+        "bounds": "[741,1556][762,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/26/2026: before habit started",
+        "bounds": "[768,1556][789,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/27/2026: before habit started",
+        "bounds": "[794,1556][815,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/28/2026: before habit started",
+        "bounds": "[821,1556][842,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/29/2026: before habit started",
+        "bounds": "[847,1556][868,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 09/30/2026: before habit started",
+        "bounds": "[874,1556][895,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/01/2026: before habit started",
+        "bounds": "[900,1556][921,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/02/2026: before habit started",
+        "bounds": "[927,1556][948,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/03/2026: before habit started",
+        "bounds": "[953,1556][974,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/04/2026: before habit started",
+        "bounds": "[980,1556][1001,1577]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/05/2026: before habit started",
+        "bounds": "[80,1582][101,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/06/2026: before habit started",
+        "bounds": "[106,1582][127,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/07/2026: before habit started",
+        "bounds": "[133,1582][154,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/08/2026: before habit started",
+        "bounds": "[159,1582][179,1603]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/09/2026: before habit started",
+        "bounds": "[185,1582][206,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/10/2026: before habit started",
+        "bounds": "[212,1582][233,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/11/2026: before habit started",
+        "bounds": "[238,1582][258,1603]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/12/2026: before habit started",
+        "bounds": "[264,1582][285,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/13/2026: before habit started",
+        "bounds": "[290,1582][311,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/14/2026: before habit started",
+        "bounds": "[317,1582][338,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/15/2026: before habit started",
+        "bounds": "[343,1582][364,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/16/2026: completed, today",
+        "bounds": "[369,1582][395,1609]",
+        "width": 26,
+        "height": 27
+      },
+      {
+        "label": "Little reading, 10/17/2026: future",
+        "bounds": "[401,1582][422,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/18/2026: future",
+        "bounds": "[427,1582][448,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/19/2026: future",
+        "bounds": "[454,1582][475,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/20/2026: future",
+        "bounds": "[480,1582][501,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/21/2026: future",
+        "bounds": "[506,1582][527,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/22/2026: future",
+        "bounds": "[533,1582][554,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/23/2026: future",
+        "bounds": "[559,1582][579,1603]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/24/2026: future",
+        "bounds": "[585,1582][606,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/25/2026: future",
+        "bounds": "[611,1582][632,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/26/2026: future",
+        "bounds": "[638,1582][658,1603]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/27/2026: future",
+        "bounds": "[664,1582][685,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/28/2026: future",
+        "bounds": "[690,1582][711,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/29/2026: future",
+        "bounds": "[717,1582][738,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/30/2026: future",
+        "bounds": "[743,1582][764,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 10/31/2026: future",
+        "bounds": "[769,1582][790,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/01/2026: future",
+        "bounds": "[796,1582][817,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/02/2026: future",
+        "bounds": "[822,1582][842,1603]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/03/2026: future",
+        "bounds": "[848,1582][869,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/04/2026: future",
+        "bounds": "[874,1582][895,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/05/2026: future",
+        "bounds": "[901,1582][921,1603]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/06/2026: future",
+        "bounds": "[927,1582][948,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/07/2026: future",
+        "bounds": "[953,1582][974,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/08/2026: future",
+        "bounds": "[980,1582][1001,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/09/2026: future",
+        "bounds": "[80,1614][101,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/10/2026: future",
+        "bounds": "[106,1614][127,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/11/2026: future",
+        "bounds": "[133,1614][154,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/12/2026: future",
+        "bounds": "[159,1614][180,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/13/2026: future",
+        "bounds": "[186,1614][207,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/14/2026: future",
+        "bounds": "[212,1614][233,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/15/2026: future",
+        "bounds": "[239,1614][260,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/16/2026: future",
+        "bounds": "[265,1614][286,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/17/2026: future",
+        "bounds": "[292,1614][313,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/18/2026: future",
+        "bounds": "[318,1614][339,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/19/2026: future",
+        "bounds": "[345,1614][366,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/20/2026: future",
+        "bounds": "[371,1614][392,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/21/2026: future",
+        "bounds": "[397,1614][418,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/22/2026: future",
+        "bounds": "[424,1614][445,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/23/2026: future",
+        "bounds": "[450,1614][471,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/24/2026: future",
+        "bounds": "[477,1614][498,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/25/2026: future",
+        "bounds": "[503,1614][524,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/26/2026: future",
+        "bounds": "[530,1614][550,1635]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/27/2026: future",
+        "bounds": "[556,1614][577,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/28/2026: future",
+        "bounds": "[583,1614][604,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/29/2026: future",
+        "bounds": "[609,1614][630,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 11/30/2026: future",
+        "bounds": "[636,1614][657,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/01/2026: future",
+        "bounds": "[662,1614][683,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/02/2026: future",
+        "bounds": "[689,1614][710,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/03/2026: future",
+        "bounds": "[715,1614][736,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/04/2026: future",
+        "bounds": "[741,1614][762,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/05/2026: future",
+        "bounds": "[768,1614][789,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/06/2026: future",
+        "bounds": "[794,1614][815,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/07/2026: future",
+        "bounds": "[821,1614][842,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/08/2026: future",
+        "bounds": "[847,1614][868,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/09/2026: future",
+        "bounds": "[874,1614][895,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/10/2026: future",
+        "bounds": "[900,1614][921,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/11/2026: future",
+        "bounds": "[927,1614][948,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/12/2026: future",
+        "bounds": "[953,1614][974,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/13/2026: future",
+        "bounds": "[980,1614][1001,1635]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Little reading, 12/14/2026: future",
+        "bounds": "[80,1640][103,1663]",
+        "width": 23,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/15/2026: future",
+        "bounds": "[109,1640][133,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/16/2026: future",
+        "bounds": "[138,1640][162,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/17/2026: future",
+        "bounds": "[167,1640][191,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/18/2026: future",
+        "bounds": "[197,1640][221,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/19/2026: future",
+        "bounds": "[226,1640][250,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/20/2026: future",
+        "bounds": "[255,1640][278,1663]",
+        "width": 23,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/21/2026: future",
+        "bounds": "[284,1640][307,1663]",
+        "width": 23,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/22/2026: future",
+        "bounds": "[313,1640][336,1663]",
+        "width": 23,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/23/2026: future",
+        "bounds": "[342,1640][366,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/24/2026: future",
+        "bounds": "[371,1640][395,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/25/2026: future",
+        "bounds": "[400,1640][424,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/26/2026: future",
+        "bounds": "[430,1640][454,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/27/2026: future",
+        "bounds": "[459,1640][483,1663]",
+        "width": 24,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/28/2026: future",
+        "bounds": "[488,1640][511,1663]",
+        "width": 23,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/29/2026: future",
+        "bounds": "[517,1640][540,1663]",
+        "width": 23,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/30/2026: future",
+        "bounds": "[546,1640][569,1663]",
+        "width": 23,
+        "height": 23
+      },
+      {
+        "label": "Little reading, 12/31/2026: future",
+        "bounds": "[575,1640][599,1663]",
+        "width": 24,
+        "height": 23
+      }
+    ]
+  },
+  "insights-after": {
+    "count": 365,
+    "sizes": [
+      [20, 20],
+      [20, 21],
+      [21, 20],
+      [21, 21]
+    ],
+    "today": [
+      {
+        "label": "Read one page, 10/16/2026: completed, today",
+        "bounds": "[371,1582][392,1603]",
+        "width": 21,
+        "height": 21
+      }
+    ],
+    "cells": [
+      {
+        "label": "Read one page, 01/01/2026: before habit started",
+        "bounds": "[159,1370][180,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/02/2026: before habit started",
+        "bounds": "[186,1370][207,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/03/2026: before habit started",
+        "bounds": "[212,1370][233,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/04/2026: before habit started",
+        "bounds": "[239,1370][260,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/05/2026: before habit started",
+        "bounds": "[265,1370][286,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/06/2026: before habit started",
+        "bounds": "[292,1370][313,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/07/2026: before habit started",
+        "bounds": "[318,1370][339,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/08/2026: before habit started",
+        "bounds": "[345,1370][366,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/09/2026: before habit started",
+        "bounds": "[371,1370][392,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/10/2026: before habit started",
+        "bounds": "[397,1370][418,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/11/2026: before habit started",
+        "bounds": "[424,1370][445,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/12/2026: before habit started",
+        "bounds": "[450,1370][471,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/13/2026: before habit started",
+        "bounds": "[477,1370][498,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/14/2026: before habit started",
+        "bounds": "[503,1370][524,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/15/2026: before habit started",
+        "bounds": "[530,1370][550,1391]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/16/2026: before habit started",
+        "bounds": "[556,1370][577,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/17/2026: before habit started",
+        "bounds": "[583,1370][604,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/18/2026: before habit started",
+        "bounds": "[609,1370][630,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/19/2026: before habit started",
+        "bounds": "[636,1370][657,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/20/2026: before habit started",
+        "bounds": "[662,1370][683,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/21/2026: before habit started",
+        "bounds": "[689,1370][710,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/22/2026: before habit started",
+        "bounds": "[715,1370][736,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/23/2026: before habit started",
+        "bounds": "[741,1370][762,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/24/2026: before habit started",
+        "bounds": "[768,1370][789,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/25/2026: before habit started",
+        "bounds": "[794,1370][815,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/26/2026: before habit started",
+        "bounds": "[821,1370][842,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/27/2026: before habit started",
+        "bounds": "[847,1370][868,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/28/2026: before habit started",
+        "bounds": "[874,1370][895,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/29/2026: before habit started",
+        "bounds": "[900,1370][921,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/30/2026: before habit started",
+        "bounds": "[927,1370][948,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 01/31/2026: before habit started",
+        "bounds": "[953,1370][974,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/01/2026: before habit started",
+        "bounds": "[980,1370][1001,1391]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/02/2026: before habit started",
+        "bounds": "[80,1396][101,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/03/2026: before habit started",
+        "bounds": "[106,1396][127,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/04/2026: before habit started",
+        "bounds": "[133,1396][154,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/05/2026: before habit started",
+        "bounds": "[159,1396][180,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/06/2026: before habit started",
+        "bounds": "[186,1396][207,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/07/2026: before habit started",
+        "bounds": "[212,1396][233,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/08/2026: before habit started",
+        "bounds": "[239,1396][260,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/09/2026: before habit started",
+        "bounds": "[265,1396][286,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/10/2026: before habit started",
+        "bounds": "[292,1396][313,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/11/2026: before habit started",
+        "bounds": "[318,1396][339,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/12/2026: before habit started",
+        "bounds": "[345,1396][366,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/13/2026: before habit started",
+        "bounds": "[371,1396][392,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/14/2026: before habit started",
+        "bounds": "[397,1396][418,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/15/2026: before habit started",
+        "bounds": "[424,1396][445,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/16/2026: before habit started",
+        "bounds": "[450,1396][471,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/17/2026: before habit started",
+        "bounds": "[477,1396][498,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/18/2026: before habit started",
+        "bounds": "[503,1396][524,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/19/2026: before habit started",
+        "bounds": "[530,1396][550,1417]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/20/2026: before habit started",
+        "bounds": "[556,1396][577,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/21/2026: before habit started",
+        "bounds": "[583,1396][604,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/22/2026: before habit started",
+        "bounds": "[609,1396][630,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/23/2026: before habit started",
+        "bounds": "[636,1396][657,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/24/2026: before habit started",
+        "bounds": "[662,1396][683,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/25/2026: before habit started",
+        "bounds": "[689,1396][710,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/26/2026: before habit started",
+        "bounds": "[715,1396][736,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/27/2026: before habit started",
+        "bounds": "[741,1396][762,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 02/28/2026: before habit started",
+        "bounds": "[768,1396][789,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/01/2026: before habit started",
+        "bounds": "[794,1396][815,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/02/2026: before habit started",
+        "bounds": "[821,1396][842,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/03/2026: before habit started",
+        "bounds": "[847,1396][868,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/04/2026: before habit started",
+        "bounds": "[874,1396][895,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/05/2026: before habit started",
+        "bounds": "[900,1396][921,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/06/2026: before habit started",
+        "bounds": "[927,1396][948,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/07/2026: before habit started",
+        "bounds": "[953,1396][974,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/08/2026: before habit started",
+        "bounds": "[980,1396][1001,1417]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/09/2026: before habit started",
+        "bounds": "[80,1423][101,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/10/2026: before habit started",
+        "bounds": "[106,1423][127,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/11/2026: before habit started",
+        "bounds": "[133,1423][154,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/12/2026: before habit started",
+        "bounds": "[159,1423][180,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/13/2026: before habit started",
+        "bounds": "[186,1423][207,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/14/2026: before habit started",
+        "bounds": "[212,1423][233,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/15/2026: before habit started",
+        "bounds": "[239,1423][260,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/16/2026: before habit started",
+        "bounds": "[265,1423][286,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/17/2026: before habit started",
+        "bounds": "[292,1423][313,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/18/2026: before habit started",
+        "bounds": "[318,1423][339,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/19/2026: before habit started",
+        "bounds": "[345,1423][366,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/20/2026: before habit started",
+        "bounds": "[371,1423][392,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/21/2026: before habit started",
+        "bounds": "[397,1423][418,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/22/2026: before habit started",
+        "bounds": "[424,1423][445,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/23/2026: before habit started",
+        "bounds": "[450,1423][471,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/24/2026: before habit started",
+        "bounds": "[477,1423][498,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/25/2026: before habit started",
+        "bounds": "[503,1423][524,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/26/2026: before habit started",
+        "bounds": "[530,1423][550,1444]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/27/2026: before habit started",
+        "bounds": "[556,1423][577,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/28/2026: before habit started",
+        "bounds": "[583,1423][604,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/29/2026: before habit started",
+        "bounds": "[609,1423][630,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/30/2026: before habit started",
+        "bounds": "[636,1423][657,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 03/31/2026: before habit started",
+        "bounds": "[662,1423][683,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/01/2026: before habit started",
+        "bounds": "[689,1423][710,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/02/2026: before habit started",
+        "bounds": "[715,1423][736,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/03/2026: before habit started",
+        "bounds": "[741,1423][762,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/04/2026: before habit started",
+        "bounds": "[768,1423][789,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/05/2026: before habit started",
+        "bounds": "[794,1423][815,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/06/2026: before habit started",
+        "bounds": "[821,1423][842,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/07/2026: before habit started",
+        "bounds": "[847,1423][868,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/08/2026: before habit started",
+        "bounds": "[874,1423][895,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/09/2026: before habit started",
+        "bounds": "[900,1423][921,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/10/2026: before habit started",
+        "bounds": "[927,1423][948,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/11/2026: before habit started",
+        "bounds": "[953,1423][974,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/12/2026: before habit started",
+        "bounds": "[980,1423][1001,1444]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/13/2026: before habit started",
+        "bounds": "[80,1449][101,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/14/2026: before habit started",
+        "bounds": "[106,1449][127,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/15/2026: before habit started",
+        "bounds": "[133,1449][154,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/16/2026: before habit started",
+        "bounds": "[159,1449][180,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/17/2026: before habit started",
+        "bounds": "[186,1449][207,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/18/2026: before habit started",
+        "bounds": "[212,1449][233,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/19/2026: before habit started",
+        "bounds": "[239,1449][260,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/20/2026: before habit started",
+        "bounds": "[265,1449][286,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/21/2026: before habit started",
+        "bounds": "[292,1449][313,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/22/2026: before habit started",
+        "bounds": "[318,1449][339,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/23/2026: before habit started",
+        "bounds": "[345,1449][366,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/24/2026: before habit started",
+        "bounds": "[371,1449][392,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/25/2026: before habit started",
+        "bounds": "[397,1449][418,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/26/2026: before habit started",
+        "bounds": "[424,1449][445,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/27/2026: before habit started",
+        "bounds": "[450,1449][471,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/28/2026: before habit started",
+        "bounds": "[477,1449][498,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/29/2026: before habit started",
+        "bounds": "[503,1449][524,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 04/30/2026: before habit started",
+        "bounds": "[530,1449][550,1470]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/01/2026: before habit started",
+        "bounds": "[556,1449][577,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/02/2026: before habit started",
+        "bounds": "[583,1449][604,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/03/2026: before habit started",
+        "bounds": "[609,1449][630,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/04/2026: before habit started",
+        "bounds": "[636,1449][657,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/05/2026: before habit started",
+        "bounds": "[662,1449][683,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/06/2026: before habit started",
+        "bounds": "[689,1449][710,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/07/2026: before habit started",
+        "bounds": "[715,1449][736,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/08/2026: before habit started",
+        "bounds": "[741,1449][762,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/09/2026: before habit started",
+        "bounds": "[768,1449][789,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/10/2026: before habit started",
+        "bounds": "[794,1449][815,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/11/2026: before habit started",
+        "bounds": "[821,1449][842,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/12/2026: before habit started",
+        "bounds": "[847,1449][868,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/13/2026: before habit started",
+        "bounds": "[874,1449][895,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/14/2026: before habit started",
+        "bounds": "[900,1449][921,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/15/2026: before habit started",
+        "bounds": "[927,1449][948,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/16/2026: before habit started",
+        "bounds": "[953,1449][974,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/17/2026: before habit started",
+        "bounds": "[980,1449][1001,1470]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/18/2026: before habit started",
+        "bounds": "[80,1476][101,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/19/2026: before habit started",
+        "bounds": "[106,1476][127,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/20/2026: before habit started",
+        "bounds": "[133,1476][154,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/21/2026: before habit started",
+        "bounds": "[159,1476][180,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/22/2026: before habit started",
+        "bounds": "[186,1476][207,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/23/2026: before habit started",
+        "bounds": "[212,1476][233,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/24/2026: before habit started",
+        "bounds": "[239,1476][260,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/25/2026: before habit started",
+        "bounds": "[265,1476][286,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/26/2026: before habit started",
+        "bounds": "[292,1476][313,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/27/2026: before habit started",
+        "bounds": "[318,1476][339,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/28/2026: before habit started",
+        "bounds": "[345,1476][366,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/29/2026: before habit started",
+        "bounds": "[371,1476][392,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/30/2026: before habit started",
+        "bounds": "[397,1476][418,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 05/31/2026: before habit started",
+        "bounds": "[424,1476][445,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/01/2026: before habit started",
+        "bounds": "[450,1476][471,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/02/2026: before habit started",
+        "bounds": "[477,1476][498,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/03/2026: before habit started",
+        "bounds": "[503,1476][524,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/04/2026: before habit started",
+        "bounds": "[530,1476][550,1497]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/05/2026: before habit started",
+        "bounds": "[556,1476][577,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/06/2026: before habit started",
+        "bounds": "[583,1476][604,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/07/2026: before habit started",
+        "bounds": "[609,1476][630,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/08/2026: before habit started",
+        "bounds": "[636,1476][657,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/09/2026: before habit started",
+        "bounds": "[662,1476][683,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/10/2026: before habit started",
+        "bounds": "[689,1476][710,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/11/2026: before habit started",
+        "bounds": "[715,1476][736,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/12/2026: before habit started",
+        "bounds": "[741,1476][762,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/13/2026: before habit started",
+        "bounds": "[768,1476][789,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/14/2026: before habit started",
+        "bounds": "[794,1476][815,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/15/2026: before habit started",
+        "bounds": "[821,1476][842,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/16/2026: before habit started",
+        "bounds": "[847,1476][868,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/17/2026: before habit started",
+        "bounds": "[874,1476][895,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/18/2026: before habit started",
+        "bounds": "[900,1476][921,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/19/2026: before habit started",
+        "bounds": "[927,1476][948,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/20/2026: before habit started",
+        "bounds": "[953,1476][974,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/21/2026: before habit started",
+        "bounds": "[980,1476][1001,1497]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 06/22/2026: before habit started",
+        "bounds": "[80,1502][101,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 06/23/2026: before habit started",
+        "bounds": "[106,1502][127,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 06/24/2026: before habit started",
+        "bounds": "[133,1502][154,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 06/25/2026: before habit started",
+        "bounds": "[159,1502][180,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 06/26/2026: before habit started",
+        "bounds": "[186,1502][207,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 06/27/2026: before habit started",
+        "bounds": "[212,1502][233,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 06/28/2026: before habit started",
+        "bounds": "[239,1502][260,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 06/29/2026: before habit started",
+        "bounds": "[265,1502][286,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 06/30/2026: before habit started",
+        "bounds": "[292,1502][313,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/01/2026: before habit started",
+        "bounds": "[318,1502][339,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/02/2026: before habit started",
+        "bounds": "[345,1502][366,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/03/2026: before habit started",
+        "bounds": "[371,1502][392,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/04/2026: before habit started",
+        "bounds": "[397,1502][418,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/05/2026: before habit started",
+        "bounds": "[424,1502][445,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/06/2026: before habit started",
+        "bounds": "[450,1502][471,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/07/2026: before habit started",
+        "bounds": "[477,1502][498,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/08/2026: before habit started",
+        "bounds": "[503,1502][524,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/09/2026: before habit started",
+        "bounds": "[530,1502][550,1522]",
+        "width": 20,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/10/2026: before habit started",
+        "bounds": "[556,1502][577,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/11/2026: before habit started",
+        "bounds": "[583,1502][604,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/12/2026: before habit started",
+        "bounds": "[609,1502][630,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/13/2026: before habit started",
+        "bounds": "[636,1502][657,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/14/2026: before habit started",
+        "bounds": "[662,1502][683,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/15/2026: before habit started",
+        "bounds": "[689,1502][710,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/16/2026: before habit started",
+        "bounds": "[715,1502][736,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/17/2026: before habit started",
+        "bounds": "[741,1502][762,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/18/2026: before habit started",
+        "bounds": "[768,1502][789,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/19/2026: before habit started",
+        "bounds": "[794,1502][815,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/20/2026: before habit started",
+        "bounds": "[821,1502][842,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/21/2026: before habit started",
+        "bounds": "[847,1502][868,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/22/2026: before habit started",
+        "bounds": "[874,1502][895,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/23/2026: before habit started",
+        "bounds": "[900,1502][921,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/24/2026: before habit started",
+        "bounds": "[927,1502][948,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/25/2026: before habit started",
+        "bounds": "[953,1502][974,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/26/2026: before habit started",
+        "bounds": "[980,1502][1001,1522]",
+        "width": 21,
+        "height": 20
+      },
+      {
+        "label": "Read one page, 07/27/2026: before habit started",
+        "bounds": "[80,1529][101,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 07/28/2026: before habit started",
+        "bounds": "[106,1529][127,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 07/29/2026: before habit started",
+        "bounds": "[133,1529][154,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 07/30/2026: before habit started",
+        "bounds": "[159,1529][180,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 07/31/2026: before habit started",
+        "bounds": "[186,1529][207,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/01/2026: before habit started",
+        "bounds": "[212,1529][233,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/02/2026: before habit started",
+        "bounds": "[239,1529][260,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/03/2026: before habit started",
+        "bounds": "[265,1529][286,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/04/2026: before habit started",
+        "bounds": "[292,1529][313,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/05/2026: before habit started",
+        "bounds": "[318,1529][339,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/06/2026: before habit started",
+        "bounds": "[345,1529][366,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/07/2026: before habit started",
+        "bounds": "[371,1529][392,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/08/2026: before habit started",
+        "bounds": "[397,1529][418,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/09/2026: before habit started",
+        "bounds": "[424,1529][445,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/10/2026: before habit started",
+        "bounds": "[450,1529][471,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/11/2026: before habit started",
+        "bounds": "[477,1529][498,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/12/2026: before habit started",
+        "bounds": "[503,1529][524,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/13/2026: before habit started",
+        "bounds": "[530,1529][550,1550]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/14/2026: before habit started",
+        "bounds": "[556,1529][577,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/15/2026: before habit started",
+        "bounds": "[583,1529][604,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/16/2026: before habit started",
+        "bounds": "[609,1529][630,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/17/2026: before habit started",
+        "bounds": "[636,1529][657,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/18/2026: before habit started",
+        "bounds": "[662,1529][683,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/19/2026: before habit started",
+        "bounds": "[689,1529][710,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/20/2026: before habit started",
+        "bounds": "[715,1529][736,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/21/2026: before habit started",
+        "bounds": "[741,1529][762,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/22/2026: before habit started",
+        "bounds": "[768,1529][789,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/23/2026: before habit started",
+        "bounds": "[794,1529][815,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/24/2026: before habit started",
+        "bounds": "[821,1529][842,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/25/2026: before habit started",
+        "bounds": "[847,1529][868,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/26/2026: before habit started",
+        "bounds": "[874,1529][895,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/27/2026: before habit started",
+        "bounds": "[900,1529][921,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/28/2026: before habit started",
+        "bounds": "[927,1529][948,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/29/2026: before habit started",
+        "bounds": "[953,1529][974,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/30/2026: before habit started",
+        "bounds": "[980,1529][1001,1550]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 08/31/2026: before habit started",
+        "bounds": "[80,1555][101,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/01/2026: before habit started",
+        "bounds": "[106,1555][127,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/02/2026: before habit started",
+        "bounds": "[133,1555][154,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/03/2026: before habit started",
+        "bounds": "[159,1555][180,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/04/2026: before habit started",
+        "bounds": "[186,1555][207,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/05/2026: before habit started",
+        "bounds": "[212,1555][233,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/06/2026: before habit started",
+        "bounds": "[239,1555][260,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/07/2026: before habit started",
+        "bounds": "[265,1555][286,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/08/2026: before habit started",
+        "bounds": "[292,1555][313,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/09/2026: before habit started",
+        "bounds": "[318,1555][339,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/10/2026: before habit started",
+        "bounds": "[345,1555][366,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/11/2026: before habit started",
+        "bounds": "[371,1555][392,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/12/2026: before habit started",
+        "bounds": "[397,1555][418,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/13/2026: before habit started",
+        "bounds": "[424,1555][445,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/14/2026: before habit started",
+        "bounds": "[450,1555][471,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/15/2026: before habit started",
+        "bounds": "[477,1555][498,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/16/2026: before habit started",
+        "bounds": "[503,1555][524,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/17/2026: before habit started",
+        "bounds": "[530,1555][550,1576]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/18/2026: before habit started",
+        "bounds": "[556,1555][577,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/19/2026: before habit started",
+        "bounds": "[583,1555][604,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/20/2026: before habit started",
+        "bounds": "[609,1555][630,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/21/2026: before habit started",
+        "bounds": "[636,1555][657,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/22/2026: before habit started",
+        "bounds": "[662,1555][683,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/23/2026: before habit started",
+        "bounds": "[689,1555][710,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/24/2026: before habit started",
+        "bounds": "[715,1555][736,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/25/2026: before habit started",
+        "bounds": "[741,1555][762,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/26/2026: before habit started",
+        "bounds": "[768,1555][789,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/27/2026: before habit started",
+        "bounds": "[794,1555][815,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/28/2026: before habit started",
+        "bounds": "[821,1555][842,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/29/2026: before habit started",
+        "bounds": "[847,1555][868,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 09/30/2026: before habit started",
+        "bounds": "[874,1555][895,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/01/2026: before habit started",
+        "bounds": "[900,1555][921,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/02/2026: before habit started",
+        "bounds": "[927,1555][948,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/03/2026: before habit started",
+        "bounds": "[953,1555][974,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/04/2026: before habit started",
+        "bounds": "[980,1555][1001,1576]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/05/2026: before habit started",
+        "bounds": "[80,1582][101,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/06/2026: before habit started",
+        "bounds": "[106,1582][127,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/07/2026: before habit started",
+        "bounds": "[133,1582][154,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/08/2026: before habit started",
+        "bounds": "[159,1582][180,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/09/2026: before habit started",
+        "bounds": "[186,1582][207,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/10/2026: before habit started",
+        "bounds": "[212,1582][233,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/11/2026: before habit started",
+        "bounds": "[239,1582][260,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/12/2026: before habit started",
+        "bounds": "[265,1582][286,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/13/2026: before habit started",
+        "bounds": "[292,1582][313,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/14/2026: before habit started",
+        "bounds": "[318,1582][339,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/15/2026: before habit started",
+        "bounds": "[345,1582][366,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/16/2026: completed, today",
+        "bounds": "[371,1582][392,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/17/2026: future",
+        "bounds": "[397,1582][418,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/18/2026: future",
+        "bounds": "[424,1582][445,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/19/2026: future",
+        "bounds": "[450,1582][471,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/20/2026: future",
+        "bounds": "[477,1582][498,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/21/2026: future",
+        "bounds": "[503,1582][524,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/22/2026: future",
+        "bounds": "[530,1582][550,1603]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/23/2026: future",
+        "bounds": "[556,1582][577,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/24/2026: future",
+        "bounds": "[583,1582][604,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/25/2026: future",
+        "bounds": "[609,1582][630,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/26/2026: future",
+        "bounds": "[636,1582][657,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/27/2026: future",
+        "bounds": "[662,1582][683,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/28/2026: future",
+        "bounds": "[689,1582][710,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/29/2026: future",
+        "bounds": "[715,1582][736,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/30/2026: future",
+        "bounds": "[741,1582][762,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 10/31/2026: future",
+        "bounds": "[768,1582][789,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/01/2026: future",
+        "bounds": "[794,1582][815,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/02/2026: future",
+        "bounds": "[821,1582][842,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/03/2026: future",
+        "bounds": "[847,1582][868,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/04/2026: future",
+        "bounds": "[874,1582][895,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/05/2026: future",
+        "bounds": "[900,1582][921,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/06/2026: future",
+        "bounds": "[927,1582][948,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/07/2026: future",
+        "bounds": "[953,1582][974,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/08/2026: future",
+        "bounds": "[980,1582][1001,1603]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/09/2026: future",
+        "bounds": "[80,1608][101,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/10/2026: future",
+        "bounds": "[106,1608][127,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/11/2026: future",
+        "bounds": "[133,1608][154,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/12/2026: future",
+        "bounds": "[159,1608][180,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/13/2026: future",
+        "bounds": "[186,1608][207,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/14/2026: future",
+        "bounds": "[212,1608][233,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/15/2026: future",
+        "bounds": "[239,1608][260,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/16/2026: future",
+        "bounds": "[265,1608][286,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/17/2026: future",
+        "bounds": "[292,1608][313,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/18/2026: future",
+        "bounds": "[318,1608][339,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/19/2026: future",
+        "bounds": "[345,1608][366,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/20/2026: future",
+        "bounds": "[371,1608][392,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/21/2026: future",
+        "bounds": "[397,1608][418,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/22/2026: future",
+        "bounds": "[424,1608][445,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/23/2026: future",
+        "bounds": "[450,1608][471,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/24/2026: future",
+        "bounds": "[477,1608][498,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/25/2026: future",
+        "bounds": "[503,1608][524,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/26/2026: future",
+        "bounds": "[530,1608][550,1629]",
+        "width": 20,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/27/2026: future",
+        "bounds": "[556,1608][577,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/28/2026: future",
+        "bounds": "[583,1608][604,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/29/2026: future",
+        "bounds": "[609,1608][630,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 11/30/2026: future",
+        "bounds": "[636,1608][657,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/01/2026: future",
+        "bounds": "[662,1608][683,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/02/2026: future",
+        "bounds": "[689,1608][710,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/03/2026: future",
+        "bounds": "[715,1608][736,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/04/2026: future",
+        "bounds": "[741,1608][762,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/05/2026: future",
+        "bounds": "[768,1608][789,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/06/2026: future",
+        "bounds": "[794,1608][815,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/07/2026: future",
+        "bounds": "[821,1608][842,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/08/2026: future",
+        "bounds": "[847,1608][868,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/09/2026: future",
+        "bounds": "[874,1608][895,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/10/2026: future",
+        "bounds": "[900,1608][921,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/11/2026: future",
+        "bounds": "[927,1608][948,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/12/2026: future",
+        "bounds": "[953,1608][974,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/13/2026: future",
+        "bounds": "[980,1608][1001,1629]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/14/2026: future",
+        "bounds": "[80,1635][101,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/15/2026: future",
+        "bounds": "[106,1635][127,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/16/2026: future",
+        "bounds": "[133,1635][154,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/17/2026: future",
+        "bounds": "[159,1635][180,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/18/2026: future",
+        "bounds": "[186,1635][207,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/19/2026: future",
+        "bounds": "[212,1635][233,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/20/2026: future",
+        "bounds": "[239,1635][260,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/21/2026: future",
+        "bounds": "[265,1635][286,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/22/2026: future",
+        "bounds": "[292,1635][313,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/23/2026: future",
+        "bounds": "[318,1635][339,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/24/2026: future",
+        "bounds": "[345,1635][366,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/25/2026: future",
+        "bounds": "[371,1635][392,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/26/2026: future",
+        "bounds": "[397,1635][418,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/27/2026: future",
+        "bounds": "[424,1635][445,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/28/2026: future",
+        "bounds": "[450,1635][471,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/29/2026: future",
+        "bounds": "[477,1635][498,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/30/2026: future",
+        "bounds": "[503,1635][524,1656]",
+        "width": 21,
+        "height": 21
+      },
+      {
+        "label": "Read one page, 12/31/2026: future",
+        "bounds": "[530,1635][550,1656]",
+        "width": 20,
+        "height": 21
+      }
+    ]
+  },
+  "year-before": {
+    "count": 31,
+    "sizes": [
+      [52, 40],
+      [52, 46],
+      [53, 40],
+      [53, 46]
+    ],
+    "today": [
+      {
+        "label": "10/16/2026: completed, today",
+        "bounds": "[822,1244][874,1290]",
+        "width": 52,
+        "height": 46
+      }
+    ],
+    "cells": [
+      {
+        "label": "10/01/2026: before habit started",
+        "bounds": "[764,1152][816,1192]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/02/2026: before habit started",
+        "bounds": "[822,1152][874,1192]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/03/2026: before habit started",
+        "bounds": "[880,1152][932,1192]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/04/2026: before habit started",
+        "bounds": "[938,1152][991,1192]",
+        "width": 53,
+        "height": 40
+      },
+      {
+        "label": "10/05/2026: before habit started",
+        "bounds": "[590,1198][642,1238]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/06/2026: before habit started",
+        "bounds": "[648,1198][700,1238]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/07/2026: before habit started",
+        "bounds": "[706,1198][758,1238]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/08/2026: before habit started",
+        "bounds": "[764,1198][816,1238]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/09/2026: before habit started",
+        "bounds": "[822,1198][874,1238]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/10/2026: before habit started",
+        "bounds": "[880,1198][932,1238]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/11/2026: before habit started",
+        "bounds": "[938,1198][991,1238]",
+        "width": 53,
+        "height": 40
+      },
+      {
+        "label": "10/12/2026: before habit started",
+        "bounds": "[590,1244][642,1290]",
+        "width": 52,
+        "height": 46
+      },
+      {
+        "label": "10/13/2026: before habit started",
+        "bounds": "[648,1244][700,1290]",
+        "width": 52,
+        "height": 46
+      },
+      {
+        "label": "10/14/2026: before habit started",
+        "bounds": "[706,1244][758,1290]",
+        "width": 52,
+        "height": 46
+      },
+      {
+        "label": "10/15/2026: before habit started",
+        "bounds": "[764,1244][816,1290]",
+        "width": 52,
+        "height": 46
+      },
+      {
+        "label": "10/16/2026: completed, today",
+        "bounds": "[822,1244][874,1290]",
+        "width": 52,
+        "height": 46
+      },
+      {
+        "label": "10/17/2026: future",
+        "bounds": "[880,1244][932,1290]",
+        "width": 52,
+        "height": 46
+      },
+      {
+        "label": "10/18/2026: future",
+        "bounds": "[938,1244][991,1290]",
+        "width": 53,
+        "height": 46
+      },
+      {
+        "label": "10/19/2026: future",
+        "bounds": "[590,1295][642,1335]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/20/2026: future",
+        "bounds": "[648,1295][700,1335]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/21/2026: future",
+        "bounds": "[706,1295][758,1335]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/22/2026: future",
+        "bounds": "[764,1295][816,1335]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/23/2026: future",
+        "bounds": "[822,1295][874,1335]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/24/2026: future",
+        "bounds": "[880,1295][932,1335]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/25/2026: future",
+        "bounds": "[938,1295][991,1335]",
+        "width": 53,
+        "height": 40
+      },
+      {
+        "label": "10/26/2026: future",
+        "bounds": "[590,1341][642,1381]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/27/2026: future",
+        "bounds": "[648,1341][700,1381]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/28/2026: future",
+        "bounds": "[706,1341][758,1381]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/29/2026: future",
+        "bounds": "[764,1341][816,1381]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/30/2026: future",
+        "bounds": "[822,1341][874,1381]",
+        "width": 52,
+        "height": 40
+      },
+      {
+        "label": "10/31/2026: future",
+        "bounds": "[880,1341][932,1381]",
+        "width": 52,
+        "height": 40
+      }
+    ]
+  },
+  "year-after": {
+    "count": 31,
+    "sizes": [
+      [53, 53],
+      [53, 54],
+      [54, 53],
+      [54, 54]
+    ],
+    "today": [
+      {
+        "label": "10/16/2026: completed, today",
+        "bounds": "[828,1284][882,1338]",
+        "width": 54,
+        "height": 54
+      }
+    ],
+    "cells": [
+      {
+        "label": "10/01/2026: before habit started",
+        "bounds": "[768,1165][822,1219]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/02/2026: before habit started",
+        "bounds": "[828,1165][882,1219]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/03/2026: before habit started",
+        "bounds": "[887,1165][941,1219]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/04/2026: before habit started",
+        "bounds": "[947,1165][1001,1219]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/05/2026: before habit started",
+        "bounds": "[590,1224][643,1278]",
+        "width": 53,
+        "height": 54
+      },
+      {
+        "label": "10/06/2026: before habit started",
+        "bounds": "[649,1224][703,1278]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/07/2026: before habit started",
+        "bounds": "[709,1224][763,1278]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/08/2026: before habit started",
+        "bounds": "[768,1224][822,1278]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/09/2026: before habit started",
+        "bounds": "[828,1224][882,1278]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/10/2026: before habit started",
+        "bounds": "[887,1224][941,1278]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/11/2026: before habit started",
+        "bounds": "[947,1224][1001,1278]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/12/2026: before habit started",
+        "bounds": "[590,1284][643,1338]",
+        "width": 53,
+        "height": 54
+      },
+      {
+        "label": "10/13/2026: before habit started",
+        "bounds": "[649,1284][703,1338]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/14/2026: before habit started",
+        "bounds": "[709,1284][763,1338]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/15/2026: before habit started",
+        "bounds": "[768,1284][822,1338]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/16/2026: completed, today",
+        "bounds": "[828,1284][882,1338]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/17/2026: future",
+        "bounds": "[887,1284][941,1338]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/18/2026: future",
+        "bounds": "[947,1284][1001,1338]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/19/2026: future",
+        "bounds": "[590,1343][643,1396]",
+        "width": 53,
+        "height": 53
+      },
+      {
+        "label": "10/20/2026: future",
+        "bounds": "[649,1343][703,1396]",
+        "width": 54,
+        "height": 53
+      },
+      {
+        "label": "10/21/2026: future",
+        "bounds": "[709,1343][763,1396]",
+        "width": 54,
+        "height": 53
+      },
+      {
+        "label": "10/22/2026: future",
+        "bounds": "[768,1343][822,1396]",
+        "width": 54,
+        "height": 53
+      },
+      {
+        "label": "10/23/2026: future",
+        "bounds": "[828,1343][882,1396]",
+        "width": 54,
+        "height": 53
+      },
+      {
+        "label": "10/24/2026: future",
+        "bounds": "[887,1343][941,1396]",
+        "width": 54,
+        "height": 53
+      },
+      {
+        "label": "10/25/2026: future",
+        "bounds": "[947,1343][1001,1396]",
+        "width": 54,
+        "height": 53
+      },
+      {
+        "label": "10/26/2026: future",
+        "bounds": "[590,1403][643,1457]",
+        "width": 53,
+        "height": 54
+      },
+      {
+        "label": "10/27/2026: future",
+        "bounds": "[649,1403][703,1457]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/28/2026: future",
+        "bounds": "[709,1403][763,1457]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/29/2026: future",
+        "bounds": "[768,1403][822,1457]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/30/2026: future",
+        "bounds": "[828,1403][882,1457]",
+        "width": 54,
+        "height": 54
+      },
+      {
+        "label": "10/31/2026: future",
+        "bounds": "[887,1403][941,1457]",
+        "width": 54,
+        "height": 54
+      }
+    ]
+  },
+  "today-large-after": {
+    "count": 14,
+    "sizes": [
+      [32, 32],
+      [33, 32]
+    ],
+    "today": [
+      {
+        "label": "A quiet moment to read a chapter before bedtime, 16/10/2026: conclu\u00eddo, hoje, com nota",
+        "bounds": "[718,902][750,934]",
+        "width": 32,
+        "height": 32
+      }
+    ],
+    "cells": [
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 03/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[228,902][260,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 04/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[266,902][298,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 05/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[303,902][335,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 06/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[341,902][374,934]",
+        "width": 33,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 07/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[379,902][411,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 08/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[417,902][449,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 09/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[454,902][486,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 10/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[492,902][524,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 11/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[530,902][562,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 12/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[567,902][599,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 13/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[605,902][638,934]",
+        "width": 33,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 14/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[643,902][675,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "Ver A quiet moment to read a chapter before bedtime, 15/10/2026: antes do in\u00edcio do h\u00e1bito",
+        "bounds": "[681,902][713,934]",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "label": "A quiet moment to read a chapter before bedtime, 16/10/2026: conclu\u00eddo, hoje, com nota",
+        "bounds": "[718,902][750,934]",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  }
+}

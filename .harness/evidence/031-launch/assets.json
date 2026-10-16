@@ -1,0 +1,38 @@
+[
+  {
+    "path": "assets/branding/icon.png",
+    "width": 1024,
+    "height": 1024,
+    "visibleBounds": [0, 0, 1024, 1024]
+  },
+  {
+    "path": "assets/branding/adaptive-foreground.png",
+    "width": 1024,
+    "height": 1024,
+    "visibleBounds": [296, 296, 728, 728]
+  },
+  {
+    "path": "assets/branding/adaptive-monochrome.png",
+    "width": 1024,
+    "height": 1024,
+    "visibleBounds": [296, 296, 728, 728]
+  },
+  {
+    "path": "android/app/src/main/res/drawable-mdpi/splashscreen_logo.png",
+    "width": 288,
+    "height": 288,
+    "visibleBounds": [96, 96, 192, 192]
+  },
+  {
+    "path": "android/app/src/main/res/drawable-night-mdpi/splashscreen_logo.png",
+    "width": 288,
+    "height": 288,
+    "visibleBounds": [96, 96, 192, 192]
+  },
+  {
+    "path": "ios/TinyWins/Images.xcassets/AppIcon.appiconset/App-Icon-1024x1024@1x.png",
+    "width": 1024,
+    "height": 1024,
+    "visibleBounds": [0, 0, 1024, 1024]
+  }
+]

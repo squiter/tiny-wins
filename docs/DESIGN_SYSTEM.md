@@ -39,3 +39,11 @@ Selection resets the native name input only on that deliberate action; ordinary 
 The editor adds a selected, explicitly labeled Weekly goal choice and 48-point target controls (1–7). Show the saved week boundary and effective-date explanation. Hide daily tolerance controls in weekly mode; choosing an optional starter idea still changes only name/icon/color.
 
 Today keeps exactly 14 cells and shows this week's binary progress plus a week-based sequence. Neutral ◇ dates are flexible opportunities, never artificial wins or daily misses. Short-week goals explain their cap. Detail and Insights show a dated live goal panel; consistency labels distinguish assessed closed-week opportunities from raw wins. Weekly-only Today uses week-oriented encouragement, and weekly check-ins never replay the daily all-done animation. Color, symbols, explicit accessible labels and standard scalable React Native text communicate the same state in both themes/languages; native enlarged-text acceptance is recorded in task 023.
+
+## Date grid geometry
+
+Date cells keep equal outer dimensions regardless of completion, today's outline or a note marker. Render backgrounds/borders as an absolute surface inside the cell so border thickness cannot contribute to flex sizing. Today keeps exactly 14 equally sized squares. Calendar month rows use seven equal flex slots, including empty leading/trailing slots; weekday labels use the same columns. Do not size wrapped calendar cells with percentage widths: Android runtime review found rectangular cells and a taller current-day row. Native acceptance compares measured bounds (one physical pixel rounding tolerance) as well as screenshots; see task 029.
+
+Plain text statistic symbols must set an explicit theme color. Android default black text can disappear on dark app surfaces even when neighboring labels already use the theme palette.
+
+Native identity: four rounded sage/forest/apricot squares on ivory; dark splash uses the dark surface and lighter forest square. Native and React loading marks align at 96 points. Loading uses real readiness, localized text, static artwork, no minimum delay and reduced-motion-aware dismissal. Early launch follows OS settings until saved preferences are available. See [branding](BRANDING.md) and ADR-025.

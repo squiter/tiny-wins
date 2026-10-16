@@ -1,0 +1,219 @@
+{
+  "baseCommit": "464dfdb5d15c7c6887875dfd1bd6214541b9c4ed",
+  "apkBuildRun": 38945776265,
+  "apkSha256": "fa48baacec9f0932819c5e20024434f5cad5a78f44f7f0bd242c0c9a54d56040",
+  "servedBundle": {
+    "nativeVariant": "debug",
+    "javascriptMode": "production",
+    "dev": false,
+    "sha256": "96776630f38d4d245065203fd1291cdc615066b1a55228bad56a5e6e6dffaed5",
+    "standalone": false
+  },
+  "inputHashes": {
+    ".maestro/android-acceptance/backup-export.yaml": "fed5d31cfb407c203ee0414c1409e9899776c96c7d007e038ca5a80b513a6d5a",
+    ".maestro/android-acceptance/backup-invalid.yaml": "f5f677f788f1f1ea66a4388b7e708bc3d5fc8c54dd8e308e447924331933cc80",
+    ".maestro/android-acceptance/backup-restore.yaml": "fc9fbdddf1e09451eda5912d2b059f8abba58ff31cb477631ad5229d2f33d8ae",
+    ".maestro/android-acceptance/large-text.yaml": "e785fc8a6557907facd6dfb13be5c81724563ba4b08b92056aa8ffc7be7539be",
+    ".maestro/android-acceptance/navigation.yaml": "61bd7a4df17c3a56cff4607038665826f9ef08bc4a6164eedd1b63704791d5fc",
+    ".maestro/appearance.yaml": "278082138541576ee770a9343f34c4084fae4a492ee6dc02448c06c67869d0e7",
+    ".maestro/celebrations.yaml": "95fb589b4253ad0de5a23a9243671efee0c0d00a4046e8523f50b16b35a98094",
+    ".maestro/day-notes.yaml": "721d6592555e739d878cdce8f0f5a2a3ebfa8637e90c153f9859a8754a98fd4c",
+    ".maestro/first-win.yaml": "452d736b1f05c8dd1f9581535dd994fc2888a0c7ee2805eea56ac0467dc9c03f",
+    ".maestro/habit-management.yaml": "576f5bceef88bc7accd8145974a1ef54fa939d41b803015cc32ad67802b378c3",
+    ".maestro/language-override.yaml": "b34636008077c3e7173b5ab90c9ae123ba360317a2fcd8d19ff77d3b5a45921b",
+    ".maestro/large-text.yaml": "9214ca1a3cf9c34fb9b8ee130373928f0fa0f81f307b1e2145f59c417be5cf20",
+    ".maestro/system-appearance-dark.yaml": "c1d2833e7930b25719cb2505ca4d00d433498b387315282035d66f7677f1925e",
+    ".maestro/system-appearance-light.yaml": "6803a6356ebad00af9384c507a23f85fb652cef4cca116d4df4bb9b31575882f",
+    ".maestro/system-language-portuguese.yaml": "7d76bd4db9ccbf7f4bedd5c3f03479b2b42da12c1c7ebf66725b4b8757c794e0",
+    ".maestro/weekly-goals.yaml": "eee576a38e068301a13b0aa1d136c343f7fbc9a98185f481d085f2c9445fe6ba",
+    "app.json": "3943158ee894d0a608e18d96490a7dc1881984bfb644eb5b40c2e8e91ffb5fb4",
+    "assets/illustrations/cozy-rabbit.png": "6cc978c83e0da63f1f1e9edd92b0c96b5e6ae82cec0b228a2f654b94f1bf3cd0",
+    "metro.config.js": "22f29c8e745ae9e7a3ef21956f1b41c53f5b778db6a4d3c1f3594146dadcb7ef",
+    "package-lock.json": "23dbf26261017488dda89e3da63c8978b4754f2632a63b65e93ba4a2e42e1332",
+    "package.json": "8cb718585dc1ff47efa94c95abe670f8b6b124fae4eeb1d3df4394150b3ae3ff",
+    "scripts/android-production-proxy.mjs": "8cb66318a1ae3767f5edd8295da014967f9b2c498a9d0d05eb035878521b0884",
+    "src/app/(tabs)/_layout.tsx": "78727441973fc2d63492ea3111ed7766baaf23e0721f9d0d4553210bcf1497bf",
+    "src/app/(tabs)/index.tsx": "bd715fef11b99b002a617e6dfa5710b25aa3e5024864e70410fadfc71d72a91e",
+    "src/app/(tabs)/insights.tsx": "d3c4bf44e3dae8e65826c4eaf9d203e1f97ef0a6adcc97ffff5ed8309961daad",
+    "src/app/(tabs)/settings.tsx": "be9dbe31849d51137e8b4638aa2b1f533af2a7f21cf5f134116cdcbb3f1c0068",
+    "src/app/_layout.tsx": "ff751adfa49cb1e0c89c8f9b20d39458aa41f734e1c8e26d43656237502b4852",
+    "src/app/habit/[id].tsx": "2949d8218c68292b78d4f80b3191441ddb9561b8f70a457308c8160a476a4165",
+    "src/components/BackupControls.tsx": "d00a16b78b83b88d7b13e3ab33698518e9a58af65edb354e5c677e70ce41a20e",
+    "src/components/BotanicalMark.tsx": "7d6702f7625870b4fe950199c2fe9d9170bc2472e626980f288e9a4bb19fc5cc",
+    "src/components/CozyIllustration.tsx": "2f3d9cc3fa33e1ec7ed387c5bd2f94ed9cf689802bb80395d7ff5c335e602f1a",
+    "src/components/CozyNote.tsx": "bbd579b1af2426febb9855a8a0daaf64dab989b08a70c9bef8846204a95acbcd",
+    "src/components/DailyProgress.tsx": "67b0da15745daee229b2b03d54ba0733c44bc00d0be963881dbec6085face113",
+    "src/components/DayInspector.tsx": "142210e069558943380de0b4187b51b9946f3d2131c4f731340f42931d1a21b7",
+    "src/components/HabitCard.tsx": "2bcb995f309953dc50d815199abf11e2726db6595463d2f9083ce7e1b842e247",
+    "src/components/HabitEditor.tsx": "77e9ff3840566153b460139dafd22a5cfe46740d4d43343d0d35602bd114e68e",
+    "src/components/HabitIcon.tsx": "e774e84876fb2acd7ac6504569495b910240589105f931b6f9e4d3a71355f339",
+    "src/components/MonthCalendar.tsx": "2be8305941742325939445922b760b2a852541bc83ee7a536348f1a54c9beff8",
+    "src/components/NoteMarker.tsx": "a297e48ad124decf1acec72297920863c78421516369045a82111491cc6a62fb",
+    "src/components/StatsGrid.tsx": "8717ecc5961c27be039fca5bfffe12aef4492dd8c2d5fed0642b3326f74bda88",
+    "src/components/TabIcon.tsx": "0265ccdf0edf69e132f931380a8e2e0a8e3f87a6c8ea26a3d43e445e8f213c63",
+    "src/components/VictoryWall.tsx": "91a4080fb7097cd36e77f5c93f2cd209590436e307390a21655f81a270a31209",
+    "src/components/WeeklyGoalProgress.tsx": "e2d3fd911d4359b67fcf2298a96e97c40d7d75c4709b83745a667a087bbaaf95",
+    "src/components/YearGrid.tsx": "3b7840a81b8254ed208cb17c32ec37cbabff96db56546dbba470e7a13f00f889",
+    "src/database/migrations.ts": "244714090e02af1dfbb9f15956acdc5f766471084cae323554e85496b73684f3",
+    "src/database/provider.tsx": "ae61b423d510a6d1ce44cc1eff391f6b2fda3fac1e0bd59f1dfdc73edb22b2cb",
+    "src/database/repository.ts": "794dcae9c0d02f2f17160cab61d312b9823d16529eb99bfc621264ae8e7b33cf",
+    "src/database/schema.ts": "0aad7336c836637bff02b993428ef4dd478c58cd0fab090278e2bf9f48dbbda5",
+    "src/domain/backup.ts": "c08b1b6aba392527761910f13ec22a0b0dc5c9f7ac378f00d3e35d06303f7ebe",
+    "src/domain/calendar.ts": "707e7b40fc2a7e84af2c2e5165c5df7e4ff70d50c1d90d12d8c1f1b90b767496",
+    "src/domain/feedback.ts": "09b0ac350fa4f978853be22ee2b3571b36f86aa8f675e97c017f56578f543d86",
+    "src/domain/habit.ts": "9503db30d64dfbce08dcc3ccdc1fb0004221b70e10b744b82329b552d91c8196",
+    "src/domain/metrics.ts": "47292769c86b2d7b7139ce0067fead1a6d3a1deb12f988f0351f902f5fffa07f",
+    "src/domain/notes.ts": "3d4c6fa4e630dd9f83a338797ba970320111aae18f9fe3e90363c819e2cc9cf2",
+    "src/domain/preferences.ts": "4c203d01fa45010fd9c170505e003706556ae7b29f9e1b74ceca1840dedc56e6",
+    "src/domain/report.ts": "e5c0ff356d6d15a15559f71750db9328d72bdc3ad8baa49b7d909cf319d9a924",
+    "src/domain/schedule.ts": "927884bd6444ff0a122c1010ca6d49fc6c5e71c160b46cf84c52484de934eecb",
+    "src/domain/streak.ts": "52181ef778f9cba6ff6a986c1761b6eab0820dec6becfbf567427328a882e7c4",
+    "src/domain/weekly.ts": "45802675360d82f98569c125227facee3726d3e3eceb65b86d1c0e961bf63254",
+    "src/features/backups/files.ts": "67ef6ebcbbf60fee34dcc841ef9eccdeba7e55b9447370ff04f3a2ba2b189b1a",
+    "src/features/backups/files.web.ts": "cd32099943225f10211082ad780d0c50271e233a2c604c4d7b1d0c972b4c6f1f",
+    "src/features/check-ins/service.ts": "a27f8e34c44c73fa5148bc79e190fe53cfc20798648f20aa55ee2a645486a0b6",
+    "src/features/feedback/provider.tsx": "ead1c003ccabd832ab0fa053c24550938f84a830471b07fecd72dba05dc367ca",
+    "src/features/feedback/service.ts": "6e242816ed09ef4b893f9ea5d9ccaa35d9d17edd9fc25a355f65738e22636f8d",
+    "src/features/habits/notes.ts": "245f37193cbc4207b5595f84b532424dce7b208b2f79d59d86f8f956db7f8943",
+    "src/features/habits/repository.ts": "9be75f1bed88197816df7f528e43b79ce9b4270cc2b9a6019a9f970f4e8de732",
+    "src/features/habits/service.ts": "5e7fc0c86ca0ccf3853c95c38426b4ed2bde9c496a6f6b58db0c3b6a8e6a2996",
+    "src/features/habits/starterIdeas.ts": "e9735c34bcd089ebe26148ca2d78f04ee0aa66c438807ad811f6bb2db48f31df",
+    "src/features/habits/useHabitData.ts": "919ba4295b3b1790d8119dedcbd74aa0d50adc02418a57b4b67e1ed3c3b2e8c2",
+    "src/features/localization/locale.ts": "dcbcbaa21eecafa0b8bb1e8d41efa61086e6a8dc8c4c79454e471560040e3631",
+    "src/features/localization/messages.ts": "654b45f4d797ab0528717224dc89ed31208f19d5d02d1a20e20241a80234bb1a",
+    "src/features/localization/presentation.ts": "a5e7edf9e1bde210941ed6d04bf901650f2e17f66f18e0b04bf8d04d7813f9ae",
+    "src/features/localization/provider.tsx": "ab94219fc2052e080797942bf32d491b284b8ee81398be4bbabaddaeab02863f",
+    "src/features/preferences/repository.ts": "1b8988c73d79383206eee154192a23694314be808319a8bef3fbd2f486dc5e8d",
+    "src/lib/clock.ts": "0cbb9eb6a9d87cb289402f5b64110611ee8f2c216c0ca51743d250bd761b741c",
+    "src/lib/recover.ts": "f47ac3976e724219f2bb7b64a526611f0a79a06ad688ac5c0d62a7cbef3b4154",
+    "src/lib/recover.web.ts": "8f0bd5fff1e5ea1d0f77b8ce47c6cb557a8fce557f29b3b090b016761922f5d6",
+    "src/theme/tokens.ts": "21bb9d470c58e6908631360d4ca1b8d55d06f26b55117b212b9fd991a2365272",
+    "src/theme/useTheme.ts": "98fb49e0750ebf7ca163d5c6add196000aca3de21637939c588c2d71dc9c0d92"
+  },
+  "localVerify": {
+    "status": "PASS",
+    "unitTests": 115,
+    "realSQLiteIntegrationTests": 26,
+    "exports": ["ios", "android", "web"]
+  },
+  "passedReports": [
+    {
+      "file": "api36-large.xml",
+      "cases": [
+        {
+          "name": "large-text",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "api36-production-verified.xml",
+      "cases": [
+        {
+          "name": "day-notes",
+          "status": "SUCCESS"
+        },
+        {
+          "name": "backup-export",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "api36-reduced-motion.xml",
+      "cases": [
+        {
+          "name": "celebrations",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "api36-system-dark.xml",
+      "cases": [
+        {
+          "name": "system-appearance-dark",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "api36-system-light.xml",
+      "cases": [
+        {
+          "name": "system-appearance-light",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "backup-restore-fixed.xml",
+      "cases": [
+        {
+          "name": "backup-restore",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "core-fixed.xml",
+      "cases": [
+        {
+          "name": "appearance",
+          "status": "SUCCESS"
+        },
+        {
+          "name": "celebrations",
+          "status": "SUCCESS"
+        },
+        {
+          "name": "language-override",
+          "status": "SUCCESS"
+        },
+        {
+          "name": "habit-management",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "first-win.xml",
+      "cases": [
+        {
+          "name": "first-win",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "large-text-fixed.xml",
+      "cases": [
+        {
+          "name": "large-text",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "notes-fixed.xml",
+      "cases": [
+        {
+          "name": "day-notes",
+          "status": "SUCCESS"
+        }
+      ]
+    },
+    {
+      "file": "system-portuguese-native.xml",
+      "cases": [
+        {
+          "name": "system-language-portuguese",
+          "status": "SUCCESS"
+        }
+      ]
+    }
+  ],
+  "diagnosticReportsAreNotPassingSuites": true,
+  "physicalDeviceTested": false,
+  "talkbackAudioReviewed": false
+}

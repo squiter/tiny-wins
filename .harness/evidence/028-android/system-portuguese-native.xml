@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028" tests="1" failures="0" time="85.102" timestamp="2026-10-16T16:44:36">
+    <testcase id="system-language-portuguese" name="system-language-portuguese" classname="system-language-portuguese" file=".maestro/system-language-portuguese.yaml" time="85.084" timestamp="2026-10-16T16:44:36" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

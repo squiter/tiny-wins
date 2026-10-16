@@ -1,0 +1,35 @@
+appId: app.tinywins.mobile
+---
+# Prepare a known synthetic habit with a saved win using the shared regression.
+- runFlow: ../first-win.yaml
+- tapOn: Complete Read one page today
+- tapOn: View Read one page, 1 win in a row
+- tapOn:
+    id: inspect-today
+- scrollUntilVisible:
+    element:
+      id: day-note
+    direction: DOWN
+- tapOn:
+    id: day-note
+- inputText: Android backup acceptance note
+- tapOn:
+    id: day-note-done-typing
+- tapOn:
+    id: save-day-note
+- assertVisible: Note saved.
+- tapOn: Close day
+- tapOn: Go back
+- tapOn: Settings(, tab, 3 of 3)?
+- assertVisible:
+    id: settings-theme-(light|dark)
+- scrollUntilVisible:
+    element: Export backup
+    direction: DOWN
+    centerElement: true
+- tapOn: Export backup
+- assertVisible: Sharing 1 file
+- assertVisible: 'tiny-wins-.*\.tinywins\.json'
+- takeScreenshot: android-native-backup-share
+- pressKey: back
+- assertVisible: Backup file prepared. Keep it somewhere safe.

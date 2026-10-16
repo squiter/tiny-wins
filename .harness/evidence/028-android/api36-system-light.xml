@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="1" failures="0" time="36.656" timestamp="2026-10-16T16:56:16">
+    <testcase id="system-appearance-light" name="system-appearance-light" classname="system-appearance-light" file=".maestro/system-appearance-light.yaml" time="36.645" timestamp="2026-10-16T16:56:16" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

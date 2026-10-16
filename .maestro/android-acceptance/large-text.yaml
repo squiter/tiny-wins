@@ -1,0 +1,50 @@
+appId: app.tinywins.mobile
+---
+# Run after backup-restore with 360 dp width and OS font_scale=1.5.
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- scrollUntilVisible:
+    element: View Read one page, 1 win in a row
+    direction: DOWN
+    centerElement: true
+- assertVisible: View Read one page, 1 win in a row
+- takeScreenshot: android16-large-today
+- tapOn: View Read one page, 1 win in a row
+- tapOn: Edit habit
+- assertVisible: Close habit editor
+- scrollUntilVisible:
+    element: Cancel
+    direction: DOWN
+    centerElement: false
+- assertVisible: Save changes
+- assertVisible: Archive habit
+- assertVisible: Cancel
+- takeScreenshot: android16-large-editor-actions
+- tapOn: Cancel
+- tapOn:
+    id: inspect-today
+- scrollUntilVisible:
+    element:
+      id: day-note
+    direction: DOWN
+    centerElement: true
+- assertVisible: Android backup acceptance note
+- tapOn:
+    id: day-note
+- scrollUntilVisible:
+    element:
+      id: day-note-done-typing
+    direction: DOWN
+- takeScreenshot: android16-large-keyboard-actions
+- tapOn:
+    id: day-note-done-typing
+- assertVisible: Android backup acceptance note
+- tapOn: Close day
+- tapOn: Go back
+- tapOn: Settings(, tab, 3 of 3)?
+- assertVisible:
+    id: settings-theme-(light|dark)
+- takeScreenshot: android16-large-settings

@@ -1,0 +1,52 @@
+appId: app.tinywins.mobile
+---
+- runFlow: ../first-win.yaml
+- takeScreenshot: design-today-pending
+- tapOn: Complete Read one page today
+- assertVisible: View Read one page, 1 win in a row
+- takeScreenshot: design-today-completed
+- tapOn: Insights
+- assertVisible: Year
+- takeScreenshot: design-insights-year
+- tapOn: Month
+- takeScreenshot: design-insights-month
+- tapOn: Week
+- takeScreenshot: design-insights-week
+- tapOn: View Read one page progress
+- assertVisible: Edit habit
+- takeScreenshot: design-detail-month
+- scrollUntilVisible:
+    element:
+      id: day-.*
+      text: '.*completed, today'
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
+- takeScreenshot: design-detail-year
+- tapOn:
+    id: day-.*
+    text: '.*completed, today'
+- assertVisible: A win worth keeping.
+- takeScreenshot: design-day-inspector
+- tapOn: Close day
+- scrollUntilVisible:
+    element: Go back
+    direction: UP
+    timeout: 60000
+- tapOn: Go back
+- tapOn: Settings
+- assertVisible:
+    id: settings-theme-(light|dark)
+- scrollUntilVisible:
+    element:
+      id: appearance-dark
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: appearance-dark
+- takeScreenshot: design-settings-dark
+- tapOn: Today
+- takeScreenshot: design-today-dark
+- tapOn: Insights
+- tapOn: Year
+- takeScreenshot: design-insights-year-dark

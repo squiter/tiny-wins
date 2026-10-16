@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="1" failures="0" time="99.229" timestamp="2026-10-16T17:26:06">
+    <testcase id="design-portuguese-large" name="design-portuguese-large" classname="design-portuguese-large" file=".maestro/android-acceptance/design-portuguese-large.yaml" time="99.215" timestamp="2026-10-16T17:26:06" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

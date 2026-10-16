@@ -130,25 +130,29 @@ export function VictoryWall({
                   accessibilityRole="button"
                   accessibilityLabel={`${habit.title}, ${cellLabel(cell)}`}
                   onPress={() => onInspect(cell.day)}
-                  style={[
-                    styles.tile,
-                    period !== 'year' && styles.largeTile,
-                    {
-                      backgroundColor:
-                        cell.state === 'complete'
-                          ? color
-                          : cell.state === 'grace'
-                            ? habitSurfaces[habit.color]
-                            : theme.surface,
-                      borderColor: cell.today || cell.state === 'missed' ? color : theme.stone,
-                      borderStyle:
-                        cell.state === 'future' || cell.state === 'not-scheduled'
-                          ? 'dashed'
-                          : 'solid',
-                      borderWidth: cell.today ? 2 : 1,
-                    },
-                  ]}
+                  style={[styles.tile, period !== 'year' && styles.largeTile]}
                 >
+                  <View
+                    pointerEvents="none"
+                    style={[
+                      styles.tileSurface,
+                      period !== 'year' && { borderRadius: 6 },
+                      {
+                        backgroundColor:
+                          cell.state === 'complete'
+                            ? color
+                            : cell.state === 'grace'
+                              ? habitSurfaces[habit.color]
+                              : theme.surface,
+                        borderColor: cell.today || cell.state === 'missed' ? color : theme.stone,
+                        borderStyle:
+                          cell.state === 'future' || cell.state === 'not-scheduled'
+                            ? 'dashed'
+                            : 'solid',
+                        borderWidth: cell.today ? 2 : 1,
+                      },
+                    ]}
+                  />
                   {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
                   {period !== 'year' && (
                     <Text
@@ -242,6 +246,8 @@ const createStyles = (theme: ThemePalette) =>
       justifyContent: 'center',
     },
     blank: { flex: 1, aspectRatio: 1 },
+    // Outlines must not change column widths, including beside empty calendar slots.
+    tileSurface: { ...StyleSheet.absoluteFill, borderRadius: 2 },
     largeTile: { minHeight: 48, aspectRatio: undefined, borderRadius: 6 },
     number: { fontFamily: 'Inter_600SemiBold', fontSize: 12 },
     weekday: {

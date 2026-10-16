@@ -42,6 +42,7 @@ appId: app.tinywins.mobile
     element:
       id: day-note-done-typing
     direction: DOWN
+- takeScreenshot: day-note-keyboard-actions
 - tapOn:
     id: day-note-done-typing
 - scrollUntilVisible:

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="1" failures="1" time="102.27" timestamp="2026-10-16T17:20:55">
+    <testcase id="design-portuguese-large" name="design-portuguese-large" classname="design-portuguese-large" file=".maestro/android-acceptance/design-portuguese-large.yaml" time="102.256" timestamp="2026-10-16T17:20:55" status="ERROR">
+      <failure>No visible element found: id: appearance-dark</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-16",
+  "device": "isolated emulator-5582, Android 16 / API 36 ARM64",
+  "artifact": "native-artifact.json",
+  "gates": {
+    "verify": "PASS: 118 unit + 38 integration, types/lint/format, iOS/Android/web exports",
+    "nativeFlows": [
+      "preserves: PASS 21s",
+      "error: PASS 4s",
+      "retry: PASS 4s",
+      "first-win: PASS 43s"
+    ],
+    "securityPolicy": "PASS; existing raw 18 high / 0 critical, expires 2026-10-22",
+    "androidProductionModules": 1783,
+    "addedPermissions": []
+  },
+  "runtime": {
+    "offline": "airplane on, wifi off, no Metro reverse; native cold launch, four flows and persistence PASS",
+    "light": "1080x2220, 440dpi, font 1.0, English, cold activity 1273ms",
+    "dark": "990x2035, 440dpi (360dp), font 1.5, per-app pt-BR, animations zero; native and React loading inspected, cold activity 721ms",
+    "warm": "existing task brought to foreground in 33ms; no artificial intro replay",
+    "launcher": "actual installed adaptive masked icon reviewed; launch by icon recorded",
+    "fixture": "synthetic long habit, one win and saved note; restored after destructive first-win flow",
+    "cleanup": "OS light, app locales cleared, font 1, physical display size, animations 1, airplane off, wifi on; app runnable standalone"
+  },
+  "diagnostics": {
+    "retry": "Original recovery reused a closing native SQLite handle. Dedicated provider connections fixed the race; final error/retry reports pass.",
+    "deviceLock": "An overlapping earlier Maestro attempt was refused before app mutation; final runs serialized."
+  },
+  "limits": [
+    "Android emulator only; no physical accessibility/device claim",
+    "iOS assets/storyboard prebuilt, no new iOS compile/runtime acceptance",
+    "Standalone release variant signed with template development key; not Play upload candidate",
+    "App-locales exercised early Portuguese; no global OS locale change claimed"
+  ]
+}

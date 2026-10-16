@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="1" failures="1" time="106.562" timestamp="2026-10-16T17:07:31">
+    <testcase id="design-review" name="design-review" classname="design-review" file=".maestro/android-acceptance/design-review.yaml" time="106.542" timestamp="2026-10-16T17:07:31" status="ERROR">
+      <failure>No visible element found: id: day-2026-10-16</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

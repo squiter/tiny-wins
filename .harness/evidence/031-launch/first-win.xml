@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="1" failures="0" time="42.624" timestamp="2026-10-16T18:06:45">
+    <testcase id="first-win" name="first-win" classname="first-win" file=".maestro/first-win.yaml" time="42.613" timestamp="2026-10-16T18:06:45" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

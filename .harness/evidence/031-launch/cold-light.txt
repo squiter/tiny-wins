@@ -1,0 +1,7 @@
+Starting: Intent { cmp=app.tinywins.mobile/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: app.tinywins.mobile/.MainActivity
+TotalTime: 1273
+WaitTime: 1280
+Complete

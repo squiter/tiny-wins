@@ -1,0 +1,10 @@
+appId: app.tinywins.mobile
+---
+# Continue after restoring the isolated test database version, while recovery is visible.
+- tapOn: Try again
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- assertVisible: View A quiet moment to read a chapter before bedtime, 1 win in a row
+- takeScreenshot: launch-retry-preserves-win

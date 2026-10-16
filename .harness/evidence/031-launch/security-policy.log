@@ -1,0 +1,7 @@
+
+> tiny-wins@0.1.0 security:policy
+> node scripts/security/check-audit.mjs
+
+Raw npm audit exit: 1. High: 18; critical: 0.
+Security policy: PASS — Only reviewed, patched tooling advisories.
+Temporary exception active: true. Expiry: 2026-10-22T00:00:00Z.

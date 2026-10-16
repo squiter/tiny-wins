@@ -1,0 +1,67 @@
+appId: app.tinywins.mobile
+---
+# Continue the dedicated Portuguese/enlarged-text design fixture.
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn: Progresso
+- scrollUntilVisible:
+    element: Vitórias neste ano
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
+- assertVisible: Consistência · dias planejados
+- takeScreenshot: design-portuguese-statistics-dark-large
+- scrollUntilVisible:
+    element: Ver progresso de A quiet moment to read a chapter before bedtime
+    direction: UP
+    centerElement: true
+    timeout: 60000
+- takeScreenshot: design-portuguese-insights-header-large
+- tapOn: Hoje
+- scrollUntilVisible:
+    element: Ver A quiet moment to read a chapter before bedtime, 1 vitória seguida
+    direction: DOWN
+- tapOn: Ver A quiet moment to read a chapter before bedtime, 1 vitória seguida
+- scrollUntilVisible:
+    element:
+      id: inspect-today
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
+- takeScreenshot: design-portuguese-detail-month-large
+- tapOn:
+    id: inspect-today
+- scrollUntilVisible:
+    element:
+      id: day-note
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: day-note
+- inputText: Synthetic design review note
+- scrollUntilVisible:
+    element:
+      id: day-note-done-typing
+    direction: DOWN
+- takeScreenshot: design-portuguese-note-keyboard-large
+- tapOn:
+    id: day-note-done-typing
+- scrollUntilVisible:
+    element:
+      id: save-day-note
+    direction: DOWN
+- tapOn:
+    id: save-day-note
+- assertVisible: Nota salva.
+- tapOn: Fechar dia
+- scrollUntilVisible:
+    element: Voltar
+    direction: UP
+    timeout: 60000
+- tapOn: Voltar
+- assertVisible: Ver A quiet moment to read a chapter before bedtime, 1 vitória seguida
+- takeScreenshot: design-portuguese-note-today-large

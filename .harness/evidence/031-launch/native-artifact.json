@@ -1,0 +1,20 @@
+{
+  "variant": "release",
+  "storeSigned": false,
+  "signer": "Expo template development key; not Play upload credentials",
+  "package": "app.tinywins.mobile",
+  "apkSha256": "9997fab5f61bcddbcd367f02caf0309b1a05a684dd49172719d366ba58534e69",
+  "bundleSha256": "e2b0e80d22b5f1389029a9818b18cd394caf21fd1d0e7c8c1c1c13d0554baba5",
+  "sourceHashes": {
+    "app.json": "d253417ece4ed02f82016d18f756960c16fc3528d0e8a7a77cc8aedf98b738b5",
+    "package.json": "67dea4b2d3e1237afc3903d15b003862f00a216fb375c1c57bea7390fad4c188",
+    "package-lock.json": "8cddd5dab504fbdaa755bc94c9b1df1e95cbcb57c4fe78a9906428265d23d1e6",
+    "src/app/_layout.tsx": "a0ef2ba023ed0f5795b232ac9f66ebe4aaa563bb07f153fb3bbd73071177e6b3",
+    "src/components/LaunchScreen.tsx": "cea8fa239c94b686b6b960ccccbb0c032c8f2e36154eb2852bf63d44f7a22cb7",
+    "src/lib/splash.ts": "249f8e03ed4ec0e649ad39045bc511a412ffd8211729c441188f449a585cf684",
+    "src/database/provider.tsx": "d0b674d56a4f9f26a5c7f01f79b9828d0e7681cf6f625299d6cbe72e9eb11ea6",
+    "scripts/generate-branding.mjs": "d200e79bdb741dea913e71a770bdc8b5415cebf3d89f98b5f212f19f61164bd4"
+  },
+  "addedPermissions": [],
+  "productionModules": 1783
+}

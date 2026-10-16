@@ -19,14 +19,32 @@
       "expo-sqlite",
       "expo-font",
       "expo-status-bar",
-      "expo-sharing"
+      "expo-sharing",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/branding/mark-light.png",
+          "imageWidth": 96,
+          "resizeMode": "contain",
+          "backgroundColor": "#FBF8F1",
+          "dark": {
+            "image": "./assets/branding/mark-dark.png",
+            "backgroundColor": "#141B17"
+          }
+        }
+      ]
     ],
     "ios": {
       "bundleIdentifier": "app.tinywins.mobile",
       "supportsTablet": true
     },
     "android": {
-      "package": "app.tinywins.mobile"
+      "package": "app.tinywins.mobile",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/branding/adaptive-foreground.png",
+        "backgroundColor": "#FBF8F1",
+        "monochromeImage": "./assets/branding/adaptive-monochrome.png"
+      }
     },
     "experiments": {
       "typedRoutes": true
@@ -34,6 +52,7 @@
     "web": {
       "bundler": "metro",
       "output": "single"
-    }
+    },
+    "icon": "./assets/branding/icon.png"
   }
 }

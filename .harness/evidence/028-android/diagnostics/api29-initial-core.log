@@ -1,0 +1,26 @@
+╭───────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                               │
+│   Get results faster by executing flows in parallel on Maestro Cloud virtual devices. Run:    │
+│   maestro cloud app_file flows_folder/                                                        │
+│                                                                                               │
+╰───────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+Waiting for flows to complete...
+[Passed] weekly-goals (1m 43s)
+[Failed] day-notes (1m 7s) (No visible element found: id: day-note-done-typing)
+[Failed] appearance (19s) (Element not found: Text matching regex: Settings, tab, 3 of 3)
+[Failed] celebrations (1m 3s) (Element not found: Text matching regex: Settings, tab, 3 of 3)
+[Failed] language-override (19s) (Element not found: Text matching regex: Settings, tab, 3 of 3)
+[Failed] habit-management (24s)
+
+5/6 Flows Failed
+
+╭────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                │
+│   Debug tests faster by easy access to test recordings, maestro logs, screenshots, and more.   │
+│                                                                                                │
+│   Run your flows on Maestro Cloud:                                                             │
+│   maestro cloud app_file flows_folder/                                                         │
+│                                                                                                │
+╰────────────────────────────────────────────────────────────────────────────────────────────────╯

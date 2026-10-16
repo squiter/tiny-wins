@@ -10,11 +10,15 @@ import { Platform, Pressable, Text, View } from 'react-native';
 import { DatabaseProvider } from '../database/provider';
 import { useSystemTheme, useTheme } from '../theme/useTheme';
 import { recoverApp } from '../lib/recover';
+import { useCallback, useEffect, useState } from 'react';
+import { LaunchScreen } from '../components/LaunchScreen';
+import { hideNativeSplash } from '../lib/splash';
 export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
   const { t } = useSystemI18n();
-  const { theme } = useSystemTheme();
+  const { theme, scheme } = useSystemTheme();
   return (
     <View
+      onLayout={hideNativeSplash}
       style={{
         flex: 1,
         backgroundColor: theme.ivory,
@@ -23,6 +27,7 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
         gap: 20,
       }}
     >
+      <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Text accessibilityRole="header" style={{ fontSize: 26, color: theme.forest }}>
         {t('Could not open your habits')}
       </Text>
@@ -47,41 +52,50 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
   );
 }
 export default function Layout() {
-  const { t } = useSystemI18n();
   const { theme } = useSystemTheme();
   const [loaded, error] = useFonts({ Fraunces_600SemiBold, Inter_400Regular, Inter_600SemiBold });
-  if (!loaded && !error)
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: theme.ivory,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Text style={{ color: theme.charcoal }}>{t('Getting your tiny wins ready…')}</Text>
-      </View>
-    );
+  const [ready, setReady] = useState(false);
+  const [surfaceLaidOut, setSurfaceLaidOut] = useState(false);
+  const onAppReady = useCallback(() => setReady(true), []);
+  const onSurfaceLayout = useCallback(() => setSurfaceLaidOut(true), []);
+  useEffect(() => {
+    if (loaded && surfaceLaidOut) hideNativeSplash();
+  }, [loaded, surfaceLaidOut]);
+  if (error) throw error;
   return (
-    <DatabaseProvider>
-      <LocalizationProvider>
-        <FeedbackProvider>
-          <ThemedRoutes />
-        </FeedbackProvider>
-      </LocalizationProvider>
-    </DatabaseProvider>
+    <View style={{ flex: 1, backgroundColor: theme.ivory }} onLayout={onSurfaceLayout}>
+      {loaded && (
+        <DatabaseProvider>
+          <LocalizationProvider>
+            <FeedbackProvider>
+              <ThemedRoutes onReady={onAppReady} />
+            </FeedbackProvider>
+          </LocalizationProvider>
+        </DatabaseProvider>
+      )}
+      {!ready && <LaunchScreen fontsLoaded={loaded} />}
+    </View>
   );
 }
 
-function ThemedRoutes() {
+function ThemedRoutes({ onReady }: { onReady(): void }) {
   const { theme, scheme } = useTheme();
+  const [laidOut, setLaidOut] = useState(false);
+  const finishLayout = useCallback(() => {
+    setLaidOut(true);
+    onReady();
+  }, [onReady]);
   return (
-    <>
+    <View
+      style={{ flex: 1, backgroundColor: theme.ivory }}
+      onLayout={finishLayout}
+      accessibilityElementsHidden={!laidOut}
+      importantForAccessibility={laidOut ? 'auto' : 'no-hide-descendants'}
+    >
       <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Stack
         screenOptions={{ headerShown: false, contentStyle: { backgroundColor: theme.ivory } }}
       />
-    </>
+    </View>
   );
 }

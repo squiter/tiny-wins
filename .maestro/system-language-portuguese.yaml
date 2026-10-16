@@ -11,7 +11,7 @@ appId: app.tinywins.mobile
 - assertVisible: Hoje
 - assertVisible: Comece com uma pequena coisa.
 - tapOn:
-    text: Ajustes, tab, 3 of 3
+    text: Ajustes(, tab, 3 of 3)?
     retryTapIfNoChange: true
 # A cold OS-language reboot can drop the first navigation tap. Reopen the
 # same tab once only when its required screen root has not appeared.
@@ -21,7 +21,7 @@ appId: app.tinywins.mobile
         id: settings-theme-(light|dark)
     commands:
       - tapOn:
-          text: Ajustes, tab, 3 of 3
+          text: Ajustes(, tab, 3 of 3)?
           retryTapIfNoChange: true
 - assertVisible:
     id: settings-theme-(light|dark)
@@ -49,7 +49,7 @@ appId: app.tinywins.mobile
     timeout: 120000
 - assertVisible: Today
 - tapOn:
-    text: Settings, tab, 3 of 3
+    text: Settings(, tab, 3 of 3)?
     retryTapIfNoChange: true
 - assertVisible:
     id: settings-theme-(light|dark)
@@ -65,7 +65,7 @@ appId: app.tinywins.mobile
     id: language-system
     text: Sistema, selecionado
 - takeScreenshot: language-system-portuguese-restored
-- tapOn: Hoje, tab, 1 of 3
+- tapOn: Hoje(, tab, 1 of 3)?
 - tapOn:
     id: add-habit
     retryTapIfNoChange: true
@@ -125,7 +125,7 @@ appId: app.tinywins.mobile
 - tapOn: Cancelar
 - assertVisible:
     id: add-habit
-- tapOn: Progresso, tab, 2 of 3
+- tapOn: Progresso(, tab, 2 of 3)?
 - assertVisible: Progresso
 - takeScreenshot: language-portuguese-large-insights-header
 - scrollUntilVisible:

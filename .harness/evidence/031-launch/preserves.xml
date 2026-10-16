@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="1" failures="0" time="20.673" timestamp="2026-10-16T18:06:04">
+    <testcase id="launch-preserves-data" name="launch-preserves-data" classname="launch-preserves-data" file=".maestro/android-acceptance/launch-preserves-data.yaml" time="20.664" timestamp="2026-10-16T18:06:04" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

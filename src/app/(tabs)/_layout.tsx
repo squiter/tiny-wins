@@ -1,17 +1,28 @@
 import { useI18n } from '../../features/localization/provider';
 import { Tabs } from 'expo-router';
+import { useWindowDimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TabIcon } from '../../components/TabIcon';
 import { useTheme } from '../../theme/useTheme';
 export default function TabLayout() {
   const { t } = useI18n();
   const { theme } = useTheme();
+  const { fontScale } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
+  const enlargedTabBarHeight =
+    fontScale > 1 ? 68 + insets.bottom + Math.ceil(24 * (fontScale - 1)) : undefined;
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: theme.forest,
         tabBarInactiveTintColor: theme.muted,
-        tabBarStyle: { backgroundColor: theme.ivory, borderTopColor: theme.stone, minHeight: 68 },
+        tabBarStyle: {
+          backgroundColor: theme.ivory,
+          borderTopColor: theme.stone,
+          minHeight: 68,
+          height: enlargedTabBarHeight,
+        },
         tabBarLabelStyle: { fontFamily: 'Inter_600SemiBold', fontSize: 12 },
         sceneStyle: { backgroundColor: theme.ivory },
       }}

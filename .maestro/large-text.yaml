@@ -3,13 +3,15 @@ appId: app.tinywins.mobile
 - stopApp
 - launchApp
 - extendedWaitUntil:
-    visible: View Read a chapter, 1 win in a row
+    visible:
+      id: add-habit
     timeout: 120000
 - takeScreenshot: cozy-large-text-today
 - scrollUntilVisible:
     element: View Read a chapter, 1 win in a row
     direction: DOWN
     centerElement: true
+- assertVisible: View Read a chapter, 1 win in a row
 - takeScreenshot: cozy-large-text-habit
 - tapOn: View Read a chapter, 1 win in a row
 - assertVisible: Edit habit
@@ -37,7 +39,7 @@ appId: app.tinywins.mobile
 - tapOn: Go back
 - assertVisible: View Read a chapter, 1 win in a row
 
-- tapOn: Insights, tab, 2 of 3
+- tapOn: Insights(, tab, 2 of 3)?
 - assertVisible: Week
 - assertVisible: Month
 - assertVisible: Year
@@ -48,7 +50,7 @@ appId: app.tinywins.mobile
     centerElement: true
 - takeScreenshot: cozy-large-text-wall
 - tapOn:
-    text: Settings, tab, 3 of 3
+    text: Settings(, tab, 3 of 3)?
     retryTapIfNoChange: true
 - assertVisible:
     id: settings-theme-(light|dark)

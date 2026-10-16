@@ -1,0 +1,8 @@
+{
+  "platform": "android",
+  "kind": "production-js-export",
+  "modules": 1783,
+  "affectedModules": [],
+  "signedArchiveInspected": false,
+  "input": "/Users/squiter/dev/code/tiny-wins/android/app/build/generated/sourcemaps/react/release/index.android.bundle.map"
+}

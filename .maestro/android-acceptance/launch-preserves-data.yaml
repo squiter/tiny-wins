@@ -1,0 +1,22 @@
+appId: app.tinywins.mobile
+---
+# Dedicated task 029 synthetic fixture; run immediately after update install, without clearing data.
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- assertVisible: View A quiet moment to read a chapter before bedtime, 1 win in a row
+- takeScreenshot: launch-update-retains-win
+- tapOn: View A quiet moment to read a chapter before bedtime, 1 win in a row
+- tapOn:
+    id: inspect-today
+- assertVisible: Synthetic design review note
+- takeScreenshot: launch-update-retains-note
+- tapOn: Close day
+- tapOn: Go back
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible: View A quiet moment to read a chapter before bedtime, 1 win in a row
+    timeout: 120000

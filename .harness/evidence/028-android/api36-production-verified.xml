@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="2" failures="0" time="220.496" timestamp="2026-10-16T16:46:11">
+    <testcase id="day-notes" name="day-notes" classname="day-notes" file=".maestro/day-notes.yaml" time="111.042" timestamp="2026-10-16T16:46:11" status="SUCCESS"/>
+    <testcase id="backup-export" name="backup-export" classname="backup-export" file=".maestro/android-acceptance/backup-export.yaml" time="109.434" timestamp="2026-10-16T16:48:02" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

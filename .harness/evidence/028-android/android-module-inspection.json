@@ -1,0 +1,8 @@
+{
+  "platform": "android",
+  "kind": "production-js-export",
+  "modules": 1777,
+  "affectedModules": [],
+  "signedArchiveInspected": false,
+  "inputDirectory": ".expo/android-security"
+}

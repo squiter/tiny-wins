@@ -1,0 +1,31 @@
+appId: app.tinywins.mobile
+---
+# Run after backup-restore; push a malformed JSON fixture to Downloads first.
+- launchApp
+- extendedWaitUntil:
+    visible: View Read one page, 1 win in a row
+    timeout: 120000
+- tapOn: Settings(, tab, 3 of 3)?
+- scrollUntilVisible:
+    element: Choose backup to restore
+    direction: DOWN
+    centerElement: true
+- tapOn: Choose backup to restore
+- tapOn: tiny-wins-invalid.json
+- scrollUntilVisible:
+    element: This file is not a valid Tiny Wins backup.
+    direction: DOWN
+    centerElement: true
+- assertVisible: This file is not a valid Tiny Wins backup.
+- assertNotVisible: Ready to restore
+- takeScreenshot: android-invalid-backup-rejected
+- tapOn: Choose backup to restore
+- pressKey: back
+- assertNotVisible: Ready to restore
+- tapOn: Today(, tab, 1 of 3)?
+- assertVisible: View Read one page, 1 win in a row
+- tapOn: View Read one page, 1 win in a row
+- tapOn:
+    id: inspect-today
+- assertVisible: Android backup acceptance note
+- tapOn: Close day

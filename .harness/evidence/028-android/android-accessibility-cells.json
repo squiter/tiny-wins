@@ -1,0 +1,42 @@
+{
+  "Walk": {
+    "dateCells": 14,
+    "labels": [
+      "Inspect Walk, 10/03/2026: before habit started",
+      "Inspect Walk, 10/04/2026: before habit started",
+      "Inspect Walk, 10/05/2026: before habit started",
+      "Inspect Walk, 10/06/2026: before habit started",
+      "Inspect Walk, 10/07/2026: before habit started",
+      "Inspect Walk, 10/08/2026: before habit started",
+      "Inspect Walk, 10/09/2026: before habit started",
+      "Inspect Walk, 10/10/2026: before habit started",
+      "Inspect Walk, 10/11/2026: before habit started",
+      "Inspect Walk, 10/12/2026: before habit started",
+      "Inspect Walk, 10/13/2026: before habit started",
+      "Inspect Walk, 10/14/2026: before habit started",
+      "Inspect Walk, 10/15/2026: before habit started",
+      "Walk, 10/16/2026: pending, today"
+    ],
+    "completionControlDp": [48.0, 48.0]
+  },
+  "Read a chapter": {
+    "dateCells": 14,
+    "labels": [
+      "Inspect Read a chapter, 10/03/2026: before habit started",
+      "Inspect Read a chapter, 10/04/2026: before habit started",
+      "Inspect Read a chapter, 10/05/2026: before habit started",
+      "Inspect Read a chapter, 10/06/2026: before habit started",
+      "Inspect Read a chapter, 10/07/2026: before habit started",
+      "Inspect Read a chapter, 10/08/2026: before habit started",
+      "Inspect Read a chapter, 10/09/2026: before habit started",
+      "Inspect Read a chapter, 10/10/2026: before habit started",
+      "Inspect Read a chapter, 10/11/2026: before habit started",
+      "Inspect Read a chapter, 10/12/2026: before habit started",
+      "Inspect Read a chapter, 10/13/2026: before habit started",
+      "Inspect Read a chapter, 10/14/2026: before habit started",
+      "Inspect Read a chapter, 10/15/2026: before habit started",
+      "Read a chapter, 10/16/2026: completed, today"
+    ],
+    "completionControlDp": [48.0, 48.0]
+  }
+}

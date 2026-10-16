@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tiny-wins-028-api36" tests="1" failures="1" time="137.505" timestamp="2026-10-16T17:10:36">
+    <testcase id="design-review" name="design-review" classname="design-review" file=".maestro/android-acceptance/design-review.yaml" time="137.486" timestamp="2026-10-16T17:10:36" status="ERROR">
+      <failure>Element not found: Text matching regex: Go back</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

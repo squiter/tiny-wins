@@ -150,11 +150,11 @@ JavaScript exports are separate from compiled, signed native apps. Maestro clear
 
 [GitHub Actions](https://github.com/squiter/tiny-wins/actions) runs verification, a separate dependency audit, Android debug builds, iOS simulator builds and native smoke flows. Debug artifacts require the Expo development server and expire after seven days.
 
-Tiny Wins is **in active development**, with iOS as the first release target and a shared Android codebase. Native accessibility, enlarged-text review, file-dialog acceptance and Android runtime validation remain release work. Check the [delivery report](docs/DELIVERY_REPORT.md) and [harness tasks](.harness/tasks) for the evidence and open gates of each slice.
+Tiny Wins is **in active development**, with iOS as the first release target and a shared Android codebase. [Android 10/16 emulator validation](docs/ANDROID_VALIDATION.md) covers persistence, weekly goals, notes, management, languages/themes, Back/keyboard, enlarged text, reduced motion and native backup dialogs. Physical accessibility, signed standalone/offline/update testing and store preparation remain release work. The report records two Android UI fixes and a known development-only Expo Router warning. Check the [delivery report](docs/DELIVERY_REPORT.md) and [harness tasks](.harness/tasks) for the evidence and open gates of each slice.
 
 The raw dependency audit retains upstream alerts. A temporary, owner-approved [tooling policy](docs/adr/020-proposed-patched-dependency-audit-policy.md) checks exact patched sources, known advisories and expiration; unknown findings still block CI. Final signed-build dependency inspection remains a release gate. Temporary mitigations and remaining findings are recorded in the [CI/security report](docs/CI_SECURITY_REPORT.md); findings are not suppressed. SQLite web compatibility patches are documented in [ADR-008](docs/adr/008-sqlite-web-bridge-fix.md).
 
-The official App Store release is planned as a **one-time paid download**, with no in-app payments or subscription. Store publication, final identifiers, branding and pricing are still pending. An open-source license has not yet been selected.
+The official App Store release is planned as a **one-time paid download**, with no in-app payments or subscription. The [four-square icon and native launch](docs/BRANDING.md) are implemented and checked in a standalone Android emulator build. Store publication, final identifiers and pricing are still pending. An open-source license has not yet been selected.
 
 `npm run security:bundle` exports production iOS JS and rejects affected tooling modules.
 

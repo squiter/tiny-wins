@@ -1,0 +1,88 @@
+appId: app.tinywins.mobile
+---
+# Push the exported synthetic JSON to Download/tiny-wins-acceptance.json first.
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn: Settings(, tab, 3 of 3)?
+- assertVisible:
+    id: settings-theme-(light|dark)
+- scrollUntilVisible:
+    element:
+      id: appearance-dark
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: appearance-dark
+- scrollUntilVisible:
+    element: Choose backup to restore
+    direction: DOWN
+    centerElement: true
+- tapOn: Choose backup to restore
+- runFlow:
+    when:
+      notVisible: tiny-wins-acceptance.json
+    commands:
+      - tapOn: Show roots
+      - tapOn: Downloads
+- assertVisible: tiny-wins-acceptance.json
+- takeScreenshot: android-native-backup-picker
+- tapOn: tiny-wins-acceptance.json
+- assertVisible: Ready to restore
+- assertVisible: 1 habit · 1 win · 1 note
+- scrollUntilVisible:
+    element: Cancel restore
+    direction: DOWN
+    centerElement: true
+- tapOn: Cancel restore
+- assertNotVisible: Ready to restore
+- scrollUntilVisible:
+    element: Choose backup to restore
+    direction: UP
+    centerElement: true
+- tapOn: Choose backup to restore
+- tapOn: tiny-wins-acceptance.json
+- assertVisible: Ready to restore
+- scrollUntilVisible:
+    element: Restore missing data
+    direction: DOWN
+    centerElement: true
+- tapOn: Restore missing data
+- assertVisible: 1 habit and 1 win and 1 note added. Your existing habits were kept.
+- scrollUntilVisible:
+    element:
+      id: appearance-dark
+    direction: UP
+    centerElement: true
+- assertVisible: Dark appearance, selected
+- tapOn: Today(, tab, 1 of 3)?
+- assertVisible: View Read one page, 1 win in a row
+- stopApp
+- launchApp
+- assertVisible: View Read one page, 1 win in a row
+- tapOn: View Read one page, 1 win in a row
+- tapOn:
+    id: inspect-today
+- assertVisible: Android backup acceptance note
+- takeScreenshot: android-restored-note-after-restart
+- tapOn: Close day
+- tapOn: Go back
+- tapOn: Settings(, tab, 3 of 3)?
+- scrollUntilVisible:
+    element: Choose backup to restore
+    direction: DOWN
+    centerElement: true
+- tapOn: Choose backup to restore
+- tapOn: tiny-wins-acceptance.json
+- assertVisible: Ready to restore
+- scrollUntilVisible:
+    element: Restore missing data
+    direction: DOWN
+    centerElement: true
+- tapOn: Restore missing data
+- assertVisible: 0 habits and 0 wins and 0 notes added. Your existing habits were kept.
+- takeScreenshot: android-duplicate-restore-keeps-data
+- runFlow: backup-invalid.yaml

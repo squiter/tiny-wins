@@ -185,7 +185,7 @@ export function HabitCard({
         {cells.map((cell) => {
           const label = cellLabel(cell);
           const style = [
-            styles.cell,
+            styles.cellSurface,
             {
               backgroundColor:
                 cell.state === 'complete'
@@ -209,8 +209,9 @@ export function HabitCard({
               aria-checked={done}
               accessibilityLabel={`${habit.title}, ${label}`}
               hitSlop={6}
-              style={style}
+              style={styles.cell}
             >
+              <View pointerEvents="none" style={style} />
               {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
               <Text
                 maxFontSizeMultiplier={1}
@@ -225,8 +226,9 @@ export function HabitCard({
               onPress={() => onInspect(cell.day)}
               accessibilityRole="button"
               accessibilityLabel={t('Inspect {title}, {date}', { title: habit.title, date: label })}
-              style={style}
+              style={styles.cell}
             >
+              <View pointerEvents="none" style={style} />
               {cell.hasNote && <NoteMarker completed={cell.state === 'complete'} />}
               <Text
                 maxFontSizeMultiplier={1}
@@ -285,6 +287,8 @@ const createStyles = (theme: ThemePalette) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
+    // Keep the outline outside flex measurement so today has the same square as history.
+    cellSurface: { ...StyleSheet.absoluteFill, borderRadius: 3 },
     cellMark: { fontSize: 7 },
     move: { backgroundColor: theme.ivory, borderColor: theme.stone },
     up: { position: 'absolute', left: 0, top: 0 },

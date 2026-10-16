@@ -1,0 +1,11 @@
+appId: app.tinywins.mobile
+---
+# The isolated test database has a deliberately newer user_version; no production data.
+- launchApp
+- extendedWaitUntil:
+    visible: Could not open your habits
+    timeout: 120000
+- assertVisible: Try again
+- assertNotVisible:
+    id: launch-loading
+- takeScreenshot: launch-recovery-visible
