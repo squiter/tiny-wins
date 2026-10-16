@@ -2,7 +2,15 @@ name: Android build
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - website/**
+      - scripts/check-website.py
+      - .github/workflows/pages.yml
   pull_request:
+    paths-ignore:
+      - website/**
+      - scripts/check-website.py
+      - .github/workflows/pages.yml
   workflow_dispatch:
 permissions:
   contents: read

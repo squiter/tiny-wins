@@ -37,3 +37,7 @@ Weekly editor native taps must center Save inside the modal viewport before acti
 Weekly entry waits for the modal animation to settle, then recovery uses positive add-habit visibility, not only absence of the modal Close label: during the transition Close can be temporarily absent after Add has disappeared (38828222585). Keep the required Close assertion. Run the weekly case first for earlier diagnosis; retain all eleven scenarios.
 
 Enlarged Portuguese weekly-editor acceptance must center Cancel as well as Save, retain both action assertions/captures and require the Today add-habit root after cancellation before navigating. Run 38830999618 passed ten cases and reached the last scenario but its non-centered Cancel was clipped by the modal safe area; an accessible label alone does not prove a safe tap target.
+
+## Marketing site
+
+For website changes run `python3 scripts/check-website.py` and the required aggregate. Review keyboard navigation, local support/privacy links and 360px/desktop layouts. Store placeholders are status text until real URLs exist. Check the published project subpath as well as local preview; only website/ is uploaded. Native device acceptance is not applicable to this isolated static site.

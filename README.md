@@ -81,6 +81,10 @@ The [implementation plan](docs/IMPLEMENTATION_PLAN.md) guides these additions. T
 
 Future integrations need their own platform, privacy and reliability decisions. The core remains a quick binary check-in: one completed habit, one filled tile.
 
+## Public landing page
+
+The buildless [marketing site](docs/WEBSITE.md) lives in `website/`, with real example screenshots, release status, support and privacy pages. Its own [Pages workflow](.github/workflows/pages.yml) publishes only that folder; site-only changes skip native builds. Store links remain unavailable until launch. See [task 026](.harness/tasks/026-public-landing-page.md) for deployment evidence.
+
 ## Try it locally
 
 Use **Node 24 LTS** and npm; the repository includes `.nvmrc`.
