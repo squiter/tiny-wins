@@ -1,0 +1,38 @@
+
+> tiny-wins@0.1.0 security:bundle
+> expo export --platform ios --source-maps --output-dir .expo/security-bundle && node scripts/security/check-bundle.mjs
+
+Using src/app as the root directory for Expo Router.
+Starting Metro Bundler
+
+iOS Bundled 5903ms node_modules/expo-router/entry.js (1715 modules)
+
+› Assets (29):
+assets/branding/mark-dark.png (25KB)
+assets/branding/mark-light.png (25KB)
+assets/illustrations/cozy-rabbit.png (2.2MB)
+node_modules/@expo-google-fonts/fraunces/600SemiBold/Fraunces_600SemiBold.ttf (73KB)
+node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf (342KB)
+node_modules/@expo-google-fonts/inter/600SemiBold/Inter_600SemiBold.ttf (344KB)
+node_modules/expo-router/assets/arrow_down.png (9.5KB)
+node_modules/expo-router/assets/error.png (469B)
+node_modules/expo-router/assets/file.png (138B)
+node_modules/expo-router/assets/forward.png (188B)
+node_modules/expo-router/assets/pkg.png (364B)
+node_modules/expo-router/assets/react-navigation/elements/back-icon-mask.png (653B)
+node_modules/expo-router/assets/react-navigation/elements/back-icon.png (4 variations | 566B)
+node_modules/expo-router/assets/react-navigation/elements/clear-icon.png (4 variations | 425B)
+node_modules/expo-router/assets/react-navigation/elements/close-icon.png (4 variations | 235B)
+node_modules/expo-router/assets/react-navigation/elements/search-icon.png (3 variations | 582B)
+node_modules/expo-router/assets/sitemap.png (465B)
+node_modules/expo-router/assets/unmatched.png (4.8KB)
+
+› ios bundles (2):
+_expo/static/js/ios/entry-12dc176b6af7e5cd3c087d20c0a45d7c.hbc (3.3MB)
+_expo/static/js/ios/entry-12dc176b6af7e5cd3c087d20c0a45d7c.hbc.map (8.2MB)
+
+› Files (1):
+metadata.json (2KB)
+
+Exported: .expo/security-bundle
+PASS: inspected 1701 production iOS JS modules; no braces/node-forge. Signed archive inspection still required before submission.

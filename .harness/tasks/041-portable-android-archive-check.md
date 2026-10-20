@@ -18,6 +18,8 @@ Commands executed / results:
 - Replaced the ripgrep command with `grep -Fx`, keeping the exact path match and `set -euo pipefail` failure semantics. No dependency or permission added.
 - Executed the actual helper archive-entry command against a positive synthetic ZIP and a missing-runtime negative ZIP with PATH=/usr/bin:/bin: PASS. Original real AAB also passes the exact entry check.
 - `npm run verify` PASS: 118 unit + 57 integration tests, types/lint/format and all exports. Reviewed one-line script diff; no app/native inputs changed from 2563e3d.
-- New hosted release candidate pending; preserve both failed beta.1 attempts and their logs.
+- Published focused helper/task commit c9e1ef2 and immutable tag android-v0.1.0-beta.2. New protected run 39495461832 (run number 3, expected versionCode 100003) is in progress; PLAY_INTERNAL_ENABLED freshly confirmed false. No native/app inputs differ from 2563e3d.
+- Cancelled only the redundant helper-only Android/iOS development builds 39495456195/39495456129; same app's native builds at 2563e3d already PASS. Keep protected release build, Validate and the existing UI-revision iOS smoke running. Do not report cancellations as passes.
+- New hosted release artifact/metadata acceptance pending; preserve both failed beta.1 attempts and their logs.
   Open questions: Play legal confirmation and optional system-navigation contrast dependency remain pending under tasks 038/040. No Play rollout attempted.
   Handoff summary: Do not retry the unchanged failing script or move android-v0.1.0-beta.1; publish the portable check in a new beta revision.

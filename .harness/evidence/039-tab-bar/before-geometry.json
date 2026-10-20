@@ -1,0 +1,29 @@
+{
+  "androidApi": 29,
+  "screenPx": [1080, 2220],
+  "densityDpi": 440,
+  "fontScale": 1.0,
+  "systemNavigationTopPx": 2088,
+  "tabs": [
+    {
+      "label": "Today",
+      "bounds": [0, 2034, 360, 2088],
+      "heightPx": 54,
+      "heightDp": 19.64
+    },
+    {
+      "label": "Insights",
+      "bounds": [360, 2034, 720, 2088],
+      "heightPx": 54,
+      "heightDp": 19.64
+    },
+    {
+      "label": "Settings",
+      "bounds": [720, 2034, 1080, 2088],
+      "heightPx": 54,
+      "heightDp": 19.64
+    }
+  ],
+  "status": "FAIL: tab hit targets under 48dp; labels visually overlap system navigation",
+  "synthetic": true
+}

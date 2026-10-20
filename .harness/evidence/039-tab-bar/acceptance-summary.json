@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-20",
+  "status": "layout preview accepted; corrected signed candidate build in progress; Play creation awaits legal confirmation",
+  "appSourceCommit": "2563e3daec6da9cd8fd69beeead64aeffa2b5b5a",
+  "releaseSourceCommit": "c9e1ef2e041822b97eca8badd61b6b3ddbba4437",
+  "appInputsUnchangedBetweenCommits": true,
+  "sourceChange": "Explicit numeric tab-bar height includes controls region + bottom safe inset at every font scale.",
+  "localVerify": "PASS: 118 unit + 57 integration, types/lint/format and all exports",
+  "baselineNative": "Original version-code 1 AAB-derived APK: 8/8 functional flows PASS, visual geometry FAIL; obsolete candidate must not be uploaded.",
+  "preview": {
+    "nativeApkRun": 39490947058,
+    "nativeApk": "development",
+    "js": "working-tree IPv4 localhost Metro, not standalone",
+    "androidApi": 29,
+    "densityDpi": 440,
+    "fontScales": [1.0, 1.5],
+    "tabHeightsDp": {
+      "originalNormal": 19.64,
+      "correctedNormal": 67.64,
+      "correctedLarge": 79.64
+    },
+    "tabFlows": "PASS at both font scales; screenshots reviewed",
+    "limitation": "System navigation button contrast is still low on Android 10 light surfaces; official-module proposal 040 awaits explicit dependency authorization."
+  },
+  "signedCandidate": {
+    "tag": "android-v0.1.0-beta.2",
+    "runId": 39495461832,
+    "url": "https://github.com/squiter/tiny-wins/actions/runs/39495461832",
+    "expectedVersionCode": 100003,
+    "actualMetadataVerified": false,
+    "artifactDownloaded": false,
+    "publishingEnabled": false,
+    "earlierRun": 39490972112,
+    "earlierAttempt1": "Maven dependency resolution failed; upstream official POMs subsequently returned HTTP 200",
+    "earlierAttempt2": "Native build SUCCESSFUL in 21m57s; jar and public certificate verified; exact runtime-entry check failed because rg is not installed. No candidate artifact uploaded.",
+    "helperFix": "grep -Fx exact path, same fail-closed shell semantics; positive/negative fixtures PASS with standard PATH"
+  },
+  "upgradeFixture": {
+    "device": "emulator-5584",
+    "data": "synthetic habit, saved win, saved note, dark app preference",
+    "prepared": "PASS; app stopped without clearing data",
+    "upgraded": false,
+    "next": "Build a universal APK from the downloaded AAB using the same temporary emulator test-only key, install -r and run the prepared upgrade-check.yaml before clearState tests."
+  },
+  "limits": [
+    "No first Play app was created; no legal declarations accepted.",
+    "No AAB was uploaded to Google Play; no actual opt-in link exists.",
+    "No new app dependency was installed for the proposed contrast fix.",
+    "Physical-device, Play-delivered install/update and final corrected signed-APK acceptance remain pending."
+  ]
+}

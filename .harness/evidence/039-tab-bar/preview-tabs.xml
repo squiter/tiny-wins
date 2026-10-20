@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_039_preview" tests="1" failures="0" time="22.054" timestamp="2026-10-20T17:31:57">
+    <testcase id="tab-bar" name="tab-bar" classname="tab-bar" file=".maestro/android-acceptance/tab-bar.yaml" time="22.041" timestamp="2026-10-20T17:31:57" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

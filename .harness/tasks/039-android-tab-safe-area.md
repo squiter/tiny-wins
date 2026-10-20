@@ -18,7 +18,12 @@ Commands executed / results:
 
 - Original AAB-derived API 29 screenshot exposed app tab labels in the system navigation area. Stable application bottom is y2088 on a 1080×2220 / 440dpi emulator; original Settings accessible bounds y2034–2088 provide only 54px (about 20dp).
 - Root cause: the normal-font style explicitly sets `height: undefined`, overriding the navigator's computed height while retaining bottom inset padding. Its 68-point minimum includes that padding, leaving too little room for controls.
-- Use an explicit numeric height at every font scale; native and signed replacement checks pending.
+- Use an explicit numeric height at every font scale. Fresh `npm run verify` PASS: 118 unit + 57 integration tests, types/lint/format and all exports. Native release-style JS/Hermes rebuild and source-map inspection PASS: 1783 modules, no affected tooling modules.
+- Published only the focused layout fix, regression flow and this task as 2563e3d; preserved all other dirty files. Tag android-v0.1.0-beta.1 starts protected Android release run 39490972112 with PLAY_INTERNAL_ENABLED=false (fresh readback).
+- Hosted verify PASS. Build attempt 1 failed resolving Maven Kotlin/java-diff-utils POMs; direct official Maven requests returned HTTP 200 and the parallel development build continued. Retained failure; retried only the failed build on a fresh runner without changing dependencies or gates. Attempt 2 native build and signature/certificate PASS, but final runtime gate failed because rg is absent; task 041 fixes that helper. New signed-candidate acceptance uses beta.2 run 39495461832.
+- Original candidate's eight Maestro flows passed, but its screenshot/bounds review failed; functional passes do not override visual acceptance. Prepared a synthetic win/note/dark-theme fixture for an in-place emulator update to the replacement APK.
 
-Open questions: Owner's first-Play-app legal confirmation remains pending under task 038. Physical/Play-delivered installation and update acceptance remain separate.
+- Development APK from hosted run 39490947058 PASS. Isolated second API 29 emulator + local IPv4 Metro preview: tab-bar flow PASS at font scales 1.0/1.5; actual controls are 67.64dp/79.64dp high and end at stable y2088 above system navigation. These preview results do not replace signed-candidate acceptance. Original emulator fixture is preserved for an in-place upgrade.
+
+Open questions: Owner's first-Play-app legal confirmation remains pending under task 038. System navigation button contrast on Android 10 is a separate proposed dependency-authorized task 040. Physical/Play-delivered installation and update acceptance remain separate.
 Handoff summary: Do not upload candidate/tiny-wins-0.1.0-1.aab; replace it with the validated corrected candidate.

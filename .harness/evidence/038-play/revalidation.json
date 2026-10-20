@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-20",
+  "status": "original candidate superseded: native normal-font three-button navigation defect; task 039 prepares replacement",
+  "source": "1101b2881b301929ba8ca91b0c11f4d4a2d05bdf",
+  "package": "app.tinywins.mobile",
+  "versionName": "0.1.0",
+  "versionCode": 1,
+  "aabSha256": "2658a0c568c887e134d084f7fde20e12d1198faed8daab9d4a5073dfc7973c0e",
+  "uploadCertificateSha256": "2befc885387498566e7681f97c5090b87b9e39a4e200afd02d2cdf2e75219b14",
+  "runtimeSha256": "e2b0e80d22b5f1389029a9818b18cd394caf21fd1d0e7c8c1c1c13d0554baba5",
+  "bytes": 74510008,
+  "minSdk": 24,
+  "targetSdk": 36,
+  "debuggable": false,
+  "gates": {
+    "verify": "PASS: 118 unit + 57 integration; types, lint, formatting, Android/iOS/web exports",
+    "securityPolicy": "PASS with existing temporary tooling exception; raw 18 high/0 critical; expires 2026-10-22T00:00:00Z",
+    "productionJsInspection": "PASS: fresh iOS export 1701 modules; preserved native Android source map 1783 modules; no braces/node-forge",
+    "bundletoolValidate": "PASS with official 1.18.3",
+    "zipIntegrity": "PASS: 1351 entries",
+    "jarsigner": "jar verified on Java 25.0.1 (Homebrew path is misleadingly named openjdk@21); self-signed upload certificate, no timestamp, POSIX attributes and streaming manifest-order warnings retained in private log; Android bundletool validation and APK generation pass",
+    "runtimeProvenance": "AAB runtime equals previously accepted native release APK runtime and newly generated emulator APK runtime; app source/config/assets/dependencies unchanged since candidate build",
+    "native": "Original AAB-derived emulator baseline: all 8 Maestro flows PASS, but visual/geometry acceptance FAIL (tab controls ~20dp, labels overlap three-button system navigation). Superseded by task 039; do not upload."
+  },
+  "console": {
+    "accountCanCreateApps": true,
+    "packageAvailability": "Nome de pacote dispon\u00edvel",
+    "form": {
+      "name": "Tiny Wins",
+      "type": "App",
+      "pricing": "Paid",
+      "defaultLanguage": "pt-BR"
+    },
+    "legalDeclarationsAccepted": false,
+    "appCreated": false,
+    "aabUploaded": false,
+    "internalReleaseAvailable": false,
+    "verifiedOptInUrl": null
+  },
+  "limitations": [
+    "Emulator APK derived from the signed AAB uses an isolated temporary test certificate, not the real upload key or Google Play signing key.",
+    "No physical-device, Play-delivered installation or Play-delivered update acceptance in this turn.",
+    "No tester contacts or signing secrets included in repository evidence."
+  ],
+  "javaRuntime": "OpenJDK 25.0.1 Homebrew (verified with absolute java -version)"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "kind": "development APK + local working-tree Metro preview; not signed candidate acceptance",
+  "source": "2563e3daec6da9cd8fd69beeead64aeffa2b5b5a",
+  "api": 29,
+  "fontScale": 1.0,
+  "densityDpi": 440,
+  "systemNavigationTopPx": 2088,
+  "tabs": [
+    {
+      "label": "Today",
+      "bounds": [0, 1902, 360, 2088],
+      "heightDp": 67.64
+    },
+    {
+      "label": "Insights",
+      "bounds": [360, 1902, 720, 2088],
+      "heightDp": 67.64
+    },
+    {
+      "label": "Settings",
+      "bounds": [720, 1902, 1080, 2088],
+      "heightDp": 67.64
+    }
+  ]
+}
