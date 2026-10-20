@@ -3,7 +3,7 @@
 Status: in progress — explicit owner authorization received on 2026-10-20
 Goal: Correct white Android system navigation buttons on light app surfaces without changing visibility or app permissions.
 Non-goals: Hiding system navigation, adding telemetry, purchase flows, changing signing/access policies or installing a dependency before authorization.
-Files/modules allowed after authorization: package.json/lockfile, app.json plugin configuration, themed root/startup/error presentation, scripts/with-android-navigation-theme.cjs, ADR-026 and focused native acceptance/evidence.
+Files/modules allowed after authorization: package.json/lockfile, app.json plugin configuration, themed root/startup/error presentation, .maestro/android-acceptance/system-navigation.yaml, scripts/with-android-navigation-theme.cjs, ADR-026 and focused native acceptance/evidence.
 Dependencies: AGENTS.md line 17 requires explicit dependency authorization. Owner explicitly authorized adding official `expo-navigation-bar` and fixing both themes before internal testing. Use installed Expo SDK 57 compatible range `~57.0.3`; no app permissions or unrelated dependency upgrades.
 Acceptance criteria:
 
@@ -23,3 +23,5 @@ Commands executed / results:
 
 Open questions: Native rebuild/emulator acceptance and final archive inspection pending. Dependency authorization received. Owner also explicitly authorized the Play declarations, but browser automatic approval rejected the first policy-checkbox click; requested personal completion of the three declarations/Create app while native work proceeds.
 Handoff summary: Integrate the SDK-57 themed component, validate both themes, rebuild and release only the corrected internal-test candidate.
+
+- Native beta.3 development flow PASS in 55s: manual dark/light, Today/Settings and saved appearance across restart. Actual screenshots show correct app-level contrast. A separate capture during native splash still showed white system icons on ivory; expanded the same resource correction to the distinct splash theme and both system bars before final submission. Beta.3 is intermediate; use a fresh immutable beta.4 after required gates.

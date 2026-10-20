@@ -1,0 +1,50 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- tapOn: Settings
+- scrollUntilVisible:
+    element:
+      id: appearance-dark
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: appearance-dark
+- assertVisible: Dark appearance, selected
+- takeScreenshot: navigation-dark-settings
+- tapOn: Today
+- assertVisible:
+    id: add-habit
+- takeScreenshot: navigation-dark-today
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- takeScreenshot: navigation-dark-restarted
+- tapOn: Settings
+- scrollUntilVisible:
+    element:
+      id: appearance-light
+    direction: DOWN
+    centerElement: true
+- tapOn:
+    id: appearance-light
+- assertVisible: Light appearance, selected
+- takeScreenshot: navigation-light-settings
+- tapOn: Today
+- assertVisible:
+    id: add-habit
+- takeScreenshot: navigation-light-today
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- takeScreenshot: navigation-light-restarted
