@@ -11,3 +11,5 @@ A small Expo config plugin initializes both navigation/status icon appearance fr
 Rebuild a native binary after this dependency/plugin change. Check both app themes, saved appearance after restart, normal/enlarged tab geometry and real system buttons on the isolated Android emulator; a Metro export alone cannot prove native behavior. Record the older-platform fallback as static resource evidence unless that OS is actually exercised.
 
 Source: [versioned Expo SDK 57 navigation-bar documentation](https://docs.expo.dev/versions/v57.0.0/sdk/navigation-bar/).
+
+Set the same resolved `statusBarStyle` in the native Stack screen options. The native screen manager applies its status style after root components mount and when returning from the editor, so a root StatusBar alone can be overwritten by the default light-content screen style. Keep the root component for loading/error surfaces, and make normal native screens own the same theme value.

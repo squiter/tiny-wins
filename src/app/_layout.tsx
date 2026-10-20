@@ -97,7 +97,11 @@ function ThemedRoutes({ onReady }: { onReady(): void }) {
       <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <NavigationBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Stack
-        screenOptions={{ headerShown: false, contentStyle: { backgroundColor: theme.ivory } }}
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: theme.ivory },
+          statusBarStyle: scheme === 'dark' ? 'light' : 'dark',
+        }}
       />
     </View>
   );

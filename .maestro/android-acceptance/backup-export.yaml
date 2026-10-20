@@ -27,8 +27,10 @@ appId: app.tinywins.mobile
     element: Export backup
     direction: DOWN
     centerElement: true
+    timeout: 60000
 - tapOn: Export backup
-- assertVisible: Sharing 1 file
+# Android 10 labels its native chooser Share; newer versions include the count.
+- assertVisible: '^(Sharing 1 file|Share)$'
 - assertVisible: 'tiny-wins-.*\.tinywins\.json'
 - takeScreenshot: android-native-backup-share
 - pressKey: back
