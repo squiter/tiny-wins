@@ -33,7 +33,7 @@ const cert = new X509Certificate(readFileSync(`${process.env.RUNNER_TEMP}/tiny-w
 const expected = process.env.TW_ANDROID_UPLOAD_CERT_SHA256.replaceAll(':', '').toLowerCase();
 if (cert.fingerprint256.replaceAll(':', '').toLowerCase() !== expected) throw new Error('AAB signing certificate mismatch.');
 JS
-unzip -Z1 android/app/build/outputs/bundle/release/app-release.aab | rg '^base/assets/index.android.bundle$'
+unzip -Z1 android/app/build/outputs/bundle/release/app-release.aab | grep -Fx 'base/assets/index.android.bundle'
 mkdir -p candidate
 cp android/app/build/outputs/bundle/release/app-release.aab candidate/tiny-wins.aab
 node --input-type=module <<'JS'
