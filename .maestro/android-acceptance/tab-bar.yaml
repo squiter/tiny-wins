@@ -1,0 +1,19 @@
+appId: app.tinywins.mobile
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: add-habit
+    timeout: 120000
+- takeScreenshot: tab-bar-today
+- tapOn: Insights
+- assertVisible: Year
+- takeScreenshot: tab-bar-insights
+- tapOn: Settings
+- assertVisible:
+    id: settings-theme-(light|dark)
+- takeScreenshot: tab-bar-settings
+- tapOn: Today
+- assertVisible:
+    id: add-habit

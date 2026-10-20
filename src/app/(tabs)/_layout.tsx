@@ -9,8 +9,7 @@ export default function TabLayout() {
   const { theme } = useTheme();
   const { fontScale } = useWindowDimensions();
   const insets = useSafeAreaInsets();
-  const enlargedTabBarHeight =
-    fontScale > 1 ? 68 + insets.bottom + Math.ceil(24 * (fontScale - 1)) : undefined;
+  const tabBarHeight = 68 + insets.bottom + Math.ceil(24 * Math.max(0, fontScale - 1));
   return (
     <Tabs
       screenOptions={{
@@ -21,7 +20,7 @@ export default function TabLayout() {
           backgroundColor: theme.ivory,
           borderTopColor: theme.stone,
           minHeight: 68,
-          height: enlargedTabBarHeight,
+          height: tabBarHeight,
         },
         tabBarLabelStyle: { fontFamily: 'Inter_600SemiBold', fontSize: 12 },
         sceneStyle: { backgroundColor: theme.ivory },
