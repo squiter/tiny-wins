@@ -1,9 +1,9 @@
 # Task: 038 — Revalidate and create first Play internal test
 
-Status: in progress — app and five tester accounts registered; final status-bar followup pending signed acceptance
+Status: complete — internal version 100006 available; five tester accounts selected; real opt-in link verified
 Goal: Revalidate Android, publish Tiny Wins only to internal testing and provide the real opt-in/install instructions.
 Non-goals: Production rollout, choosing/charging a public price, weakening security gates, unrelated owner/workflow changes or exposing credentials/tester addresses.
-Files/modules allowed: Focused release validation/evidence, .maestro/android-acceptance/backup-export.yaml, this task and release documentation. Preserve existing dirty owner roadmap/workflow files.
+Files/modules allowed: Focused release validation/evidence, .maestro/android-acceptance/backup-export.yaml and backup-restore.yaml, this task and release documentation. Preserve existing dirty owner roadmap/workflow files.
 Dependencies: Owner explicitly requested revalidation/internal release, approved the official navigation module, gave fresh action-time approval for the three Play declarations/Create app and explicitly approved the account-reusable tester list solely selected on Tiny Wins. App/Paid/pt-BR remains the chosen model; internal testing is free.
 Acceptance criteria:
 
@@ -27,3 +27,13 @@ Commands executed / results:
 
 Open questions: Final beta.5 archive/runtime acceptance, native backup restore, actual Play upload/rollout/link and a later Play-delivered pilot install. No physical Android is available; owner chose emulators.
 Handoff summary: Complete remaining native gates, upload only the corrected candidate to the existing internal draft, confirm Console distribution/link, then give short friend-install instructions. Preserve all unrelated dirty files and do not send invitations/messages to friends.
+
+- Backup restore first run recovered/restarted with the expected note and duplicate import, then rejected the wrong-format valid-JSON fixture with its correct unsupported-format message. Replaced only the private fixture with actually malformed JSON required by the unchanged invalid-file assertion. A subsequent run exposed an offscreen review header after cancel/reselect on API29; screenshot shows the review below the fold. Added explicit scroll-to-review before the same required Ready/count/merge assertions. This is navigation recovery, not an app/schema change or weakened data assertion; preserve failed diagnostics and require a clean rerun.
+
+- Clean centered backup-restore PASS (136s), including cancellation, merge, dark preference, restart/note, duplicate import adds zero, malformed JSON rejection and original data retention. Primary emulator stopped with this fixture for beta.5 update. Full updated export reached correct native Share/file but its prepared message was below the viewport; added explicit scroll before the same message assertion, preserving that failure and requiring a clean full-flow rerun.
+
+- Corrected full backup-export PASS clean (107s): exact native chooser/file/prepared-message assertions retained, confirmation explicitly scrolled into view. Corrected full backup-restore PASS clean (136s) including malformed-file rejection and unchanged data. No backup JSON/database file is retained in repository evidence.
+
+- Final beta.5 signed archive accepted: source 464331b, code 100006, AAB SHA256 aef0d395fee4599aa7b3aa17c77b26010003ef49f0a719d0be7acf520d51576e, protected run 39510936963 SUCCESS. Final offline update retains habit/win/note/Dark; normal/150% geometry and all six standalone native cases PASS. Console uploaded and saved the exact 100006 artifact with native symbols. Review has zero blocking errors and one advisory about optional R8 mapping; generated release minification is disabled by default. Publication awaits clean-reboot system-bar visual readback.
+
+- Final clean-reboot keyboard/back/restart and system-theme followup PASS, 2/2 in 58s, actual light/dark screenshots reviewed. Console publication completed on 2026-10-20 at 20:21 BRT: track Ativo, release Disponível para testadores internos, version 100006. Primeiros testadores remains selected with five accounts and no unsaved changes. Enabled Console copy-link control confirms https://play.google.com/apps/internaltest/4701397993886033581 . Store name is temporarily app.tinywins.mobile (unreviewed) until app setup/review; propagation can take an hour or longer. No production release, price change, new service-account access or outgoing friend messages. Earlier pending items above are historical; remaining external followup is the first actual Play-delivered install/update on a tester phone.

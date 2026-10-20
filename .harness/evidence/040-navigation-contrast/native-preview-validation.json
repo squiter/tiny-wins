@@ -1,0 +1,25 @@
+{
+  "source": "82ce4f119c8629d428f5000aedeba9b7f6b87f5c",
+  "artifactRun": "39505914373",
+  "kind": "Native development APK, Metro unavailable during splash hold; not standalone candidate acceptance",
+  "api": 29,
+  "nativeSplash": {
+    "light": "PASS: reviewed image, dark icons on ivory",
+    "dark": "PASS: reviewed image, light icons on dark",
+    "nightReadback": "mNightMode=2; mCurUiMode=0x21",
+    "note": "Initial unprivileged night command did not change OS mode (locked on this image). Repeated under isolated emulator adbd debug root and verified actual mode before capture. Dark image under unprivileged command is not accepted as dark-mode evidence."
+  },
+  "functionalPreview": {
+    "source": "a11e305; same app JS and dependencies as 82ce4f1 (Android CNG-only followup)",
+    "firstWin": "PASS 54s",
+    "weeklyGoals": "PASS 108s",
+    "languageOverride": "PASS 172s",
+    "manualThemesAndRestart": "PASS 55s"
+  },
+  "startupRecovery": {
+    "initialHarnessFailure": "Replacing a live SQLite file with a snapshot using different journal mode caused SQLITE_LOCKED. Retained failure; restored synthetic fixture with process stopped (PASS win/note). Corrected injection patches only version header bytes, preserves journal/files.",
+    "errorSurface": "PASS light, PASS dark (development LogBox dismissed before required user-error assertions)",
+    "retry": "PASS across staged checks: Try again restored app + win; fresh unchanged-selector continuation verified original note and returned Today (59s). Retained initial injector failure and stale-driver selector failure; not reported as clean first-attempt flow."
+  },
+  "finalSignedArchiveAcceptance": "PENDING protected run 39505917703"
+}

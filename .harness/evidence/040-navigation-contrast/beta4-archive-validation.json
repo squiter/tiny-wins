@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "source": "82ce4f119c8629d428f5000aedeba9b7f6b87f5c",
+  "package": "app.tinywins.mobile",
+  "versionName": "0.1.0",
+  "versionCode": 100005,
+  "aabSha256": "f7fd20b3f649f94339344b29e8287e0106a5a340a52eefb93119762051b7de3c",
+  "uploadCertificateSha256": "2befc885387498566e7681f97c5090b87b9e39a4e200afd02d2cdf2e75219b14",
+  "signatureVerified": true,
+  "zipIntegrity": true,
+  "bundletoolValidate": true,
+  "debuggable": false,
+  "packagedRuntimeSha256": "3912893e8a0af2a2919c589a53954404d046bc02ee59ee61b7a25000800fa576",
+  "runtimeProvenance": "Entire packaged Hermes disassembly equals local release-style build except input-source hash header; exact binary hash differs",
+  "disassemblyLines": 620817,
+  "differingHeaders": [3],
+  "androidModules": 1786,
+  "affectedToolingModules": [],
+  "nativeRuntimeAcceptance": "Update, data/geometry and navigation functional gates PASS; superseded by native status-bar visual failure (task040). Do not upload beta4.",
+  "scope": "Archive crypto/identity/runtime inspection only; not complete release readiness"
+}

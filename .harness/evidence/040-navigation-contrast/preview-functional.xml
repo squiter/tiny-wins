@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_039_preview" tests="3" failures="0" time="334.317" timestamp="2026-10-20T19:09:38">
+    <testcase id="first-win" name="first-win" classname="first-win" file=".maestro/first-win.yaml" time="54.462" timestamp="2026-10-20T19:09:38" status="SUCCESS"/>
+    <testcase id="weekly-goals" name="weekly-goals" classname="weekly-goals" file=".maestro/weekly-goals.yaml" time="108.3" timestamp="2026-10-20T19:10:32" status="SUCCESS"/>
+    <testcase id="language-override" name="language-override" classname="language-override" file=".maestro/language-override.yaml" time="171.507" timestamp="2026-10-20T19:12:21" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

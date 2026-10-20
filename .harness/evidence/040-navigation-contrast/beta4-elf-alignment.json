@@ -1,0 +1,192 @@
+{
+  "status": "PASS",
+  "check": "64-bit ELF LOAD segment alignment >= 16KB; static inspection, not 16KB-device runtime acceptance",
+  "libraries": 46,
+  "minimumAlignmentBytes": 16384,
+  "details": [
+    {
+      "library": "base/lib/arm64-v8a/libandroidx.graphics.path.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libappmodules.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libc++_shared.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libexpo-modules-core.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libexpo-sqlite.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libfbjni.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libgesturehandler.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libgifimage.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libhermestooling.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libhermesvm.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libimagepipeline.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libjsi.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libnative-filters.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libnative-imagetranscoder.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libreact_codegen_rngesturehandler_codegen.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libreact_codegen_rnscreens.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libreact_codegen_safeareacontext.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libreactnative.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libreanimated.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/librnscreens.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libstatic-webp.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libworklets.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/arm64-v8a/libzstd-kmp.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libandroidx.graphics.path.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libappmodules.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libc++_shared.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libexpo-modules-core.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libexpo-sqlite.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libfbjni.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libgesturehandler.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libgifimage.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libhermestooling.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libhermesvm.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libimagepipeline.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libjsi.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libnative-filters.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libnative-imagetranscoder.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libreact_codegen_rngesturehandler_codegen.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libreact_codegen_rnscreens.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libreact_codegen_safeareacontext.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libreactnative.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libreanimated.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/librnscreens.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libstatic-webp.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libworklets.so",
+      "loadAlignmentBytes": 16384
+    },
+    {
+      "library": "base/lib/x86_64/libzstd-kmp.so",
+      "loadAlignmentBytes": 16384
+    }
+  ]
+}

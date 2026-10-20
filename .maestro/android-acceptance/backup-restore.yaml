@@ -31,6 +31,11 @@ appId: app.tinywins.mobile
 - assertVisible: tiny-wins-acceptance.json
 - takeScreenshot: android-native-backup-picker
 - tapOn: tiny-wins-acceptance.json
+- scrollUntilVisible:
+    element: Ready to restore
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
 - assertVisible: Ready to restore
 - assertVisible: 1 habit · 1 win · 1 note
 - scrollUntilVisible:
@@ -45,6 +50,11 @@ appId: app.tinywins.mobile
     centerElement: true
 - tapOn: Choose backup to restore
 - tapOn: tiny-wins-acceptance.json
+- scrollUntilVisible:
+    element: Ready to restore
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
 - assertVisible: Ready to restore
 - scrollUntilVisible:
     element: Restore missing data
@@ -77,6 +87,11 @@ appId: app.tinywins.mobile
     centerElement: true
 - tapOn: Choose backup to restore
 - tapOn: tiny-wins-acceptance.json
+- scrollUntilVisible:
+    element: Ready to restore
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
 - assertVisible: Ready to restore
 - scrollUntilVisible:
     element: Restore missing data

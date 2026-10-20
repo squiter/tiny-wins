@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_038" tests="6" failures="0" time="341.14" timestamp="2026-10-20T20:13:03">
+    <testcase id="navigation" name="navigation" classname="navigation" file=".maestro/android-acceptance/navigation.yaml" time="22.661" timestamp="2026-10-20T20:13:03" status="SUCCESS"/>
+    <testcase id="system-navigation" name="system-navigation" classname="system-navigation" file=".maestro/android-acceptance/system-navigation.yaml" time="35.288" timestamp="2026-10-20T20:13:25" status="SUCCESS"/>
+    <testcase id="tab-bar" name="tab-bar" classname="tab-bar" file=".maestro/android-acceptance/tab-bar.yaml" time="11.473" timestamp="2026-10-20T20:14:01" status="SUCCESS"/>
+    <testcase id="first-win" name="first-win" classname="first-win" file=".maestro/first-win.yaml" time="39.942" timestamp="2026-10-20T20:14:12" status="SUCCESS"/>
+    <testcase id="weekly-goals" name="weekly-goals" classname="weekly-goals" file=".maestro/weekly-goals.yaml" time="88.603" timestamp="2026-10-20T20:14:52" status="SUCCESS"/>
+    <testcase id="language-override" name="language-override" classname="language-override" file=".maestro/language-override.yaml" time="143.145" timestamp="2026-10-20T20:16:21" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

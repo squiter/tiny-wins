@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_038" tests="1" failures="0" time="135.863" timestamp="2026-10-20T19:57:01">
+    <testcase id="backup-restore" name="backup-restore" classname="backup-restore" file=".maestro/android-acceptance/backup-restore.yaml" time="135.844" timestamp="2026-10-20T19:57:01" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

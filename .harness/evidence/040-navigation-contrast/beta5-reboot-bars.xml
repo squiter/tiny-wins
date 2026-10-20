@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_038" tests="2" failures="0" time="57.831" timestamp="2026-10-20T20:20:04">
+    <testcase id="navigation" name="navigation" classname="navigation" file=".maestro/android-acceptance/navigation.yaml" time="23.872" timestamp="2026-10-20T20:20:04" status="SUCCESS"/>
+    <testcase id="system-navigation" name="system-navigation" classname="system-navigation" file=".maestro/android-acceptance/system-navigation.yaml" time="33.944" timestamp="2026-10-20T20:20:28" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

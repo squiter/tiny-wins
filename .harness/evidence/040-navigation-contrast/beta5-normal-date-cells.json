@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "source": "464331b5033236c84caffc761547275e3ecc228e",
+  "kind": "AAB-derived standalone test APK, temporary test-only signature",
+  "fontScale": 1.0,
+  "count": 14,
+  "cells": [
+    {
+      "label": "Inspect Read one page, 10/07/2026: before habit started",
+      "bounds": [228, 1163, 267, 1202],
+      "width": 39,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/08/2026: before habit started",
+      "bounds": [272, 1163, 311, 1202],
+      "width": 39,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/09/2026: before habit started",
+      "bounds": [316, 1163, 354, 1202],
+      "width": 38,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/10/2026: before habit started",
+      "bounds": [360, 1163, 398, 1202],
+      "width": 38,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/11/2026: before habit started",
+      "bounds": [405, 1163, 443, 1202],
+      "width": 38,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/12/2026: before habit started",
+      "bounds": [449, 1163, 488, 1202],
+      "width": 39,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/13/2026: before habit started",
+      "bounds": [493, 1163, 532, 1202],
+      "width": 39,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/14/2026: before habit started",
+      "bounds": [537, 1163, 576, 1202],
+      "width": 39,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/15/2026: before habit started",
+      "bounds": [581, 1163, 620, 1202],
+      "width": 39,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/16/2026: before habit started",
+      "bounds": [625, 1163, 663, 1202],
+      "width": 38,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/17/2026: before habit started",
+      "bounds": [669, 1163, 707, 1202],
+      "width": 38,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/18/2026: before habit started",
+      "bounds": [714, 1163, 752, 1202],
+      "width": 38,
+      "height": 39
+    },
+    {
+      "label": "Inspect Read one page, 10/19/2026: before habit started",
+      "bounds": [758, 1163, 797, 1202],
+      "width": 39,
+      "height": 39
+    },
+    {
+      "label": "Read one page, 10/20/2026: completed, today, has note",
+      "bounds": [802, 1163, 841, 1202],
+      "width": 39,
+      "height": 39
+    }
+  ]
+}

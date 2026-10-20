@@ -1,0 +1,191 @@
+{
+  "status": "PASS",
+  "check": "All uncompressed 64-bit native libraries in bundletool universal APK aligned to 16KB",
+  "libraries": 46,
+  "details": [
+    {
+      "library": "lib/arm64-v8a/libandroidx.graphics.path.so",
+      "offsetBytes": 18022400
+    },
+    {
+      "library": "lib/arm64-v8a/libappmodules.so",
+      "offsetBytes": 18038784
+    },
+    {
+      "library": "lib/arm64-v8a/libc++_shared.so",
+      "offsetBytes": 18890752
+    },
+    {
+      "library": "lib/arm64-v8a/libexpo-modules-core.so",
+      "offsetBytes": 20185088
+    },
+    {
+      "library": "lib/arm64-v8a/libexpo-sqlite.so",
+      "offsetBytes": 21692416
+    },
+    {
+      "library": "lib/arm64-v8a/libfbjni.so",
+      "offsetBytes": 23527424
+    },
+    {
+      "library": "lib/arm64-v8a/libgesturehandler.so",
+      "offsetBytes": 23707648
+    },
+    {
+      "library": "lib/arm64-v8a/libgifimage.so",
+      "offsetBytes": 23805952
+    },
+    {
+      "library": "lib/arm64-v8a/libhermestooling.so",
+      "offsetBytes": 24133632
+    },
+    {
+      "library": "lib/arm64-v8a/libhermesvm.so",
+      "offsetBytes": 24281088
+    },
+    {
+      "library": "lib/arm64-v8a/libimagepipeline.so",
+      "offsetBytes": 26771456
+    },
+    {
+      "library": "lib/arm64-v8a/libjsi.so",
+      "offsetBytes": 26787840
+    },
+    {
+      "library": "lib/arm64-v8a/libnative-filters.so",
+      "offsetBytes": 27213824
+    },
+    {
+      "library": "lib/arm64-v8a/libnative-imagetranscoder.so",
+      "offsetBytes": 27246592
+    },
+    {
+      "library": "lib/arm64-v8a/libreact_codegen_rngesturehandler_codegen.so",
+      "offsetBytes": 27836416
+    },
+    {
+      "library": "lib/arm64-v8a/libreact_codegen_rnscreens.so",
+      "offsetBytes": 28213248
+    },
+    {
+      "library": "lib/arm64-v8a/libreact_codegen_safeareacontext.so",
+      "offsetBytes": 29425664
+    },
+    {
+      "library": "lib/arm64-v8a/libreactnative.so",
+      "offsetBytes": 29589504
+    },
+    {
+      "library": "lib/arm64-v8a/libreanimated.so",
+      "offsetBytes": 36585472
+    },
+    {
+      "library": "lib/arm64-v8a/librnscreens.so",
+      "offsetBytes": 38092800
+    },
+    {
+      "library": "lib/arm64-v8a/libstatic-webp.so",
+      "offsetBytes": 38207488
+    },
+    {
+      "library": "lib/arm64-v8a/libworklets.so",
+      "offsetBytes": 38715392
+    },
+    {
+      "library": "lib/arm64-v8a/libzstd-kmp.so",
+      "offsetBytes": 39829504
+    },
+    {
+      "library": "lib/x86_64/libandroidx.graphics.path.so",
+      "offsetBytes": 79675392
+    },
+    {
+      "library": "lib/x86_64/libappmodules.so",
+      "offsetBytes": 79691776
+    },
+    {
+      "library": "lib/x86_64/libc++_shared.so",
+      "offsetBytes": 80560128
+    },
+    {
+      "library": "lib/x86_64/libexpo-modules-core.so",
+      "offsetBytes": 81821696
+    },
+    {
+      "library": "lib/x86_64/libexpo-sqlite.so",
+      "offsetBytes": 83279872
+    },
+    {
+      "library": "lib/x86_64/libfbjni.so",
+      "offsetBytes": 85164032
+    },
+    {
+      "library": "lib/x86_64/libgesturehandler.so",
+      "offsetBytes": 85344256
+    },
+    {
+      "library": "lib/x86_64/libgifimage.so",
+      "offsetBytes": 85442560
+    },
+    {
+      "library": "lib/x86_64/libhermestooling.so",
+      "offsetBytes": 85753856
+    },
+    {
+      "library": "lib/x86_64/libhermesvm.so",
+      "offsetBytes": 85901312
+    },
+    {
+      "library": "lib/x86_64/libimagepipeline.so",
+      "offsetBytes": 88506368
+    },
+    {
+      "library": "lib/x86_64/libjsi.so",
+      "offsetBytes": 88522752
+    },
+    {
+      "library": "lib/x86_64/libnative-filters.so",
+      "offsetBytes": 88948736
+    },
+    {
+      "library": "lib/x86_64/libnative-imagetranscoder.so",
+      "offsetBytes": 88981504
+    },
+    {
+      "library": "lib/x86_64/libreact_codegen_rngesturehandler_codegen.so",
+      "offsetBytes": 89702400
+    },
+    {
+      "library": "lib/x86_64/libreact_codegen_rnscreens.so",
+      "offsetBytes": 90095616
+    },
+    {
+      "library": "lib/x86_64/libreact_codegen_safeareacontext.so",
+      "offsetBytes": 91324416
+    },
+    {
+      "library": "lib/x86_64/libreactnative.so",
+      "offsetBytes": 91488256
+    },
+    {
+      "library": "lib/x86_64/libreanimated.so",
+      "offsetBytes": 98598912
+    },
+    {
+      "library": "lib/x86_64/librnscreens.so",
+      "offsetBytes": 100139008
+    },
+    {
+      "library": "lib/x86_64/libstatic-webp.so",
+      "offsetBytes": 100237312
+    },
+    {
+      "library": "lib/x86_64/libworklets.so",
+      "offsetBytes": 100810752
+    },
+    {
+      "library": "lib/x86_64/libzstd-kmp.so",
+      "offsetBytes": 101875712
+    }
+  ]
+}

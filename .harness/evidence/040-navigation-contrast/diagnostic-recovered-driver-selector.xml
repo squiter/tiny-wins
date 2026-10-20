@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_039_preview" tests="1" failures="1" time="54.612" timestamp="2026-10-20T19:26:59">
+    <testcase id="contrast-retry" name="contrast-retry" classname="contrast-retry" file="/private/tmp/tiny-wins-internal-038/contrast-retry.yaml" time="54.604" timestamp="2026-10-20T19:26:59" status="ERROR">
+      <failure>Element not found: Id matching regex: inspect-today</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

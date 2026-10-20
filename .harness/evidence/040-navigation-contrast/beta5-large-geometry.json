@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "source": "464331b5033236c84caffc761547275e3ecc228e",
+  "kind": "AAB-derived standalone test APK with temporary test-only signature",
+  "api": 29,
+  "fontScale": 1.5,
+  "densityDpi": 440,
+  "systemNavigationTopPx": 2088,
+  "tabs": [
+    {
+      "label": "Today",
+      "bounds": [0, 1869, 360, 2088],
+      "heightDp": 79.64
+    },
+    {
+      "label": "Insights",
+      "bounds": [360, 1869, 720, 2088],
+      "heightDp": 79.64
+    },
+    {
+      "label": "Settings",
+      "bounds": [720, 1869, 1080, 2088],
+      "heightDp": 79.64
+    }
+  ]
+}

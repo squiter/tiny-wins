@@ -1,0 +1,38 @@
+{
+  "source": "464331b5033236c84caffc761547275e3ecc228e",
+  "status": "Native status-bar correction preview PASS, signed archive pending",
+  "previousCandidate": "82ce4f1/code100005 superseded after upper-bar visual failure; its crypto, update, data and geometry evidence remains valid for those checks",
+  "preview": {
+    "kind": "Existing beta4 native development APK + corrected working-tree JS; no native dependency/config change",
+    "keyboardBackRestart": "PASS 28s",
+    "manualLightDarkRestart": "PASS 42s",
+    "reviewedScreenshots": ["status-preview-editor.png", "status-preview-restarted-today.png"]
+  },
+  "backupRestore": {
+    "kind": "Standalone beta4 AAB-derived APK, same backup/storage/native modules as 464331b",
+    "status": "PASS clean full flow 136s",
+    "checks": [
+      "cancel review",
+      "restore 1 habit/1 win/1 note",
+      "retain dark preference",
+      "restart and note",
+      "duplicate import adds zero",
+      "malformed JSON rejected",
+      "data retained after rejection"
+    ],
+    "priorFailures": "Wrong invalid fixture (valid unsupported JSON), then review below viewport; retained diagnostics. Corrected fixture and explicit scroll before the same assertions. No app/schema/data assertion weakened."
+  },
+  "testerPrivacy": "Five emails exist only in Google Play Console; repository content scan matched none.",
+  "backupExport": {
+    "status": "PASS clean full flow 107s",
+    "kind": "beta4 native development APK + source464331b JS",
+    "checks": [
+      "create/complete/restart/undo fixture",
+      "save expected note",
+      "native Android10 Share chooser",
+      "expected backup file name",
+      "prepared message after scrolling into view"
+    ],
+    "priorFailures": "API36-only chooser title and offscreen appended confirmation; preserved diagnostics. Exact Android10/modern title alternatives plus explicit scroll, all required file/message assertions retained."
+  }
+}

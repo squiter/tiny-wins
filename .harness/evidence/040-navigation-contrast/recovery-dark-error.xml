@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_039_preview" tests="1" failures="0" time="9.371" timestamp="2026-10-20T19:26:08">
+    <testcase id="contrast-error-debug" name="contrast-error-debug" classname="contrast-error-debug" file="/private/tmp/tiny-wins-internal-038/contrast-error-debug.yaml" time="9.364" timestamp="2026-10-20T19:26:08" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

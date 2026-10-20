@@ -1,0 +1,35 @@
+{
+  "source": "a11e305dc0bb9d46587336f2069aac5d64d699fa",
+  "dependency": "expo-navigation-bar@57.0.3",
+  "authorization": "Owner explicitly authorized compatible module and theme correction on 2026-10-20",
+  "verify": {
+    "unit": 118,
+    "integration": 57,
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "format": "PASS",
+    "exports": ["android", "ios", "web"]
+  },
+  "securityPolicy": {
+    "status": "PASS",
+    "high": 18,
+    "critical": 0,
+    "exceptionExpiry": "2026-10-22T00:00:00Z",
+    "note": "Existing reviewed patched tooling exception; not clean raw audit"
+  },
+  "moduleInspection": {
+    "iosProductionModules": 1703,
+    "androidReleaseStyleModules": 1786,
+    "affectedToolingModules": [],
+    "finalArchiveProvenancePending": true
+  },
+  "nativeResources": {
+    "idempotent": true,
+    "launchAppearance": "Superseded initial AppTheme-only attr; followup configures both AppTheme and separate splash using day/night boolean resource",
+    "navigationVisible": true,
+    "api24_25Fallback": "black background, light buttons; static only",
+    "api26plus": "transparent + explicit themed icons"
+  },
+  "nativeRuntimeAcceptance": "Development APK + Metro app-level dark/light/restart PASS (55s); native light splash contrast FAIL, followup resource correction required before Play submission",
+  "releaseRun": "https://github.com/squiter/tiny-wins/actions/runs/39503970641"
+}

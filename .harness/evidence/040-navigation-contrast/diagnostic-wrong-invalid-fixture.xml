@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_038" tests="1" failures="1" time="126.057" timestamp="2026-10-20T19:50:44">
+    <testcase id="backup-restore" name="backup-restore" classname="backup-restore" file=".maestro/android-acceptance/backup-restore.yaml" time="126.04" timestamp="2026-10-20T19:50:44" status="ERROR">
+      <failure>No visible element found: "This file is not a valid Tiny Wins backup."</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

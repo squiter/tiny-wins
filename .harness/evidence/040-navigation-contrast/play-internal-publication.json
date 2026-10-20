@@ -1,0 +1,22 @@
+{
+  "observedAt": "2026-10-20T20:21:00-03:00",
+  "package": "app.tinywins.mobile",
+  "source": "464331b5033236c84caffc761547275e3ecc228e",
+  "versionCode": 100006,
+  "versionName": "0.1.0",
+  "track": "internal",
+  "trackStatus": "Ativo",
+  "releaseStatus": "Disponível para testadores internos",
+  "testerList": "Primeiros testadores",
+  "selectedAccountCount": 5,
+  "testerListSaved": true,
+  "optInLink": "https://play.google.com/apps/internaltest/4701397993886033581",
+  "copyLinkEnabled": true,
+  "temporaryStoreName": "app.tinywins.mobile (unreviewed)",
+  "blockingErrors": 0,
+  "advisories": [
+    "Optional R8/Proguard mapping file absent; release minification disabled by default"
+  ],
+  "productionPublished": false,
+  "physicalOrPlayDeliveredInstallObserved": false
+}

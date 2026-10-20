@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_039_preview" tests="1" failures="0" time="59.441" timestamp="2026-10-20T19:29:31">
+    <testcase id="recovery-note-check" name="recovery-note-check" classname="recovery-note-check" file="/private/tmp/tiny-wins-internal-038/recovery-note-check.yaml" time="59.433" timestamp="2026-10-20T19:29:31" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

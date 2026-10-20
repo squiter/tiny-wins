@@ -1,6 +1,6 @@
 # Task: 040 — Match Android system navigation to the app theme
 
-Status: in progress — explicit owner authorization received on 2026-10-20
+Status: complete
 Goal: Correct white Android system navigation buttons on light app surfaces without changing visibility or app permissions.
 Non-goals: Hiding system navigation, adding telemetry, purchase flows, changing signing/access policies or installing a dependency before authorization.
 Files/modules allowed after authorization: package.json/lockfile, app.json plugin configuration, themed root/startup/error presentation, .maestro/android-acceptance/system-navigation.yaml, scripts/with-android-navigation-theme.cjs, ADR-026 and focused native acceptance/evidence.
@@ -29,3 +29,7 @@ Handoff summary: Integrate the SDK-57 themed component, validate both themes, re
 - Beta.4 AAB archive acceptance PASS; offline primary update PASS (28s), geometry normal/150% PASS, final navigation/system-theme/tab flows PASS (20s/34s/10s). Visual review retained a separate status-bar failure: native screens restore default light status content after editor navigation/restart on ivory surfaces, overriding the root StatusBar. Set native Stack statusBarStyle from the same app scheme, validate this on the existing development binary before a fresh immutable beta.5, and do not publish beta.4. No dependency/native-module/config change in this followup.
 
 - Native Stack statusBarStyle followup: aggregate verify PASS (175 tests), working-tree preview keyboard/back/restart PASS (28s). Reviewed actual editor and restarted Today screenshots: dark upper/lower icons remain visible on ivory. Native app/dependency/config inputs unchanged from beta.4; new JS requires a new protected signed revision.
+
+- Final beta.5 source 464331b, protected run 39510936963 SUCCESS, code 100006: signed archive/provenance/credential scan/16KB alignment PASS; offline in-place update PASS (28s); exactly 14 square cells at normal/150% text and tab bounds 67.64dp/79.64dp PASS. Six standalone Maestro flows PASS, zero failures (341s). Primary emulator SystemUI clock was stale at 6:07 despite Android time 20:19, while native LIGHT_STATUS_BAR and SystemUI dark intensity were correct; clean emulator reboot restores dark upper icons on ivory without app/source changes. Repeat the two bar/navigation journeys after reboot for actual visual acceptance. Backup export/restore clean full runs PASS (107s/136s).
+
+- Clean-reboot final native followup PASS: 2/2 flows in 58s. Actual light Settings, keyboard-dismissed editor, restarted Today and dark restarted Today screenshots show legible upper/lower icons. No further app changes required; beta.5 is accepted for internal release. Earlier pending/legal handoff notes above are historical; the owner approvals and final acceptance are complete. Physical/Play-delivered pilot remains outside available emulator evidence.

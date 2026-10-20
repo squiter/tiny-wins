@@ -34,4 +34,9 @@ appId: app.tinywins.mobile
 - assertVisible: 'tiny-wins-.*\.tinywins\.json'
 - takeScreenshot: android-native-backup-share
 - pressKey: back
+- scrollUntilVisible:
+    element: Backup file prepared. Keep it somewhere safe.
+    direction: DOWN
+    centerElement: true
+    timeout: 60000
 - assertVisible: Backup file prepared. Keep it somewhere safe.

@@ -1,6 +1,6 @@
 # Task: 039 — Keep tab controls above Android system navigation
 
-Status: in progress
+Status: complete
 Goal: Correct the normal-font tab bar found during task 038's signed-candidate revalidation, then generate and accept a replacement internal-test candidate.
 Non-goals: New dependencies, permissions, architecture, public production release, pricing, accepting legal terms or unrelated owner/workflow changes.
 Files/modules allowed: Shared tab layout, focused native regression, task/evidence and current release documentation.
@@ -27,3 +27,7 @@ Commands executed / results:
 
 Open questions: Owner's first-Play-app legal confirmation remains pending under task 038. System navigation button contrast on Android 10 is a separate proposed dependency-authorized task 040. Physical/Play-delivered installation and update acceptance remain separate.
 Handoff summary: Do not upload candidate/tiny-wins-0.1.0-1.aab; replace it with the validated corrected candidate.
+
+- Final beta.5 source 464331b, protected run 39510936963 SUCCESS, code 100006: signed archive/provenance/credential scan/16KB alignment PASS; offline in-place update PASS (28s); exactly 14 square cells at normal/150% text and tab bounds 67.64dp/79.64dp PASS. Six standalone Maestro flows PASS, zero failures (341s). Primary emulator SystemUI clock was stale at 6:07 despite Android time 20:19, while native LIGHT_STATUS_BAR and SystemUI dark intensity were correct; clean emulator reboot restores dark upper icons on ivory without app/source changes. Repeat the two bar/navigation journeys after reboot for actual visual acceptance. Backup export/restore clean full runs PASS (107s/136s).
+
+- Clean-reboot final native followup PASS: 2/2 flows in 58s. Actual light Settings, keyboard-dismissed editor, restarted Today and dark restarted Today screenshots show legible upper/lower icons. No further app changes required; beta.5 is accepted for internal release. Earlier pending/legal handoff notes above are historical; the owner approvals and final acceptance are complete. Physical/Play-delivered pilot remains outside available emulator evidence.

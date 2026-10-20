@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites>
+  <testsuite name="Test Suite" device="tinywins_internal_038" tests="1" failures="0" time="27.534" timestamp="2026-10-20T20:11:22">
+    <testcase id="beta5-upgrade-check" name="beta5-upgrade-check" classname="beta5-upgrade-check" file="/private/tmp/tiny-wins-internal-038/beta5-upgrade-check.yaml" time="27.524" timestamp="2026-10-20T20:11:22" status="SUCCESS"/>
+  </testsuite>
+</testsuites>

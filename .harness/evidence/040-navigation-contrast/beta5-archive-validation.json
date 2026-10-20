@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "source": "464331b5033236c84caffc761547275e3ecc228e",
+  "package": "app.tinywins.mobile",
+  "versionName": "0.1.0",
+  "versionCode": 100006,
+  "aabSha256": "aef0d395fee4599aa7b3aa17c77b26010003ef49f0a719d0be7acf520d51576e",
+  "uploadCertificateSha256": "2befc885387498566e7681f97c5090b87b9e39a4e200afd02d2cdf2e75219b14",
+  "signatureVerified": true,
+  "zipIntegrity": true,
+  "bundletoolValidate": true,
+  "debuggable": false,
+  "packagedRuntimeSha256": "996d6e089ec7a5f7ad6b4a09e9c961e60bbd5fec3c443607285ee4f1c38d87a1",
+  "runtimeProvenance": "Entire packaged Hermes disassembly equals local release-style build except input-source hash header; exact binary hash differs",
+  "disassemblyLines": 620823,
+  "differingHeaders": [3],
+  "androidModules": 1786,
+  "affectedToolingModules": [],
+  "nativeRuntimeAcceptance": "PASS: six standalone offline API29 cases (341s), in-place update retention, normal/150% tab and exactly14 square-cell geometry. After stale SystemUI clock diagnosis and clean emulator reboot, keyboard/back/restart plus both themes PASS (58s), screenshots reviewed. AAB-derived APK uses temporary emulator-only certificate; no physical or Play-delivered installation claim."
+}
