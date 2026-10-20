@@ -2,6 +2,7 @@ import { LocalizationProvider, useSystemI18n } from '../features/localization/pr
 import { FeedbackProvider } from '../features/feedback/provider';
 import { Stack, type ErrorBoundaryProps } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { NavigationBar } from 'expo-navigation-bar';
 import { useFonts } from 'expo-font';
 import { Fraunces_600SemiBold } from '@expo-google-fonts/fraunces/600SemiBold';
 import { Inter_400Regular } from '@expo-google-fonts/inter/400Regular';
@@ -28,6 +29,7 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
       }}
     >
       <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+      <NavigationBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Text accessibilityRole="header" style={{ fontSize: 26, color: theme.forest }}>
         {t('Could not open your habits')}
       </Text>
@@ -93,6 +95,7 @@ function ThemedRoutes({ onReady }: { onReady(): void }) {
       importantForAccessibility={laidOut ? 'auto' : 'no-hide-descendants'}
     >
       <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+      <NavigationBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Stack
         screenOptions={{ headerShown: false, contentStyle: { backgroundColor: theme.ivory } }}
       />

@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { NavigationBar } from 'expo-navigation-bar';
 import { useSystemI18n } from '../features/localization/provider';
 import { useSystemTheme } from '../theme/useTheme';
 
@@ -15,6 +16,7 @@ export function LaunchScreen({ fontsLoaded }: { fontsLoaded: boolean }) {
       style={[styles.screen, { backgroundColor: theme.ivory }]}
     >
       <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+      <NavigationBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Image
         accessible={false}
         source={

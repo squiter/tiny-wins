@@ -19,6 +19,8 @@
       "expo-sqlite",
       "expo-font",
       "expo-status-bar",
+      "./scripts/with-android-navigation-theme.cjs",
+      ["expo-navigation-bar", { "enforceContrast": false, "hidden": false }],
       "expo-sharing",
       [
         "expo-splash-screen",
